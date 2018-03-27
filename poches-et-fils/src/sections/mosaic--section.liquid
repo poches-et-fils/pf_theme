@@ -1,0 +1,126 @@
+ <div data-section-id="{{ section.id }}" data-section-type="mosaic-section">
+
+
+  <div class="section--mosaic--blocks">
+    <h1 class="section--title--heading bold--caps">{{section.settings.heading}}</h1>
+    <div class="section--mosaic--container">
+     
+     
+      <div class="section--mosaic--left" style="background-image: url('{{section.settings.mosaicleftimg | img_url: '1000x1000' }}');">
+        <a href="{{section.settings.linkleft}}" class="mosaic--overalay w-inline-block">
+          <h1 class="section--mosaic--text">{{section.settings.mosaicleft}}</h1>
+        </a>
+      </div>
+
+
+      <div class="section--mosaic--right" >
+        <div class="section--mosaic--top flex">
+          <div class="section--mosaic--left--top" style="background-image: url('{{section.settings.mosaicrightimg | img_url: '1000x1000' }}');">
+            <a href="{{section.settings.linkright}}" class="mosaic--overalay w-inline-block">
+              <h1 class="section--mosaic--text">{{section.settings.mosaicright}}</h1>
+            </a>
+          </div>
+
+
+          <div class="section--mosaic--left--top nopadd" style="    background-image: url('{{section.settings.mosaiclefttopimg | img_url: '1000x1000' }});">
+            <a href="{{section.settings.linklefttop}}" class="mosaic--overalay w-inline-block">
+              <h1 class="section--mosaic--text">{{section.settings.moasaiclefttop}}</h1>
+            </a>
+          </div>
+
+
+        </div>
+
+
+        <div class="section--mosaic--bottom" style="background-image: url('{{section.settings.mosaicbottomimg | img_url: '1000x1000'}});">
+          <a href="{{section.settings.linkbottom}}" class="mosaic--overalay w-inline-block">
+            <h1 class="section--mosaic--text">{{section.settings.mosaicbottom}}</h1>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  </div>
+
+    
+{% schema %}
+{
+  "name": "Mosaic  Blocks",
+  "settings": [
+    {
+      "id": "heading",
+      "type": "text",
+      "label": "Mosaic Heading"
+    },
+     {
+      "id": "mosaicleftimg",
+      "type": "image_picker",
+      "label": "Mosaic Left Image"
+    },
+     {
+      "id": "mosaicleft",
+      "type": "text",
+      "label": "Mosaic Left Title"
+    },
+    {
+      "id": "linkleft",
+      "type": "url",
+      "label": "Mosaic Left Link"
+    },
+     {
+      "id": "mosaicrightimg",
+      "type": "image_picker",
+      "label": "Mosaic Left Image"
+    },
+     {
+      "id": "mosaicright",
+      "type": "text",
+      "label": "Mosaic Left Title"
+    },
+    {
+      "id": "linkright",
+      "type": "url",
+      "label": "Mosaic Left Link"
+    },
+     {
+      "id": "mosaiclefttopimg",
+      "type": "image_picker",
+      "label": "Mosaic Left Image"
+    },
+     {
+      "id": "moasaiclefttop",
+      "type": "text",
+      "label": "Mosaic Left Title"
+    },
+    {
+      "id": "linklefttop",
+      "type": "url",
+      "label": "Mosaic Left Link"
+    },
+     {
+      "id": "mosaicbottomimg",
+      "type": "image_picker",
+      "label": "Mosaic Left Image"
+    },
+     {
+      "id": "mosaicbottom",
+      "type": "text",
+      "label": "Mosaic Left Title"
+    },
+    {
+      "id": "linkbottom",
+      "type": "url",
+      "label": "Mosaic Left Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Mosaic",
+      "category": "Elements"
+    }
+  ]
+}
+{% endschema %}

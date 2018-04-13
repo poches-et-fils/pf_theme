@@ -1,0 +1,65 @@
+{% for product in collection.products%}
+
+{% if product.type == 'Pocket' %}
+
+<a href="{{product.url}}" class="product--grid--item--four three--row w-inline-block">
+  <div class="product--grid--item--image men--tshirt">
+    <div class="product--grid--item--variant--overlay">
+      {% for image in product.images limit: 1 %}
+      <img src="{{ image.src | product_img_url: 'medium'  }}" width="45" height="45" class="product--grid--item--pocket">
+      {%endfor%}
+    </div>
+  </div>
+  <h5 class="product--grid--item--title">{{product.title}}</h5>
+  <div>{{product.price | money }}</div>
+  <div class="product--grid--item--link">See more styles</div>
+</a>
+
+{%else%}
+
+<a href="{{product.url}}" class="product--grid--item--four three--row w-inline-block">
+
+  <div class="product--grid--item--image t-shirt">
+
+    <div class="product--grid--item--variant--overlay"></div>
+  </div>
+  <h5 class="product--grid--item--title">{{product.title}}</h5>
+  <div>{{product.price | money }}</div>
+  <div class="product--grid--item--link">See more styles</div>
+</a>
+
+{%endif%}
+
+
+{%endfor%}
+
+
+<script>
+  (function () {
+    const getRandImg = type => {
+      // Receives a shirt type
+      // and select an adecuate image bg
+      const tshirts = [
+        'https://cdn.shopify.com/s/files/1/0013/6685/1647/files/tshirt--_32.png?4793904201384404240',
+        'https://cdn.shopify.com/s/files/1/0013/6685/1647/files/tshirt--_24.png?4793904201384404240',
+        'https://cdn.shopify.com/s/files/1/0013/6685/1647/files/tshirt--_33.png?4793904201384404240',
+        'https://cdn.shopify.com/s/files/1/0013/6685/1647/files/tshirt--_31.png?4793904201384404240',
+        'https://cdn.shopify.com/s/files/1/0013/6685/1647/files/tshirt--_23.png?4793904201384404240',
+        'https://cdn.shopify.com/s/files/1/0013/6685/1647/files/tshirt--_29.png?4793904201384404240',
+        'https://cdn.shopify.com/s/files/1/0013/6685/1647/files/tshirt--_30.png?4793904201384404240',
+        'https://cdn.shopify.com/s/files/1/0013/6685/1647/files/tshirt--_28.png?4793904201384404240',
+        'https://cdn.shopify.com/s/files/1/0013/6685/1647/files/tshirt--_26.png?4793904201384404240',
+        'https://cdn.shopify.com/s/files/1/0013/6685/1647/files/tshirt--_27.png?4793904201384404240',
+        'https://cdn.shopify.com/s/files/1/0013/6685/1647/files/tshirt--_25.png?4793904201384404240'
+      ]
+      
+      return `${tshirts[Math.floor(Math.random() * tshirts.length)]}`
+    }
+    
+    $(document).ready(_ => {
+      $('.men--tshirt').each(function () {
+        $(this).css('background-image', `url('${getRandImg()})'`)
+      })
+    })
+  })()
+</script>

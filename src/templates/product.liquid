@@ -1,0 +1,22 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script> 
+
+
+
+{%- comment -%}
+// Product-api: Controls the logic of product variants via JSON and shopify Product Get API
+// Product--pocket: is the section for the general pocket products
+// Product--normal: is for all other products. 
+{%- endcomment -%}
+ 
+
+
+{% if product.type == 'Pocket' %}
+ {% include 'product-api'%}
+{% section 'product--pocket' %}
+
+{%else%}
+
+{% section 'product--normal' %}
+
+{%endif%}

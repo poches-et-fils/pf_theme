@@ -1,0 +1,36 @@
+<style>
+.collection--sidebar {display:none!important;}
+#shopify-section-collection--sidebar {width:100%;}
+.collection--grid {display:none;}
+#shopify-section-collection--design {width:100%;}
+.collection--divider--crumbs {display:none;}
+.pagination {display:none;}
+.collection--main {padding-right: 30px!important;padding-left: 30px!important;}
+
+</style> 
+ 
+ <div id="design" class="design--collection">
+    <h2 id="title" class="collection--heading">All Designs</h2>
+    <div class="collection--x--icon">
+      <div>
+        <h1 class="collection--x--icon--block">X</h1>
+      </div>
+    </div>
+    <div class="design--collection--types">
+      <div class="design--collection--links">All</div>
+      <div class="seperator--line"></div>
+      <div class="design--collection--links">Food</div>
+      <div class="seperator--line"></div>
+    </div>
+    <div class="design--collection--links"></div>
+    <div class="design--collection--container">
+
+ {% for product in collection.products%}
+      <a href="{{product.url}}" class="design--collection--item w-inline-block " {% for image in product.images limit: 1 %} style="background-size: 230%;background-image: url('{{ image.src | product_img_url: '2048x2048'  }}');"      {%endfor%} data-ix="hidden-title-on-overlay">
+        <div class="design--collection--title" data-ix="originally-hidden">{{product.title}}</div>
+      </a>
+      {%endfor%}
+ 
+    </div><a href="#design" class="design--collection--top">Back to top</a></div>
+
+    

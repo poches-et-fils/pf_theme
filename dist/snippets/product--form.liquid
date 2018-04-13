@@ -1,0 +1,168 @@
+{%- if product.type == 'Pocket' -%}
+  
+
+
+<div class="product--form">
+  <div class="w-form-1">
+    <form id="email-form" name="email-form" data-name="Email Form">
+      <div class="product--form--selector variant--images">
+        <div class="variant--selector--bar w-clearfix">
+          <div class="selector--heading--left">
+            <strong>Design:</strong> 
+            <span class="product--VA--name no-wrap">{{ product.tags }}</span>
+          </div>
+          <div class="selector--heading--right">See all</div>
+        </div>
+        <div class="product-thumbnails flex-row flex-center">
+          <div class="selected-thumb-details"></div>
+          <section class="thumb-nav-container">
+            <span class="thumb-nav-arrow go-prev">‹</span>
+            <span class="thumb-nav-arrow go-next">›</span>
+          </section>
+          <div class="thumbnails-container"></div>
+        </div>
+
+        {%- comment -%}
+        - Need to have variant add to cart
+        - Need to import product sizes dynamically based on design selected
+        - Need to update price dynamically
+        - Need to handle shirt color translation dynamically
+        - Need to add the toggles for description
+        - Need to add related products
+        {%- endcomment -%}
+
+        <div class="product--form--selector sizing">
+          <div class="variant--selector--bar w-clearfix">
+            <div class="selector--heading--left">
+              <strong>Size:</strong> 
+              <span class="selector--heading--right nofloat">size guide</span>
+            </div>
+          </div>
+          <div class="product--design--selector--grid flex-row">
+            <div class="product--size--selector disabled">
+              <h2 class="product--size--selector--text">XS</h2>
+            </div>
+            <div class="product--size--selector">
+              <h2 class="product--size--selector--text">S</h2>
+            </div>
+            <div class="product--size--selector selected">
+              <h2 class="product--size--selector--text">M</h2>
+            </div>
+            <div class="product--size--selector">
+              <h2 class="product--size--selector--text">L</h2>
+            </div>
+            <div class="product--size--selector">
+              <h2 class="product--size--selector--text">XL</h2>
+            </div>
+            <div class="product--size--selector">
+              <h2 class="product--size--selector--text">XXL</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="product--form--selector sizing">
+          <div class="variant--selector--bar w-clearfix">
+            <div class="selector--heading--left">
+              <strong>Shirt colour:</strong>
+              <span class="current-color"></span>
+            </div>
+            <br>
+            <ul class="colors-container"></ul>
+          </div>
+        </div>
+
+        <div class="product--form--qty">
+          <div><strong>QTY:</strong></div>
+          <select id="field" 
+                  name="field"
+                  class="product--form--qty--selector w-select">
+            <option selected disabled>Select one...</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
+        </div>
+
+        <input type="submit" 
+               value="ADD TO CART" 
+               data-wait="Please wait..." 
+               class="product--form--atc w-button">
+      </div>
+    </form>
+    <div class="w-form-done">
+      <div>Thank you! Your submission has been received!</div>
+    </div>
+    <div class="w-form-fail">
+      <div>Oops! Something went wrong while submitting the form.</div>
+    </div>
+  </div>
+</div>
+
+<div class="ajax--cart--popout--section" style="background: transparent; display: none">
+  <div class="ajax--cart--popout" style="width: 100%">
+    <div class="ajax--cart--lower">
+      <div class="ajax--cart--items">
+        {% for item in cart.items %}
+        <div class="ajax--cart--item">
+          <div class="ajax--cart--item--image">
+            {{ item | img_url: '100x100' | img_tag }}
+          </div>
+          <div class="ajax--cart--item--details">
+            <div class="ajax--cart--item--block padding">
+              <div class="ajax--cart--item--text bold--text">{{ item.type }}</div>
+              <div class="ajax--cart--item--text">{{ item.title }}</div>
+            </div>
+            <div class="ajax--cart--item--block padding">
+              <div class="ajax--cart--item--text">Size: {{variant.size}}</div>
+              <div class="ajax--cart--item--text">Color: {{variant.color}}</div>
+            </div>
+            <div class="ajax--cart--item--block flexed">
+              <div class="ajax--cart--qty"></div>
+              <div class="ajax--cart--price--block">
+                <div>{{ item.price | money}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        {% if cart.item_count == 0 %}
+        <h2>Your cart is empty.</h2>
+        {% endif %}
+      </div>
+      <div class="ajax--cart--bottom">
+        <h3 class="ajax--cart--free-shipping">Free Shipping</h3>
+        <p class="ajax--cart--message">Add another $100 to cart to get free shipping.</p>
+        <a href="#" data-keep-shopping>Continue Shopping</a>
+        <div class="ajax--cart--subtotal">
+          <h4 class="ajax--cart--title--text">Subtotal</h4>
+          <h4 class="ajax--cart--title--text right">{{ cart.original_total_price | money }}</h4>
+        </div>
+        <a href="#" class="button wide-text full-caps black full-width w-button">Checkout</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{%- else -%}
+
+<div class="product--form">
+          <div class="w-form">
+            <form  method="post" action="/cart/add">
+              <h1 class="product--title--normal">{{product.title}}</h1>
+                 <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+              <div class="product--form--selector sizing">
+                <p>{{product.description}}</p>
+              </div>
+              <div class="product--form--qty">
+                <div><strong>Qty:</strong></div><select id="field" name="field" class="product--form--qty--selector w-select"><option value="">Select one...</option><option value="First">First Choice</option><option value="Second">Second Choice</option><option value="Third">Third Choice</option></select></div><input type="submit" value="ADD TO CART" data-wait="Please wait..." class="product--form--atc w-button"></form>
+           
+          </div>
+  
+{%- endif -%}

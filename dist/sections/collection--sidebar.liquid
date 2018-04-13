@@ -1,0 +1,23 @@
+<div class="collection--sidebar">
+      <div class="sidebar--block">
+        <h4 class="sidebar--heading">Collections</h4>
+        <div class="sidebar--links--block">
+         <a href="/all" class="sidebar--link">Shop all</a>
+
+         {%- comment -%}dynamically import all collection, while hiding 'all' and 'frontpage's{%- endcomment -%}
+        {% for collection in collections %}
+        {% if collection.title contains 'Home page'%}
+
+        {% else %}
+            
+        <a href="{{collection.url}}" class="sidebar--link">{{collection.title}}</a>
+        {%endif%}
+        {%endfor%}
+        </div>
+      </div>
+      <div class="sidebar--block">
+        <h4 class="sidebar--heading">Shop</h4>
+        <div class="sidebar--links--block"><a href="collection.html" class="sidebar--link">Shop all</a><a href="collection.html" class="sidebar--link">Men</a><a href="#" class="sidebar--link">Women</a></div>
+      </div>
+    </div>
+    <div class="collection--grid">

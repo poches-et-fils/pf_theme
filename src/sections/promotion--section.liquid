@@ -1,0 +1,48 @@
+ 
+  <div class="section--promotions w-clearfix">
+    
+    <a  style="width: 100%;"  href="{{section.settings.bgurl1}}" > 
+    <div class="promotion--left" style=" background-image: url('{{section.settings.bgimg1 | img_url: '1000x1000'}}');"></div>
+    </a>
+
+    
+    <a style="width: 100%;" href="{{section.settings.bgurl2}}" > 
+    <div class="promotion--right"  style=" background-image: url('{{section.settings.bgimg2 | img_url: '1000x1000'}}');"></div>
+    </a>
+  </div>
+
+
+  {% schema %}
+{
+  "name": "Promotion  Blocks",
+  "settings": [
+    {
+      "id": "bgimg1",
+      "type": "image_picker",
+      "label": "Promotion Image Left"
+    },
+      {
+      "id": "bgurl1",
+      "type": "url",
+      "label": "Promotion Image URL Left"
+    },
+     {
+      "id": "bgimg2",
+      "type": "image_picker",
+      "label": "Promotion Image Right"
+    },
+      {
+      "id": "bgurl2",
+      "type": "url",
+      "label": "Promotion Image URL Right"
+    }
+     
+  ],
+  "presets": [
+    {
+      "name": "Promotion Blocks",
+      "category": "Elements"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,87 @@
+
+<div data-section-id="{{ section.id }}" data-section-type="product" data-enable-history-state="true" itemscope itemtype="http://schema.org/Product">
+  {%- assign current_variant = product.selected_or_first_available_variant -%}
+  {%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
+  <meta itemprop="name" content="{{ product.title }}{% unless product.has_only_default_variant %} - {{ current_variant.title }}{% endunless %}">
+  <meta itemprop="url" content="{{ shop.url }}{{ current_variant.url }}">
+  <meta itemprop="brand" content="{{ product.vendor }}">
+  <meta itemprop="image" content="{{ featured_image | img_url: '600x600' }}">
+  <meta itemprop="description" content="{{ product.description | strip_html | escape }}">
+
+  <div class="product--container">
+    <div data-animation="slide" data-duration="500" data-infinite="1" class="mobile--slider w-slider">
+      <div class="w-slider-mask">
+
+      {%- comment -%}mobile product images{%- endcomment -%}
+        <div class="mobile--slider--slide w-slide">
+        </div>
+        <div class="w-slide"></div>
+      </div>
+      <div class="mobile--slider--arrows w-slider-arrow-left">
+        <div class="w-icon-slider-left"></div>
+      </div>
+      <div class="mobile--slider--arrows w-slider-arrow-right">
+        <div class="w-icon-slider-right"></div>
+      </div>
+      <div class="w-slider-nav w-round"></div>
+    </div>
+
+    <div class="product--block">
+    {%- comment -%}desktop images{%- endcomment -%}
+      <div class="product--block--left images--block">
+
+      {% for image in product.images %}
+        <div class="product--image--smaller">
+        <a href="#" class="product--image--smaller--item w-inline-block">
+        <img src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg"></a>
+        <a href="#" class="product--image--smaller--item w-inline-block">
+        <img src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg"></a>
+        <a href="#" class="product--image--smaller--item w-inline-block">
+        <img src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg"></a>
+        </div>
+       
+       
+        <div class="product--image--large" style="background-image: url('{{ image.src | product_img_url: 'original' }}') ">
+        </div>
+      {%endfor%}
+      
+      </div>
+
+
+      <div class="product--block--right">
+        
+{% include 'product--form' %}
+
+{% if product.type == 'Gift Card' %} 
+{% else %}
+ {% include 'product-toggle' %}  
+        {%endif%}
+         
+      </div>
+    </div>
+</div>
+{% if product.type == 'Gift Card'%} 
+{% else %}
+    {% include 'related--products' %}
+  </div>
+  {% unless product == empty %}
+    <script type="application/json" data-product-json>
+      {{ product | json }}
+    </script>
+  {% endunless %}
+</div>
+
+{%endif%}
+{% schema %}
+  {
+    "name": "Product pages",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_share_buttons",
+        "label": "Show social sharing buttons",
+        "default": true
+      }
+    ]
+  }
+{% endschema %}

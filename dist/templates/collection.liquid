@@ -1,0 +1,41 @@
+
+{% if collection.image %}
+  <div class="collection--section" style="background-image: url('{{ collection.image | img_url: 'large' }}');">
+    <h2 class="collection--title">{{collection.title}}</h2>
+  </div>
+{% endif %}
+
+  <div class="collection--divider--crumbs">
+    <div>{{collection.title}}</div>
+  </div>
+  <div class="collection--main">
+    
+    {% if collection.title contains 'All' %}
+
+{% section 'collection--design' %}
+ 
+{% else %}
+
+  {% section 'collection--sidebar' %}
+
+{% assign collection = collections.all %}
+{% paginate collection.products by 12 %}
+  
+
+
+
+  
+ {% section 'collection--section' %}
+
+
+
+
+    </div>
+  </div>
+
+  {% if paginate.pages > 1 %}
+    {% include 'pagination' %}
+  {% endif %}
+{% endpaginate %}
+
+{% endif %}

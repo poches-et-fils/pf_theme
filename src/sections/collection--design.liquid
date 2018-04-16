@@ -25,11 +25,15 @@
     <div class="design--collection--links"></div>
     <div class="design--collection--container">
 
+{% if product.type == 'Pocket' %}
+
  {% for product in collection.products%}
-      <a href="{{product.url}}" class="design--collection--item w-inline-block " {% for image in product.images limit: 1 %} style="background-size: 230%;background-image: url('{{ image.src | product_img_url: '2048x2048'  }}');"      {%endfor%} data-ix="hidden-title-on-overlay">
+      <a href="{{product.url}}" class="design--collection--item w-inline-block " {% for image in product.images %}   {% if forloop.index == 2 %}  style="background-size: 230%;background-image: url('{{ image.src | product_img_url: '2048x2048'  }}');"     {%endif%} {%endfor%} data-ix="hidden-title-on-overlay">
         <div class="design--collection--title" data-ix="originally-hidden">{{product.title}}</div>
       </a>
       {%endfor%}
+ 
+      {%endif%}
  
     </div><a href="#design" class="design--collection--top">Back to top</a></div>
 

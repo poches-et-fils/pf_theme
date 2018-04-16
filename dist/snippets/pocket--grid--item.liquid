@@ -1,28 +1,20 @@
-
 {%- comment -%}
 Need to figure out a way to dynamically import t-shirts, sweatshirts etc on collections.
 {%- endcomment -%}
 
-
 <div class="product--grid--item--four">
-
- <a href="{{ product.url | within: collection }}">
-        <div class="product--grid--item--image men--tshirt"
-             style="
-             background-image: url('https://cdn.shopify.com/s/files/1/0013/6685/1647/files/download_7.png?13818503824399871884');"
-        >
-
-        
-          <div class="product--grid--item--variant--overlay">
-
-       
-          <img class="product--grid--item--pocket" src=" {{ product.featured_image.src | img_url: '48x48' }}" >
-          
-     
-          
-                </div>
-       
-        </div>
-        <h5 class="product--grid--item--title">{{product.title}}</h5> </a>
-        <div>  {{ product.price | money }}</div>
-        <a href="{{ product.url | within: collection }}" class="product--grid--item--link">See more styles</a></div>
+  <a href="{{ product.url | within: collection }}">
+    <div class="product--grid--item--image men--tshirt"
+         style="background-image: url('https://cdn.shopify.com/s/files/1/0013/6685/1647/files/download_7.png?13818503824399871884');">
+      <div class="product--grid--item--variant--overlay">
+        <img class="product--grid--item--pocket" 
+             src=" {{ product.featured_image.src | img_url: '48x48' }}" />
+      </div>
+    </div>
+    <h5 class="product--grid--item--title">{{product.title}}</h5> </a>
+  <div>{{ product.price | money }}</div>
+  <a href="{{ product.url | within: collection }}"
+     class="product--grid--item--link">
+    See more styles
+  </a>
+</div>

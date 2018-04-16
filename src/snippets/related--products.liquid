@@ -1,57 +1,39 @@
-{%- comment -%}
-Set section
-{%- endcomment -%}
-
-
-
-
+{%- comment -%}Set section{%- endcomment -%}
 
 <div class="realted--product--section">
     <h3 class="realted--title">{{section.settings.title}}</h3>
     <div class="related--product--grid--block">
-
-    {% assign product_type = 'ctype' %}
-          {% assign product.id = 'cname' %}
-          
-          {% for product in collections.all.products limit:4 %}
-          {% if product_type == 'ctype' %}
-          {% if product.id == 'cname'%}
-          
-          {%else%}
-
-     {% if product.type == 'Pocket' %}
-
-      <a href="{{product.url}}" class="product--grid--item--four three--row w-inline-block">
+      <a href="#" class="product--grid--item--four w-inline-block">
         <div class="product--grid--item--image men--tshirt">
-          <div class="product--grid--item--variant--overlay">
-          {% for image in product.images limit: 1 %}
-          <img src="{{ image.src | product_img_url: 'medium'  }}" width="45" height="45" class="product--grid--item--pocket">
-          {%endfor%}
-          </div>
+          <div class="product--grid--item--variant--overlay"><img src="images/lagrossevie_thumbnail_grande.png" width="45" height="45" class="product--grid--item--pocket"></div>
         </div>
         <h5 class="product--grid--item--title">{{product.title}}</h5>
-        <div>{{product.price | money }}</div>
+        <div>{{product.price}}</div>
         <div class="product--grid--item--link">See more styles</div>
       </a>
-
-      {%else%}
-
-           <a href="{{product.url}}" class="product--grid--item--four three--row w-inline-block">
-         
-        <div class="product--grid--item--image"   {% for image in product.images %} style="background-image: url('{{image.src | product_img_url: 'medium'}}')" {%endfor%}>
-        
-          <div class="product--grid--item--variant--overlay">
-         </div>
+      <a href="#" class="product--grid--item--four w-inline-block">
+        <div class="product--grid--item--image men--tshirt">
+          <div class="product--grid--item--variant--overlay"><img src="images/lagrossevie_thumbnail_grande.png" width="45" height="45" class="product--grid--item--pocket"></div>
         </div>
         <h5 class="product--grid--item--title">{{product.title}}</h5>
-        <div>{{product.price | money }}</div>
+        <div>{{product.price}}</div>
         <div class="product--grid--item--link">See more styles</div>
       </a>
-
-      {%endif%}
-
-      {%endif%}
-            {%endif%}
-                  {%endfor%}
+      <a href="#" class="product--grid--item--four w-inline-block">
+        <div class="product--grid--item--image men--tshirt">
+          <div class="product--grid--item--variant--overlay"><img src="images/lagrossevie_thumbnail_grande.png" width="45" height="45" class="product--grid--item--pocket"></div>
+        </div>
+        <h5 class="product--grid--item--title">{{product.title}}</h5>
+        <div>{{product.price}}</div>
+        <div class="product--grid--item--link">See more styles</div>
+      </a>
+      <a href="#" class="product--grid--item--four w-inline-block">
+        <div class="product--grid--item--image men--tshirt">
+          <div class="product--grid--item--variant--overlay"><img src="images/lagrossevie_thumbnail_grande.png" width="45" height="45" class="product--grid--item--pocket"></div>
+        </div>
+        <h5 class="product--grid--item--title">{{product.title}}</h5>
+        <div>{{product.price}}</div>
+        <div class="product--grid--item--link">See more styles</div>
+      </a>
     </div>
   </div>

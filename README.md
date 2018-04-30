@@ -1,6 +1,6 @@
 # Poches Et Fils Theme
 
-Version: 0.0.4
+Version: 0.0.11
 
 
 ## Issue Tracking

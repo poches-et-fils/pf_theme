@@ -5,7 +5,18 @@ Version: 0.0.11
 
 ## Issue Tracking
 
-- None yet
+- Aligning pocket items on desktop
+- Adding tag function/removing JS function (adjusting sidebar)
+- Non-Pocket Products not adding to cart
+- Sending random size on non-pocket products to cart (bypass sizing selector)
+- Changing lower homepage promotion section from image to section with text/button
+- Design selector on product page doesn't work on older Chrome/Safari (tested by client, not tested in-house)
+- Language setup
+- Homepage slider z-index is higher than the cart
+- Continous load doesn't have a lazy-load effect where as you scroll the background appears, then others appear.
+- Lazy load only loads SOME products in collection
+- No related products on non-pocket product page
+- 
 
 ## Getting Started
 

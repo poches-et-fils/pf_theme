@@ -1,41 +1,89 @@
-<style>
-#shopify-section-collection--section {width:80%!important;}
-#shopify-section-collection--sidebar {width: 20%!important;}
-</style>
+<div>
+  <div id="desktop-only">
+    {% if collection.image %}
+    <div class="collection--section" 
+         style="background-repeat: no-repeat; background-size: cover;background-image: url('{{ collection.image | img_url: '2048x2048' }}'); height: 608px">
+      <h2 class="collection--title">{{collection.title}}</h2>
+    </div>
+    {% endif %}
 
+    <div class="collection--divider--crumbs">
+      <div>{{collection.title}}</div>
+    </div>
 
-{% if collection.image %}
-  <div class="collection--section" style="background-image: url('{{ collection.image | img_url: 'large' }}');">
-    <h2 class="collection--title">{{collection.title}}</h2>
-  </div>
-{% endif %}
-
-  <div class="collection--divider--crumbs">
-    <div>{{collection.title}}</div>
-  </div>
-
-  <div class="collection--main">
-    
-    {% if collection.title contains 'All' %}
-
-{% section 'collection--design' %}
- 
-{% else %}
-
-  {% section 'collection--sidebar' %}
-
-{% assign collection = collections.all %}
-
-  
-
-
-
-  
- {% section 'collection--section' %}
-
-{%endif%}
-
-
+    <div class="collection--main">
+      {% if collection.title contains 'All' %}
+      {% section 'collection--design' %}
+      {% else %}
+      {% section 'collection--sidebar' %}
+      {% assign collection = collections.all %}
+      {% section 'collection--section' %}
+      {%endif%}
     </div>
   </div>
+  
+  <div id="mobile-only">
+    {% include 'mobile--section' %}
+  </div>
+</div>
 
+<script>
+  (function () {
+    
+    $(document).ready(_ => {
+      
+      const filterSizes = event => {
+        $('li[title]').removeClass('selectedColor')
+        const selectedSize 		= $(event.target).addClass('selected-color').attr('title')
+        const currentSizeFilter = $('#sizeFilterValue')
+        const itemsContainer 	= $('[data-variant-info]')
+        const noItemsMessage	= $('.noItemsFound')
+        let foundItems 			= 0
+        
+        itemsContainer.map((index, item) => {
+          item = $(item)
+          
+          if (item.attr('data-variant-color') === selectedSize) {
+            item.show()
+            foundItems++
+          } else {
+            item.hide()
+          }
+        })
+        
+      }
+      
+      $(document).on('click', 'li[title]', filterSizes)
+    })
+  })()
+</script>
+
+<style>
+  #shopify-section-collection--section {width:80%!important;}
+  #shopify-section-collection--sidebar {width: 20%!important;}
+
+  @media (max-width: 796px) {
+
+    .collection--main {flex-wrap: wrap;}
+    #shopify-section-collection--sidebar{ width: 100% !important;}
+
+    .collection--main {
+      padding-right: 20px!important;
+      padding-left: 20px!important;
+
+    }
+
+    #shopify-section-collection--section {width:100%!important}
+  }
+
+  @media (min-width: 796px) {
+    #desktop-only {display:block}
+    #mobile-only {display:none!important;}
+  }
+
+  @media (max-width: 796px) {
+    #desktop-only {display:none}
+    #mobile-only {display:block;}
+    .product--grid--item--four {margin:0px!important}
+  }
+</style>

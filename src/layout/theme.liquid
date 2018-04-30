@@ -1,4 +1,4 @@
-{%- comment -%}
+{%- comment -%} 
 Poches et Fils theme 
 Version: 1.0.0
 Configured 2018
@@ -7,7 +7,7 @@ Configured 2018
 - Added 'on touch' JS which interfaces mobile pgones.
 - Added custom JS which imports product API
 {%- endcomment -%}
-<!doctype html>
+<!doctype html> 
 <!--[if IE 9]> <html class="ie9 no-js supports-no-cookies" lang="{{ shop.locale }}"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js supports-no-cookies" lang="{{ shop.locale }}"> <!--<![endif]-->
 <head>
@@ -15,6 +15,7 @@ Configured 2018
   <script type="text/javascript">WebFont.load({  google: {    families: ["Rubik:300,regular,500,700,900"]  }});</script>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  
 
   {{ 'functions.js' | asset_url | script_tag }}
   {%- comment -%} Adds Google Font Rubik {%- endcomment -%}
@@ -73,19 +74,57 @@ Configured 2018
   {{ content_for_header }}
 </head>
 <body id="{{ page_title | handle }}" class="template-{{ template.name | handle }}">
-  <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
+  <a class="in-page-link visually-hidden skip-link" 
+     href="#MainContent">
+    {{ 'general.accessibility.skip_to_content' | t }}
+  </a>
   {% section 'header' %}
+  
+  {% include 'newsletter--popup' %}
   <main role="main" id="MainContent">
+    <div class="dark-overlay"></div>
+    <div id="CartHolder" style="position: relative; z-index: 1000"></div>
     {{ content_for_layout }}
   </main>
 
   {% section 'footer' %}
 
   {{ 'ajaxify.min.js' | asset_url | script_tag }}
+  {{ 'toggle-handler.js' | asset_url | script_tag }}
+
+  <script>
+    $(document).ready(_ => {
+      if (!localStorage.storeCurrency) {
+        localStorage.storeCurrency = `{{ shop.currency }}`
+      }
+    })
+
+    const formatCurrency = amount => {
+      amount = amount.toString()
+      const pos = amount.length-2
+      amount = `${amount.slice(0, pos)}.${amount.slice(pos)}`
+      amount = new Intl.NumberFormat("en-US", {'maximumSignificantDigits': 2}).format(parseFloat(amount))
+      return `${localStorage.storeCurrency} $${amount}`
+    }
+  </script>
 
   {{ 'random-color.js' | asset_url | script_tag }}
   {{ 'random-model-image.js' | asset_url | script_tag }}
-  {{ 'format-js-currency.js' | asset_url | script_tag }}
-  {{ 'filter-product-urlparams.js' | asset_url | script_tag }}
+  {{ 'parse-urlparams.js' | asset_url | script_tag }}
+  {{ 'shuffle-dom-siblings.js' | asset_url | script_tag }}
+  {{ 'popout-cart.js' | asset_url | script_tag  }}
+  
+  <style>
+    .dark-overlay {
+      display: none;
+      height: 100vh;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      position: fixed;
+      opacity: 1;
+      top: 0;
+      transition: 0.6s;
+    }
+  </style>
 </body>
 </html>

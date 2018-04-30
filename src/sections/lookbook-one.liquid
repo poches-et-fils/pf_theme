@@ -1,0 +1,87 @@
+  <div class="lookbook--layout">
+    <div class="lookbook--heading">
+      <h3 class="lookbook--title">{{section.settings.title}}</h3>
+    </div>
+    <div class="lookbook--breadcrumbs">
+      <div class="lookbook--breadcrumb--block"><a href="lookbook.html" class="lookbook--breadcrumb--link">Fall Collection 2017</a>
+        <div class="lookbook--breadcrumb--divider">|</div><a href="#" class="lookbook--breadcrumb--link">Fall Collection 2017</a></div>
+    </div>
+    <div class="lookbook--main--image"style="background-image: url('{{section.settings.mainimage | img_url: 'master'}}');"></div>
+   
+    
+      {% for block in section.blocks %}
+    
+   
+    
+    <div class="lookbook--flex  {% cycle '', 'alternative' %}">
+      <div class="lookbook--image--item"style="background-image: url('{{block.settings.image | img_url: 'master'}}');" ></div>
+      <div class="lookbook--content">
+        <h3 class="flex--item--heading">{{block.settings.title}}</h3>
+        <p>{{block.settings.paragraph}}</p>
+        <a href="{{block.settings.link}}" class="flex--item--link">{{block.settings.linktext}}</a></div>
+    </div>
+    
+    {%endfor%}
+    
+  
+  </div>
+
+{% schema %}
+ {
+  "name": "Page Blocks",
+	"max_blocks": 10,
+  "settings": [
+    {
+      "id": "title",
+      "type": "text",
+      "label": "Page Heading",
+      "default": "Lookbook"
+    },
+ {
+      "id": "mainimage",
+      "type": "image_picker",
+      "label": "Page Main Image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "select",
+      "name": "Add Button",
+      "settings": [
+{
+          "id": "image",
+          "type": "image_picker",
+       		"label": "Block Image"
+        },
+{
+          "id": "title",
+          "type": "text",
+       		"label": "Block Text"
+        },
+{
+          "id": "paragraph",
+          "type": "textarea",
+       		"label": "Block Paragraph"
+        },
+        {
+          "id": "link",
+          "type": "url",
+       		"label": "Button link"
+        },
+        {
+          "id": "linktext",
+          "type": "text",
+          "label": "Button text",
+          "default": "Click here"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

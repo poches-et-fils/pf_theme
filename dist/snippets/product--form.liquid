@@ -1,39 +1,15 @@
-<div class="ajax--cart--popout--section">
-  <div class="ajax--cart--popout" style="width: 100%">
-    <a href="#" data-keep-shopping
-       style="background-color: #161616"
-       class="button wide-text full-caps black w-button">
-      ← Continue shopping
-    </a>
-    <div class="ajax--cart--lower">
-      <div class="ajax--cart--items"></div>
-      <div class="ajax--cart--bottom">
-        <h3 class="ajax--cart--free-shipping">Free Shipping</h3>
-        <p class="ajax--cart--message">Add another $100 to cart to get free shipping.</p>
-        <a href="#" data-keep-shopping>Continue Shopping</a>
-        <div class="ajax--cart--subtotal">
-          <h4 class="ajax--cart--title--text">Subtotal</h4>
-          <h4 class="ajax--cart--title--text right">{{ cart.original_total_price | money }}</h4>
-        </div>
-        <a href="#" class="button wide-text full-caps black full-width w-button">Checkout</a>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="product--form">
   <div class="w-form-1">
     <form id="email-form" name="email-form" data-name="Email Form">
       <div class="product--form--selector variant--images">
         <div class="variant--selector--bar w-clearfix">
           <div class="selector--heading--left">
-            <strong>Design:</strong> 
+            <strong>Designs:</strong> 
             <span class="product--VA--name no-wrap">{{ product.title }}</span>
           </div>
           <div class="selector--heading--right">See all</div>
         </div>
         <div class="product-thumbnails flex-row flex-center">
-          <div class="selected-thumb-details"></div>
           <section class="thumb-nav-container">
             <span class="thumb-nav-arrow go-prev">‹</span>
             <span class="thumb-nav-arrow go-next">›</span>
@@ -57,25 +33,13 @@
               <span class="selector--heading--right nofloat">size guide</span>
             </div>
           </div>
-          <div class="product--design--selector--grid flex-row">
-            <div class="product--size--selector disabled">
-              <h2 class="product--size--selector--text">XS</h2>
-            </div>
-            <div class="product--size--selector">
-              <h2 class="product--size--selector--text">S</h2>
-            </div>
-            <div class="product--size--selector selected">
-              <h2 class="product--size--selector--text">M</h2>
-            </div>
-            <div class="product--size--selector">
-              <h2 class="product--size--selector--text">L</h2>
-            </div>
-            <div class="product--size--selector">
-              <h2 class="product--size--selector--text">XL</h2>
-            </div>
-            <div class="product--size--selector">
-              <h2 class="product--size--selector--text">XXL</h2>
-            </div>
+          <div class="product--design--selector--grid ">
+            <div class="product--size--selector">XS</div>
+            <div class="product--size--selector">S</div>
+            <div class="product--size--selector selected">M</div>
+            <div class="product--size--selector">L</div>
+            <div class="product--size--selector">XL</div>
+            <div class="product--size--selector">XXL</div>
           </div>
         </div>
 
@@ -92,11 +56,8 @@
 
         <div class="product--form--qty">
           <div><strong>QTY:</strong></div>
-          <select id="field" 
-                  name="field"
-                  class="product--form--qty--selector w-select">
-            <option selected disabled>Select one...</option>
-            <option value="1">1</option>
+          <select id="field" name="field" class="product--form--qty--selector w-select">
+            <option value="1" selected>1</option>
             <option value="2">2</option>
             <option value="3">3</option>
             <option value="4">4</option>
@@ -109,13 +70,13 @@
           </select>
         </div>
 
-        <input type="submit" 
+        <p class="cart-error text-error"></p>
+
+        <input type="submit"
+               style="font-weight: bold;"
                value="ADD TO CART" 
                data-wait="Please wait..." 
                class="product--form--atc w-button">
-        
-        <p class="cart-error text-error"></p>
-        
       </div>
     </form>
     <div class="w-form-done">
@@ -128,13 +89,51 @@
 </div>
 
 <style>
-  .ajax--cart--popout--section {
-    position: fixed;
-    width: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    z-index: 1000;
-    transition: 0.6s;
+  .text-error { text-align: right; }
+  .product--form--qty--selector {
+    width: 50px;
+    border-radius: 7px;
+    background-image: 
+      linear-gradient(45deg, transparent 50%, gray 50%), 
+      linear-gradient(135deg, gray 50%, transparent 50%), 
+      linear-gradient(to right, transparent, transparent);
+    background-position: 
+      calc(100% - 20px) calc(1em + 2px), 
+      calc(100% - 15px) calc(1em + 2px),
+      calc(100% - 2.5em) 0.5em;
+    background-size: 
+      5px 5px,
+      5px 5px,
+      1px 1.5em;
+    background-repeat: no-repeat;
+  }
+
+  .product--form--qty--selector:focus {
+    background-image:
+      linear-gradient(45deg, green 50%, transparent 50%),
+      linear-gradient(135deg, transparent 50%, green 50%),
+      linear-gradient(to right, transparent, transparent);
+    background-position:
+      calc(100% - 15px) 1em,
+      calc(100% - 20px) 1em,
+      calc(100% - 2.5em) 0.5em;
+    background-size:
+      5px 5px,
+      5px 5px,
+      1px 1.5em;
+    background-repeat: no-repeat;
+    border-color: green;
+    outline: 0;
   }
 </style>
+
+<script>
+  (function () {
+    window.onload = _ => {
+      const navContainer = $('.thumb-nav-container')
+      const containerHeight = $('.product-thumbnails').height()
+
+      navContainer.css('top', `${containerHeight/2}px`)
+    }
+  })()
+</script>

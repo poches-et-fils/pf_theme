@@ -29,24 +29,18 @@
     </div>
     <div class="product--block">
       <div class="product--block--left images--block">
-        <div class="product--image--smaller">
-          <a href="#" class="product--image--smaller--item w-inline-block">
-            <img src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg">
-          </a>
-          <a href="#" class="product--image--smaller--item w-inline-block">
-            <img src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg">
-          </a>
-          <a href="#" class="product--image--smaller--item w-inline-block">
-            <img src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg">
-          </a>
+        <div class="product--image--large" style="background-color: #f9f9f9;">
+          <img class="product--pocket--image--placement--man product-preview" 
+               src="{{ product.featured_image | img_url: '600x600'}}"
+               width="50"
+               height="50"/>
         </div>
-        <div class="product--image--large">
-          <img class="product--pocket--image--placement--man product-preview"  width="50" height="50"/></div>
       </div>
       <div class="product--block--right">
         <div class="product--variant--image">
           <div class="product--variant--image--image">
-            <img class="product--variant--image--image product-preview"  />
+            <img class="product--variant--image--image product-preview" 
+                 src="{{ product.featured_image | img_url: '600x600'}}" />
           </div>
           <div>
             <h2 class="product--variant--price">
@@ -65,9 +59,34 @@
         {% include 'product-toggle' %}   
       </div>
     </div>
+
+    <br>
+
+    <h2 class="text-center" style="display:block;font-weight: 600">ALSO LOOKS GOOD ON</h2>
+
     {% include 'related--products' %}
+
+    <br><br>
+
+
+    <div class="section--instagram">
+
+      <h1 style="font-weight:bold" class="section--title--heading bold--caps">SHOP THE LOOK</h1>
+      <div id="instagram--lower"> 
+
+
+        <h4><a style="text-decoration: none;" href="http://instagram.com/pochesetfils"> @Pochesetfils</a> </h4>
+        <h4 style="margin-left: 10px; margin-right: 10px;"> | </h4>
+        <h4> <a style="text-decoration: none;" href="http://instagram.com/explore/tags/pochesetfils"> #pochesetfils </a></h4>
+
+      </div> 
+
+      <div id="evm_shopify_app"></div><script src="https://www.expertvillagemedia.com/shopbyinstagram_with_tag/shopify/js/embed.js" data-shop-id="poches-development-mica.myshopify.com" data-viewall-id="true"  type="text/javascript"  data-gallery="0"></script>
+    </div>
+
+
   </div>
-  
+
   {% unless product == empty %}
   <script type="application/json" data-product-json>{{ product | json }}</script>
   {% endunless %}
@@ -75,38 +94,74 @@
 
 <script>
   (function () {
-    const getModel = _ => {
+    const getModels = (event, searchColor) => {
       /*
        * urlParams are sent to getRandImg() as an array.
        * e.g. ['adult=true', 'genre=female', 'type=...']
        * if no urlParams are found, it sends `false`
       */
-      const url		  		= window.location.href
-      const urlParams 		= url.includes('?') ? url.replace(/(http){1}.+\?+/, '').split('&') : false
+      const urlParams 		= getProductUrlparams(window.location.href) || []
       const modelContainer	= $('.product--image--large')
-      const modelImageUrl	= getRandImg(urlParams)
+      const setError		= $('.cart-error').text('')
 
+      if(searchColor) {
+        urlParams.push(`color=${searchColor}`)
+      }
+
+      let modelImageUrl = getRandImg(urlParams)
+
+      console.log("Model image:", modelImageUrl) 
+      if (!modelImageUrl) {
+        setError.text('Sorry, this image is not available')
+        modelImageUrl = getRandImg()
+      }
+      
       modelContainer
-      .attr('style', `background-image: url(${modelImageUrl})`)
+      .attr('style', `background-image: url('${modelImageUrl}')`)
       .find('img')
-      .css('transform', `translateY(${modelImageUrl.includes('child') ? '70px':'0'})`)
+      .css('transform', `translateY(${modelImageUrl.includes('--Kid') ? '115px':modelImageUrl.includes('--Baby') ? '130px':'25px'})`)
     }
-    
-    $(document).ready(getModel)
+
+    const setPreviewImage = event => {
+      const model = $(event.target).attr('src')
+
+      $('.product--image--large')
+      .css('background-image', `url('${model}')`)
+
+      .find('img')
+      .css('transform', `translateY(${model.includes('Kid') ? '130px':model.includes('Baby') ? '140px':'0'})`)
+    }
+
+    const filterColors = event => getModels(false, $(event.target).attr('title'))
+
+    $(document).ready(getModels)
+    $(document).on('click', 'li[title]', filterColors)
+    $(document).on('click', 'img.model-thumb', setPreviewImage)
   })()
 </script>
 
-{% schema %}
-  {
-    "name": "Product pages",
-    "settings": [
-      {
-        "type": "checkbox",
-        "id": "show_share_buttons",
-        "label": "Show social sharing buttons",
-        "default": true
-      }
-    ]
+<style>
+  .model-thumb { cursor: pointer; }
+  .toggle--icon--plus { 
+    transform: rotate(0deg);
+    transition: 0.3s;
   }
-{% endschema %}
+  .toggle--icon--less { 
+    transform: rotate(45deg);
+    transition: 0.3s;
+  }
+</style>
 
+{% schema %}
+{
+"name": "Product pages",
+"settings": [
+{
+"type": "checkbox",
+"id": "show_share_buttons",
+"label": "Show social sharing buttons",
+"default": true
+}
+]
+}
+{% endschema %}

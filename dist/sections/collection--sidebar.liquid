@@ -1,26 +1,357 @@
 <div class="collection--sidebar">
-      <div class="sidebar--block">
-        <h4 class="sidebar--heading">Collections</h4>
-        <div class="sidebar--links--block">
-         <a href="/all" class="sidebar--link">Shop all</a>
+  <div class="sidebar--block">
+    <h4 class="sidebar--heading">Collections</h4>
+    <div class="sidebar--links--block">
+      <a href="/all" class="sidebar--link">Shop all</a>
 
-         {%- comment -%}dynamically import all collection, while hiding 'all' and 'frontpage's{%- endcomment -%}
-        {% for collection in collections %}
-        {% if collection.title contains 'Home page'%}
 
-        {% else %}
-            
-        <a href="{{collection.url}}" class="sidebar--link">{{collection.title}}</a>
-        {%endif%}
-        {%endfor%}
+      {%- comment -%}
+      Section for collection
+      {%- endcomment -%}
+      {%- comment -%}
+      dynamically import all collection, while hiding 'all' and 'frontpage's
+      {%- endcomment -%}
+
+      {% for collection in collections %}
+
+      {% if collection.title contains 'Home page'%}
+      {% else %}
+      {% if collection.title contains 'All Designs'%}
+      {% else %}
+      <a href="{{collection.url}}" class="sidebar--link">{{collection.title}}</a>
+      {%endif%}
+      {%endif%}
+      {%endfor%}
+    </div>
+  </div>
+
+  {%- comment -%}
+  Section for link blocks
+  {%- endcomment -%}
+
+
+  <div class="sidebar--block">
+    <h4 class="sidebar--heading">Shop</h4>
+
+    <div class="sidebar--links--block">
+      {% for block in section.blocks %}
+      <a id="top-link" href="{{ block.settings.toplink }}"> {{block.settings.toplinktitle}}</a>
+
+      {% if block.settings.sublink1 %}
+      <a id="sub-link" href="{{block.settings.sublink1}}"> {{block.settings.sublinktitle1}}</a>
+      {%endif%}
+
+      {% if block.settings.sublink2 %}
+      <a id="sub-link" href="{{block.settings.sublink2}}"> {{block.settings.sublinktitle2}}</a>
+      {%endif%}
+
+      {% if block.settings.sublink3 %}
+      <a id="sub-link" href="{{block.settings.sublink3}}"> {{block.settings.sublinktitle3}}</a>
+      {%endif%}
+
+      {% if block.settings.sublink4 %}
+      <a id="sub-link" href="{{block.settings.sublink4}}"> {{block.settings.sublinktitle4}}</a>
+      {%endif%}
+      {%endfor%}
+    </div>
+  </div>
+</div>
+{%- comment -%}
+Section for design collection filter
+{%- endcomment -%}
+
+<div class="sidebar--block">
+  <h4 class="sidebar--heading" style="border-bottom: none">Designs</h4>
+  <div class="sidebar--links--block">
+    {%- comment -%}Toggle #1: Random{%- endcomment -%}
+    <div class="toggle--item">
+      <div class="toggle--activation" data-ix="toggle-interaction">
+        <h4 class="toggle--heading">Random</h4>
+        <img src="https://cdn.shopify.com/s/files/1/0013/6685/1647/files/plus.svg?8578614239508185635"
+             class="toggle--icon--plus">
+      </div>
+      <div class="toggle--contents">
+        <div id="sidebar-block-toggle">
+          {% for product in collections.all-designs.products limit:11 %}
+          <div id="sidebar-block">
+            {%for image in product.images %}   
+            <img src="{{image.src | img_url: '2048x2048'}}'" title="{{ product.title }}" />
+            {%endfor%} 
+          </div>
+          {%endfor%}
         </div>
       </div>
-      <div class="sidebar--block">
-        <h4 class="sidebar--heading">Shop</h4>
-        <div class="sidebar--links--block"><a href="collection.html" class="sidebar--link">Shop all</a><a href="collection.html" class="sidebar--link">Men</a><a href="#" class="sidebar--link">Women</a></div>
-      </div>
-    </div>
-    <div class="collection--grid">
     </div>
 
-  
+    {%- comment -%}Toggle #2: Animals{%- endcomment -%}
+    <div class="toggle--item">
+      <div class="toggle--activation" data-ix="toggle-interaction">
+        <h4 class="toggle--heading">Animals</h4>
+        <img src="https://cdn.shopify.com/s/files/1/0013/6685/1647/files/minus.svg?2249220138586907846" 
+             class="toggle--icon--minus"
+             data-ix="originally-hidden">
+        <img src="https://cdn.shopify.com/s/files/1/0013/6685/1647/files/plus.svg?8578614239508185635" 
+             class="toggle--icon--plus">
+        <div class="toggle--contents">
+          <div id="sidebar-block-toggle">
+            {% for product in collections.all-designs.products limit:11 %}
+            {% if product.tags contains 'Animals'%}
+            <div id="sidebar-block">
+              {%for image in product.images %}   
+              <img src="{{image.src | img_url: '2048x2048'}}'">
+              {%endfor%}
+            </div>
+            {%endif%}
+            {%endfor%}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {%- comment -%}Toggle #3: Sports{%- endcomment -%}
+    <div class="toggle--item">
+      <div class="toggle--activation" data-ix="toggle-interaction">
+        <h4 class="toggle--heading">Sports</h4>
+        <img src="https://cdn.shopify.com/s/files/1/0013/6685/1647/files/minus.svg?2249220138586907846" class="toggle--icon--minus" data-ix="originally-hidden"><img src="https://cdn.shopify.com/s/files/1/0013/6685/1647/files/plus.svg?8578614239508185635" 
+        class="toggle--icon--plus">
+      </div>
+      <div class="toggle--contents">
+        <div id="sidebar-block-toggle">
+          {% for product in collections.all-designs.products  limit:11%}
+          {% if product.tags contains 'Sports'%}
+          <div id="sidebar-block">
+            {%for image in product.images %}   
+            <img src="{{image.src | img_url: '2048x2048'}}'">
+            {%endfor%}
+          </div>
+          {%endif%}
+          {%endfor%}
+        </div> 
+      </div>
+    </div>
+
+    {%- comment -%}Toggle #4: Patterns{%- endcomment -%}
+    <div class="toggle--item">
+      <div class="toggle--activation" data-ix="toggle-interaction">
+        <h4 class="toggle--heading">Patterns</h4>
+        <img src="https://cdn.shopify.com/s/files/1/0013/6685/1647/files/minus.svg?2249220138586907846" class="toggle--icon--minus" data-ix="originally-hidden"><img src="https://cdn.shopify.com/s/files/1/0013/6685/1647/files/plus.svg?8578614239508185635" 
+        class="toggle--icon--plus">
+      </div>
+      <div class="toggle--contents">
+        <div id="sidebar-block-toggle">
+          {% for product in collections.all-designs.products limit:11%}
+          {% if product.tags contains 'Patterns'%}
+          <div id="sidebar-block">
+            {%for image in product.images %}   
+            <img src="{{image.src | img_url: '2048x2048'}}'">
+            {%endfor%}
+          </div>
+          {%endif%}
+          {%endfor%}
+        </div>
+      </div>
+    </div>
+
+
+    {%- comment -%}Toggle #5: Food{%- endcomment -%}
+    <div class="toggle--item">
+      <div class="toggle--activation" data-ix="toggle-interaction">
+        <h4 class="toggle--heading">Food</h4><img src="https://cdn.shopify.com/s/files/1/0013/6685/1647/files/minus.svg?2249220138586907846" class="toggle--icon--minus" data-ix="originally-hidden"><img src="https://cdn.shopify.com/s/files/1/0013/6685/1647/files/plus.svg?8578614239508185635" class="toggle--icon--plus"></div>
+      <div class="toggle--contents">
+
+        <div id="sidebar-block-toggle">
+          {% for product in collections.all-designs.products limit:11%}
+
+          {% if product.tags contains 'Food'%}
+          <div id="sidebar-block">
+            {%for image in product.images %}   
+            <img src="{{image.src | img_url: '2048x2048'}}'">
+            {%endfor%} 
+          </div>
+          {%endif%}
+          {%endfor%}
+        </div> 
+      </div>
+    </div>
+
+    {%- comment -%}Toggle #6: Collaboration{%- endcomment -%}
+    <div class="toggle--item">
+      <div class="toggle--activation" data-ix="toggle-interaction">
+        <h4 class="toggle--heading">Collaboration</h4>
+        <img src="https://cdn.shopify.com/s/files/1/0013/6685/1647/files/minus.svg?2249220138586907846" 
+             class="toggle--icon--minus"
+             data-ix="originally-hidden">
+        <img src="https://cdn.shopify.com/s/files/1/0013/6685/1647/files/plus.svg?8578614239508185635" 
+             class="toggle--icon--plus">
+      </div>
+      <div class="toggle--contents">
+        <div id="sidebar-block-toggle">
+          {% for product in collections.all-designs.products limit:11 %}
+          {% if product.tags contains 'Collaboration'%}
+          <div id="sidebar-block">
+            {%for image in product.images %}   
+            <img src="{{image.src | img_url: '2048x2048'}}'">
+            {%endfor%}
+          </div>
+          {%endif%}
+          {%endfor%}
+        </div>
+      </div>
+    </div>
+
+    {%- comment -%}
+    Section for filter by filter
+    {%- endcomment -%}
+    <div class="sidebar--block">
+      <h4 class="sidebar--heading">Filter By</h4>
+      <div class="sidebar--links--block">
+        
+        <div class="toggle--item">
+          <h4 class="toggle--heading">
+            <strong>Size:</strong>
+            <span id="sizeFilterValue"></span>
+          </h4>
+          <div class="product--design--selector--grid flex-row">
+            <div class="product--size--selector">XS</div>
+            <div class="product--size--selector">S</div>
+            <div class="product--size--selector">M</div>
+            <div class="product--size--selector">L</div>
+            <div class="product--size--selector">XL</div>
+            <div class="product--size--selector">XXL</div>
+          </div>
+        </div>
+        
+        <div class="toggle--item">
+          <h4 class="toggle--heading">
+            <strong>Colour:</strong>
+            <span id="colorFilterValue"></span>
+          </h4>
+          <ul class="colors-container">
+            <li title="Black"></li>
+            <li title="White"></li>
+            <li title="Grey"></li>
+            <li title="Dark-Grey"></li>
+            <li title="Burgundy"></li>
+            <li title="Navy"></li>
+          </ul>
+        </div>
+      </div>
+        
+    </div>
+  </div>
+</div>
+
+<style>
+  .toggle--item {
+    width: 80%;
+    padding: 5px 0;
+    border-bottom: 1px solid #ddd;
+  }
+
+  #sidebar-block-toggle {
+    display: flex;
+    flex-flow: row wrap;
+  }
+
+  #sidebar-block {
+    flex-basis: 25%;
+  }
+
+  #sidebar-block img {
+    object-fit: none;
+    margin: 5px;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  #top-link {
+    width: 100%;
+    display: block;
+    text-decoration: none;
+  }
+
+  #sub-link {
+    display: block;
+    margin-left: 20px;
+    color: #aaa;
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 3px;
+  }
+</style>
+
+{% schema %}
+{
+"name": "Collection Sidebar Blocks",
+"max_blocks": 3,
+"settings": [
+{
+"id": "text-box",
+"type": "text",
+"label": "Heading",
+"default": "Title"
+}
+],
+"blocks": [
+{
+"type": "select",
+"name": "Add Button",
+"settings": [
+{
+"id": "toplink",
+"type": "url",
+"label": "Category link"
+},
+{
+"id": "toplinktitle",
+"type": "text",
+"label": "Category Title",
+"default": "Category"
+},
+{
+"id": "sublink1",
+"type": "url",
+"label": "Sub-Category link #1"
+},
+{
+"id": "sublinktitle1",
+"type": "text",
+"label": "Sub-Category link  title #1"
+},
+{
+"id": "sublink2",
+"type": "url",
+"label": "Sub-Category link #2"
+},
+{
+"id": "sublinktitle2",
+"type": "text",
+"label": "Sub-Category link  title #2"
+},
+{
+"id": "sublink3",
+"type": "url",
+"label": "Sub-Category link #3"
+},
+{
+"id": "sublinktitle3",
+"type": "text",
+"label": "Sub-Category link  title #3"
+},
+{
+"id": "sublink4",
+"type": "url",
+"label": "Sub-Category link #4"
+},
+{
+"id": "sublinktitle4",
+"type": "text",
+"label": "Sub-Category link  title #4"
+}
+]
+}
+]
+}
+{% endschema %}

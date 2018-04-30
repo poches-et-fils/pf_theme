@@ -1,23 +1,31 @@
+{%- comment -%}
+For the links with dropdowns we need to dynamically add the data links
+{%- endcomment -%}
+
+
+
 {% for link in linklists[section.settings.right_linklist].links %}
-        {%- assign child_list_handle = link.title | handleize -%}
-        {% if menus[child_list_handle].links != blank %}
-          
-        
-            <a href="{{ link.url }}" class="w-nav-link">
-              {{ link.title }}
-              {% include 'icon-arrow-down' %}
-            </a>
-          
-              {% for childlink in menus[child_list_handle].links %}
-             
-                  <a href="{{ childlink.url }}" class="site-nav__link">{{ childlink.title | escape }}</a>
-               
-              {% endfor %}
-          
-          
-        {% else %}
-          
-            <a href="{{ link.url }}" class="w-nav-link">{{ link.title }}</a>
-          
-        {% endif %}
-      {% endfor %}
+{%- assign child_list_handle = link.title | handleize -%}
+
+{% if menus[child_list_handle].links != blank %}
+
+<a href="{{ link.url }}" class="w-nav-link" data-dropdown-rel="{{ link.handle }}">
+  {{ link.title }}
+  {% include 'icon-arrow-down' %}
+</a>
+
+{% for childlink in menus[child_list_handle].links %}
+<a href="{{ childlink.url }}" class="site-nav__link">
+  {{ childlink.title | escape }}
+</a>
+{% endfor %}
+
+{% else %}
+<a href="{{ link.url }}" class="w-nav-link">{{ link.title }}</a>
+{% endif %}
+
+{% endfor %}
+
+
+
+

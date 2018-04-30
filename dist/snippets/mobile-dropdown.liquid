@@ -1,0 +1,20 @@
+<div class="mobile--dropdown--navigation">
+  
+   {% for link in linklists[section.settings.left_linklist].links %}
+  {%- assign child_list_handle = link.title | handleize -%}
+  
+   <a href="{{link.url}}" class="mobile--dropdown--links">{{link.title}}</a>
+  
+  {%endfor%}
+  
+  {% for link in linklists[section.settings.right_linklist].links %}
+  {%- assign child_list_handle = link.title | handleize -%}
+  <a href="{{link.url}}" class="mobile--dropdown--links">{{link.title}}</a>
+  {%endfor%}
+
+    <div class="social--icons--mobile--dropdown">
+      <a href="https://instagram.com/pochesetfils" class="social--icons w-inline-block">
+        <img src="https://cdn.shopify.com/s/files/1/0013/6685/1647/files/instagram.svg?16942166759855565463" width="25"></a>
+      <a href="https://facebook.com/pochesetfils" class="w-inline-block">
+        <img src="https://cdn.shopify.com/s/files/1/0013/6685/1647/files/facebook.svg?16942166759855565463" width="28"></a></div>
+  </div>

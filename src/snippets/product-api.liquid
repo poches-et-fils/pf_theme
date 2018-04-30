@@ -25,10 +25,10 @@
 
     products.map(product => {
       thumbsContainer.append(`<img class="thumbnail"
-src="${product.images[0].src}"
-data-id="${product.id}"
-alt="${product.handle}"
-title="${product.title}" />`)
+      src="${product.images[0].src}"
+      data-id="${product.id}"
+      alt="${product.handle}"
+      title="${product.title}" />`)
 
       if(product.handle === currentProduct) {
         $(`img.thumbnail[alt="${product.handle}"]`).click()
@@ -37,8 +37,8 @@ title="${product.title}" />`)
   }
 
   const displayProduct = event => {
-    const selectedThumb  	 = $(event.target).addClass('selected-thumb')
-    const curHandle          = selectedThumb.attr('alt') || false
+    const selectedThumb = $(event.target).addClass('selected-thumb')
+    const curHandle     = selectedThumb.attr('alt') || false
 
     // set/remove 'selected-thumb' class
     $('*.selected-thumb').not(selectedThumb).removeClass('selected-thumb')
@@ -113,11 +113,14 @@ title="${product.title}" />`)
           })
           return correctVariant
         })
-        console.log(foundVariant)
+        
         const cart_data = {
           'id': foundVariant.id,
           'quantity': quantity,
-          'properties': { 'size': requestedSize }
+          'properties': { 
+            'size': requestedSize,
+            'color': requestedColor
+          }
         }
 
         if(Array.isArray(searchParams))
@@ -135,70 +138,34 @@ title="${product.title}" />`)
               .addClass('disabled success')
               .attr('disabled', true)
               .attr('value', 'ADDED TO CART')
-              
-              toggleCart(null, 'reloadProducts')
+
               toggleCart()
             } else if (response.status === 422) {
               $('.cart-error').text(response.description)
             }
           })
       })
-      else {console.log(`Data is not ready: qty ${quantity}, prod ${product}`)}
-  }
-
-  const toggleProductInfo = event => {
-    const container = $(event.target).find('.toggle--contents')
-    container.is(':visible') ? container.slideUp() : container.slideDown()
+      else {
+        console.log(`Data is not ready: qty ${quantity}, prod ${product}`)
+      }
   }
   
-  const toggleCart = (event, loadProducts) => {
-    const cartContainer = $('.ajax--cart--popout--section')
-    const itemsInCart 	= cartContainer.find('.ajax--cart--items').empty()
-    const cartIsVisible = cartContainer.css('width').replace(/\D+/, '') > 0
-    
-    if (loadProducts) {
-      $.getJSON('/cart.js', cartData => {
-        cartData.items.map(item => {
-          console.log(item.title)
-          itemsInCart
-          .append(`
-			<div class="ajax--cart--item">
-              <div class="ajax--cart--item--image">
-				 <img src="${item.image}" alt="${item.title}">
-              </div>
-              <div class="ajax--cart--item--details">
-                <div class="ajax--cart--item--block padding">
-                  <div class="ajax--cart--item--text bold--text"></div>
-					<div class="ajax--cart--item--text">${item.title}</div>
-                </div>
-                <div class="ajax--cart--item--block padding">
-				<div class="ajax--cart--item--text">Size: ${item.properties.size}</div>
-				<div class="ajax--cart--item--text">Color: ${item.properties.color}</div>
-                </div>
-                <div class="ajax--cart--item--block flexed">
-                  <div class="ajax--cart--qty"></div>
-                  <div class="ajax--cart--price--block">
-					<div>$${formatCurrency(item.price)}</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-		  `)
-        })
-      })
-    }
-    
-    cartContainer.css('width', cartIsVisible ? '0':'30%')
+  const keepShopping = _ => {
+    $('.product--form--atc')
+    .removeClass('disabled success')
+    .removeAttr('disabled')
+    .attr('value', 'ADD TO CART')
   }
 
-  $(document).ready(getProducts)
-  $(document).on('click', '.thumbnail[src]', displayProduct)
-  $(document).on('click', '.thumb-nav-arrow', navThumbnails)
-  $(document).on('click', '.colors-container li[title]', setColor)
-  $(document).on('click', '.product--size--selector', setSize)
-  $(document).on('click', '.product--form--atc', addToCart)
-  $(document).on('click', '.toggle--item', toggleProductInfo)
-  $(document).on('click', 'a[data-keep-shopping]', toggleCart)
+  $(document).ready(_ => {
+    getProducts()
+    $(document).on('click', '.thumbnail[src]', displayProduct)
+    $(document).on('click', '.thumb-nav-arrow', navThumbnails)
+    $(document).on('click', '.colors-container li[title]', setColor)
+    $(document).on('click', '.product--size--selector', setSize)
+    $(document).on('click', '.product--form--atc', addToCart)
+    $(document).on('click', '*[data-keep-shopping], .dark-overlay', keepShopping)
+  })
 </script>
 
 <style>
@@ -255,23 +222,23 @@ title="${product.title}" />`)
   }
 
   .thumbnails-container {
-    text-align: center; 
-    padding: 0 10px 0 10px;
+    text-align: left; 
+    padding: 0 20px;
   }
 
   img.thumbnail {
-    height: 45px;
-    width: 45px;
+    height: 50px;
+    width: 50px;
     cursor: pointer;
     transition: 0.3s;
     object-fit: none;
     padding: 3px;
-    object-fit: cover;
+    margin: 5px;
     user-select: none;
   }
   img.thumbnail.selected-thumb {
-    outline: 1px solid rgba(0, 0, 0, 0.5);
-    background-color: rgba(255, 255, 255, 0.5);
+    outline: 2px solid rgba(0, 0, 0, 0.7);
+    background-color: #f9f9f9;
     transition: 0.3s;
   }
 
@@ -279,7 +246,6 @@ title="${product.title}" />`)
     display: block;
     max-width: 180px; 
     opacity: 0.9;
-    transition: 0.7s;
   }
 
   img.product-preview:hover {
@@ -358,6 +324,7 @@ title="${product.title}" />`)
     font-size: 4em;
     font-weight: 100;
     opacity: 0.5;
+    margin: -30px;
   }
 
   .disabled { cursor: not-allowed !important; }

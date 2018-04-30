@@ -1,0 +1,125 @@
+<div class="product--form">
+  <div class="w-form-1">
+    <form id="email-form" name="email-form" data-name="Email Form">
+      <div class="product--form--selector variant--images">
+        <div class="variant--selector--bar w-clearfix">
+          <div class="selector--heading--left">
+            <strong>Design:</strong> 
+            <span class="product--VA--name no-wrap">{{ product.title }}</span>
+            <span class="product--handle hide">{{ product.handle }}</span>
+          </div>
+          <div class="selector--heading--right">See all</div>
+        </div>
+
+        <div class="product--form--selector sizing">
+          <div class="variant--selector--bar w-clearfix">
+            <div class="selector--heading--left">
+              <strong>Size:</strong> 
+              <span class="selector--heading--right nofloat">size guide</span>
+            </div>
+          </div>
+          <div class="product--design--selector--grid ">
+            <div class="product--size--selector disabled">XS</div>
+            <div class="product--size--selector">S</div>
+            <div class="product--size--selector selected">M</div>
+            <div class="product--size--selector">L</div>
+            <div class="product--size--selector">XL</div>
+            <div class="product--size--selector">XXL</div>
+          </div>
+        </div>
+
+        <div class="product--form--qty">
+          <div><strong>QTY:</strong></div>
+          <select id="field" name="field" class="product--form--qty--selector w-select">
+            <option value="1" selected>1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
+        </div>
+
+        <button type="button"
+                data-wait="Please wait..." 
+                class="product--form--atc w-button">ADD TO CART</button>
+
+        <p class="cart-error text-error"></p>
+
+      </div>
+    </form>
+    <div class="w-form-done">
+      <div>Thank you! Your submission has been received!</div>
+    </div>
+    <div class="w-form-fail">
+      <div>Oops! Something went wrong while submitting the form.</div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .product--form--selector {
+    margin: 0;
+    min-height: unset;
+    padding: 10px 0;
+  }
+  
+  .product--form--qty--selector {
+    width: 50px;
+    border-radius: 7px;
+    background-image: 
+      linear-gradient(45deg, transparent 50%, gray 50%), 
+      linear-gradient(135deg, gray 50%, transparent 50%), 
+      linear-gradient(to right, transparent, transparent);
+    background-position: 
+      calc(100% - 20px) calc(1em + 2px), 
+      calc(100% - 15px) calc(1em + 2px),
+      calc(100% - 2.5em) 0.5em;
+    background-size: 
+      5px 5px,
+      5px 5px,
+      1px 1.5em;
+    background-repeat: no-repeat;
+  }
+
+  .product--form--qty--selector:focus {
+    background-image:
+      linear-gradient(45deg, green 50%, transparent 50%),
+      linear-gradient(135deg, transparent 50%, green 50%),
+      linear-gradient(to right, transparent, transparent);
+    background-position:
+      calc(100% - 15px) 1em,
+      calc(100% - 20px) 1em,
+      calc(100% - 2.5em) 0.5em;
+    background-size:
+      5px 5px,
+      5px 5px,
+      1px 1.5em;
+    background-repeat: no-repeat;
+    border-color: green;
+    outline: 0;
+  }
+  
+  .hide { display: none; }
+</style>
+
+<script>
+  const loadThumbnails = handle => $.getJSON(`${handle}.js`, renderThumbnails)
+  
+  const renderThumbnails = data => {
+    const images = Array.isArray(data.images) ? data.images : []
+    const thumbsContainer = $('.product--image--smaller').empty()
+
+    images.map(image => thumbsContainer.append(`<img class="thumbnail" src="${image}"/>`))
+  }
+  
+  $(document).ready(_ => {
+    const handle = $('.product--handle').text()
+    loadThumbnails(handle)
+    //toggleInfo()
+  })
+</script>

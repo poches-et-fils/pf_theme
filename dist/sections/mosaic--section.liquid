@@ -6,7 +6,7 @@
     <div class="section--mosaic--container">
      
      
-      <div class="section--mosaic--left" style="background-image: url('{{section.settings.mosaicleftimg | img_url: '1000x1000' }}');">
+      <div class="section--mosaic--left" style="background-image: url('{{section.settings.mosaicleftimg | img_url: 'master' }}');">
         <a href="{{section.settings.linkleft}}" class="mosaic--overalay w-inline-block">
           <h1 class="section--mosaic--text">{{section.settings.mosaicleft}}</h1>
         </a>
@@ -15,14 +15,14 @@
 
       <div class="section--mosaic--right" >
         <div class="section--mosaic--top flex">
-          <div class="section--mosaic--left--top" style="background-image: url('{{section.settings.mosaicrightimg | img_url: '1000x1000' }}');">
+          <div class="section--mosaic--left--top" style="background-image: url('{{section.settings.mosaicrightimg | img_url: 'master' }}');">
             <a href="{{section.settings.linkright}}" class="mosaic--overalay w-inline-block">
               <h1 class="section--mosaic--text">{{section.settings.mosaicright}}</h1>
             </a>
           </div>
 
 
-          <div class="section--mosaic--left--top nopadd" style="    background-image: url('{{section.settings.mosaiclefttopimg | img_url: '1000x1000' }});">
+          <div class="section--mosaic--left--top nopadd" style="    background-image: url('{{section.settings.mosaiclefttopimg | img_url: 'master' }});">
             <a href="{{section.settings.linklefttop}}" class="mosaic--overalay w-inline-block">
               <h1 class="section--mosaic--text">{{section.settings.moasaiclefttop}}</h1>
             </a>
@@ -32,7 +32,7 @@
         </div>
 
 
-        <div class="section--mosaic--bottom" style="background-image: url('{{section.settings.mosaicbottomimg | img_url: '1000x1000'}});">
+        <div class="section--mosaic--bottom" style="background-image: url('{{section.settings.mosaicbottomimg | img_url: 'master'}});">
           <a href="{{section.settings.linkbottom}}" class="mosaic--overalay w-inline-block">
             <h1 class="section--mosaic--text">{{section.settings.mosaicbottom}}</h1>
           </a>
@@ -44,6 +44,16 @@
 
 
   </div>
+
+<style>
+  @media (max-width: 796px) {
+  
+    
+    .section--mosaic--container {flex-direction:column}
+    .section--mosaic--left {width:100%!important;}
+    .section--mosaic--right {width:100%!important;width: 100%;height: 1200px;}
+  }
+</style>
 
     
 {% schema %}

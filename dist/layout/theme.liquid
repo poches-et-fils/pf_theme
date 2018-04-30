@@ -112,7 +112,8 @@ Configured 2018
   {{ 'random-model-image.js' | asset_url | script_tag }}
   {{ 'parse-urlparams.js' | asset_url | script_tag }}
   {{ 'shuffle-dom-siblings.js' | asset_url | script_tag }}
-  {{ 'popout-cart.js' | asset_url | script_tag  }}
+  {{ 'quickadd-handler.js' | asset_url | script_tag }}
+  {{ 'popout-cart.js' | asset_url | script_tag }}
   
   <style>
     .dark-overlay {
@@ -124,6 +125,7 @@ Configured 2018
       opacity: 1;
       top: 0;
       transition: 0.6s;
+      z-index: 1000;
     }
   </style>
 </body>

@@ -16,7 +16,7 @@ Version: 0.0.11
 - Continous load doesn't have a lazy-load effect where as you scroll the background appears, then others appear.
 - Lazy load only loads SOME products in collection
 - No related products on non-pocket product page
-- 
+
 
 ## Getting Started
 

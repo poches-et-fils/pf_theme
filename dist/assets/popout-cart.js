@@ -321,7 +321,7 @@ const imageProps = (item, model) => {
   if (item.properties.product === 'Pocket' || item.properties.product === 'Combo') {
     imageDiv = `class="ajax--cart--item--image" style="background-image: url('${model}')"`
   } else {
-    imageDiv = `style="width: 100px;"`
+    imageDiv = `style="width: 40%; display: flex; justify-content: center; align-items: center;"`
   }
   
   return imageDiv

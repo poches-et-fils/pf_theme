@@ -2,8 +2,8 @@
 <div id="MainContent" class="container">
   <div class="EndlessScroll">
     {% for product in collection.products %}
-    
-    {% for variant in product.variants %}
+
+    {% for variant in product.variants limit:1 %}
     {% if product.type == 'Pocket' or product.type == 'Combo'%}
     <a href="{{ product.url }}?gender={{ collection.title }}&product_type={{ variant.option3 }}"
        title="{{ product.title }} ({{ variant.title }})"
@@ -43,7 +43,7 @@
       <div>{{ variant.price | money }}</div>
       <div class="light-gray"><u><small>See more styles</small></u></div>
     </a>
-    
+
     {%else%}
     <a href="{{product.url}}/"
        class="product--grid--item--four three--row w-inline-block"
@@ -58,7 +58,7 @@
        data-variant-type="{{ product.type }}">
       <div class="product--grid--item--image random-colored-bg">
         <div class="product--grid--item--variant--overlay">
-           <img src="{{ product.featured_image | product_img_url: 'master' }}" 
+          <img src="{{ product.featured_image | product_img_url: 'master' }}" 
                width="100%"
                height="100%">
         </div>
@@ -76,10 +76,10 @@
       </div>
       <h5 class="product--grid--item--title">{{product.title}}</h5>
       <div>{{ product.price | money }}</div>
-      <div class="product--grid--item--link">See more styles</div>
+      <div class="light-gray"><u><small>See more styles</small></u></div>
     </a>
     {%endif%}
-    
+
     {% endfor %}
     {%endfor%}
 
@@ -96,8 +96,9 @@
   (function () {
 
     const addCollectionImages = _ => {
-      const productList = $(`.EndlessScroll > [data-variant-type=Pocket],
-                            .EndlessScroll > [data-variant-type=Combo]`)
+      const productList = $
+      (`.EndlessScroll > [data-variant-type=Pocket],
+		.EndlessScroll > [data-variant-type=Combo]`)
       
       productList.map((index, item) => {
         const product = $(item).find('.product--grid--item--image')
@@ -105,20 +106,19 @@
         .find('.product--grid--item--params')
         .text()
         .split(' / ')
+        
 
         searchParams.map((param, index) => searchParams[index] = `param=${param}`)
 
         const bgImgURL = getRandImg(searchParams)
-          
-        console.log(bgImgURL)
         
         if (!product.find('img').length) {
           // no <img> container
           product.parent().hide()
         } else if (bgImgURL) {
-          
+        
           product.css('background-image', `url('${bgImgURL}')`)
-
+          
           if (bgImgURL.includes('Kid')) {
             product
             .find('img.product--grid--item--pocket')
@@ -145,65 +145,21 @@
       })
     }
 
-    const handleQuickAdd = event => {
-      event.preventDefault()
-
-      const button 			= $(event.target)
-      const hiddenQA 			= button.next('.product--quickadd--sizes')
-      const hiddenQAContainer = hiddenQA.parent()
-
-      if (button.is('[class="product--quickadd--CTA"]')) {
-        button.toggle()
-        hiddenQA.css({'display': 'flex', 'opacity': 1 })
-        hiddenQAContainer.css('opacity', 1)
-      }
-    }
-
-    const quickAdd = event => {
-      const button			 = $(event.target).closest('.product--quickadd')
-      const info 			 = $(event.target).closest('*[data-variant-info]')
-      const variant_size 	 = $(event.target).text()
-      const variant_id 	   	 = info.attr('data-variant-id')
-      const variant_color 	 = info.attr('data-variant-color')
-      const variant_quantity = info.attr('data-variant-quantity')
-      const clothing_type	 = info.attr('data-variant-clothing')
-      const variant_type	 = info.attr('data-variant-type')
-
-      $.post('/cart/add.js', {
-        'id': 		variant_id,
-        'quantity': variant_quantity,
-        'properties': {
-          'size': 	variant_size,
-          'color': 	variant_color,
-          'product':variant_type,
-          'type': 	clothing_type,
-        }
-      })
-      .error(error => console.log("Error:", error))
-      .complete(data => {
-        if (data.status === 200) {
-          button.css('opacity', 0)
-          toggleCart()
-        }
-      })
-
-    }
-
     const shuffleProducts = _ => {
       addCollectionImages()
       shuffleDOMSiblings('.EndlessScroll')
       fillBg()
-      $('.pagination').remove()
+      $('.pagination').hide()
     }
     
     $(document).ready(_ => {
       // Set up jQuery handles
-      $(document).on('click', '.product--quickadd', e => e.preventDefault())
-      $(document).on('click', '.product--quickadd--CTA', handleQuickAdd)
-      $(document).on('click', '*[class^="product--size"]', quickAdd)
       $(document).ready(_ => {
+        ajaxify({
+          'callback': shuffleProducts,
+          'fade': 2000
+        })
         shuffleProducts()
-        ajaxify({'callback': shuffleProducts})
       })
     })
   })()
@@ -251,5 +207,10 @@
   a.product--grid--item--four.three--row.w-inline-block:not(:hover) .product--quickadd {
     opacity: 0 !important;
     transition: 0.3s;
+  }
+  
+  .visible {
+    opacity: 1 !important;
+    transition: 5s;
   }
 </style>

@@ -1,8 +1,5 @@
 {%- comment -%}
-
 Handles Product Grid in Collections on homepage. 
-
-
 {%- endcomment -%}
 
 <div class="section--products" 
@@ -13,10 +10,11 @@ Handles Product Grid in Collections on homepage.
   {% endif %}
   {%- assign collection = collections[section.settings.collection] -%}
   <div class="product--grid--block">
-     {% for product in collection.products limit:4 %}
-    {% if product.type == 'Pocket'%}
-   
-   <a href="{{ product.url }}?gender={{ collection.title }}&product_type={{ variant.option3 }}"
+    {% for product in collection.products limit:4 %}
+
+    {% for variant in product.variants limit:1 %}
+    {% if product.type == 'Pocket' or product.type == 'Combo'%}
+    <a href="{{ product.url }}?gender={{ collection.title }}&product_type={{ variant.option3 }}"
        title="{{ product.title }} ({{ variant.title }})"
        data-variant-info
        data-variant-id="{{ variant.id }}"
@@ -24,7 +22,8 @@ Handles Product Grid in Collections on homepage.
        data-variant-quantity="1"
        data-variant-size="{{ variant.option1 }}"
        data-variant-color="{{ variant.option2 }}"
-       data-variant-type="{{ variant.option3 }}"
+       data-variant-clothing="{{ variant.option3 }}"
+       data-variant-type="{{ product.type }}"
        class="product--grid--item--four three--row w-inline-block">
       <div class="product--grid--item--image men--tshirt random-colored-bg">
         <div class="product--grid--item--variant--overlay">
@@ -53,29 +52,29 @@ Handles Product Grid in Collections on homepage.
       <div>{{ variant.price | money }}</div>
       <div class="light-gray"><u><small>See more styles</small></u></div>
     </a>
-    
+
     {%else%}
-    
-    <a href="{{product.url}}" class="product--grid--item--four three--row w-inline-block">
-      
-      <div class="product--grid--item--image t-shirt random-colored-bg">
-      
-         <div class="product--grid--item--variant--overlay">
+    <a href="{{product.url}}/"
+       class="product--grid--item--four three--row w-inline-block"
+       title="{{ product.title }} ({{ variant.title }})"
+       data-variant-info
+       data-variant-id="{{ variant.id }}"
+       data-variant-handle="{{ product.handle }}"
+       data-variant-quantity="1"
+       data-variant-size="{{ variant.option1 }}"
+       data-variant-color="{{ variant.option2 }}"
+       data-variant-clothing="{{ variant.option3 }}"
+       data-variant-type="{{ product.type }}">
+      <div class="product--grid--item--image random-colored-bg">
+        <div class="product--grid--item--variant--overlay">
           <img src="{{ product.featured_image | product_img_url: 'master' }}" 
                width="100%"
-               height="100%"
-              >
+               height="100%">
         </div>
-      
         <div class="product--quickadd">
           <strong class="product--quickadd--CTA">+ QUICK ADD</strong>
           <div class="product--quickadd--sizes product--design--selector--grid flex-row">
-            <div class="product--size--selector">XS</div>
-            <div class="product--size--selector">S</div>
-            <div class="product--size--selector">M</div>
-            <div class="product--size--selector">L</div>
-            <div class="product--size--selector">XL</div>
-            <div class="product--size--selector">XXL</div>
+            <div class="product--size--selector">Unique size</div>
           </div>
         </div>
       </div>
@@ -83,113 +82,73 @@ Handles Product Grid in Collections on homepage.
       <div>{{ product.price | money }}</div>
       <div class="product--grid--item--link">See more styles</div>
     </a>
-    
     {%endif%}
 
+    {% endfor %}
     {%endfor%}
-
-
   </div>
 </div> 
 
 <style>
   .product--grid--item--four {width:23%!important;}
+
   @media (max-width: 796px) {
-    .product--grid--item--four {width: 48%!important;height: 350px!important;}
+    .product--grid--item--four {
+      width: 48% !important;
+      height: 350px !important;
+    }
   }
 </style>
 
 <script>
   (function () {
-    $(document).ready(_ => {
+
+    const addCollectionImages = _ => {
+      const productList = $(`.product--grid--block > [data-variant-type=Pocket],
+							 .product--grid--block > [data-variant-type=Combo]`)
       
-      const addCollectionImages = _ => {
-        const productList = $('.EndlessScroll').children()
-        productList.map((index, item) => {
-          const product = $(item).find('.product--grid--item--image')
-          const searchParams = $(item).find('.product--grid--item--params').text().split(' / ')
-          
-          searchParams.map((param, index) => searchParams[index] = `param=${param}`)
-          
-          const bgImgURL = getRandImg(searchParams)
+      $('.product--grid--item--variant--overlay > img').css({
+        'transition': '1s'
+      })
 
-          if (!product.find('img').length) {
-            product.parent().remove()
-          } else if (bgImgURL) {
-            
-            product.css('background-image', `url('${bgImgURL}')`)
+      productList.map((index, item) => {
+        const product = $(item).find('.product--grid--item--image')
 
-            if (bgImgURL.includes('Kid')) {
-              product
-              .find('img.product--grid--item--pocket')
-              .css({
-                'top': '30px',
-                'left': '-100px',
-                'transition': '0.3s'
-              })
-            }
-            
-          } else {
-            // no images found
-            product.parent().remove()
+        const bgImgURL = getRandImg()
+
+        if (!product.find('img').length) {
+          product.parent().hide()
+        } else if(bgImgURL) {
+          product.css('background-image', `url('${bgImgURL}')`)
+
+          if (bgImgURL.includes('Kid')) {
+            product
+            .find('img.product--grid--item--pocket')
+            .css({
+              'top': '38px',
+              'left': '-140px',
+              'transition': '0.3s'
+            })
           }
-          
-        })
-      }
-      
-      const shuffleProducts = _ => {
-        addCollectionImages()
-        shuffleDOMSiblings('.EndlessScroll')
-        fillBg()
-        $('.pagination').remove()
-      }
-      
-      const handleQuickAdd = event => {
-        event.preventDefault()
-        
-        const button 			= $(event.target)
-        const hiddenQA 			= button.next('.product--quickadd--sizes')
-        const hiddenQAContainer = hiddenQA.parent()
-		
-        if (button.is('[class="product--quickadd--CTA"]')) {
-          button.toggle()
-          hiddenQA.css({'display': 'flex', 'opacity': 1 })
-          hiddenQAContainer.css('opacity', 1)
+
+        } else {
+          // no images found
+          console.log('hide1')
+          product.parent().hide()
         }
-      }
-      
-      const quickAdd = event => {
-        const button			= $(event.target).closest('.product--quickadd')
-        const info 				= $(event.target).closest('*[data-variant-info]')
-        const variant_size 		= $(event.target).text()
-        const variant_id 	   	= info.attr('data-variant-id')
-        const variant_color 	= info.attr('data-variant-color')
-        const variant_quantity 	= info.attr('data-variant-quantity')
-        const variant_type	 	= info.attr('data-variant-type')
-        
-        $.post('/cart/add.js', {
-          'id': 		variant_id,
-          'quantity': 	variant_quantity,
-          'properties': {
-            'size': 	variant_size,
-            'color': 	variant_color,
-            'type': 	variant_type
-          }
-        })
-        .error(error => console.log("Error:", error))
-        .complete(data => {
-          if (data.status === 200) {
-            button.css('opacity', 0)
-            toggleCart()
-          }
-        })
-        
-      }
-      
+
+      })
+    }
+
+    const shuffleProducts = _ => {
+      addCollectionImages()
+      shuffleDOMSiblings('.EndlessScroll')
+      fillBg()
+      $('.pagination').remove()
+    }
+
+    $(document).ready(_ => {
       // Set up jQuery handles
-      $(document).on('click', '.product--quickadd', e => e.preventDefault())
-      $(document).on('click', '.product--quickadd--CTA', handleQuickAdd)
-      $(document).on('click', '*[class^="product--size"]', quickAdd)
       $(document).ready(_ => {
         shuffleProducts()
         ajaxify({'callback': shuffleProducts})
@@ -200,14 +159,14 @@ Handles Product Grid in Collections on homepage.
 
 <style>
   .light-gray { color: gray; }
-  
+
   #shopify-section-collection--section { width: inherit; }
 
   .EndlessScroll { 
     display: flex;
     flex-flow: row wrap;
   }
-  
+
   .product--quickadd {
     position: relative;
     top: -25px;
@@ -218,7 +177,7 @@ Handles Product Grid in Collections on homepage.
     font-variant-caps: all-petite-caps;
     transition: 0.3s;
   }
-  
+
   .product--quickadd--CTA { display: block }
   .product--quickadd--sizes {
     display: none;
@@ -226,17 +185,17 @@ Handles Product Grid in Collections on homepage.
     width: 100%;
     justify-content: center;
   }
-  
+
   .random-colored-bg:hover .product--quickadd {
     opacity: 1;
     transition: 0.3s;
   }
-  
+
   a.product--grid--item--four.three--row.w-inline-block:hover .product--quickadd {
     opacity: 1 !important;
     transition: 0.3s;
   }
-  
+
   a.product--grid--item--four.three--row.w-inline-block:not(:hover) .product--quickadd {
     opacity: 0 !important;
     transition: 0.3s;

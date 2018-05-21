@@ -3,62 +3,43 @@
     <h4 class="sidebar--heading">Collections</h4>
     <div class="sidebar--links--block">
       <a href="/all" class="sidebar--link">Shop all</a>
-
-
-      {%- comment -%}
-      Section for collection
-      {%- endcomment -%}
-      {%- comment -%}
-      dynamically import all collection, while hiding 'all' and 'frontpage's
-      {%- endcomment -%}
-
       {% for collection in collections %}
-
-      {% if collection.title contains 'Home page'%}
-      {% else %}
-      {% if collection.title contains 'All Designs'%}
-      {% else %}
-      <a href="{{collection.url}}" class="sidebar--link">{{collection.title}}</a>
-      {%endif%}
-      {%endif%}
-      {%endfor%}
+        {% unless collection.title contains 'Home page' or collection.title contains 'All Designs' or collection.title contains 'Pockets' or collection.title contains 'Socks' %}
+          <a href="{{collection.url}}" class="sidebar--link">{{collection.title}}</a>
+        {% endunless %}
+      {% endfor %}
     </div>
   </div>
-
-  {%- comment -%}
-  Section for link blocks
-  {%- endcomment -%}
-
 
   <div class="sidebar--block">
     <h4 class="sidebar--heading">Shop</h4>
 
     <div class="sidebar--links--block">
-      {% for block in section.blocks %}
-      <a id="top-link" href="{{ block.settings.toplink }}"> {{block.settings.toplinktitle}}</a>
-
-      {% if block.settings.sublink1 %}
-      <a id="sub-link" href="{{block.settings.sublink1}}"> {{block.settings.sublinktitle1}}</a>
-      {%endif%}
-
-      {% if block.settings.sublink2 %}
-      <a id="sub-link" href="{{block.settings.sublink2}}"> {{block.settings.sublinktitle2}}</a>
-      {%endif%}
-
-      {% if block.settings.sublink3 %}
-      <a id="sub-link" href="{{block.settings.sublink3}}"> {{block.settings.sublinktitle3}}</a>
-      {%endif%}
-
-      {% if block.settings.sublink4 %}
-      <a id="sub-link" href="{{block.settings.sublink4}}"> {{block.settings.sublinktitle4}}</a>
-      {%endif%}
-      {%endfor%}
+      <div class="nav-section">
+        <a id="top-link" href="/collections/{{ collection.handle }}"/tops>Tops</a>
+        <a id="sub-link" href="/collections/{{ collection.handle }}/tshirt">T-Shirts</a>
+        {% if collection.handle == "men" or  collection.handle == "women" %}
+          <a id="sub-link" href="/collections/{{ collection.handle }}/sweatshirt">Sweatshirts</a>
+          <a id="sub-link" href="/collections/{{ collection.handle }}/tanktop">Tank Tops</a>
+          <a id="sub-link" href="/collections/{{ collection.handle }}/vneck">V-Necks</a>
+        {% endif %}
+      </div>
+      {% if collection.handle == "men" %}
+        <div class="nav-section">
+          <a id="top-link" href="/collections/{{ collection.handle }}"/bottoms>Bottoms</a>
+          <a id="sub-link" href="/collections/{{ collection.handle }}/boxers">Boxers</a>
+        </div>
+      {% endif %}
+      <div class="nav-section">
+        <a id="top-link" href="/collections/{{ collection.handle }}"/accessories>Accessories</a>
+        <a id="sub-link" href="/collections/{{ collection.handle }}/socks">Unisex Socks</a>
+        <a id="sub-link" href="/collections/{{ collection.handle }}/phonecase">Phone Cases</a>
+        <a id="sub-link" href="/collections/{{ collection.handle }}/hat">Hats</a>
+        <a id="sub-link" href="/collections/{{ collection.handle }}/bundle">Bundles</a>
+      </div>
     </div>
   </div>
 </div>
-{%- comment -%}
-Section for design collection filter
-{%- endcomment -%}
 
 <div class="sidebar--block">
   <h4 class="sidebar--heading" style="border-bottom: none">Designs</h4>

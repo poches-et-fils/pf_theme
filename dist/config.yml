@@ -18,11 +18,5 @@ development:
   theme_id: live
   store: poches-development-mica.myshopify.com
   ignore_files:
-    #- settings_data.json # Uncomment this line to avoid resetting theme settings
+    - config/settings_data.json
 
-production:
-  password: 
-  theme_id: "live"
-  store: your-shop.myshopify.com
-  ignore_files:
-    #- settings_data.json # Uncomment this line to avoid resetting theme settings

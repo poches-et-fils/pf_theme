@@ -1,168 +1,52 @@
-{% paginate collection.products by 24 %}
-<div id="MainContent" class="container">
-  <div class="EndlessScroll">
-    {% for product in collection.products %}
+{% assign filter_gender_tag = "" %}
+{% if collection.handle == "men" %}
+  {% assign filter_gender_tag = ' data-filter-gender="Men"' %}
+{% endif %}
+{% if collection.handle == "women" %}
+  {% assign filter_gender_tag = ' data-filter-gender="Women"' %}
+{% endif %}
+{% if collection.handle == "kid" %}
+  {% assign filter_gender_tag = ' data-filter-gender="Kid"' %}
+{% endif %}
+{% if collection.handle == "baby" %}
+  {% assign filter_gender_tag = ' data-filter-gender="Baby"' %}
+{% endif %}
+{% if collection.handle == "youth" %}
+  {% assign filter_gender_tag = ' data-filter-gender="Kid,Baby"' %}
+{% endif %}
 
-    {% for variant in product.variants limit:1 %}
-    {% if product.type == 'Pocket' or product.type == 'Combo'%}
-    <a href="{{ product.url }}?gender={{ collection.title }}&product_type={{ variant.option3 }}"
-       title="{{ product.title }} ({{ variant.title }})"
-       data-variant-info
-       data-variant-id="{{ variant.id }}"
-       data-variant-handle="{{ product.handle }}"
-       data-variant-quantity="1"
-       data-variant-size="{{ variant.option1 }}"
-       data-variant-color="{{ variant.option2 }}"
-       data-variant-clothing="{{ variant.option3 }}"
-       data-variant-type="{{ product.type }}"
-       class="product--grid--item--four three--row w-inline-block">
-      <div class="product--grid--item--image men--tshirt random-colored-bg">
-        <div class="product--grid--item--variant--overlay">
-          <img src="{{ product.featured_image | product_img_url: 'medium' }}" 
-               width="45"
-               height="45"
-               class="product--grid--item--pocket">
-        </div>
-        <div class="product--quickadd">
-          <strong class="product--quickadd--CTA">+ QUICK ADD</strong>
-          <div class="product--quickadd--sizes product--design--selector--grid flex-row">
-            <div class="product--size--selector">XS</div>
-            <div class="product--size--selector">S</div>
-            <div class="product--size--selector">M</div>
-            <div class="product--size--selector">L</div>
-            <div class="product--size--selector">XL</div>
-            <div class="product--size--selector">XXL</div>
-          </div>
-        </div>
-      </div>
-      <h5 class="product--grid--item--title">
-        {{ product.title }}
-        <span class="product--grid--item--params"
-              style="display: none">{{ variant.title }}</span>
-      </h5>
-      <div>{{ variant.price | money }}</div>
-      <div class="light-gray"><u><small>See more styles</small></u></div>
-    </a>
+{% if filter_gender_tag == '' %}
+  {% assign filter_gender_tag = ' data-filter-gender="no-match"' %}
+{% endif %}
 
-    {%else%}
-    <a href="{{product.url}}/"
-       class="product--grid--item--four three--row w-inline-block"
-       title="{{ product.title }} ({{ variant.title }})"
-       data-variant-info
-       data-variant-id="{{ variant.id }}"
-       data-variant-handle="{{ product.handle }}"
-       data-variant-quantity="1"
-       data-variant-size="{{ variant.option1 }}"
-       data-variant-color="{{ variant.option2 }}"
-       data-variant-clothing="{{ variant.option3 }}"
-       data-variant-type="{{ product.type }}">
-      <div class="product--grid--item--image random-colored-bg">
-        <div class="product--grid--item--variant--overlay">
-          <img src="{{ product.featured_image | product_img_url: 'master' }}" 
-               width="100%"
-               height="100%">
-        </div>
-        <div class="product--quickadd">
-          <strong class="product--quickadd--CTA">+ QUICK ADD</strong>
-          <div class="product--quickadd--sizes product--design--selector--grid flex-row">
-            <div class="product--size--selector">XS</div>
-            <div class="product--size--selector">S</div>
-            <div class="product--size--selector">M</div>
-            <div class="product--size--selector">L</div>
-            <div class="product--size--selector">XL</div>
-            <div class="product--size--selector">XXL</div>
-          </div>
-        </div>
-      </div>
-      <h5 class="product--grid--item--title">{{product.title}}</h5>
-      <div>{{ product.price | money }}</div>
-      <div class="light-gray"><u><small>See more styles</small></u></div>
-    </a>
-    {%endif%}
+{% assign filter_type_tag = "" %}
+{% if current_tags contains "tops" %}
+  {% assign filter_type_tag = ' data-filter-type="T-Shirt,Sweatshirt,Tank-Top,V-Neck"' %}
+{% endif %}
+{% if current_tags contains "tshirt" %}
+  {% assign filter_type_tag = ' data-filter-type="T-Shirt"' %}
+{% endif %}
+{% if current_tags contains "sweatshirt" %}
+  {% assign filter_type_tag = ' data-filter-type="Sweatshirt"' %}
+{% endif %}
+{% if current_tags contains "tanktop" %}
+  {% assign filter_type_tag = ' data-filter-type="Tank-Top"' %}
+{% endif %}
+{% if current_tags contains "vneck" %}
+  {% assign filter_type_tag = ' data-filter-type="V-Neck"' %}
+{% endif %}
 
-    {% endfor %}
-    {%endfor%}
+{% if filter_type_tag == '' and current_tags.length > 0 %}
+  {% assign filter_type_tag = ' data-filter-type="no-match"' %}
+{% endif %}
 
-    {% if paginate.next %}
-    <div class="pagination">
-      <a href="{{ paginate.next.url }}">Loading more</a>
-    </div>
-    {% endif %}
-  </div>
+
+<div id="MainContent" class="container product-grid-filters"{{ filter_type_tag }}{{ filter_gender_tag }} data-filter-tags="{{ current_tags | join: ',' }}" data-filter-collection="{{ collection.handle }}">
+  <h3>Loading...</h3>
 </div>
-{% endpaginate %}
 
-<script>
-  (function () {
-
-    const addCollectionImages = _ => {
-      const productList = $
-      (`.EndlessScroll > [data-variant-type=Pocket],
-		.EndlessScroll > [data-variant-type=Combo]`)
-      
-      productList.map((index, item) => {
-        const product = $(item).find('.product--grid--item--image')
-        const searchParams = $(item)
-        .find('.product--grid--item--params')
-        .text()
-        .split(' / ')
-        
-
-        searchParams.map((param, index) => searchParams[index] = `param=${param}`)
-
-        const bgImgURL = getRandImg(searchParams)
-        
-        if (!product.find('img').length) {
-          // no <img> container
-          product.parent().hide()
-        } else if (bgImgURL) {
-        
-          product.css('background-image', `url('${bgImgURL}')`)
-          
-          if (bgImgURL.includes('Kid')) {
-            product
-            .find('img.product--grid--item--pocket')
-            .css({
-              'top': '40px',
-              'left': '-145px',
-              'transition': '0.3s'
-            })
-          } else if (bgImgURL.includes('Baby')) {
-            product
-            .find('img.product--grid--item--pocket')
-            .css({
-              'top': '45px',
-              'left': '-145px',
-              'transition': '0.3s'
-            })
-          }
-
-        } else {
-          // no images found
-          product.parent().hide()
-        }
-
-      })
-    }
-
-    const shuffleProducts = _ => {
-      addCollectionImages()
-      shuffleDOMSiblings('.EndlessScroll')
-      fillBg()
-      $('.pagination').hide()
-    }
-    
-    $(document).ready(_ => {
-      // Set up jQuery handles
-      $(document).ready(_ => {
-        ajaxify({
-          'callback': shuffleProducts,
-          'fade': 2000
-        })
-        shuffleProducts()
-      })
-    })
-  })()
+<script type="text/javascript">
+  window.poches.filters.init();
 </script>
 
 <style>

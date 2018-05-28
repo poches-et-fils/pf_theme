@@ -13,35 +13,52 @@ const handleQuickAdd = event => {
 }
 
 const quickAdd = event => {
-  const button			 = $(event.target).closest('.product--quickadd')
-  const info 			 = $(event.target).closest('*[data-variant-info]')
-  const variant_size 	 = $(event.target).text()
-  const variant_id 	   	 = info.attr('data-variant-id')
-  const variant_color 	 = info.attr('data-variant-color')
-  const variant_quantity = info.attr('data-variant-quantity')
-  const clothing_type	 = info.attr('data-variant-clothing')
-  const variant_type	 = info.attr('data-variant-type')
+  const button = $(event.target).closest('.product--quickadd')
+  const info = $(event.target).closest('*[data-quickadd-info]')
+  const option_size = $(event.target).text()
 
-  console.log(info)
-  
-  $.post('/cart/add.js', {
-    'id': 		variant_id,
-    'quantity': variant_quantity,
-    'properties': {
-      'size': 	variant_size,
-      'color': 	variant_color,
-      'product':variant_type,
-      'type': 	clothing_type,
+  const product_handle = info.attr('data-product-handle')
+
+  const option_color = info.attr('data-option-color')
+  const option_type = info.attr('data-option-type')
+  const option_gender = info.attr('data-option-gender')
+
+
+  $.getJSON('/products/' + product_handle + '.json', function(productData) {
+    productData = productData['product']
+    var optionMap = {'Gender': '', 'Color': '', 'Type': ''}
+    for(var i = 0;i < productData['options'].length; i++) {
+      optionMap[productData['options'][i]['name']] = 'option' + productData['options'][i]['position']
+    }
+    var match = false
+    for(var i = 0;i < productData['variants'].length; i++) {
+      if(productData['variants'][i][optionMap['Gender']] == option_gender
+      && productData['variants'][i][optionMap['Type']] == option_type
+      && productData['variants'][i][optionMap['Color']] == option_color) {
+        match = productData['variants'][i]['id']
+        break
+      }
+    }
+    
+    if(match) {
+      $.post('/cart/add.js', {
+        'id': match,
+        'quantity': 1,
+        'properties': {
+          'size': option_size
+        }
+      })
+      .error(error => console.log("Error:", error))
+      .complete(data => {
+        if (data.status === 200) {
+          button.css('opacity', 0)
+          toggleCart()
+        }
+      })
+    } else {
+      console.log('Error: no match found')
     }
   })
-  .error(error => console.log("Error:", error))
-  .complete(data => {
-    if (data.status === 200) {
-      button.css('opacity', 0)
-      toggleCart()
-    }
-  })
-
 }
 
 $(document).on('click', '.product--quickadd', e => e.preventDefault())

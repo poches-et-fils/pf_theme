@@ -16,8 +16,8 @@ window.poches.filters['data'] = function () {
    * Add a design product type
    * @param {String} productType 
    */
-  this.addDesignProductType = function (type, gender) {
-    productTypes.push({type: type, gender: gender});
+  this.addDesignProductType = function (type, gender, color, price) {
+    productTypes.push({type: type, gender: gender, color: color, price: price});
   }
 
   /**
@@ -26,7 +26,7 @@ window.poches.filters['data'] = function () {
    * @param {String} productImage Product Image URL
    * @param {String} productHandle Shopify Product Handle
    */
-  this.addDesignProduct = function (productName, productImage, productHandle, productAttributes) {
+  this.addDesignProduct = function (productName, productImage, productHandle) {
     var newProduct = {name: productName, image: productImage, handle: productHandle}
     products.push(newProduct);
   }
@@ -37,8 +37,10 @@ window.poches.filters['data'] = function () {
       for(var j = 0;j < products.length; j++) {
         // JSONifying to retrieve byVal instead of byRef.
         var newDisplayProduct = JSON.parse(JSON.stringify(products[j]));
+        newDisplayProduct['color'] = productTypes[i]['color'];
         newDisplayProduct['type'] = productTypes[i]['type'];
         newDisplayProduct['gender'] = productTypes[i]['gender'];
+        newDisplayProduct['price'] = productTypes[i]['price'];
         displayProducts.push(newDisplayProduct);
       }
     }

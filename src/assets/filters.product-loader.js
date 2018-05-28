@@ -25,7 +25,11 @@ window.poches.filters['productLoader'] = function () {
       if(response['products'].length > 0) {
         for(var i = 0;i < response['products'].length; i++) {
           var productAttributes = {};
-          filterData.addDesignProduct(response['products'][i]['title'], response['products'][i]['images'][0]['src'], response['products'][i]['handle']);
+          var productImage = '';
+          if(response['products'][i]['images'] && response['products'][i]['images'][0]) {
+            productImage = response['products'][i]['images'][0]['src'];
+          }
+          filterData.addDesignProduct(response['products'][i]['title'], productImage, response['products'][i]['handle']);
         }
         window.poches.filters.productLoader.loadProductPage(pageNum+1, callback);
       } else {
@@ -52,7 +56,11 @@ window.poches.filters['productLoader'] = function () {
             }
           }
           if(productMatch) {
-            filterData.addGenericProduct(response['products'][i]['title'], response['products'][i]['images'][0]['src'], response['products'][i]['handle'], response['products'][i]['variants'][0]['price'])
+            var productImage = '';
+            if(response['products'][i]['images'] && response['products'][i]['images'][0]) {
+              productImage = response['products'][i]['images'][0]['src'];
+            }
+            filterData.addGenericProduct(response['products'][i]['title'], productImage, response['products'][i]['handle'], response['products'][i]['variants'][0]['price'])
           }
         }
         window.poches.filters.productLoader.loadStandardProductsPage(collection, tags, pageNum+1, callback);

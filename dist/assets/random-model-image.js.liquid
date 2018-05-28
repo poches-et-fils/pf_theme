@@ -2,6 +2,7 @@ const getRandImg = (urlParams, returnArray) => {
   // Receives a shirt type
   // and select an adecuate image bg
   const searchParams = []
+  /*
   let models = [
     'https://cdn.shopify.com/s/files/1/0013/6685/1647/files/model--T-Shirt--Kid--28--White.png?15499528741549918950',
     'https://cdn.shopify.com/s/files/1/0013/6685/1647/files/model--T-Shirt--Kid--29--Black.png?15499528741549918950',
@@ -37,6 +38,41 @@ const getRandImg = (urlParams, returnArray) => {
     'https://cdn.shopify.com/s/files/1/0013/6685/1647/files/model--Sweatshirt--adult--Men--9--Burgundy.png?1207510937472484771',
     'https://cdn.shopify.com/s/files/1/0013/6685/1647/files/model--Sweatshirt--adult--Men--7--Black.png?1207510937472484771',
     'https://cdn.shopify.com/s/files/1/0013/6685/1647/files/model--Sweatshirt--adult--Men--6--White.png?1207510937472484771'
+  ]
+  */
+  let models = [
+    '{{ "model--Sweatshirt--Men--Black.png" | asset_url }}',
+    '{{ "model--Sweatshirt--Men--Burgundy.png" | asset_url }}',
+    '{{ "model--Sweatshirt--Men--Navy.png" | asset_url }}',
+    '{{ "model--Sweatshirt--Men--White.png" | asset_url }}',
+    '{{ "model--Sweatshirt--Women--Black.png" | asset_url }}',
+    '{{ "model--Sweatshirt--Women--Burgundy.png" | asset_url }}',
+    '{{ "model--Sweatshirt--Women--Navy.png" | asset_url }}',
+    '{{ "model--Sweatshirt--Women--White.png" | asset_url }}',
+    '{{ "model--T-Shirt--Baby--Black.png" | asset_url }}',
+    '{{ "model--T-Shirt--Baby--Dark-Grey.png" | asset_url }}',
+    '{{ "model--T-Shirt--Baby--White.png" | asset_url }}',
+    '{{ "model--T-Shirt--Kid--Black.png" | asset_url }}',
+    '{{ "model--T-Shirt--Kid--Dark-Grey.png" | asset_url }}',
+    '{{ "model--T-Shirt--Kid--White.png" | asset_url }}',
+    '{{ "model--T-Shirt--Men--Black.png" | asset_url }}',
+    '{{ "model--T-Shirt--Men--Dark-Grey.png" | asset_url }}',
+    '{{ "model--T-Shirt--Men--Grey.png" | asset_url }}',
+    '{{ "model--T-Shirt--Men--White.png" | asset_url }}',
+    '{{ "model--T-Shirt--Women--Black.png" | asset_url }}',
+    '{{ "model--T-Shirt--Women--Dark-Grey.png" | asset_url }}',
+    '{{ "model--T-Shirt--Women--Grey.png" | asset_url }}',
+    '{{ "model--T-Shirt--Women--White.png" | asset_url }}',
+    '{{ "model--Tank-Top--Men--Black.png" | asset_url }}',
+    '{{ "model--Tank-Top--Men--Dark-Grey.png" | asset_url }}',
+    '{{ "model--Tank-Top--Men--White.png" | asset_url }}',
+    '{{ "model--Tank-Top--Women--Black.png" | asset_url }}',
+    '{{ "model--Tank-Top--Women--Dark-Grey.png" | asset_url }}',
+    '{{ "model--Tank-Top--Women--White.png" | asset_url }}',
+    '{{ "model--V-Neck--Women--Black.png" | asset_url }}',
+    '{{ "model--V-Neck--Women--Dark-Grey.png" | asset_url }}',
+    '{{ "model--V-Neck--Women--Grey.png" | asset_url }}',
+    '{{ "model--V-Neck--Women--White.png" | asset_url }}'
   ]
 
   if(urlParams) {

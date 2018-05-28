@@ -18,9 +18,11 @@
       <div class="nav-section">
         <a id="top-link" href="/collections/{{ collection.handle }}"/tops>Tops</a>
         <a id="sub-link" href="/collections/{{ collection.handle }}/tshirt">T-Shirts</a>
-        {% if collection.handle == "men" or  collection.handle == "women" %}
+        {% if collection.handle == "men" or collection.handle == "women" %}
           <a id="sub-link" href="/collections/{{ collection.handle }}/sweatshirt">Sweatshirts</a>
           <a id="sub-link" href="/collections/{{ collection.handle }}/tanktop">Tank Tops</a>
+        {% endif %}
+        {% if collection.handle == "women" %}
           <a id="sub-link" href="/collections/{{ collection.handle }}/vneck">V-Necks</a>
         {% endif %}
       </div>
@@ -53,11 +55,9 @@
       </div>
       <div class="toggle--contents">
         <div id="sidebar-block-toggle">
-          {% for product in collections.all-designs.products limit:11 %}
+          {% for product in collections.all-designs.products limit: 12 %}
           <div id="sidebar-block">
-            {%for image in product.images %}   
-            <img src="{{image.src | img_url: '2048x2048'}}'" title="{{ product.title }}" />
-            {%endfor%} 
+            <img src="{{product.images.first.src | img_url: '60x60'}}'" title="{{ product.title }}" class="pocket-swatch-filter" />
           </div>
           {%endfor%}
         </div>
@@ -75,14 +75,12 @@
              class="toggle--icon--plus">
         <div class="toggle--contents">
           <div id="sidebar-block-toggle">
-            {% for product in collections.all-designs.products limit:11 %}
-            {% if product.tags contains 'Animals'%}
-            <div id="sidebar-block">
-              {%for image in product.images %}   
-              <img src="{{image.src | img_url: '2048x2048'}}'">
-              {%endfor%}
-            </div>
-            {%endif%}
+            {% for product in collections.all-designs.products limit: 250 %}
+              {% if product.tags contains 'Animals' %}
+                <div id="sidebar-block">
+                  <img src="{{product.images.first.src | img_url: '60x60'}}'" title="{{ product.title }}" class="pocket-swatch-filter">
+                </div>
+              {%endif%}
             {%endfor%}
           </div>
         </div>
@@ -98,12 +96,10 @@
       </div>
       <div class="toggle--contents">
         <div id="sidebar-block-toggle">
-          {% for product in collections.all-designs.products  limit:11%}
+          {% for product in collections.all-designs.products limit: 250 %}
           {% if product.tags contains 'Sports'%}
           <div id="sidebar-block">
-            {%for image in product.images %}   
-            <img src="{{image.src | img_url: '2048x2048'}}'">
-            {%endfor%}
+            <img src="{{product.images.first.src | img_url: '60x60'}}'" title="{{ product.title }}" class="pocket-swatch-filter">
           </div>
           {%endif%}
           {%endfor%}
@@ -120,12 +116,10 @@
       </div>
       <div class="toggle--contents">
         <div id="sidebar-block-toggle">
-          {% for product in collections.all-designs.products limit:11%}
+          {% for product in collections.all-designs.products limit: 250 %}
           {% if product.tags contains 'Patterns'%}
           <div id="sidebar-block">
-            {%for image in product.images %}   
-            <img src="{{image.src | img_url: '2048x2048'}}'">
-            {%endfor%}
+            <img src="{{product.images.first.src | img_url: '60x60'}}'" title="{{ product.title }}" class="pocket-swatch-filter">
           </div>
           {%endif%}
           {%endfor%}
@@ -141,13 +135,11 @@
       <div class="toggle--contents">
 
         <div id="sidebar-block-toggle">
-          {% for product in collections.all-designs.products limit:11%}
+          {% for product in collections.all-designs.products limit: 250%}
 
           {% if product.tags contains 'Food'%}
           <div id="sidebar-block">
-            {%for image in product.images %}   
-            <img src="{{image.src | img_url: '2048x2048'}}'">
-            {%endfor%} 
+            <img src="{{product.images.first.src | img_url: '60x60'}}'" title="{{ product.title }}" class="pocket-swatch-filter">
           </div>
           {%endif%}
           {%endfor%}
@@ -167,12 +159,10 @@
       </div>
       <div class="toggle--contents">
         <div id="sidebar-block-toggle">
-          {% for product in collections.all-designs.products limit:11 %}
+          {% for product in collections.all-designs.products limit: 250 %}
           {% if product.tags contains 'Collaboration'%}
           <div id="sidebar-block">
-            {%for image in product.images %}   
-            <img src="{{image.src | img_url: '2048x2048'}}'">
-            {%endfor%}
+            <img src="{{product.images.first.src | img_url: '60x60'}}'" title="{{ product.title }}" class="pocket-swatch-filter">
           </div>
           {%endif%}
           {%endfor%}
@@ -186,7 +176,7 @@
     <div class="sidebar--block">
       <h4 class="sidebar--heading">Filter By</h4>
       <div class="sidebar--links--block">
-        
+        {%- comment -%}
         <div class="toggle--item">
           <h4 class="toggle--heading">
             <strong>Size:</strong>
@@ -201,6 +191,7 @@
             <div class="product--size--selector">XXL</div>
           </div>
         </div>
+        {%- endcomment -%}
         
         <div class="toggle--item">
           <h4 class="toggle--heading">

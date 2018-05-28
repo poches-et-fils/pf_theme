@@ -16,6 +16,10 @@ window.poches.filters['filter'] = function () {
     filters['name'] = designName;
   }
 
+  this.applyColorFilter = function (colorName) {
+    filters['color'] = colorName;
+  }
+
   this.applyGenderFilter = function (gender) {
     filters['gender'] = gender;
   }

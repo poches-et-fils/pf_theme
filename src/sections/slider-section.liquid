@@ -27,36 +27,20 @@ Script includes
 <div class="slider--section">
   <div data-delay="4000" data-animation="cross" data-autoplay="1" data-duration="500" data-infinite="1"  class="slider--section--slider w-slider">
     <div class="w-slider-mask">
-
       {% for block in section.blocks %}
-      <div class="home--slider {% if forloop.index == 1 %}one{% elsif forloop.index == 2 %}two{%else%}three{%endif%} w-slide"
-           {% if block.settings.color %} style="background-color: {{block.settings.color}};" {%endif%}
-           >
+        <div class="home--slider {% if forloop.index == 1 %}one{% elsif forloop.index == 2 %}two{%else%}three{%endif%} w-slide"{% if block.settings.color %} style="background-color: {{block.settings.color}};" {%endif%}>
+          <div class="slider--image--overlay" style="{% if block.settings.bg-position != 'center' %}background-image: url('{{block.settings.image | img_url: '1000x1000'}}');{% endif %}{% if block.settings.bg-position == 'left' %}background-position: left;{% endif %}{% if block.settings.bg-position == 'right' %}background-position: right;{% endif %}{% if block.settings.bg-position == 'fill' %}background-size: cover;{% endif %}">
+            <div class="slider--content {% if block.settings.bg-position == 'left' %}slider--content--right{% endif %}{% if block.settings.bg-position == 'right' %}slider--content--left{% endif %}{% if block.settings.bg-position == 'center' or block.settings.bg-position == 'fill' %}slider--content--center{% endif %}">
+              <h1 class="slider--heading--main"  style="font-size: 55px;font-weight: 500;color: #fff;text-transform: uppercase;"> {{ block.settings.heading }}</h1>
+              <h3 class="slider--heading--text" style="font-size: 20px;color: #fff;"> {{ block.settings.subtitle }}</h3>
 
-        <div class="slider--image--overlay
-                    {%if block.settings.flextext == 'text--left' %}left-align {%endif%}
-                    {%if block.settings.flextext == 'text---center' %}centered {%endif%}
-                    {%if block.settings.flextext == 'text-right' %}right-align {%endif%}"
-
-             style=" background-image: url('{{block.settings.image | img_url: '1000x1000'}}');
-                    background-position: {% if block.settings.bg-position == 'center' %}center {%endif%} {% if block.settings.bg-position == 'left' %}left {%endif%} {% if block.settings.bg-position == 'right' %}right {%endif%};
-                    
-                    ">
-
-
-          <h1 class="slider--heading--main {{block.settings.flextext}}"  style="font-size: 55px;font-weight: 500;color: #fff;text-transform: uppercase; {%if block.settings.flextext == 'text---center' %}text-align: center;{%endif%}{%if block.settings.flextext == 'text-right' %}text-align: right; {%endif%}"> {{ block.settings.heading }}</h1>
-          <h3 class="slider--heading--text" style="font-size: 20px;color: #fff;{%if block.settings.flextext == 'text---center' %}text-align: center;{%endif%}{%if block.settings.flextext == 'text-right' %}text-align: right; {%endif%}"> {{ block.settings.subtitle }}</h3>
-
-          {% if block.settings.btn %}
-          <a href="{{block.settings.url}}" style="border: 3px solid #fff;background-color: transparent;font-weight: 500;" class="slider--button--main w-button">{{block.settings.btn}}</a></div>
-        {%endif%}
-      </div>
-
-
+              {% if block.settings.btn %}
+              <a href="{{block.settings.url}}" style="border: 3px solid #fff;background-color: transparent;font-weight: 500;" class="slider--button--main w-button">{{block.settings.btn}}</a></div>
+            </div>
+          {%endif%}
+        </div>
       {%endfor%}
-
     </div>
-
 
     <div class="slider--section--hideen--arrows w-slider-arrow-left">
       <div class="w-icon-slider-left"></div>
@@ -83,41 +67,55 @@ color: #000;
 
   .w-slider {height: 60vh!important; }
   .slider--container {height: 60vh!important;}
+
+  .slider--content {
+    position: absolute;
+  }
+  .slider--content--right {
+    text-align: right;
+    right: 5%;
+  }
+  .slider--content--left {
+    text-align: left;
+    left: 5%;
+  }
+  .slider--content--center {
+    text-align: center;
+    right: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  .slider--heading--main {
+    font-size: 25px !important;
+  }
   
-  @media screen and (max-height: 900px) {
-    .slider--heading--main {
-      font-size: 25px !important;
-      position: absolute !important;
-      top: 5px !important;
-    }
+  .slider--heading--text {
+    font-size: 15px !important;
+  }
+  
+  a.slider--button--main.w-button {
     
-    .slider--heading--text {
-      font-size: 15px !important;
-      position: absolute;
-      top: 19%;
-    }
-    
-    a.slider--button--main.w-button {
-      position: absolute;
-      top: 150px;
-     
-    }
-    
-    .w-slider-nav.w-shadow.w-round {
-      display: none;
-    }
-    
-    .slider--image--overlay.centered {
-      background-size: 280px;
-    }
+  }
+  
+  .w-slider-nav.w-shadow.w-round {
+    display: none;
+  }
+  
+  .slider--image--overlay.centered {
+    background-size: 280px;
   }
   
   @media (max-width: 796px) {
-  
     .slider--image--overlay {justify-content: baseline!important;background-position: bottom!important;}
-    .slider--heading--text {text-align:center!important;}
-    
-    
+    .slider--content {
+      float: none;
+      width: 100%;
+      text-align:center!important;
+      right: 0;
+      left: 0;
+      top: 2%;
+    }
   }
   
 
@@ -157,28 +155,16 @@ color: #000;
 "label": "Slider Overlay Color"
 },
 
-{
-"type":      "select",
-"id":        "flextext",
-"label":     "Text Alignment",
-"options": [
-{ "value": "text--left", "label": "Left Aligned" },
-{ "value": "text---center", "label": "Center Aligned" },
-{ "value": "text-right", "label": "Right Aligned" }
-],
-"default":   "text---center",
-"info":      "Moves the alignment of the text"
-},
-
 
 {
 "type":      "select",
 "id":        "bg-position",
-"label":     "Background Image Alignment",
+"label":     "Image Position",
 "options": [
 { "value": "left", "label": "Left Aligned" },
-{ "value": "center", "label": "Center Aligned" },
-{ "value": "right", "label": "Right Aligned" }
+{ "value": "center", "label": "Center Aligned (No Image)" },
+{ "value": "right", "label": "Right Aligned" },
+{ "value": "fill", "label": "Fill Background" }
 ],
 "default":   "left",
 "info":      "Moves the alignment of the background image"

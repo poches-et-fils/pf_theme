@@ -633,9 +633,9 @@ a.button.wide-text.full-caps:hover { box-shadow: 0 0 transparent; }
 .js--cart--image {
   width: 50%;
   height: 100%;
-  background-image: url('../images/example-bg.png');
+  background-image: url('{{ 'pf-gif.gif' | asset_url }}');
   background-position: 50% 50%;
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
 }
 
@@ -1040,7 +1040,6 @@ border-radius: 7px;
   margin-bottom: 0px;
   color: #fff;
   font-weight: 700;
-  text-align: center;
 }
 
 .slider--heading--main.text--left {

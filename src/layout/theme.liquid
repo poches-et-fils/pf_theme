@@ -11,23 +11,6 @@ Configured 2018
 <!--[if IE 9]> <html class="ie9 no-js supports-no-cookies" lang="{{ shop.locale }}"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js supports-no-cookies" lang="{{ shop.locale }}"> <!--<![endif]-->
 <head>
-  <script type="text/javascript">
-    var locales = {
-      'en': {
-        'ca': '',
-        'us': '',
-        'eu': ''
-      },
-      'fr': {
-        'ca': '',
-        'eu': ''
-      }
-    };
-    var language = (window.navigator.userLanguage || window.navigator.language).split('-')[0];
-    if(locales[language]) {
-      console.log(locales[language]);
-    }
-  </script>
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js" type="text/javascript"></script>
   <script type="text/javascript">WebFont.load({  google: {    families: ["Rubik:300,regular,500,700,900"]  }});</script>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -151,5 +134,44 @@ Configured 2018
       z-index: 1000;
     }
   </style>
+  <script type="text/javascript">
+    var locales = {
+      'en': {
+        'CA': 'poches-development-mica.myshopify.com'
+      },
+      'fr': {
+        'EU': 'pochesetfilsfrance.myshopify.com'
+      }
+    };
+    $(document).ready(function () {
+      for (language in locales) {
+        for(country in locales[language]) {
+          var selected = '';
+          if(locales[language][country] == window.location.host) {
+            selected = ' selected="selected"';
+          }
+          $('.country-switcher-dropdown').append('<option value="' + language + '-' + country + '"' + selected + '>' + language.toUpperCase() + '-' + country + '</option>');
+        }
+      }
+      $('.country-switcher-dropdown').change(function () {
+        var countrySwitch = $(this).val().split('-');
+        window.location.host = locales[countrySwitch[0]][countrySwitch[1]];
+      });
+
+      var euCountryCodes = ["AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "DE", "GR", "HU", "IE", "IT", "LV", "LT", "LU", "MT", "NL", "PL", "PT", "RO", "SK", "SI", "ES", "SE", "GB", "UK", "GR", "GF", "GP", "MQ", "ME", "YT", "RE", "MF", "GI", "AX", "PM", "GL", "BL", "SX", "AW", "CW", "WF", "PF", "NC", "TF", "AI", "BM", "IO", "VG", "KY", "FK", "MS", "PN", "SH", "GS", "TC", "AD", "LI", "MC", "SM", "VA", "JE", "GG", "GI"];
+      var language = (window.navigator.userLanguage || window.navigator.language).split('-')[0];
+      if(locales[language]) {
+        $.getJSON('http://ip-api.com/json?callback=?', function (ipData) {
+          var countryCode = ipData['countryCode'];
+          if($.inArray(countryCode, euCountryCodes)) {
+            countryCode = 'EU';
+          }
+          if(window.location.host != locales[language][countryCode]) {
+            window.location.host = locales[language][countryCode];
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>

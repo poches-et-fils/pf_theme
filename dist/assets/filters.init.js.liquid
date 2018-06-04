@@ -1,8 +1,17 @@
 if(typeof window.poches === "undefined") window['poches'] = {};
 if(typeof window.poches.filters === "undefined") window.poches['filters'] = {};
+window.poches.filters.helper = new window.poches.filters.helper();
+
+$(document).ready(function () {
+  if((window.poches.filters.helper.gup('gender') == 'Kid' || window.poches.filters.helper.gup('gender') == 'Baby')) {
+    console.log('match...');
+    $('.sizeguide-link').attr('href', '{{ 'baby-kids-tops-size.jpg' | asset_url }}');
+  }
+});
+
+
 window.poches.filters['init'] = function () {
   // Init classes as singletons...
-  window.poches.filters.helper = new window.poches.filters.helper();
   window.poches.filters.data = new window.poches.filters.data();
   window.poches.filters.productLoader = new window.poches.filters.productLoader();
   window.poches.filters.productLoader.setFilterData(window.poches.filters.data);

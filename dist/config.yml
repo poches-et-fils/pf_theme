@@ -18,5 +18,11 @@ development:
   theme_id: live
   store: poches-development-mica.myshopify.com
   ignore_files:
-    - config/settings_data.json
+    - settings_data.json
 
+developmentfr:
+  password: f7a86bf7df61a80fa1387c44b2efe39e
+  theme_id: live
+  store: pochesetfilsfrance.myshopify.com
+  ignore_files:
+    - settings_data.json

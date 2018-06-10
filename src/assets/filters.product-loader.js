@@ -29,7 +29,25 @@ window.poches.filters['productLoader'] = function () {
         if(response['products'][i]['images'] && response['products'][i]['images'][0]) {
           productImage = response['products'][i]['images'][0];
         }
-        filterData.addDesignProduct(response['products'][i]['title'], productImage, response['products'][i]['handle']);
+        var price = {};
+        var productVariants = window.collectionData['all-designs'][i]['variants'];
+        var genderOption = window.collectionData['all-designs'][i]['options'].indexOf('Gender')+1;
+        var colorOption = window.collectionData['all-designs'][i]['options'].indexOf('Color')+1;
+        var typeOption = window.collectionData['all-designs'][i]['options'].indexOf('Type')+1;
+        if(genderOption == 0 || colorOption == 0 || typeOption == 0) {
+          console.log('Product missing option...');
+          console.log(response['products'][i]['title']);
+          console.log(i);
+        } else {
+          for(var j = 0;j < productVariants.length;j++) {
+            if(typeof price[productVariants[j]['option' + genderOption]] === 'undefined') price[productVariants[j]['option' + genderOption]] = {};
+            if(typeof price[productVariants[j]['option' + genderOption]][productVariants[j]['option' + typeOption]] === 'undefined') price[productVariants[j]['option' + genderOption]][productVariants[j]['option' + typeOption]] = {};
+            
+            price[productVariants[j]['option' + genderOption]][productVariants[j]['option' + typeOption]][productVariants[j]['option' + colorOption]] = productVariants[j]['price'];
+          }
+          console.log(price);
+          filterData.addDesignProduct(response['products'][i]['title'], productImage, response['products'][i]['handle'], price);
+        }
       }
 
       window.poches.filters.productsLoaded = true;

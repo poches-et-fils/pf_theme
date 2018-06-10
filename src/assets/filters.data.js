@@ -16,8 +16,8 @@ window.poches.filters['data'] = function () {
    * Add a design product type
    * @param {String} productType 
    */
-  this.addDesignProductType = function (type, gender, color, price) {
-    productTypes.push({type: type, gender: gender, color: color, price: price});
+  this.addDesignProductType = function (type, gender, color) {
+    productTypes.push({type: type, gender: gender, color: color});
   }
 
   /**
@@ -26,8 +26,8 @@ window.poches.filters['data'] = function () {
    * @param {String} productImage Product Image URL
    * @param {String} productHandle Shopify Product Handle
    */
-  this.addDesignProduct = function (productName, productImage, productHandle) {
-    var newProduct = {name: productName, image: productImage, handle: productHandle}
+  this.addDesignProduct = function (productName, productImage, productHandle, price) {
+    var newProduct = {name: productName, image: productImage, handle: productHandle, price: price}
     products.push(newProduct);
   }
 
@@ -40,8 +40,11 @@ window.poches.filters['data'] = function () {
         newDisplayProduct['color'] = productTypes[i]['color'];
         newDisplayProduct['type'] = productTypes[i]['type'];
         newDisplayProduct['gender'] = productTypes[i]['gender'];
-        newDisplayProduct['price'] = productTypes[i]['price'];
-        displayProducts.push(newDisplayProduct);
+        console.log(newDisplayProduct);
+        if(newDisplayProduct['price'] && newDisplayProduct['price'][newDisplayProduct['gender']] && newDisplayProduct['price'][newDisplayProduct['gender']][newDisplayProduct['type']] && newDisplayProduct['price'][newDisplayProduct['gender']][newDisplayProduct['type']][newDisplayProduct['color']]) {
+          newDisplayProduct['price'] = ((newDisplayProduct['price'][newDisplayProduct['gender']][newDisplayProduct['type']][newDisplayProduct['color']])/100).toFixed(2);
+          displayProducts.push(newDisplayProduct);
+        }
       }
     }
     for(var i = 0;i < genericProducts.length; i++) {

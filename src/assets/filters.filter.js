@@ -41,8 +41,6 @@ window.poches.filters['filter'] = function () {
           productMatch = false;
         }
       } else {
-        console.log('filters!!!:');
-        console.log(filters);
         for(var filterKey in filters) {
           if(filters[filterKey].indexOf(',') !== -1) {
             var filterValues = filters[filterKey].split(',');

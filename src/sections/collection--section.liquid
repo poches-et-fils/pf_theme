@@ -39,13 +39,22 @@
   {% assign filter_type_tag = ' data-filter-type="V-Neck"' %}
 {% endif %}
 
-{% if filter_type_tag == '' and current_tags.length > 0 %}
+{% if filter_type_tag == '' and current_tags.size == 1 %}
   {% assign filter_type_tag = ' data-filter-type="no-match"' %}
 {% endif %}
 
 
 <div id="MainContent" class="container product-grid-filters"{{ filter_type_tag }}{{ filter_gender_tag }} data-filter-tags="{{ current_tags | join: ',' }}" data-filter-collection="{{ collection.handle }}">
-  <h3>Loading...</h3>
+  {% for i in (1..12) %}
+    <a href="#" class="product--skeleton product--grid--item--four three--row w-inline-block" style="cursor:default;" title="Loading...">
+      <div class="product--grid--item--image" style="background-color: rgba(230,230,230, 0.75);">
+        <div class="product--grid--item--variant--overlay" style="background-image:none; "></div>
+      </div>
+      <h5 class="product--grid--item--title">Loading...</h5>
+      <div>$x.xx</div>
+      <div class="light-gray"><u><small>See more styles</small></u></div>
+    </a>
+  {% endfor %}
 </div>
 
 <script type="text/javascript">

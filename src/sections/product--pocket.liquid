@@ -1,6 +1,6 @@
 <script type="text/javascript">
 $(document).ready(function () {
-  if($.inArray(['Men','Women','Kid','Baby'], window.poches.filters.helper.gup('gender')) === -1) {
+  if($.inArray(window.poches.filters.helper.gup('gender'), ['Men','Women','Kid','Baby']) === -1) {
     window.location = '/';
   }
 });

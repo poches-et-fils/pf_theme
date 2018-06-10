@@ -8,8 +8,8 @@ window.poches.filters['data'] = function () {
   /**
    * Add a generic product.
    */
-  this.addGenericProduct = function (productName, productImage, productHandle, productPrice) {
-    genericProducts.push({name: productName, image: productImage, handle: productHandle, type: 'custom', price: productPrice});
+  this.addGenericProduct = function (productName, productImage, productHandle, productPrice, variantId = 0) {
+    genericProducts.push({name: productName, image: productImage, handle: productHandle, type: 'custom', price: productPrice, variantid: variantId});
   }
 
   /**

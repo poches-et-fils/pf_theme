@@ -60,7 +60,7 @@ window.poches.filters['productLoader'] = function () {
             if(response['products'][i]['images'] && response['products'][i]['images'][0]) {
               productImage = response['products'][i]['images'][0]['src'];
             }
-            filterData.addGenericProduct(response['products'][i]['title'], productImage, response['products'][i]['handle'], response['products'][i]['variants'][0]['price'])
+            filterData.addGenericProduct(response['products'][i]['title'], productImage, response['products'][i]['handle'], response['products'][i]['variants'][0]['price'], response['products'][i]['variants'][0]['id']);
           }
         }
         window.poches.filters.productLoader.loadStandardProductsPage(collection, tags, pageNum+1, callback);

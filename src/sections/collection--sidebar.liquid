@@ -44,7 +44,11 @@
 </div>
 
 <div class="sidebar--block">
-  <h4 class="sidebar--heading" style="border-bottom: none">Designs</h4>
+
+  <h4 class="sidebar--heading" style="border-bottom: none">
+    <div class="selector--heading--left">DESIGNS</div>
+    <div class="selector--heading--right open-design-modal" style="margin-right: 20%;">See all</div>
+  </h4>
   <div class="sidebar--links--block">
     {%- comment -%}Toggle #1: Random{%- endcomment -%}
     <div class="toggle--item">
@@ -55,10 +59,12 @@
       </div>
       <div class="toggle--contents">
         <div id="sidebar-block-toggle">
-          {% for product in collections.all-designs.products limit: 12 %}
-          <div id="sidebar-block">
-            <img src="{{product.images.first.src | img_url: '60x60'}}'" title="{{ product.title }}" class="pocket-swatch-filter" />
-          </div>
+          {% for product in collections.all-designs.products limit: 250 %}
+            {% if product.tags contains 'random' %}
+              <div id="sidebar-block">
+                <img src="{{product.images.first.src | img_url: '60x60'}}'" title="{{ product.title }}" class="pocket-swatch-filter" />
+              </div>
+            {% endif %}
           {%endfor%}
         </div>
       </div>
@@ -68,21 +74,18 @@
     <div class="toggle--item">
       <div class="toggle--activation" data-ix="toggle-interaction">
         <h4 class="toggle--heading">Animals</h4>
-        <img src="https://cdn.shopify.com/s/files/1/0013/6685/1647/files/minus.svg?2249220138586907846" 
-             class="toggle--icon--minus"
-             data-ix="originally-hidden">
         <img src="https://cdn.shopify.com/s/files/1/0013/6685/1647/files/plus.svg?8578614239508185635" 
              class="toggle--icon--plus">
-        <div class="toggle--contents">
-          <div id="sidebar-block-toggle">
-            {% for product in collections.all-designs.products limit: 250 %}
-              {% if product.tags contains 'Animals' %}
-                <div id="sidebar-block">
-                  <img src="{{product.images.first.src | img_url: '60x60'}}'" title="{{ product.title }}" class="pocket-swatch-filter">
-                </div>
-              {%endif%}
-            {%endfor%}
-          </div>
+      </div>
+      <div class="toggle--contents">
+        <div id="sidebar-block-toggle">
+          {% for product in collections.all-designs.products limit: 250 %}
+            {% if product.tags contains 'animals' %}
+              <div id="sidebar-block">
+                <img src="{{product.images.first.src | img_url: '60x60'}}'" title="{{ product.title }}" class="pocket-swatch-filter">
+              </div>
+            {%endif%}
+          {%endfor%}
         </div>
       </div>
     </div>
@@ -97,7 +100,7 @@
       <div class="toggle--contents">
         <div id="sidebar-block-toggle">
           {% for product in collections.all-designs.products limit: 250 %}
-          {% if product.tags contains 'Sports'%}
+          {% if product.tags contains 'sports'%}
           <div id="sidebar-block">
             <img src="{{product.images.first.src | img_url: '60x60'}}'" title="{{ product.title }}" class="pocket-swatch-filter">
           </div>
@@ -117,7 +120,7 @@
       <div class="toggle--contents">
         <div id="sidebar-block-toggle">
           {% for product in collections.all-designs.products limit: 250 %}
-          {% if product.tags contains 'Patterns'%}
+          {% if product.tags contains 'patterns'%}
           <div id="sidebar-block">
             <img src="{{product.images.first.src | img_url: '60x60'}}'" title="{{ product.title }}" class="pocket-swatch-filter">
           </div>
@@ -137,7 +140,7 @@
         <div id="sidebar-block-toggle">
           {% for product in collections.all-designs.products limit: 250%}
 
-          {% if product.tags contains 'Food'%}
+          {% if product.tags contains 'food'%}
           <div id="sidebar-block">
             <img src="{{product.images.first.src | img_url: '60x60'}}'" title="{{ product.title }}" class="pocket-swatch-filter">
           </div>
@@ -212,6 +215,8 @@
     </div>
   </div>
 </div>
+
+
 
 <style>
   .toggle--item {

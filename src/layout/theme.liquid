@@ -91,6 +91,61 @@ Configured 2018
     <div class="dark-overlay"></div>
     <div id="CartHolder" style="position: relative; z-index: 1000"></div>
     {{ content_for_layout }}
+
+
+    <div id="design-selector">
+      <div class="close-modal">X</div>
+      <h4>All Designs</h4>
+      <div class="design-selector-nav">
+        <a href="#" style="font-weight:bold;">All</a> | <a href="#">Random</a> | <a href="#">Animals</a> | <a href="#">Sports</a> | <a href="#">Patterns</a> | <a href="#">Food</a> | <a href="#">Collaboration</a>
+      </div>
+      <div class="design-selector-products" data-product-category="All" style="display: block;">
+        {% for dproduct in collections.all-designs.products limit: 250 %}
+          <div class="design-selector-design" data-design-handle="{{ dproduct.handle }}" data-design-title="{{ dproduct.title | replace: " ", "+" }}"><img src="{{ dproduct | img_url: '480x480' }}" class="design-selector-design-image" /><div class="design-selector-design-label">{{ dproduct.title }}</div></div>
+        {% endfor %}
+      </div>
+      <div class="design-selector-products" data-product-category="Random">
+        {% for dproduct in collections.all-designs.products limit: 250 %}
+          {% if dproduct.tags contains "random" %}
+            <div class="design-selector-design" data-design-handle="{{ dproduct.handle }}" data-design-title="{{ dproduct.title | replace: " ", "+" }}"><img src="{{ dproduct | img_url: '480x480' }}" class="design-selector-design-image" /><div class="design-selector-design-label">{{ dproduct.title }}</div></div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div class="design-selector-products" data-product-category="Animals">
+        {% for dproduct in collections.all-designs.products limit: 250 %}
+          {% if dproduct.tags contains "animals" %}
+            <div class="design-selector-design" data-design-handle="{{ dproduct.handle }}" data-design-title="{{ dproduct.title | replace: " ", "+" }}"><img src="{{ dproduct | img_url: '480x480' }}" class="design-selector-design-image" /><div class="design-selector-design-label">{{ dproduct.title }}</div></div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div class="design-selector-products" data-product-category="Sports">
+        {% for dproduct in collections.all-designs.products limit: 250 %}
+          {% if dproduct.tags contains "sports" %}
+            <div class="design-selector-design" data-design-handle="{{ dproduct.handle }}" data-design-title="{{ dproduct.title | replace: " ", "+" }}"><img src="{{ dproduct | img_url: '480x480' }}" class="design-selector-design-image" /><div class="design-selector-design-label">{{ dproduct.title }}</div></div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div class="design-selector-products" data-product-category="Patterns">
+        {% for dproduct in collections.all-designs.products limit: 250 %}
+          {% if dproduct.tags contains "patterns" %}
+            <div class="design-selector-design" data-design-handle="{{ dproduct.handle }}" data-design-title="{{ dproduct.title | replace: " ", "+" }}"><img src="{{ dproduct | img_url: '480x480' }}" class="design-selector-design-image" /><div class="design-selector-design-label">{{ dproduct.title }}</div></div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div class="design-selector-products" data-product-category="Food">
+        {% for dproduct in collections.all-designs.products limit: 250 %}
+          {% if dproduct.tags contains "Food" %}
+            <div class="design-selector-design" data-design-handle="{{ dproduct.handle }}" data-design-title="{{ dproduct.title | replace: " ", "+" }}"><img src="{{ dproduct | img_url: '480x480' }}" class="design-selector-design-image" /><div class="design-selector-design-label">{{ dproduct.title }}</div></div>
+          {% endif %}
+        {% endfor %}
+      <div class="design-selector-products" data-product-category="Collaboration">
+        {% for dproduct in collections.all-designs.products limit: 250 %}
+          {% if dproduct.tags contains "collaboration" %}
+            <div class="design-selector-design" data-design-handle="{{ dproduct.handle }}" data-design-title="{{ dproduct.title | replace: " ", "+" }}"><img src="{{ dproduct | img_url: '480x480' }}" class="design-selector-design-image" /><div class="design-selector-design-label">{{ dproduct.title }}</div></div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
   </main>
 
   {% section 'footer' %}
@@ -120,8 +175,91 @@ Configured 2018
   {{ 'shuffle-dom-siblings.js' | asset_url | script_tag }}
   {{ 'quickadd-handler.js' | asset_url | script_tag }}
   {{ 'popout-cart.js' | asset_url | script_tag }}
-  
-  <style>
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('.open-design-modal').click(function () {
+        $('#design-selector').show();
+      });
+      $('#design-selector > .close-modal').click(function () {
+        $('#design-selector').hide();
+      });
+      $('.design-selector-design').click(function () {
+        {% if template contains 'product' %}
+          window.location = window.location.href.replace('{{ product.handle }}', $(this).attr('data-design-handle'));
+        {% else %}
+          window.poches.filters.helper.uup('design', $(this).attr('data-design-title'));
+        {% endif %}
+      });
+      $('.design-selector-nav > a').click(function (e) {
+        $('.design-selector-nav > a').css('font-weight', 'normal');
+        $(this).css('font-weight', 'bold');
+        e.preventDefault();
+        $('.design-selector-products').hide();
+        $('.design-selector-products[data-product-category="' + $(this).text() + '"]').show();
+        return false;
+      });
+    });
+  </script>
+  <style type="text/css">
+    #MainContent {
+      position: relative;
+    }
+    .open-design-modal {
+      cursor: pointer;
+    }
+    #design-selector {
+      z-index: 10000;
+      display: none;
+      position: absolute;
+      top:0;
+      left:0;
+      right:0;
+      min-height: 115%;
+      background-color: #FFFFFF;
+    }
+    #design-selector > h4 {
+      text-transform: uppercase;
+      text-align: center;
+      margin: 30px auto;
+    }
+    #design-selector > .close-modal {
+      position: absolute;
+      top: 40px;
+      right: 60px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+    .design-selector-nav {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .design-selector-nav > a {
+      text-decoration: none;
+    }
+    .design-selector-products {
+      display: none;
+      text-align: center;
+    }
+    .design-selector-design {
+      display: inline-block;
+      width: 240px;
+      height: 240px;
+      max-width: 240px;
+      max-height: 240px;
+      margin: 12px;
+      object-fit: none;
+      cursor: pointer;
+      overflow: hidden;
+    }
+    .design-selector-design-image {
+      width: 480px;
+      height: 480px;
+      max-width: 480px;
+      max-height: 480px;
+      margin-left: -120px;
+      margin-top: -120px;
+    }
     .dark-overlay {
       display: none;
       height: 100vh;

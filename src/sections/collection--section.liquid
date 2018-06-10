@@ -14,6 +14,9 @@
 {% if collection.handle == "youth" %}
   {% assign filter_gender_tag = ' data-filter-gender="Kid,Baby"' %}
 {% endif %}
+{% if collection.handle == 'pockets' %}
+  {% assign filter_gender_tag = ' data-filter-gender="Men,Women,Kid,Baby"' %}
+{% endif %}
 
 {% if filter_gender_tag == '' %}
   {% assign filter_gender_tag = ' data-filter-gender="no-match"' %}

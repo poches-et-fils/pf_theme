@@ -4,7 +4,6 @@ window.poches.filters.helper = new window.poches.filters.helper();
 
 $(document).ready(function () {
   if((window.poches.filters.helper.gup('gender') == 'Kid' || window.poches.filters.helper.gup('gender') == 'Baby')) {
-    console.log('match...');
     $('.sizeguide-link').attr('href', '{{ 'baby-kids-tops-size.jpg' | asset_url }}');
   }
 });

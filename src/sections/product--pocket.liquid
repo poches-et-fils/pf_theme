@@ -37,11 +37,10 @@ $(document).ready(function () {
     </div>
     <div class="product--block">
       <div class="product--block--left images--block">
-        <div class="product--image--large" style="background-color: #f9f9f9;">
-          <img class="product--pocket--image--placement--man product-preview" 
+        <div class="product--image--large" style="background-color: #f9f9f9;position: relative;">
+          <img class="product-preview" 
                src="{{ product.featured_image | img_url: '600x600'}}"
-               width="50"
-               height="50"/>
+               style="width:50px;height:50px;position:absolute;top:50%;left:50%;" />
         </div>
       </div>
       <div class="product--block--right">
@@ -99,9 +98,7 @@ $(document).ready(function () {
       }
       
       modelContainer
-      .attr('style', `background-image: url('${modelImageUrl}')`)
-      .find('img')
-      .css('transform', `translateY(${modelImageUrl.includes('--Kid') ? '115px':modelImageUrl.includes('--Baby') ? '130px':'25px'})`)
+      .attr('style', `background-image: url('${modelImageUrl}');position:relative;`)
     }
 
     const setPreviewImage = event => {
@@ -109,9 +106,6 @@ $(document).ready(function () {
 
       $('.product--image--large')
       .css('background-image', `url('${model}')`)
-
-      .find('img')
-      .css('transform', `translateY(${model.includes('Kid') ? '130px':model.includes('Baby') ? '140px':'0'})`)
     }
 
     const filterColors = event => getModels(false, $(event.target).attr('title'))

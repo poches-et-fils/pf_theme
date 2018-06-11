@@ -11,6 +11,13 @@ Configured 2018
 <!--[if IE 9]> <html class="ie9 no-js supports-no-cookies" lang="{{ shop.locale }}"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js supports-no-cookies" lang="{{ shop.locale }}"> <!--<![endif]-->
 <head>
+  <script type="text/javascript">
+    window.currencySymbol = '$';
+    {% if shop.currency == 'EUR' %}
+      window.currencySymbol = '€';
+    {% endif %}
+
+  </script>
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js" type="text/javascript"></script>
   <script type="text/javascript">WebFont.load({  google: {    families: ["Rubik:300,regular,500,700,900"]  }});</script>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -99,7 +106,7 @@ Configured 2018
       <div class="close-modal">X</div>
       <h4>All Designs</h4>
       <div class="design-selector-nav">
-        <a href="#" style="font-weight:bold;">All</a> | <a href="#">Random</a> | <a href="#">Animals</a> | <a href="#">Sports</a> | <a href="#">Patterns</a> | <a href="#">Food</a> | <a href="#">Collaboration</a>
+        <a href="#" style="font-weight:bold;" data-product-category="All">All</a> | <a href="#" data-product-category="Random">Random</a> | <a href="#" data-product-category="Animals">Animals</a> | <a href="#" data-product-category="Sports">Sports</a> | <a href="#">Patterns</a> | <a href="#" data-product-category="Food">Food</a> | <a href="#" data-product-category="Collaboration">Collaboration</a>
       </div>
       <div class="design-selector-products" data-product-category="All" style="display: block;">
         {% for dproduct in collections.all-designs.products limit: 250 %}
@@ -196,7 +203,7 @@ Configured 2018
         $(this).css('font-weight', 'bold');
         e.preventDefault();
         $('.design-selector-products').hide();
-        $('.design-selector-products[data-product-category="' + $(this).text() + '"]').show();
+        $('.design-selector-products[data-product-category="' + $(this).attr('data-product-category') + '"]').show();
         return false;
       });
     });

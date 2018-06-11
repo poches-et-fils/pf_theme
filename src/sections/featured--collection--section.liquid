@@ -25,7 +25,7 @@ Handles Product Grid in Collections on homepage.
        data-variant-clothing="{{ variant.option3 }}"
        data-variant-type="{{ product.type }}"
        class="product--grid--item--four three--row w-inline-block">
-      <div class="product--grid--item--image men--tshirt random-colored-bg">
+      <div class="product--grid--item--image random-colored-bg">
         <div class="product--grid--item--variant--overlay">
           <img src="{{ product.featured_image | product_img_url: 'medium' }}" 
                width="45"
@@ -103,17 +103,6 @@ Handles Product Grid in Collections on homepage.
           product.parent().hide()
         } else if(bgImgURL) {
           product.css('background-image', `url('${bgImgURL}')`)
-
-          if (bgImgURL.includes('Kid')) {
-            product
-            .find('img.product--grid--item--pocket')
-            .css({
-              'top': '38px',
-              'left': '-140px',
-              'transition': '0.3s'
-            })
-          }
-
         } else {
           // no images found
           console.log('hide1')

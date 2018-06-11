@@ -27,7 +27,7 @@ window.poches.filters['render'] = function () {
         imagePosition = 'margin-left:0;margin-top:0;';
       }
       if(displayProduct['gender'] == 'Kid') {
-        imagePosition = 'margin-left:0;margin-top:-8%;';
+        imagePosition = 'margin-left:0;margin-top:-5%;';
       }
       productImage = '<img src="' + displayProduct['image'] + '" style="width:13%;height:auto;position:absolute;top:50%;left:50%;' + imagePosition + '" />';
       dataAttributes.push('data-quickadd-info');
@@ -40,7 +40,7 @@ window.poches.filters['render'] = function () {
       dataAttributes.push('data-quickadd-variantid="' + displayProduct['variantid'] + '"');
     }
 
-    return '<a href="' + productLink + '" class="product--grid--item--four three--row w-inline-block" title="' + displayProduct['name'] + '" '+ dataAttributes.join(' ') +'><div class="product--grid--item--image random-colored-bg" style="background-color: rgba(255, 247, 220, 0.76);"><div class="product--grid--item--variant--overlay" style="background-image:' + backgroundImage + ';position:relative;">' + productImage + '</div>' + quickAdd + '</div><h5 class="product--grid--item--title">' + productDisplayName + '</h5><div>$' + displayProduct['price'] + '</div><div class="light-gray"><u><small>See more styles</small></u></div></a>';
+    return '<a href="' + productLink + '" class="product--grid--item--four three--row w-inline-block" title="' + displayProduct['name'] + '" '+ dataAttributes.join(' ') +'><div class="product--grid--item--image random-colored-bg" style="background-color: rgba(255, 247, 220, 0.76);"><div class="product--grid--item--variant--overlay" style="background-image:' + backgroundImage + ';position:relative;">' + productImage + '</div>' + quickAdd + '</div><h5 class="product--grid--item--title">' + productDisplayName + '</h5><div>' + window.currencySymbol + displayProduct['price'] + '</div><div class="light-gray"><u><small>See more styles</small></u></div></a>';
   };
 
   this.renderProductGrid = function (displayProducts) {

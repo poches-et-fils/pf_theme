@@ -15,21 +15,21 @@ window.poches.filters['render'] = function () {
       backgroundImage = 'url(' + getRandImg(['gender=' + displayProduct['gender'], 'color=' + displayProduct['color'], 'type=' + displayProduct['type']], false) + ')';
       var imagePosition = '';
       if(displayProduct['gender'] == 'Men') {
-        imagePosition = 'margin-left:6%;margin-top:-15%;';
+        imagePosition = 'margin-left:2%;margin-top:-10%;';
         if(displayProduct['type'] == 'Tank-Top') {
-          imagePosition = 'margin-left:6%;margin-top:-12%;';
+          imagePosition = 'margin-left:3%;margin-top:-12%;';
         }
       }
       if(displayProduct['gender'] == 'Women') {
-        imagePosition = 'margin-left:4%;margin-top:-9%;';
+        imagePosition = 'margin-left:2%;margin-top:-13%;';
       }
       if(displayProduct['gender'] == 'Baby') {
-        imagePosition = 'margin-left:4%;';
+        imagePosition = 'margin-left:0;margin-top:0;';
       }
       if(displayProduct['gender'] == 'Kid') {
-        imagePosition = 'margin-left:4%;margin-top:-3%;';
+        imagePosition = 'margin-left:0;margin-top:-8%;';
       }
-      productImage = '<img src="' + displayProduct['image'] + '" style="width:25px;height:25px;position:absolute;top:50%;left:50%;' + imagePosition + '" />';
+      productImage = '<img src="' + displayProduct['image'] + '" style="width:13%;height:auto;position:absolute;top:50%;left:50%;' + imagePosition + '" />';
       dataAttributes.push('data-quickadd-info');
       dataAttributes.push('data-product-handle="' + displayProduct['handle'] + '"');
       dataAttributes.push('data-option-color="' + displayProduct['color'] + '"');

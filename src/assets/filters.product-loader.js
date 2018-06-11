@@ -45,7 +45,6 @@ window.poches.filters['productLoader'] = function () {
             
             price[productVariants[j]['option' + genderOption]][productVariants[j]['option' + typeOption]][productVariants[j]['option' + colorOption]] = productVariants[j]['price'];
           }
-          console.log(price);
           filterData.addDesignProduct(response['products'][i]['title'], productImage, response['products'][i]['handle'], price);
         }
       }
@@ -79,8 +78,8 @@ window.poches.filters['productLoader'] = function () {
           filterData.addGenericProduct(response['products'][i]['title'], productImage, response['products'][i]['handle'], response['products'][i]['variants'][0]['price'], response['products'][i]['variants'][0]['id']);
         }
       }
-      window.poches.filters.productsLoaded = true;
-      if(callback !== false) callback();
     }
+    window.poches.filters.productsLoaded = true;
+    if(callback !== false) callback();
   }
 }

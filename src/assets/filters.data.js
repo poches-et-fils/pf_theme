@@ -40,7 +40,6 @@ window.poches.filters['data'] = function () {
         newDisplayProduct['color'] = productTypes[i]['color'];
         newDisplayProduct['type'] = productTypes[i]['type'];
         newDisplayProduct['gender'] = productTypes[i]['gender'];
-        console.log(newDisplayProduct);
         if(newDisplayProduct['price'] && newDisplayProduct['price'][newDisplayProduct['gender']] && newDisplayProduct['price'][newDisplayProduct['gender']][newDisplayProduct['type']] && newDisplayProduct['price'][newDisplayProduct['gender']][newDisplayProduct['type']][newDisplayProduct['color']]) {
           newDisplayProduct['price'] = ((newDisplayProduct['price'][newDisplayProduct['gender']][newDisplayProduct['type']][newDisplayProduct['color']])/100).toFixed(2);
           displayProducts.push(newDisplayProduct);

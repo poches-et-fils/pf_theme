@@ -16,20 +16,11 @@ Configured 2018
     {% if shop.currency == 'EUR' %}
       window.currencySymbol = '€';
     {% endif %}
-
   </script>
-  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js" type="text/javascript"></script>
-  <script type="text/javascript">WebFont.load({  google: {    families: ["Rubik:300,regular,500,700,900"]  }});</script>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  
 
-  {{ 'functions.js' | asset_url | script_tag }}
-  {%- comment -%} Adds Google Font Rubik {%- endcomment -%}
   <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/mikhailarden/Shopify-OpenSource/master/Theme%20Dependenices/components.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js" type="text/javascript"></script>
-  <!-- [if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif] -->
-  <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
   <link href="https://daks2k3a4ib2z.cloudfront.net/img/favicon.ico" rel="shortcut icon" type="image/x-icon">
   <link href="https://daks2k3a4ib2z.cloudfront.net/img/webclip.png" rel="apple-touch-icon">
   <meta charset="utf-8">
@@ -79,14 +70,6 @@ Configured 2018
   <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'theme.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
   <!--[if lt IE 9]><script src="{{ 'theme.js' | asset_url }}"></script><![endif]-->
   {{ content_for_header }}
-  {{ 'random-color.js' | asset_url | script_tag }}
-  {{ 'random-model-image.js' | asset_url | script_tag }}
-  <script src="{{ 'filters.helper.js' | asset_url }}"></script>
-  <script src="{{ 'filters.data.js' | asset_url }}"></script>
-  <script src="{{ 'filters.product-loader.js' | asset_url }}"></script>
-  <script src="{{ 'filters.filter.js' | asset_url }}"></script>
-  <script src="{{ 'filters.render.js' | asset_url }}"></script>
-  <script src="{{ 'filters.init.js' | asset_url }}"></script>
 </head>
 <body id="{{ page_title | handle }}" class="template-{{ template.name | handle }}">
   <a class="in-page-link visually-hidden skip-link" 
@@ -183,31 +166,6 @@ Configured 2018
   {{ 'quickadd-handler.js' | asset_url | script_tag }}
   {{ 'popout-cart.js' | asset_url | script_tag }}
 
-  <script type="text/javascript">
-    $(document).ready(function () {
-      $('.open-design-modal').click(function () {
-        $('#design-selector').show();
-      });
-      $('#design-selector > .close-modal').click(function () {
-        $('#design-selector').hide();
-      });
-      $('.design-selector-design').click(function () {
-        {% if template contains 'product' %}
-          window.location = window.location.href.replace('{{ product.handle }}', $(this).attr('data-design-handle'));
-        {% else %}
-          window.poches.filters.helper.uup('design', $(this).attr('data-design-title'));
-        {% endif %}
-      });
-      $('.design-selector-nav > a').click(function (e) {
-        $('.design-selector-nav > a').css('font-weight', 'normal');
-        $(this).css('font-weight', 'bold');
-        e.preventDefault();
-        $('.design-selector-products').hide();
-        $('.design-selector-products[data-product-category="' + $(this).attr('data-product-category') + '"]').show();
-        return false;
-      });
-    });
-  </script>
   <style type="text/css">
     #MainContent {
       position: relative;
@@ -319,5 +277,44 @@ Configured 2018
       }
     });
   </script>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js" type="text/javascript"></script>
+  <script type="text/javascript">WebFont.load({  google: {    families: ["Rubik:300,regular,500,700,900"]  }});</script>
+  {{ 'functions.js' | asset_url | script_tag }}
+  {%- comment -%} Adds Google Font Rubik {%- endcomment -%}
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js" type="text/javascript"></script>
+  <!-- [if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif] -->
+  <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
+
+  {{ 'random-color.js' | asset_url | script_tag }}
+  {{ 'random-model-image.js' | asset_url | script_tag }}
+  {% if collection %}
+    {{ 'filters.design-modal.js' | asset_url | script_tag }}
+    {{ 'filters.data.js' | asset_url | script_tag }}
+    {{ 'filters.product-loader.js' | asset_url | script_tag }}
+    {{ 'filters.filter.js' | asset_url | script_tag }}
+    {{ 'filters.render.js' | asset_url | script_tag }}
+  {% endif %}
+  {% if product %}
+    {{ 'filters.design-modal.js' | asset_url | script_tag }}
+  {% endif %}
+  {{ 'filters.helper.js' | asset_url | script_tag }}
+  {{ 'filters.init.js' | asset_url | script_tag }}
+
+  <script type="text/javascript">
+    {% if collection OR product %}
+      window.collectionData = [];
+      window.collectionData["all-designs"] = JSON.parse('{{ collections['all-designs'].products | json | replace: "'", "\\'" }}');
+    {% endif %}
+
+    {% if collection %}
+      window.collectionData["{{ collection.handle }}"] = JSON.parse('{{ collection.products | json | replace: "'", "\\'" }}');
+      window.poches.filters.init();
+    {% endif %}
+  </script>
+  {% if product %}
+    {{ 'pocket-adjust.js' | asset_url | script_tag }}
+  {% endif %}
 </body>
 </html>

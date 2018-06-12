@@ -42,94 +42,55 @@
 
 
 <script>
-  (function () {
-
-    const fillRelatedProducts = _ => {
-      const handle = '{{ product.handle }}';
-      $.getJSON(`${handle}.js`, product => {
-        const variants = product.variants
-        const relatedContainer = $('.related--product--grid--block')
-        let counter = 0
-        while (counter < 4) {
-          counter ++
-          const random  	= Math.floor(Math.random() * variants.length + 1)
-          const variant 	= variants[random]
-          let urlParams 	= variant.options
-          urlParams 		= urlParams.map(param => param = `param=${param}`)
-          const randomModel = getRandImg(urlParams, false) || ''
-          
-                    
-          
-          const newElement 	= `
-            <a href="?gender=${variant.options[0]}&type=${variant.options[2]}"
-            class="product--grid--item--four w-inline-block">
-            <div class="product--grid--item--image">
-            <div class="product--grid--item--variant--overlay random-colored-bg" 
-            style="background-image: url('${randomModel}');position:relative;">
-            <img src="${product.featured_image}"
-            width="25"
-            height="25"
-            class="product--grid--item--pocket related--product--pocket"
-            data-pocket-gender="${variant.options[0]}"
-            data-pocket-type="${variant.options[2]}"
-			      style="position: absolute; top: 50%; left: 50%;">
-            </div>
-            </div>
-            <h5 class="product--grid--item--title">
-            ${ variant.options[0] }'s
-            ${ variant.options[1].toLowerCase() }
-            ${ variant.options[2] }
-            </h5>
-            <div>$${ formatCurrency(variant.price) }</div>
-            <div class="product--grid--item--link">See more styles</div>
-            </a>`
-          
-          
-          if (randomModel) {
-            relatedContainer.append(newElement)
-          }
-          variants.splice(random, 1)
+  const fillRelatedProducts = _ => {
+    const handle = '{{ product.handle }}';
+    $.getJSON(`${handle}.js`, product => {
+      const variants = product.variants
+      const relatedContainer = $('.related--product--grid--block')
+      let counter = 0
+      while (counter < 4) {
+        counter ++
+        const random  	= Math.floor(Math.random() * (variants.length - 1) + 1)
+        const variant 	= variants[random]
+        let urlParams 	= variant.options
+        urlParams 		= urlParams.map(param => param = `param=${param}`)
+        const randomModel = getRandImg(urlParams, false) || ''
+        
+                  
+        
+        const newElement 	= `
+          <a href="?gender=${variant.options[0]}&type=${variant.options[2]}"
+          class="product--grid--item--four w-inline-block">
+          <div class="product--grid--item--image">
+          <div class="product--grid--item--variant--overlay random-colored-bg" 
+          style="background-image: url('${randomModel}');position:relative;">
+          <img src="${product.featured_image}"
+          class="product--grid--item--pocket related--product--pocket"
+          data-pocket-gender="${variant.options[0]}"
+          data-pocket-type="${variant.options[2]}"
+          style="position: absolute; top: 50%; left: 50%;">
+          </div>
+          </div>
+          <h5 class="product--grid--item--title">
+          ${ variant.options[0] }'
+          ${ variant.options[1].toLowerCase() }
+          ${ variant.options[2] }
+          </h5>
+          <div>$${ formatCurrency(variant.price) }</div>
+          <div class="product--grid--item--link">See more styles</div>
+          </a>`
+        
+        if (randomModel) {
+          relatedContainer.append(newElement)
         }
-        fillBg()
-      })
-    }
-
-    $(document).ready(fillRelatedProducts)
-  })()
-</script>
-
-
-<script type="text/javascript">
-$(document).ready(function () {
-  var positionPocket = function($target, gender, type) {
-    if(gender == 'Men') {
-      $target.css('margin-left', '2%');
-      $target.css('margin-top', '-10%');
-      if(type == 'Tank-Top') {
-      $target.css('margin-left', '3%');
-      $target.css('margin-top', '-12%');
+        variants.splice(random, 1)
       }
-    }
-    if(gender == 'Women') {
-      $target.css('margin-left', '2%');
-      $target.css('margin-top', '-13%');
-    }
-    if(gender == 'Baby') {
-      $target.css('margin-left', '0');
-      $target.css('margin-top', '0');
-    }
-    if(gender == 'Kid') {
-      $target.css('margin-left', '0');
-      $target.css('margin-top', '-5%');
-    }
+      fillBg()
+      $('.related--product--pocket').each(function () {
+        window.positionPocket($(this), $(this).attr('data-pocket-gender'), $(this).attr('data-pocket-type'));
+      });
+    })
   }
-  var gender = window.poches.filters.helper.gup('gender');
-  var type = window.poches.filters.helper.gup('type');
-  positionPocket($('.product-preview'), gender, type);
 
-
-  $('.related--product--pocket').each(function () {
-    positionPocket($(this), $(this).attr('data-pocket-gender'), $(this).attr('data-pocket-type'));
-  });
-});
+  $(document).ready(fillRelatedProducts)
 </script>

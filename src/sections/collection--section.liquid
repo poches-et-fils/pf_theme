@@ -57,14 +57,6 @@
   {% endfor %}
 </div>
 
-
-<script type="text/javascript">
-  window.collectionData = [];
-  window.collectionData["{{ collection.handle }}"] = JSON.parse('{{ collection.products | json | replace: "'", "\\'" }}');
-  window.collectionData["all-designs"] = JSON.parse('{{ collections['all-designs'].products | json | replace: "'", "\\'" }}');
-  window.poches.filters.init();
-</script>
-
 <style>
   .light-gray { color: gray; }
 

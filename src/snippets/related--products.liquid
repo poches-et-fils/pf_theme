@@ -59,24 +59,32 @@
                   
         
         const newElement 	= `
-          <a href="?gender=${variant.options[0]}&type=${variant.options[2]}"
-          class="product--grid--item--four w-inline-block">
-          <div class="product--grid--item--image">
-          <div class="product--grid--item--variant--overlay random-colored-bg" 
+          <a href="?gender=${variant.options[0]}&type=${variant.options[2]}&color=${variant.options[1]}"
+          class="product--grid--item--four w-inline-block"
+          data-option-gender="${variant.options[0]}"
+          data-option-type="${variant.options[2]}"
+          data-option-color="${variant.options[1]}"
+          data-product-handle="${handle}"
+          >
+          <div class="product--grid--item--image random-colored-bg">
+          <div class="product--grid--item--variant--overlay " 
           style="background-image: url('${randomModel}');position:relative;">
           <img src="${product.featured_image}"
           class="product--grid--item--pocket related--product--pocket"
           data-pocket-gender="${variant.options[0]}"
           data-pocket-type="${variant.options[2]}"
+          data-pocket-color="${variant.options[1]}"
           style="position: absolute; top: 50%; left: 50%;">
           </div>
+          
+          <div class="product--quickadd"><strong class="product--quickadd--CTA">+ QUICK ADD</strong><div class="product--quickadd--sizes product--design--selector--grid flex-row"><div class="product--size--selector">XS</div><div class="product--size--selector">S</div><div class="product--size--selector">M</div><div class="product--size--selector">L</div><div class="product--size--selector">XL</div><div class="product--size--selector">XXL</div></div></div>
           </div>
           <h5 class="product--grid--item--title">
-          ${ variant.options[0] }'
+          ${ variant.options[0] }'s
           ${ variant.options[1] }
           ${ variant.options[2] }
           </h5>
-          <div>$${ window.currencySymbol + (variant.price/100).toFixed(2) }</div>
+          <div>${ window.currencySymbol + (variant.price/100).toFixed(2) }</div>
           <div class="product--grid--item--link">See more styles</div>
           </a>`
         

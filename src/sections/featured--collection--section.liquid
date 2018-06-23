@@ -16,10 +16,9 @@ Handles Product Grid in Collections on homepage.
     {% if product.type == 'Pocket' %}
     <a href="{{ product.url }}"
        title="{{ product.title }} ({{ variant.title }})"
-       data-variant-info
-       data-variant-id="{{ variant.id }}"
-       data-variant-handle="{{ product.handle }}"
+       data-quickadd-info
        data-variant-type="{{ product.type }}"
+       data-product-handle="{{ product.handle }}"
        class="product--grid--item--four three--row w-inline-block">
       <div class="product--grid--item--image random-colored-bg">
         <div class="product--grid--item--variant--overlay" style="position: relative;">
@@ -28,6 +27,7 @@ Handles Product Grid in Collections on homepage.
                height="45"
                class="product--grid--item--pocket" style="position: absolute;width:13%;height:auto;top:50%;left:50%;">
         </div>
+        <div class="product--quickadd"><strong class="product--quickadd--CTA">+ QUICK ADD</strong><div class="product--quickadd--sizes product--design--selector--grid flex-row"><div class="product--size--selector">XS</div><div class="product--size--selector">S</div><div class="product--size--selector">M</div><div class="product--size--selector">L</div><div class="product--size--selector">XL</div><div class="product--size--selector">XXL</div></div></div>
       </div>
       <h5 class="product--grid--item--title">
         {{ product.title }}
@@ -42,20 +42,16 @@ Handles Product Grid in Collections on homepage.
     <a href="{{product.url}}/"
        class="product--grid--item--four three--row w-inline-block"
        title="{{ product.title }} ({{ variant.title }})"
-       data-variant-info
-       data-variant-id="{{ variant.id }}"
-       data-variant-handle="{{ product.handle }}"
-       data-variant-quantity="1"
-       data-variant-size="{{ variant.option1 }}"
-       data-variant-color="{{ variant.option2 }}"
-       data-variant-clothing="{{ variant.option3 }}"
-       data-variant-type="{{ product.type }}">
+       data-variant-type="{{ product.type }}"
+       data-quickadd-info
+       data-quickadd-variantid="{{ variant.id }}">
       <div class="product--grid--item--image random-colored-bg">
         <div class="product--grid--item--variant--overlay">
           <img src="{{ product.featured_image | product_img_url: 'master' }}" 
                width="100%"
                height="100%">
         </div>
+        <div class="product--quickadd"><strong class="product--quickadd--CTA product-quickadd--no-options">+ QUICK ADD</strong></div>
       </div>
       <h5 class="product--grid--item--title">{{product.title}}</h5>
       <div>{{ product.price | money }}</div>
@@ -143,6 +139,9 @@ Handles Product Grid in Collections on homepage.
           product.attr('data-gender', gender)
           product.attr('data-color', color)
           product.attr('data-type', type)
+          product.parent().attr('data-option-gender', gender)
+          product.parent().attr('data-option-color', color)
+          product.parent().attr('data-option-type', type)
           product.css('background-image', `url('${bgImgURL}')`)
         } else {
           product.parent().hide()
@@ -177,40 +176,6 @@ Handles Product Grid in Collections on homepage.
   .EndlessScroll { 
     display: flex;
     flex-flow: row wrap;
-  }
-
-  .product--quickadd {
-    position: relative;
-    top: -25px;
-    opacity: 0;
-    background: white;
-    width: 100%;
-    text-align: center;
-    font-variant-caps: all-petite-caps;
-    transition: 0.3s;
-  }
-
-  .product--quickadd--CTA { display: block }
-  .product--quickadd--sizes {
-    display: none;
-    height: 24px;
-    width: 100%;
-    justify-content: center;
-  }
-
-  .random-colored-bg:hover .product--quickadd {
-    opacity: 1;
-    transition: 0.3s;
-  }
-
-  a.product--grid--item--four.three--row.w-inline-block:hover .product--quickadd {
-    opacity: 1 !important;
-    transition: 0.3s;
-  }
-
-  a.product--grid--item--four.three--row.w-inline-block:not(:hover) .product--quickadd {
-    opacity: 0 !important;
-    transition: 0.3s;
   }
 </style>
 

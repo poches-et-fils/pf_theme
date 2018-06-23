@@ -2416,9 +2416,6 @@ html.w-mod-js *[data-ix="page-popupoad"] {
   }
 }
 
-.product--quickadd {padding-top: 10px;padding-bottom: 10px;font-size: 18px;top: -55px!important;margin-left: auto;margin-right: auto;background: white;width: 90%!important;/* border-radius: 5px; */}
-
-
 .instagram--section {
   width: 100%;
   height: 500px;
@@ -2899,4 +2896,36 @@ li[title="Dark-Grey"] { background: #898686; }
     text-align: left;
     color: #161616;
   }
+}
+
+
+.random-colored-bg .product--quickadd {padding-top: 10px;padding-bottom: 10px;font-size: 18px;top: -55px!important;margin-left: auto;margin-right: auto;background: white;width: 90%!important;/* border-radius: 5px; */}
+.random-colored-bg .product--quickadd {
+  position: relative;
+  top: -25px;
+  opacity: 0;
+  background: white;
+  width: 100%;
+  text-align: center;
+  font-variant-caps: all-petite-caps;
+  transition: 0.3s;
+}
+.random-colored-bg .product--quickadd--CTA { display: block }
+.random-colored-bg .product--quickadd--sizes {
+  display: none;
+  height: 24px;
+  width: 100%;
+  justify-content: center;
+}
+.random-colored-bg:hover .product--quickadd {
+  opacity: 1;
+  transition: 0.3s;
+}
+.random-colored-bg .product--quickadd:hover {
+  opacity: 1 !important;
+  transition: 0.3s;
+}
+.random-colored-bg .product--quickadd:not(:hover) {
+  opacity: 0 !important;
+  transition: 0.3s;
 }

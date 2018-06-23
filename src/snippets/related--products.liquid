@@ -61,10 +61,11 @@
         const newElement 	= `
           <a href="?gender=${variant.options[0]}&type=${variant.options[2]}&color=${variant.options[1]}"
           class="product--grid--item--four w-inline-block"
+          data-quickadd-info
           data-option-gender="${variant.options[0]}"
           data-option-type="${variant.options[2]}"
           data-option-color="${variant.options[1]}"
-          data-product-handle="${handle}"
+          data-product-handle="{{ product.handle }}"
           >
           <div class="product--grid--item--image random-colored-bg">
           <div class="product--grid--item--variant--overlay " 

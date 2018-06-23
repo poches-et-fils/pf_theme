@@ -1,14 +1,23 @@
  
   <div class="section--promotions w-clearfix">
-    
-    <a  style="width: 100%;"  href="{{section.settings.bgurl1}}" > 
-    <div class="promotion--left" style=" background-image: url('{{section.settings.bgimg1 | img_url: '1000x1000'}}');"></div>
-    </a>
-
-    
-    <a style="width: 100%;" href="{{section.settings.bgurl2}}" > 
-    <div class="promotion--right"  style=" background-image: url('{{section.settings.bgimg2 | img_url: '1000x1000'}}');"></div>
-    </a>
+    <div class="promotion--left" style=" background-image: url('{{ section.settings.bgimg1 | img_url: '1000x1000' }}');">
+      <div class="slider--content {% if section.settings.bg-position1 == 'left' %}slider--content--right{% endif %}{% if section.settings.bg-position1 == 'right' %}slider--content--left{% endif %}{% if section.settings.bg-position1 == 'center' or section.settings.bg-position1 == 'fill' %}slider--content--center{% endif %}">
+        <h1 class="slider--heading--main"  style="font-size: 55px;font-weight: 500;color: #fff;text-transform: uppercase;"> {{ section.settings.heading1 }}</h1>
+        <h3 class="slider--heading--text" style="font-size: 20px;color: #fff;"> {{ section.settings.subtitle1 }}</h3>
+        {% if section.settings.btn1 %}
+          <a href="{{section.settings.link1}}" style="background-color: rgba(255, 255, 255, 0.2);font-weight: 500;" class="slider--button--main w-button">{{section.settings.btn1}}</a>
+        {%endif%}
+      </div>
+    </div>
+    <div class="promotion--right"  style=" background-image: url('{{ section.settings.bgimg2 | img_url: '1000x1000' }}');">
+      <div class="slider--content {% if section.settings.bg-position2 == 'left' %}slider--content--right{% endif %}{% if section.settings.bg-position2 == 'right' %}slider--content--left{% endif %}{% if section.settings.bg-position2 == 'center' or section.settings.bg-position2 == 'fill' %}slider--content--center{% endif %}">
+        <h1 class="slider--heading--main"  style="font-size: 55px;font-weight: 500;color: #fff;text-transform: uppercase;"> {{ section.settings.heading2 }}</h1>
+        <h3 class="slider--heading--text" style="font-size: 20px;color: #fff;"> {{ section.settings.subtitle2 }}</h3>
+        {% if section.settings.btn2 %}
+          <a href="{{section.settings.link2}}" style="background-color: rgba(255, 255, 255, 0.2);font-weight: 500;" class="slider--button--main w-button">{{section.settings.btn2}}</a>
+        {%endif%}
+      </div>
+    </div>
   </div>
 
 
@@ -19,24 +28,93 @@
     {
       "id": "bgimg1",
       "type": "image_picker",
-      "label": "Promotion Image Left"
+      "label": "Promotion Image"
     },
-      {
-      "id": "bgurl1",
+    {
+      "type":      "select",
+      "id":        "bg-position1",
+      "label":     "Image Position",
+      "options": [
+        { "value": "left", "label": "Left Aligned" },
+        { "value": "center", "label": "Center Aligned" },
+        { "value": "right", "label": "Right Aligned" },
+        { "value": "fill", "label": "Fill Background" }
+      ],
+      "default":   "left",
+      "info":      "Moves the alignment of the background image"
+    },
+    {
+      "id": "heading1",
+      "type": "text",
+      "label": "Slider Heading"
+    },
+    {
+      "id": "subtitle1",
+      "type": "text",
+      "label": "Slider Subtitle"
+    },
+    {
+      "id": "link1",
       "type": "url",
-      "label": "Promotion Image URL Left"
+      "label": "Button link"
     },
-     {
+    {
+      "id": "btn1",
+      "type": "text",
+      "label": "Button text",
+      "default": "Click here"
+    },
+    {
+      "id": "btncolor1",
+      "type": "color",
+      "label": "Button Color",
+      "default": "#f36e21"
+    },
+    {
       "id": "bgimg2",
       "type": "image_picker",
-      "label": "Promotion Image Right"
+      "label": "Promotion Image 2"
     },
-      {
-      "id": "bgurl2",
+    {
+      "type":      "select",
+      "id":        "bg-position2",
+      "label":     "Image Position 2",
+      "options": [
+        { "value": "left", "label": "Left Aligned" },
+        { "value": "center", "label": "Center Aligned" },
+        { "value": "right", "label": "Right Aligned" },
+        { "value": "fill", "label": "Fill Background" }
+      ],
+      "default":   "left",
+      "info":      "Moves the alignment of the background image"
+    },
+    {
+      "id": "heading2",
+      "type": "text",
+      "label": "Slider Heading 2"
+    },
+    {
+      "id": "subtitle2",
+      "type": "text",
+      "label": "Slider Subtitle 2"
+    },
+    {
+      "id": "link2",
       "type": "url",
-      "label": "Promotion Image URL Right"
+      "label": "Button link 2"
+    },
+    {
+      "id": "btn2",
+      "type": "text",
+      "label": "Button text 2",
+      "default": "Click here"
+    },
+    {
+      "id": "btncolor2",
+      "type": "color",
+      "label": "Button Color 2",
+      "default": "#f36e21"
     }
-     
   ],
   "presets": [
     {

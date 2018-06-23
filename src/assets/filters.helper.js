@@ -10,11 +10,12 @@ window.poches.filters['helper'] = function () {
     return results == null ? '' : results[1].replace(/\+/g,' ');
   };
 
-  this.uup = function (key, value) {
+  this._uup = function (key, value) {
+    var newSearch = '';
     key = escape(key); value = escape(value);
     var kvp = document.location.search.substr(1).split('&');
     if (kvp == '') {
-      document.location.search = '?' + key + '=' + value;
+      newSearch = '?' + key + '=' + value;
     } else {
       var i = kvp.length;
       var x;
@@ -29,8 +30,19 @@ window.poches.filters['helper'] = function () {
       if (i < 0) {
         kvp[kvp.length] = [key, value].join('=');
       }
-      document.location.search = kvp.join('&');
+      newSearch = kvp.join('&');
     }
+    return newSearch;
+  }
+
+  this.uup = function (key, value) {
+    document.location.search = window.poches.filters.helper._uup(key, value);
+  }
+  
+  this.uups = function (key, value) {
+    var newSearchString = window.poches.filters.helper._uup(key, value);
+    var url = [location.protocol, '//', location.host, location.pathname].join('');
+    history.pushState(newSearchString, document.title, url + '?' + newSearchString);
   }
 
   this.shuffle = function (array) {

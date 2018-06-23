@@ -1,182 +1,60 @@
-
-{% comment %}
-
-Using Shopify's liquid structure we can create sublinks. Shopify collections natively function wtih the ability to filter based on a specific tag.
-So all products in a specific collection tagged will display.
-
-Eg: /collections/men/boxers will display all boxers within the men's category. 
-We will be using this for easy filtering.
-
-(This also helps SEO)
-
-Tags to use on products (all lowercase):
-- tops
-- tshirt
-- sweatshirt
-- tanktops
-- boxers
-- dadhat
-- socks
-- btshirt
-- ktshirt
-
-NOT ALL LINKS HAVE BEEN ADDED
-NEED TO ADD LINKS FOR WOMEN, YOUTH AND DESIGNS
-
-{%endcomment%}
-
-
 <div class="dropdown">
-  
-  {% comment %}Men's dropdown{% endcomment %}
-  
-  <div class="dropdown-content main Men">
-    <div class="navigation--dropdown--block">
-      <div class="navigation--content--block">
-        <div class="navigation--dropdown--block--item nopadding">
-          <div class="navigation--image--block">
-            <img src="{{section.settings.menimg | img_url: '1000x1000'}}" 
-                 width="200"
-                 height="200"
-                 sizes="(max-width: 991px) 100vw, 114px" 
-                 class="image" />
+  {% for link in linklists.header-menu.links %}
+    <div class="dropdown-content main {{ link.title }}">
+      <div class="navigation--dropdown--block">
+        <div class="navigation--content--block">
+          <div class="navigation--dropdown--block--item nopadding">
+            <div class="navigation--image--block">
+              {% if link.title == "Men" %}
+                <img src="{{section.settings.menimg | img_url: '1000x1000'}}" 
+                    width="200"
+                    height="200"
+                    sizes="(max-width: 991px) 100vw, 114px" 
+                    class="image" />
+              {% endif %}
+              {% if link.title == "Women" %}
+                <img src="{{section.settings.womenimg | img_url: '1000x1000'}}" 
+                    width="200"
+                    height="200"
+                    sizes="(max-width: 991px) 100vw, 114px" 
+                    class="image" />
+              {% endif %}
+              {% if link.title == "Youth" %}
+                <img src="{{section.settings.youthimg | img_url: '1000x1000'}}" 
+                    width="200"
+                    height="200"
+                    sizes="(max-width: 991px) 100vw, 114px" 
+                    class="image" />
+              {% endif %}
+            </div>
           </div>
-        </div>
-        <div class="navigation--dropdown--block--item">
+
+          {% for sub_link in link.links %}
+            <div class="navigation--dropdown--block--item">
+              <a href="{{ sub_link.url }} " class="navigation--link main">{{ sub_link.title }}</a>
+
+              {% for sub_sub_link in sub_link.links %}
+                <a href="{{ sub_sub_link.url }}" class="navigation--link sub">{{ sub_sub_link.title }}</a>
+              {% endfor %}
+            </div>
+          {% endfor %}
           
-          <a href="/collections/men/tops " class="navigation--link main">Tops</a>
-          <a href="/collections/men/tshirt " class="navigation--link sub">T-Shirt</a>
-          <a href="/collections/men/sweatshirt " class="navigation--link sub">Sweatshirt</a>
-          <a href="/collections/men/tanktops " class="navigation--link sub">Tank Top</a>
-        </div>
-        
-        
-        <div class="navigation--dropdown--block--item">
+          <div class="navigation--dropdown--block--item">
+            <a href="{{ link.url }}" class="navigation--link main">Designs</a>
+            <a href="{{ link.url }}?design_type=random" class="navigation--link sub">Random</a>
+            <a href="{{ link.url }}?design_type=animals" class="navigation--link sub">Animals</a>
+            <a href="{{ link.url }}?design_type=food" class="navigation--link sub">Food</a>
+            <a href="{{ link.url }}?design_type=patterns" class="navigation--link sub">Patterns</a>
+            <a href="{{ link.url }}?design_type=sports" class="navigation--link sub">Sports</a>
+            <a href="{{ link.url }}?design_type=collaboration" class="navigation--link sub">Collaborations</a>
+          </div>
           
-          <a href="#" class="navigation--link main">Bottoms</a>
-          <a href="/collections/men/boxers " class="navigation--link sub">Boxers</a>
+          <div class="navigation--dropdown--block--item">
+            <a href="{{ link.url }}" class="navigation--link sub">See all styles</a></div>
         </div>
-        
-        <div class="navigation--dropdown--block--item">
-          <a href="#" class="navigation--link main">Accessories </a>
-          <a href="/collections/men/socks " class="navigation--link sub">Unisex socks</a>
-          <a href="/collections/men/sweatshirt" class="navigation--link sub">Sweatshirt</a>
-          <a href="/collections/men/boxers " class="navigation--link sub">Boxers</a>
-          <a href="/collections/men/dadhat" class="navigation--link sub">Dad hat</a>
-        </div>
-        
-        <div class="navigation--dropdown--block--item">
-          <a href="#" class="navigation--link main">Designs</a>
-          <a href="#" class="navigation--link sub">Random</a>
-          <a href="#" class="navigation--link sub">Animals </a>
-          <a href="#" class="navigation--link sub">Food</a>
-          <a href="#" class="navigation--link sub">Patterns </a>
-          <a href="#" class="navigation--link sub">Sports  </a>
-          <a href="#" class="navigation--link sub">Collaborations  </a>
-        </div>
-        
-    
-        
-        <div class="navigation--dropdown--block--item">
-          <a href="#" class="navigation--link sub">See all styles</a></div>
       </div>
     </div>
-  </div>
-  
-    {% comment %}
-  women's dropdown 
-  {% endcomment %}
-  
-  
-  <div class="dropdown-content main Women">
-    <div class="navigation--dropdown--block">
-      <div class="navigation--content--block">
-        <div class="navigation--dropdown--block--item nopadding">
-          <div class="navigation--image--block">
-             <img src="{{section.settings.womenimg | img_url: '1000x1000'}}" 
-                  width="200"
-                 height="200"
-                 sizes="(max-width: 991px) 100vw, 114px" 
-                 class="image" />
-          </div>
-        </div>
-        
-        <div class="navigation--dropdown--block--item">
-          
-          <a href="#" class="navigation--link main">Tops</a>
-          <a href="#" class="navigation--link sub">T-Shirt</a>
-          <a href="#" class="navigation--link sub">Sweatshirt</a>
-          <a href="#" class="navigation--link sub">Tank Top</a>
-        </div>
-        
-        
-        <div class="navigation--dropdown--block--item">
-          <a href="#" class="navigation--link main">Accessories </a>
-          <a href="#" class="navigation--link sub">Unisex socks</a>
-          <a href="#" class="navigation--link sub">Sweatshirt</a>
-          <a href="#" class="navigation--link sub">Dad hat</a>
-        </div>
-        
-        <div class="navigation--dropdown--block--item">
-          <a href="#" class="navigation--link main">Designs</a>
-          <a href="#" class="navigation--link sub">Random</a>
-          <a href="#" class="navigation--link sub">Animals </a>
-          <a href="#" class="navigation--link sub">Food</a>
-          <a href="#" class="navigation--link sub">Patterns </a>
-          <a href="#" class="navigation--link sub">Sports  </a>
-          <a href="#" class="navigation--link sub">Collaborations  </a>
-        </div>
-        
-       
-        
-        
-        <div class="navigation--dropdown--block--item"><a href="#" class="navigation--link sub">See all styles</a></div>
-      </div>
-    </div>
-  </div>
-  
-    {% comment %}
-  Youth's dropdown 
-  {% endcomment %}
-  
-  <div class="dropdown-content main Youth">
-    <div class="navigation--dropdown--block">
-      <div class="navigation--content--block">
-        <div class="navigation--dropdown--block--item nopadding">
-          <div class="navigation--image--block">
-             <img src="{{section.settings.youthimg | img_url: '1000x1000'}}" 
-                  width="200"
-                 height="200"
-                 sizes="(max-width: 991px) 100vw, 114px" 
-                 class="image" />
-          </div>
-        </div>
-        <div class="navigation--dropdown--block--item">
-          
-          <a href="#" class="navigation--link main">Tops</a>
-          <a href="#" class="navigation--link sub">Baby T-Shirt</a>
-          <a href="#" class="navigation--link sub">Kid T-Chirt</a>
-          
-        </div>
-        
-        
-        <div class="navigation--dropdown--block--item">
-          <a href="#" class="navigation--link main">Designs</a>
-          <a href="#" class="navigation--link sub">Random</a>
-          <a href="#" class="navigation--link sub">Animals </a>
-          <a href="#" class="navigation--link sub">Food</a>
-          <a href="#" class="navigation--link sub">Patterns </a>
-          <a href="#" class="navigation--link sub">Sports  </a>
-          <a href="#" class="navigation--link sub">Collaborations  </a>
-        </div>
-        
-      
-        
-        
-        <div class="navigation--dropdown--block--item"><a href="#" class="navigation--link sub">See all styles</a></div>
-      </div>
-    </div>
-  </div>
+  {% endfor %}
 </div>
 
 <style>

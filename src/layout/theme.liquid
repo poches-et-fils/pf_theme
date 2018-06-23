@@ -126,7 +126,7 @@ Configured 2018
       </div>
       <div class="design-selector-products" data-product-category="Food">
         {% for dproduct in collections.all-designs.products limit: 250 %}
-          {% if dproduct.tags contains "Food" %}
+          {% if dproduct.tags contains "food" %}
             <div class="design-selector-design" data-design-handle="{{ dproduct.handle }}" data-design-title="{{ dproduct.title | replace: " ", "+" }}"><img src="{{ dproduct | img_url: '480x480' }}" class="design-selector-design-image" /><div class="design-selector-design-label">{{ dproduct.title }}</div></div>
           {% endif %}
         {% endfor %}
@@ -144,22 +144,6 @@ Configured 2018
 
   {{ 'ajaxify.min.js' | asset_url | script_tag }}
   {{ 'toggle-handler.js' | asset_url | script_tag }}
-
-  <script>
-    $(document).ready(_ => {
-      if (!localStorage.storeCurrency) {
-        localStorage.storeCurrency = `{{ shop.currency }}`
-      }
-    })
-
-    const formatCurrency = amount => {
-      amount = amount.toString()
-      const pos = amount.length-2
-      amount = `${amount.slice(0, pos)}.${amount.slice(pos)}`
-      amount = new Intl.NumberFormat("en-US", {'maximumSignificantDigits': 2}).format(parseFloat(amount))
-      return `${localStorage.storeCurrency} $${amount}`
-    }
-  </script>
 
   {{ 'parse-urlparams.js' | asset_url | script_tag }}
   {{ 'shuffle-dom-siblings.js' | asset_url | script_tag }}
@@ -313,8 +297,6 @@ Configured 2018
       window.poches.filters.init();
     {% endif %}
   </script>
-  {% if product %}
-    {{ 'pocket-adjust.js' | asset_url | script_tag }}
-  {% endif %}
+  {{ 'pocket-adjust.js' | asset_url | script_tag }}
 </body>
 </html>

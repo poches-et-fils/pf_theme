@@ -101,6 +101,11 @@ const cartHTML = `
 
 .ajax--cart--item--image {
   width: 40%;
+  text-align: center;
+}
+.ajax--cart--item--image img {
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .ajax--cart--item--details {
@@ -246,14 +251,6 @@ const cartHTML = `
   background-color: #f9f9f9;
 }
 
-.ajax--cart--item--image img {
-  position: relative;
-  top: 42%;
-  right: 40%;
-  width: 13px;
-  float: right;
-}
-
 *[disabled] { cursor: not-allowed; }
 </style>`
 
@@ -307,25 +304,12 @@ const refreshPrice = amount => {
   const priceLabel = $('.ajax--cart--subtotal--amount')
   
   if(amount) {
-    return priceLabel.empty().text(formatCurrency(amount))
+    return priceLabel.empty().text(window.currencySymbol + (amount/100).toFixed(2))
   } else {
     return priceLabel.text()
   }
 }
 
-const imageProps = (item, model) => {
-  let imageDiv = ''
-  
-  console.info(item.properties.product)
-  
-  if (item.properties.product === 'Pocket' || item.properties.product === 'Combo') {
-    imageDiv = `class="ajax--cart--item--image" style="background-image: url('${model}')"`
-  } else {
-    imageDiv = `style="width: 40%; display: flex; justify-content: center; align-items: center;"`
-  }
-  
-  return imageDiv
-}
 
 const refreshCart = _ => {
   const cartSelector = $('.ajax--cart--popout--section')
@@ -334,29 +318,33 @@ const refreshCart = _ => {
   $.getJSON('/cart.js', data => {
     
     data.items.map(item => {
-      const model = getRandImg([`type=${item.properties.type}`, 
-                                `color=${item.properties.color}`])
+      var title = item.product_title
+      var subtitle = '&nbsp;'
+      var size = item.variant_title
+      if(item.product_type == 'Pocket') {
+        subtitle = item.variant_title
+        size = item.properties.size
+      }
 
       itemsInCart
       .append(`
 		<div class="ajax--cart--item item-start" 
 			 data-variant-id="${item.variant_id}"
-			 data-product-type=${item.properties.product}>
-		<div ${imageProps(item, model)}>
-		<img src='${item.image}' alt="${item.title}" title="${item.title}" />
+			 data-product-type=${item.product_type}>
+		<div class="ajax--cart--item--image">
+		  <img src='${item.image}' alt="${item.title}" title="${item.title}" />
 		</a>
         </div>
         <div class="ajax--cart--item--details">
         <div class="ajax--cart--item--block padding">
         <div class="ajax--cart--item--text bold--text">
-		  ${item.properties.type}
+		    ${title}
 		  <span class="ajax--cart--item--quantity remove" title="Remove">x</span>
 		</div>
-		<div class="ajax--cart--item--text">${item.product_title}</div>
+		<div class="ajax--cart--item--text">${subtitle}</div>
         </div>
         <div class="ajax--cart--item--block padding">
-        <div class="ajax--cart--item--text">Size: ${item.properties.size}</div>
-        <div class="ajax--cart--item--text">Color: ${item.properties.color}</div>
+        <div class="ajax--cart--item--text">Size: ${size}</div>
         </div>
         <div class="ajax--cart--item--block flexed">
         <div class="ajax--cart--qty">
@@ -364,7 +352,7 @@ const refreshCart = _ => {
           <div class="ajax--cart--item--curQuantity">${item.quantity}</div>
           <button class="ajax--cart--item--quantity more" title="Add 1">+</button>
 		</div>
-        <div class="ajax--cart--price--block">${formatCurrency(item.line_price)}</div>
+        <div class="ajax--cart--price--block">${window.currencySymbol + (item.line_price/100).toFixed(2)}</div>
         </div>
         </div>
         </div>`)
@@ -413,7 +401,7 @@ const updateQty = event => {
       const linePrice = response.items.find(it => it.id === parseInt(itemID)).line_price
       
       curQty.text(newQty) 
-      itemPrice.text(formatCurrency(linePrice))
+      itemPrice.text(window.currencySymbol + (linePrice/100).toFixed(2))
       
       refreshPrice(response.total_price)
       freeShipping(response.total_price)
@@ -424,11 +412,9 @@ const updateQty = event => {
 
 const freeShipping = currentAmount => {
   const cartMessage   = $('.ajax--cart--message')
-
-  currentAmount = formatCurrency(currentAmount).replace(/\D+/, '')
   
   if (100 - currentAmount > 0) {
-    cartMessage.text(`Add another $${100 - currentAmount} to cart to get free shipping.`)
+    cartMessage.text(`Add another ${window.currencySymbol}${100 - currentAmount} to cart to get free shipping.`)
   } else {
     cartMessage.text('Congratulations! You may apply for Free Shipping.')
   }  

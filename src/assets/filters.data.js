@@ -8,8 +8,8 @@ window.poches.filters['data'] = function () {
   /**
    * Add a generic product.
    */
-  this.addGenericProduct = function (productName, productImage, productHandle, productPrice, variantId = 0) {
-    genericProducts.push({name: productName, image: productImage, handle: productHandle, type: 'custom', price: (productPrice / 100).toFixed(2), variantid: variantId});
+  this.addGenericProduct = function (productName, productImage, productHandle, productPrice, tags, variantId = 0) {
+    genericProducts.push({name: productName, image: productImage, handle: productHandle, type: 'custom', price: (productPrice / 100).toFixed(2), tags: tags, variantid: variantId});
   }
 
   /**
@@ -26,8 +26,8 @@ window.poches.filters['data'] = function () {
    * @param {String} productImage Product Image URL
    * @param {String} productHandle Shopify Product Handle
    */
-  this.addDesignProduct = function (productName, productImage, productHandle, price) {
-    var newProduct = {name: productName, image: productImage, handle: productHandle, price: price}
+  this.addDesignProduct = function (productName, productImage, productHandle, price, tags) {
+    var newProduct = {name: productName, image: productImage, handle: productHandle, price: price, tags: tags}
     products.push(newProduct);
   }
 

@@ -3,6 +3,7 @@ if(typeof window.poches.filters === "undefined") window.poches['filters'] = {};
 window.poches.filters['filter'] = function () {
   var filterData = false;
   var filters = [];
+  var tagFilter = false;
 
   /**
    * Set the Filter Data object for use when loading data.
@@ -14,6 +15,10 @@ window.poches.filters['filter'] = function () {
 
   this.applyDesignFilter = function (designName) {
     filters['name'] = designName;
+  }
+
+  this.applyDesignTypeFilter = function (designType) {
+    tagFilter = designType;
   }
 
   this.applyColorFilter = function (colorName) {
@@ -60,6 +65,11 @@ window.poches.filters['filter'] = function () {
           }
         }
       }
+
+      if(tagFilter && !displayProducts[i]['tags'].includes(tagFilter)) {
+        productMatch = false;
+      }
+
       if(productMatch) filteredDisplayProducts.push(displayProducts[i]);
     }
     return filteredDisplayProducts;

@@ -7,9 +7,9 @@ $(document).ready(function () {
     });
     $('.design-selector-design').click(function () {
         if($('body').hasClass('template-product')) {
-          window.location = window.location.href.replace(JSON.parse($('script[data-product-json]').html())['handle'], $(this).attr('data-design-handle'));
+            window.location = window.location.href.replace(JSON.parse($('script[data-product-json]').html())['handle'], $(this).attr('data-design-handle'));
         } else {
-          window.poches.filters.helper.uup('design', $(this).attr('data-design-title'));
+            window.poches.filters.helper.uup('design', $(this).attr('data-design-title'));
         }
     });
     $('.design-selector-nav > a').click(function (e) {

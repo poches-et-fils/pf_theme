@@ -32,13 +32,16 @@
           <a id="sub-link" href="/collections/{{ collection.handle }}/boxers">Boxers</a>
         </div>
       {% endif %}
-      <div class="nav-section">
-        <a id="top-link" href="#">Accessories</a>
-        <a id="sub-link" href="/collections/socks">Unisex Socks</a>
-        <a id="sub-link" href="/collections/phonecase">Phone Cases</a>
-        <a id="sub-link" href="/collections/hat">Hats</a>
-        <a id="sub-link" href="/collections/bundle">Bundles</a>
-      </div>
+
+      {% if collection.handle == "men" or collection.handle == "women" %}
+        <div class="nav-section">
+          <a id="top-link" href="#">Accessories</a>
+          <a id="sub-link" href="/collections/socks">Unisex Socks</a>
+          <a id="sub-link" href="/collections/phonecase">Phone Cases</a>
+          <a id="sub-link" href="/collections/hat">Hats</a>
+          <a id="sub-link" href="/collections/bundle">Bundles</a>
+        </div>
+      {% endif %}
     </div>
   </div>
 </div>
@@ -163,7 +166,7 @@
       <div class="toggle--contents">
         <div id="sidebar-block-toggle">
           {% for product in collections.all-designs.products limit: 250 %}
-          {% if product.tags contains 'Collaboration'%}
+          {% if product.tags contains 'collaboration' %}
           <div id="sidebar-block">
             <img src="{{product.images.first.src | img_url: '60x60'}}'" title="{{ product.title }}" class="pocket-swatch-filter">
           </div>

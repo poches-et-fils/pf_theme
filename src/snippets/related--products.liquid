@@ -73,10 +73,10 @@
           </div>
           <h5 class="product--grid--item--title">
           ${ variant.options[0] }'
-          ${ variant.options[1].toLowerCase() }
+          ${ variant.options[1] }
           ${ variant.options[2] }
           </h5>
-          <div>$${ formatCurrency(variant.price) }</div>
+          <div>$${ window.currencySymbol + (variant.price/100).toFixed(2) }</div>
           <div class="product--grid--item--link">See more styles</div>
           </a>`
         
@@ -86,6 +86,7 @@
         variants.splice(random, 1)
       }
       fillBg()
+
       $('.related--product--pocket').each(function () {
         window.positionPocket($(this), $(this).attr('data-pocket-gender'), $(this).attr('data-pocket-type'));
       });

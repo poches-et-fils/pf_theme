@@ -26,4 +26,8 @@ $(document).ready(function () {
     var gender = window.poches.filters.helper.gup('gender');
     var type = window.poches.filters.helper.gup('type');
     window.positionPocket($('.product-preview'), gender, type);
+
+    $('.shopify-section a[data-variant-type="Pocket"] .product--grid--item--image').each(function () {
+      window.positionPocket($(this).find('.product--grid--item--pocket'), $(this).attr('data-gender'), $(this).attr('data-type'));
+    });
 });

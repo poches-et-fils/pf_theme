@@ -77,6 +77,10 @@ window.poches.filters['init'] = function () {
           window.poches.filters.filter.applyColorFilter(window.poches.filters.helper.gup('color'));
           $('ul.colors-container li[title='+window.poches.filters.helper.gup('color')+']').addClass('selected-color');
         }
+
+        if(window.poches.filters.helper.gup('design_type') != '') {
+          window.poches.filters.filter.applyDesignTypeFilter(window.poches.filters.helper.gup('design_type'));
+        }
         jQuery(this).html(window.poches.filters.render.renderProductGrid(window.poches.filters.helper.shuffle(window.poches.filters.filter.getFilteredDisplayProducts())));
         fillBg();
 

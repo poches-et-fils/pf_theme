@@ -75,5 +75,5 @@ const quickAdd = event => {
 
 $(document).on('click', '.product--quickadd', e => e.preventDefault())
 $(document).on('click', '.product--quickadd--CTA', handleQuickAdd)
-$(document).on('click', '*[class^="product--size"]', quickAdd)
+$(document).on('click', '.product--quickadd--sizes .product--size--selector', quickAdd)
 $(document).on('click', '.product-quickadd--no-options', quickAdd)

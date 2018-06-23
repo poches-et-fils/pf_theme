@@ -12,7 +12,7 @@ $(document).ready(function () {
   <meta itemprop="name" content="{{ product.title }}{% unless product.has_only_default_variant %} - {{ current_variant.title }}{% endunless %}">
   <meta itemprop="url" content="{{ shop.url }}{{ current_variant.url }}">
   <meta itemprop="brand" content="{{ product.vendor }}">
-  <meta itemprop="image" content="{{ featured_image | img_url: '600x600' }}">
+  <meta itemprop="image" content="{{ featured_image | img_url: '360x360' }}">
   <meta itemprop="description" content="{{ product.description | strip_html | escape }}">
   <div class="product--container">
     <div data-animation="slide" data-duration="500" data-infinite="1" class="mobile--slider w-slider">
@@ -39,7 +39,7 @@ $(document).ready(function () {
       <div class="product--block--left images--block">
         <div class="product--image--large" style="background-color: #f9f9f9;position: relative;">
           <img class="product-preview" 
-               src="{{ product.featured_image | img_url: '600x600'}}"
+               src="{{ product.featured_image | img_url: '360x360'}}"
                style="width:13%;height:auto;position:absolute;top:50%;left:50%;" />
         </div>
       </div>
@@ -47,14 +47,11 @@ $(document).ready(function () {
         <div class="product--variant--image">
           <div class="product--variant--image--image">
             <img class="product--variant--image--image product-preview" 
-                 src="{{ product.featured_image | img_url: '600x600'}}" />
+                 src="{{ product.featured_image | img_url: '360x360'}}" />
           </div>
           <div>
             <h2 class="product--variant--price">
-              {{ shop.currency }}
-              <span class="product--variant--price-amount">
-                {{ product.price | money }}
-              </span>
+              <span class="product--variant--price-amount"></span>
             </h2>
             <strong><span class="product--VA--name no-wrap">{{ product.title }}</span></strong>
             <br>
@@ -74,46 +71,42 @@ $(document).ready(function () {
 </div>
 
 <script>
-  (function () {
-    const getModels = (event, searchColor) => {
-      /*
-       * urlParams are sent to getRandImg() as an array.
-       * e.g. ['adult=true', 'genre=female', 'type=...']
-       * if no urlParams are found, it sends `false`
-      */
-      const urlParams 		= getProductUrlparams(window.location.href) || []
-      const modelContainer	= $('.product--image--large')
-      const setError		= $('.cart-error').text('')
+  const getModels = (event, searchColor) => {
+    /*
+      * urlParams are sent to getRandImg() as an array.
+      * e.g. ['adult=true', 'genre=female', 'type=...']
+      * if no urlParams are found, it sends `false`
+    */
+    const urlParams 		= getProductUrlparams(window.location.href) || []
+    const modelContainer	= $('.product--image--large')
+    const setError		= $('.cart-error').text('')
 
-      if(searchColor) {
-        urlParams.push(`color=${searchColor}`)
-      }
-
-      let modelImageUrl = getRandImg(urlParams)
-
-      console.log("Model image:", modelImageUrl) 
-      if (!modelImageUrl) {
-        setError.text('Sorry, this image is not available')
-        modelImageUrl = getRandImg()
-      }
-      
-      modelContainer
-      .attr('style', `background-image: url('${modelImageUrl}');position:relative;`)
+    if(searchColor) {
+      urlParams.push(`color=${searchColor}`)
     }
 
-    const setPreviewImage = event => {
-      const model = $(event.target).attr('src')
+    let modelImageUrl = getRandImg(urlParams)
 
-      $('.product--image--large')
-      .css('background-image', `url('${model}')`)
+    console.log("Model image:", modelImageUrl) 
+    if (!modelImageUrl) {
+      setError.text('Sorry, this image is not available')
+      modelImageUrl = getRandImg()
     }
+    
+    modelContainer
+    .attr('style', `background-image: url('${modelImageUrl}');position:relative;`)
+  }
 
-    const filterColors = event => getModels(false, $(event.target).attr('title'))
+  const setPreviewImage = event => {
+    const model = $(event.target).attr('src')
 
-    $(document).ready(getModels)
-    $(document).on('click', 'li[title]', filterColors)
-    $(document).on('click', 'img.model-thumb', setPreviewImage)
-  })()
+    $('.product--image--large')
+    .css('background-image', `url('${model}')`)
+  }
+
+  const filterColors = event => getModels(false, $(event.target).attr('title'))
+  
+  $(document).ready(getModels)
 </script>
 
 <style>

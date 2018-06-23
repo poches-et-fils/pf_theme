@@ -13,24 +13,20 @@ Handles Product Grid in Collections on homepage.
     {% for product in collection.products limit:4 %}
 
     {% for variant in product.variants limit:1 %}
-    {% if product.type == 'Pocket' or product.type == 'Combo'%}
-    <a href="{{ product.url }}?gender={{ collection.title }}&product_type={{ variant.option3 }}"
+    {% if product.type == 'Pocket' %}
+    <a href="{{ product.url }}"
        title="{{ product.title }} ({{ variant.title }})"
        data-variant-info
        data-variant-id="{{ variant.id }}"
        data-variant-handle="{{ product.handle }}"
-       data-variant-quantity="1"
-       data-variant-size="{{ variant.option1 }}"
-       data-variant-color="{{ variant.option2 }}"
-       data-variant-clothing="{{ variant.option3 }}"
        data-variant-type="{{ product.type }}"
        class="product--grid--item--four three--row w-inline-block">
       <div class="product--grid--item--image random-colored-bg">
-        <div class="product--grid--item--variant--overlay">
+        <div class="product--grid--item--variant--overlay" style="position: relative;">
           <img src="{{ product.featured_image | product_img_url: 'medium' }}" 
                width="45"
                height="45"
-               class="product--grid--item--pocket">
+               class="product--grid--item--pocket" style="position: absolute;width:13%;height:auto;top:50%;left:50%;">
         </div>
       </div>
       <h5 class="product--grid--item--title">
@@ -87,8 +83,7 @@ Handles Product Grid in Collections on homepage.
   (function () {
 
     const addCollectionImages = _ => {
-      const productList = $(`.product--grid--block > [data-variant-type=Pocket],
-							 .product--grid--block > [data-variant-type=Combo]`)
+      const productList = $(`.product--grid--block > [data-variant-type=Pocket]`)
       
       $('.product--grid--item--variant--overlay > img').css({
         'transition': '1s'
@@ -99,14 +94,59 @@ Handles Product Grid in Collections on homepage.
 
         const bgImgURL = getRandImg()
 
+        var gender = 'Kid';
+        if(bgImgURL.includes('--Men--')) {
+          gender = 'Men';
+        }
+        if(bgImgURL.includes('--Women--')) {
+          gender = 'Women';
+        }
+        if(bgImgURL.includes('--Baby--')) {
+          gender = 'Baby';
+        }
+
+        var color = 'Black';
+        if(bgImgURL.includes('--White')) {
+          color = 'White';
+        }
+        if(bgImgURL.includes('--Grey')) {
+          color = 'Grey';
+        }
+        if(bgImgURL.includes('--Dark-Grey')) {
+          color = 'Dark-Grey';
+        }
+        if(bgImgURL.includes('--Navy')) {
+          color = 'Navy';
+        }
+        if(bgImgURL.includes('--Burgundy')) {
+          color = 'Burgundy';
+        }
+        
+
+        var type = 'T-Shirt';
+        if(bgImgURL.includes('--Sweatshirt--')) {
+          type = 'Sweatshirt';
+        }
+        if(bgImgURL.includes('--Tank-Top--')) {
+          type = 'Tank-Top';
+        }
+        if(bgImgURL.includes('--V-Neck--')) {
+          type = 'V-Neck';
+        }
+
+
         if (!product.find('img').length) {
           product.parent().hide()
+          console.log('img not found');
         } else if(bgImgURL) {
+          product.parent().attr('href', product.parent().attr('href') + '?gender=' + gender + '&type=' + type + '&color=' + color)
+          product.attr('data-gender', gender)
+          product.attr('data-color', color)
+          product.attr('data-type', type)
           product.css('background-image', `url('${bgImgURL}')`)
         } else {
-          // no images found
-          console.log('hide1')
           product.parent().hide()
+          console.log('bgImgUrl not set');
         }
 
       })

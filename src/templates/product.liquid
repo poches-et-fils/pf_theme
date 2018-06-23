@@ -8,14 +8,10 @@
 {%- endcomment -%}
 
 {% if product.type == 'Pocket' %}
-
- {% include 'product-api'%}
-{% section 'product--pocket' %}
-
+  {% include 'product-api' %}
+  {% section 'product--pocket' %}
 {%else%}
-
-{% section 'product--normal' %}
-
+  {% section 'product--normal' %}
 {%endif%}
 
 <br>

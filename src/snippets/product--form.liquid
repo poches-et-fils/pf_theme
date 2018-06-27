@@ -21,7 +21,7 @@
               {% for category in design_categories %}
                 {% if pocket_shown == false and product.tags contains category and pocket_product.tags contains category %}
                   {% assign pocket_shown = true %}
-                  <img src="{{pocket_product.images.first.src | img_url: '60x60'}}'" title="{{ pocket_product.title }}" alt="{{ pocket_product.title }}" class="thumbnail{% if product.id == pocket_product.id %} selected-thumb{% endif %}" data-handle="{{ pocket_product.handle }}" data-image-360x="{{ pocket_product.featured_image | img_url: '360x360' }}" />
+                  <img src="{{pocket_product.images.first.src | img_url: '100x100'}}'" title="{{ pocket_product.title }}" alt="{{ pocket_product.title }}" class="thumbnail{% if product.id == pocket_product.id %} selected-thumb{% endif %}" data-handle="{{ pocket_product.handle }}" data-image-360x="{{ pocket_product.featured_image | img_url: '360x360' }}" />
                 {% endif %}
               {% endfor %}
             {% endfor %}

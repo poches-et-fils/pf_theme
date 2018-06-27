@@ -96,6 +96,17 @@ figcaption {
 
 
 .w-nav-link { font-weight: 500; }
+
+.w-nav[data-collapse="medium"] .w-nav-button {
+  display: none !important;
+}
+
+@media (max-width: 900px) {
+  .w-nav[data-collapse="medium"] .w-nav-button {
+  display: block !important;
+}
+}
+
 .project-hero-copy {
   width: 50%;
   padding-top: 60px;
@@ -761,9 +772,9 @@ a.button.wide-text.full-caps:hover { box-shadow: 0 0 transparent; }
 
 .nav--container {
   display: block;
-  width: 60%;
-  margin-right: 2%;
-  margin-left: 2%;
+  width: 80%;
+  margin-right: -6%;
+  margin-left: -6%;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;

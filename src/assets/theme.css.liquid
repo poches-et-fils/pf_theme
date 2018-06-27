@@ -1765,6 +1765,10 @@ font-weight: bold;
   text-decoration: none;
 }
 
+.sidebar--link:hover {
+  color: #4b9e84;
+}
+
 .sidebar--link.w--current {
   font-weight: bold;
 }
@@ -2082,6 +2086,7 @@ html.w-mod-js *[data-ix="page-popupoad"] {
     -ms-flex-order: -1;
     order: -1;
   }
+
   .menu-button {
     float: left;
   }
@@ -2834,6 +2839,11 @@ ul.colors-container li {
   width: 25px;
   border-radius: 50%;
   border: 1px solid rgba(128, 128, 128, 0.49);
+  transition: 0.3s;
+}
+
+ul.colors-container li:hover {
+  opacity: 0.5;
   transition: 0.3s;
 }
 

@@ -15,7 +15,7 @@
     <h4 class="sidebar--heading">Shop</h4>
 
     <div class="sidebar--links--block">
-      <div class="nav-section">
+      <div class="nav-section" style="margin-bottom: 10px;">
         <a id="top-link" href="/collections/{{ collection.handle }}/tops">Tops</a>
         <a id="sub-link" href="/collections/{{ collection.handle }}/tshirt">T-Shirts</a>
         {% if collection.handle == "men" or collection.handle == "women" %}
@@ -27,14 +27,14 @@
         {% endif %}
       </div>
       {% if collection.handle == "men" %}
-        <div class="nav-section">
+        <div class="nav-section" style="margin-bottom: 10px;">
           <a id="top-link" href="/collections/{{ collection.handle }}/bottoms">Bottoms</a>
           <a id="sub-link" href="/collections/{{ collection.handle }}/boxers">Boxers</a>
         </div>
       {% endif %}
 
       {% if collection.handle == "men" or collection.handle == "women" %}
-        <div class="nav-section">
+        <div class="nav-section" style="margin-bottom: 10px;">
           <a id="top-link" href="#">Accessories</a>
           <a id="sub-link" href="/collections/socks">Unisex Socks</a>
           <a id="sub-link" href="/collections/phonecase">Phone Cases</a>
@@ -250,6 +250,10 @@
     width: 100%;
     display: block;
     text-decoration: none;
+  }
+  
+  #top-link:hover {
+    color: #4b9e84;
   }
 
   #sub-link {

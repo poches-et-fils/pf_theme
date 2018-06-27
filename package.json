@@ -3,5 +3,9 @@
   "version": "0.0.1",
   "devDependencies": {
     "@shopify/slate-tools": "0.13.0"
+  },
+  "dependencies": {
+    "@shopify/slate": "^0.14.0",
+    "global": "^4.3.2"
   }
 }

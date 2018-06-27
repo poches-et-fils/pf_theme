@@ -103,8 +103,8 @@
             <div class="toggle--item">
               <div class="toggle--activation" data-ix="toggle-interaction">
                 <h4 class="toggle--heading">{{ article.title }}</h4>
-                <img src="images/minus.svg" class="toggle--icon--minus" data-ix="originally-hidden">
-                <img src="images/plus.svg" class="toggle--icon--plus"></div>
+                <img src="https://cdn.shopify.com/s/files/1/0013/6685/1647/files/minus.svg" class="toggle--icon--minus" style="display: none">
+                <img src="https://cdn.shopify.com/s/files/1/0013/6685/1647/files/plus.svg" class="toggle--icon--plus"></div>
               <div class="toggle--contents">
 
                 <p>
@@ -156,12 +156,13 @@
               const container = $(event.target).closest('.toggle--item')
               const otherToggles = $('.toggle--item').not(container)
 
-              container.find('.toggle--contents').toggle()
-              container.find('img.toggle--icon--plus').css('transform', 'rotate(-45deg)')
+              container.find('.toggle--contents').toggle("fast")
+              container.find('img.toggle--icon--plus').toggle()
+              container.find('img.toggle--icon--minus').toggle()
 
               otherToggles.find('.toggle--contents').hide()
-              otherToggles.find('img.toggle--icon--plus').css('transform', 'rotate(0deg)')
             }
+
 
             $(document).ready(_ => {
               $(document).on('click', '.toggle--activation', toggleProductInfo)

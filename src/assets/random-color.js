@@ -1,11 +1,13 @@
 const getRandColor = _ => {
-  const colors = ['dad7ff', 'b8ffe1', 'ffcdd3', 'fff7dc', 'cee7e5']
-  return `#${colors[Math.floor(Math.random() * colors.length)]}c2`
-}
+  const colors = ["f9f9f9", "f9f9f9", "f9f9f9", "f9f9f9", "f9f9f9"];
+  return `#${colors[Math.floor(Math.random() * colors.length)]}c2`;
+};
 
 const fillBg = _ => {
-  const itemsContainer = $('.random-colored-bg')
-  itemsContainer.map((i, item) => $(item).css('background-color', getRandColor()))
-}
+  const itemsContainer = $(".random-colored-bg");
+  itemsContainer.map((i, item) =>
+    $(item).css("background-color", getRandColor())
+  );
+};
 
-$(document).ready(fillBg)
+$(document).ready(fillBg);

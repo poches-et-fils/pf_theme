@@ -13,8 +13,8 @@
         <div class="home--slider {% if forloop.index == 1 %}one{% elsif forloop.index == 2 %}two{%else%}three{%endif%} w-slide"{% if block.settings.color %} style="background-color: {{block.settings.color}};" {%endif%}>
           <div class="slider--image--overlay" style="{% if block.settings.bg-position != 'center' %}background-image: url('{{block.settings.image | img_url: '1000x1000'}}');{% endif %}{% if block.settings.bg-position == 'left' %}background-position: left;{% endif %}{% if block.settings.bg-position == 'right' %}background-position: right;{% endif %}{% if block.settings.bg-position == 'fill' %}background-size: cover;{% endif %}">
             <div class="slider--content {% if block.settings.bg-position == 'left' %}slider--content--right{% endif %}{% if block.settings.bg-position == 'right' %}slider--content--left{% endif %}{% if block.settings.bg-position == 'center' or block.settings.bg-position == 'fill' %}slider--content--center{% endif %}">
-              <h1 class="slider--heading--main"  style="font-size: 55px;font-weight: 500;color: #fff;text-transform: uppercase;"> {{ block.settings.heading }}</h1>
-              <h3 class="slider--heading--text" style="font-size: 20px;color: #fff;"> {{ block.settings.subtitle }}</h3>
+              <h1 class="slider--heading--main"  style=""> {{ block.settings.heading }}</h1>
+              <h3 class="slider--heading--text" style=""> {{ block.settings.subtitle }}</h3>
               {% if block.settings.btn %}
                 <a href="{{block.settings.url}}" style="background-color: rgba(255, 255, 255, 0.2);font-weight: 500;" class="slider--button--main w-button">{{block.settings.btn}}</a>
               {%endif%}
@@ -50,32 +50,6 @@ color: #000;
   }
   .slider--container {height: 60vh!important;}
 
-  .slider--content {
-    position: absolute;
-  }
-  .slider--content--right {
-    text-align: right;
-    right: 5%;
-  }
-  .slider--content--left {
-    text-align: left;
-    left: 5%;
-  }
-  .slider--content--center {
-    text-align: center;
-    right: 0;
-    left: 0;
-    width: 100%;
-  }
-
-  .slider--heading--main {
-    font-size: 48px !important;
-  }
-
-  .slider--heading--text {
-    font-size: 24px !important;
-  }
-
   a.slider--button--main.w-button {
     font-size: 18px !important;
   }
@@ -86,6 +60,21 @@ color: #000;
 
   .slider--image--overlay.centered {
     background-size: 280px;
+  }
+
+  @media (max-width: 796px) {
+    .slider--image--overlay {
+      justify-content: baseline!important;
+      background-position: bottom!important;
+    }
+    .slider--content {
+      float: none;
+      width: 100%;
+      text-align:center!important;
+      right: 0;
+      left: 0;
+      top: 2%;
+    }
   }
 
   @media (max-width: 796px) {

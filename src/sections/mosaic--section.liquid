@@ -4,8 +4,8 @@
   <div class="section--mosaic--blocks">
     <h1 class="section--title--heading bold--caps">{{section.settings.heading}}</h1>
     <div class="section--mosaic--container">
-     
-     
+
+
       <div class="section--mosaic--left" style="background-image: url('{{section.settings.mosaicleftimg | img_url: 'master' }}');">
         <a href="{{section.settings.linkleft}}" class="mosaic--overalay w-inline-block">
           <h1 class="section--mosaic--text">{{section.settings.mosaicleft}}</h1>
@@ -47,15 +47,18 @@
 
 <style>
   @media (max-width: 796px) {
-  
-    
+
+
     .section--mosaic--container {flex-direction:column}
     .section--mosaic--left {width:100%!important;}
     .section--mosaic--right {width:100%!important;width: 100%;height: 1200px;}
   }
+  @media (max-width: 479px) {
+    .section--mosaic--right {height: auto;}
+  }
 </style>
 
-    
+
 {% schema %}
 {
   "name": "Mosaic  Blocks",

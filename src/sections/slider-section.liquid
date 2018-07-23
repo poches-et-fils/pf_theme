@@ -10,24 +10,32 @@
     <div class="w-slider-mask">
       {% for block in section.blocks %}
         <div class="home--slider w-slide
-              {% if forloop.index == 1 %} one {% elsif forloop.index == 2 %} two {%else%} three {% endif %}"
-              {% if block.settings.color %} style="background-color: {{block.settings.color}} ;" {% endif %}>
+          {% if forloop.index == 1 %} one {% elsif forloop.index == 2 %} two {%else%} three {% endif %}"
+          {% if block.settings.color %} style="background-color: {{block.settings.color}} ;" {% endif %}
+        >
 
-          <div class="slider--image--overlay" style="background-image: url('{{block.settings.image | img_url: "1000x1000"}}');">
-            <div class="slider--content
-              {% if block.settings.bg-position == 'left' %} slider--content--right {% endif %}
-              {% if block.settings.bg-position == 'right' %} slider--content--left {% endif %}
-              {% if block.settings.bg-position == 'center' or block.settings.bg-position == 'fill' %} slider--content--center {% endif %}"
-            >
-              <h1 class="slider--heading--main"  style=""> {{ block.settings.heading }}</h1>
-              <h3 class="slider--heading--text" style=""> {{ block.settings.subtitle }}</h3>
+          <div class="slider--content
+            {% if block.settings.bg-position == 'left' %} slider--content--right {% endif %}
+            {% if block.settings.bg-position == 'right' %} slider--content--left {% endif %}
+            {% if block.settings.bg-position == 'center' or block.settings.bg-position == 'fill' %} slider--content--center {% endif %}"
+          >
+            <h1 class="slider--heading--main"  style=""> {{ block.settings.heading }}</h1>
+            <h3 class="slider--heading--text" style=""> {{ block.settings.subtitle }}</h3>
 
-              {% if block.settings.btn %}
-                <a href="{{block.settings.url}}" class="slider--button--main w-button">{{block.settings.btn}}</a>
-              {%endif%}
+            {% if block.settings.btn %}
+            <a href="{{block.settings.url}}" class="slider--button--main slider--button--large w-button">{{block.settings.btn}}</a>
+            {%endif%}
 
-            </div>
           </div>
+
+          <div class="slider--image--container
+            {% if block.settings.bg-position == 'left' %} slider--image--container--left {% endif %}
+            {% if block.settings.bg-position == 'right' %} slider--image--container--right {% endif %}
+            {% if block.settings.bg-position == 'center' or block.settings.bg-position == 'fill' %} slider--image--container--center {% endif %}"
+          >
+            <img class="slider--image" src="{{ block.settings.image | img_url: '1000x1000' }}">
+          </div>
+
         </div>
       {%endfor%}
     </div>

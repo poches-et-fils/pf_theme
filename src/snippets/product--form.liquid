@@ -28,45 +28,18 @@
           </div>
         </div>
 
-        <div class="product--form--selector sizing">
-          <div class="variant--selector--bar w-clearfix">
-            <div class="selector--heading--left">
-              <strong>Size:</strong> 
-              <span class="selector--heading--right nofloat"><a href="#" target="_BLANK" class="sizeguide-link">size guide</a></span>
-            </div>
-          </div>
-          <div class="product--design--selector--grid">
-            <div class="product--size--selector">XS</div>
-            <div class="product--size--selector">S</div>
-            <div class="product--size--selector">M</div>
-            <div class="product--size--selector">L</div>
-            <div class="product--size--selector">XL</div>
-            <div class="product--size--selector">XXL</div>
-          </div>
-        </div>
-
-        {% assign color_option_position = false %}
-        {% assign color_list = 'Black' | split: ',' %}
-        {% for product_option in product.options_with_values %}
-          {% if product_option.name == 'Color' %}
-            {% assign color_option_position = product_option.position %}
-            {% assign color_list = product_option.values %}
-          {% endif %}
-        {% endfor %}
-
-        {% if color_option_position %}
+        {% if product.options.first.name == "Size" %}
           <div class="product--form--selector sizing">
             <div class="variant--selector--bar w-clearfix">
               <div class="selector--heading--left">
-                <strong>Color:</strong>
-                <span class="current-color"></span>
+                <strong>Size:</strong> 
+                <span class="selector--heading--right nofloat"><a href="#" target="_BLANK" class="sizeguide-link">size guide</a></span>
               </div>
-              <br>
-              <ul class="colors-container">
-                {% for color in color_list %}
-                  <li title="{{ color }}"></li>
-                {% endfor %}
-              </ul>
+            </div>
+            <div class="product--design--selector--grid">
+              {% for size_option in product.options.first.values %}
+                <div class="product--size--selector">{{ size_option }}</div>
+              {% endfor %}
             </div>
           </div>
         {% endif %}
@@ -301,103 +274,6 @@
   }
 </style>
 <script type="text/javascript">
-$(document).ready(function () {
-  var productType = window.poches.filters.helper.gup('type');
-  var productGender = window.poches.filters.helper.gup('gender');
-  var productColor = window.poches.filters.helper.gup('color');
-  var availableColors = [];
-
-  var variants = JSON.parse($('script[data-product-json]').html()).variants;
-  for(var i = 0;i < variants.length; i++) {
-    if(variants[i].option1 == productGender && variants[i].option3 == productType) {
-      availableColors.push(variants[i].option2);
-    }
-  }
-  $('.colors-container li').each(function () {
-    if(!availableColors.includes($(this).attr('title'))) {
-      $(this).hide();
-    }
-  });
-  $('.current-color').text(productColor);
-
-  $('.product--form--atc').click(function (e) {
-    e.preventDefault();
-    $('.cart-error').text('');
-    if($(this).val() == $(this).attr('data-wait')) {
-      $('.cart-error').text('Please wait...');
-    } else if($('.product--size--selector.selected').text() == '') {
-      $('.cart-error').text('Please select a size.');
-    } else {
-      var variant_id = false;
-      for(var i = 0;i < variants.length; i++) {
-        if(variants[i].option1 == productGender && variants[i].option2 == productColor && variants[i].option3 == productType) {
-          variant_id = variants[i].id;
-          break;
-        }
-      }
-      if(!variant_id) {
-        $('.cart-error').text('Invalid product...');
-      } else {
-        $('.product--form--atc').attr('data-orig-value', $('.product--form--atc').val());
-        $('.product--form--atc').val($(this).attr('data-wait'));
-        $.post('/cart/add.js', {
-          'id': variant_id,
-          'quantity': $('.product--form--qty--selector').val(),
-          'properties': {
-            'size': $('.product--size--selector.selected').text()
-          }
-        })
-        .error(function(err) {
-          $('.product--form--atc').val($('.product--form--atc').attr('data-orig-value'));
-          console.log('error!');
-          window.err = err;
-          $('.cart-error').text(JSON.parse(err.responseText)['description']);
-        })
-        .complete(function(data) {
-          if (data.status === 200) {
-            toggleCart();
-          } else if(data.status === 422) {
-            $('.cart-error').text(data['description']);
-          } else {
-            $('.cart-error').text('An error has occurred, please try again.');
-          }
-          $('.cart-error').val($(this).attr('data-orig-value'));
-        });
-      }
-    }
-  });
-
-
-  $('ul.colors-container li').click(function () {
-    window.poches.filters.helper.uups('color', $(this).attr('title'));
-    productColor = $(this).attr('title');
-    $('.current-color').text(productColor);
-    getModels();
-  });
-
-  $('.product--size--selector').click(function () {
-    $('.product--size--selector.selected').removeClass('selected');
-    $(this).addClass('selected');
-  });
-
-  var updateDisplayPrice = function() {
-    // get display price for variants json
-    var price = '0.00';
-    var variant_id = false;
-    for(var i = 0;i < variants.length; i++) {
-      if(variants[i].option1 == productGender && variants[i].option2 == productColor && variants[i].option3 == productType) {
-        variant_id = variants[i].id;
-        price = variants[i]['price'];
-        break;
-      }
-    }
-    if(String(price).indexOf(".")==-1) {
-      price = (price / 100).toFixed(2);
-    }
-    $('.product--variant--price-amount').html(window.currencySymbol + price);
-  }
-  updateDisplayPrice();
-
   var switchProduct = function (newHandle) {
     var newUrl = window.location.href.replace($('.selected-thumb').attr('data-handle'), newHandle);
     $('.selected-thumb').removeClass('selected-thumb');

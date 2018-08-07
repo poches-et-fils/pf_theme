@@ -1,58 +1,11 @@
-{% assign filter_gender_tag = "" %}
-{% if collection.handle == "men" %}
-  {% assign filter_gender_tag = ' data-filter-gender="Men"' %}
-{% endif %}
-{% if collection.handle == "women" %}
-  {% assign filter_gender_tag = ' data-filter-gender="Women"' %}
-{% endif %}
-{% if collection.handle == "kid" %}
-  {% assign filter_gender_tag = ' data-filter-gender="Kid"' %}
-{% endif %}
-{% if collection.handle == "baby" %}
-  {% assign filter_gender_tag = ' data-filter-gender="Baby"' %}
-{% endif %}
-{% if collection.handle == "youth" %}
-  {% assign filter_gender_tag = ' data-filter-gender="Kid,Baby"' %}
-{% endif %}
-{% if collection.handle == 'pockets' %}
-  {% assign filter_gender_tag = ' data-filter-gender="Men,Women,Kid,Baby"' %}
-{% endif %}
-
-{% if filter_gender_tag == '' %}
-  {% assign filter_gender_tag = ' data-filter-gender="no-match"' %}
-{% endif %}
-
-{% assign filter_type_tag = "" %}
-{% if current_tags contains "tops" %}
-  {% assign filter_type_tag = ' data-filter-type="T-Shirt,Sweatshirt,Tank-Top,V-Neck"' %}
-{% endif %}
-{% if current_tags contains "tshirt" %}
-  {% assign filter_type_tag = ' data-filter-type="T-Shirt"' %}
-{% endif %}
-{% if current_tags contains "sweatshirt" %}
-  {% assign filter_type_tag = ' data-filter-type="Sweatshirt"' %}
-{% endif %}
-{% if current_tags contains "tanktop" %}
-  {% assign filter_type_tag = ' data-filter-type="Tank-Top"' %}
-{% endif %}
-{% if current_tags contains "vneck" %}
-  {% assign filter_type_tag = ' data-filter-type="V-Neck"' %}
-{% endif %}
-
-{% if filter_type_tag == '' and current_tags.size == 1 %}
-  {% assign filter_type_tag = ' data-filter-type="no-match"' %}
-{% endif %}
-
-
 <div id="MainContent" class="container product-grid-filters"{{ filter_type_tag }}{{ filter_gender_tag }} data-filter-tags="{{ current_tags | join: ',' }}" data-filter-collection="{{ collection.handle }}">
-  {% for i in (1..12) %}
-    <a href="#" class="product--skeleton product--grid--item--four three--row w-inline-block" style="cursor:default;" title="Loading...">
+  {% for product in collection.products %}
+    <a href="{{ product.url }}" class="product--skeleton product--grid--item--four three--row w-inline-block">
       <div class="product--grid--item--image" style="background-color: rgba(230,230,230, 0.75);">
-        <div class="product--grid--item--variant--overlay" style="background-image:none; "></div>
+        <div class="product--grid--item--variant--overlay" style="background-image: url('{{ product | img_url: 'x630' }}'); "></div>
       </div>
-      <h5 class="product--grid--item--title">Loading...</h5>
-      <div>$x.xx</div>
-      <div class="light-gray"><u><small>See more styles</small></u></div>
+      <h5 class="product--grid--item--title">{{ product.title }}</h5>
+      <div>{{ product.price | money }}</div>
     </a>
   {% endfor %}
 </div>

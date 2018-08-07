@@ -12,13 +12,9 @@
     </div>
 
     <div class="collection--main">
-      {% if collection.title contains 'All' %}
-      {% section 'collection--design' %}
-      {% else %}
       {% section 'collection--sidebar' %}
       {% assign collection = collections.all %}
       {% section 'collection--section' %}
-      {%endif%}
     </div>
   </div>
   

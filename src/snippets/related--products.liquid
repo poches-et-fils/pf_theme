@@ -5,8 +5,6 @@
   <div class="related--product--grid--block"></div>
 </div>
 
-{%- comment -%}Mobile CSS Overrides {%- endcomment -%}
-
 <style>
 
   /* Corrects size and postion of pockets on mobile */
@@ -40,25 +38,7 @@
   }
 </style>
 
-
-<script>
-  const fillRelatedProducts = _ => {
-    const handle = '{{ product.handle }}';
-    $.getJSON(`${handle}.js`, product => {
-      const variants = product.variants
-      const relatedContainer = $('.related--product--grid--block')
-      let counter = 0
-      while (counter < 4) {
-        counter ++
-        const random  	= Math.floor(Math.random() * (variants.length - 1) + 1)
-        const variant 	= variants[random]
-        let urlParams 	= variant.options
-        urlParams 		= urlParams.map(param => param = `param=${param}`)
-        const randomModel = getRandImg(urlParams, false) || ''
-        
-                  
-        
-        const newElement 	= `
+{% comment %}
           <a href="?gender=${variant.options[0]}&type=${variant.options[2]}&color=${variant.options[1]}"
           class="product--grid--item--four w-inline-block"
           data-quickadd-info
@@ -87,20 +67,5 @@
           </h5>
           <div>${ window.currencySymbol + (variant.price/100).toFixed(2) }</div>
           {% comment %} <div class="product--grid--item--link">See more styles</div> {% endcomment %}
-          </a>`
-        
-        if (randomModel) {
-          relatedContainer.append(newElement)
-        }
-        variants.splice(random, 1)
-      }
-      fillBg()
-
-      $('.related--product--pocket').each(function () {
-        window.positionPocket($(this), $(this).attr('data-pocket-gender'), $(this).attr('data-pocket-type'));
-      });
-    })
-  }
-
-  $(document).ready(fillRelatedProducts)
-</script>
+          </a>
+{% endcomment %}

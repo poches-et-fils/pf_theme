@@ -7,12 +7,7 @@
 // Product--normal: is for all other products. 
 {%- endcomment -%}
 
-{% if product.type == 'Pocket' %}
-  {% include 'product-api' %}
-  {% section 'product--pocket' %}
-{%else%}
-  {% section 'product--normal' %}
-{%endif%}
+{% section 'product' %}
 
 <br>
 <h2 class="text-center" style="display:block;font-weight: 600">ALSO LOOKS GOOD ON</h2>

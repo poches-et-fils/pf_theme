@@ -4,38 +4,46 @@
     <div class="js--cart--details">
       <div class="close--popup" data-ix="close-news-popup">{% include 'icon-close' %}</div>
 
-      <h5 class="js--popup--heading">Win the entire stock collection!</h5>
+      <h5 class="js--popup--heading">
+        {{ 'homepage.newsletter_popup.title' | t }}
+      </h5>
 
-      <p class="js--popup--paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.</p>
+      <p class="js--popup--paragraph">
+        {{ 'homepage.newsletter_popup.description' | t }}
+      </p>
 
       <div class="form--block--widen">
         <div class="w-form js--popup--form">
-
           {% form 'customer' %}
-          {{ form.errors | default_errors }}
-          {% if form.posted_successfully? %}
-          <p class="form--success">{{section.settings.success}}</p>
-          {%else%}
-          <input type="hidden" name="contact[tags]" value="newsletter">
-          <input type="email" 
-                 class="js--popup--input w-input"
-                 name="contact[email]"
-                 id="Email"
-                 class="section-settings--field w-input" 
-                 maxlength="256" 
-                 value="{% if customer %}{{ customer.email }}{% endif %}"
-                 placeholder="Enter your email" 
-                 autocorrect="off"
-                 autocapitalize="off"
-                 required="">
+            {{ form.errors | default_errors }}
 
-          <input type="submit" 
-                 id="Subscribe"
-                 data-wait="Please wait..." 
-                 class="section--newsletter--button w-button">
-          {% endif %}
+            {% if form.posted_successfully? %}
+              <p class="form--success">{{section.settings.success}}</p>
+            {% else %}
+              <input type="hidden" name="contact[tags]" value="newsletter">
+              <input 
+                type="email" 
+                class="js--popup--input w-input"
+                name="contact[email]"
+                id="Email"
+                class="section-settings--field w-input" 
+                maxlength="256" 
+                value="{% if customer %}{{ customer.email }}{% endif %}"
+                placeholder="{{ 'homepage.newsletter_popup.email_placeholder' | t }}" 
+                autocorrect="off"
+                autocapitalize="off"
+                required=""
+              >
+
+              <input 
+                type="submit" 
+                id="Subscribe"
+                value="{{ 'homepage.newsletter_popup.button_text' | t }}"
+                data-wait="{{ 'homepage.newsletter_popup.loading_text' | t }}" 
+                class="section--newsletter--button w-button"
+              >
+            {% endif %}
           {% endform %}
-
         </div>
       </div>
     </div>

@@ -2,7 +2,8 @@
   "name": "poches-et-fils",
   "version": "0.0.1",
   "scripts": {
-    "watch": "slate watch"
+    "watch": "slate watch",
+    "build": "slate build"
   },
   "devDependencies": {
     "@shopify/slate-tools": "0.13.0"

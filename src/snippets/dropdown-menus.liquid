@@ -3,42 +3,40 @@
     <div class="dropdown-content main {{ link.title }}">
       <div class="navigation--dropdown--block">
         <div class="navigation--content--block">
-          <div class="navigation--dropdown--block--item nopadding">
-            <div class="navigation--image--block">
-              {% if link.title == "Men" %}
-                <img src="{{section.settings.menimg | img_url: '1000x1000'}}" 
-                    width="200"
-                    height="200"
-                    sizes="(max-width: 991px) 100vw, 114px" 
-                    class="image" />
-              {% endif %}
-              {% if link.title == "Women" %}
-                <img src="{{section.settings.womenimg | img_url: '1000x1000'}}" 
-                    width="200"
-                    height="200"
-                    sizes="(max-width: 991px) 100vw, 114px" 
-                    class="image" />
-              {% endif %}
-              {% if link.title == "Youth" %}
-                <img src="{{section.settings.youthimg | img_url: '1000x1000'}}" 
-                    width="200"
-                    height="200"
-                    sizes="(max-width: 991px) 100vw, 114px" 
-                    class="image" />
-              {% endif %}
-            </div>
+          <div class="navigation--image--item">
+            {% if link.title == "Men" %}
+              <img src="{{section.settings.menimg | img_url: '1000x1000'}}"
+                  width="200"
+                  height="200"
+                  sizes="(max-width: 991px) 100vw, 114px"
+                  class="image" />
+            {% endif %}
+            {% if link.title == "Women" %}
+              <img src="{{section.settings.womenimg | img_url: '1000x1000'}}"
+                  width="200"
+                  height="200"
+                  sizes="(max-width: 991px) 100vw, 114px"
+                  class="image" />
+            {% endif %}
+            {% if link.title == "Youth" %}
+              <img src="{{section.settings.youthimg | img_url: '1000x1000'}}"
+                  width="200"
+                  height="200"
+                  sizes="(max-width: 991px) 100vw, 114px"
+                  class="image" />
+            {% endif %}
           </div>
 
           {% for sub_link in link.links %}
-            <div class="navigation--dropdown--block--item">
-              <a href="{{ sub_link.url }} " class="navigation--link main">{{ sub_link.title }}</a>
+          <div class="navigation--dropdown--block--item">
+            <a href="{{ sub_link.url }} " class="navigation--link main">{{ sub_link.title }}</a>
 
-              {% for sub_sub_link in sub_link.links %}
-                <a href="{{ sub_sub_link.url }}" class="navigation--link sub">{{ sub_sub_link.title }}</a>
-              {% endfor %}
-            </div>
+            {% for sub_sub_link in sub_link.links %}
+              <a href="{{ sub_sub_link.url }}" class="navigation--link sub">{{ sub_sub_link.title }}</a>
+            {% endfor %}
+          </div>
           {% endfor %}
-          
+
           <div class="navigation--dropdown--block--item">
             <a href="{{ link.url }}" class="navigation--link main">Designs</a>
             <a href="{{ link.url }}?design_type=random" class="navigation--link sub">Random</a>
@@ -48,7 +46,7 @@
             <a href="{{ link.url }}?design_type=sports" class="navigation--link sub">Sports</a>
             <a href="{{ link.url }}?design_type=collaboration" class="navigation--link sub">Collaborations</a>
           </div>
-          
+
           <div class="navigation--dropdown--block--item">
             <a href="{{ link.url }}" class="navigation--link sub">See all styles</a></div>
         </div>
@@ -58,65 +56,8 @@
 </div>
 
 <style>
-  
-  .navigation--dropdown--block--item.nopadding {padding:0px; margin-right: 12px;}
-  
-  /* The container <div> - needed to position the dropdown content */
-  .dropdown {
-    position: relative;
-    display: block;
-    width: 100%;
-  }
-  
- .navigation--link.sub:hover {color: #4b9e84;}
 
-  /* Dropdown Content (Hidden by Default) */
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    width: inherit;
-    max-height: 230px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1000;
-  }
 
-  /* Links inside the dropdown */
-  .dropdown-content a {
-    color: black;
-    text-decoration: none;
-    display: block;
-  }
-
-  /* Show the dropdown menu on hover */
-  .dropdown:hover .dropdown-content { display: block; }
-  
-  .navigation--dropdown--block--item {
-   padding-top: 16px;
-    padding-bottom: 16px;
-  }
-
-  .navigation--content--block { 
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: left;
-    align-items: flex-start;
-  }
-  
-  /* Full-width Dropdown */
-  .navigation--dropdown--block { width: inherit; }
-  
-  .navigation--dropdown--block--item { flex-basis: 15%; }
-  
-  a.navigation--link.main { font-weight: bold; }
-  
-  .dropdown-content:hover { display: flex; }
-  
-  .w-nav-link { 
-    color: black;
-    transition: 0.3s;
-  }
-  .w-nav-link:hover { transition: 0.3s; }
 </style>
 
 <script>
@@ -124,32 +65,31 @@
     const maintainOpen = element => {
       element.mouseleave(_ => element.hide())
     }
-    
+
     const showDrop = event => {
       const selectedDrop = $(event.target)
       const selectedMenu = selectedDrop.text()
       const dropdowns	 = $('.dropdown-content') || false
       const dropElement	 = $(`.dropdown-content.main.${selectedMenu}`) || false
-      
+
       $('.w-nav-link').not(selectedDrop).css('opacity', 0.4)
-      
+
       if (dropElement) {
 		dropElement.css('display', 'flex')
         dropdowns.not(dropElement).hide()
         maintainOpen(dropElement)
       }
     }
-    
+
     const highlightLabels = event => {
       const selectedDrop = $(event.target)
       const menus		 = $('.w-nav-link')
-      
+
       menus.css('opacity', 1)
     }
-    
+
     $(document).ready(_ => {
       $('a.w-nav-link').hover(showDrop, highlightLabels)
     })
   })()
 </script>
-

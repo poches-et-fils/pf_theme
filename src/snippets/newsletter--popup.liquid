@@ -1,9 +1,13 @@
-<div class="page--popup--section" data-ix="page-popupoad">
+<div class="page--popup--section newsletter--popup" data-ix="page-popupoad">
   <div class="js--popup">
     <div class="js--cart--image"></div>
     <div class="js--cart--details">
+      <div class="close--popup" data-ix="close-news-popup">{% include 'icon-close' %}</div>
+
       <h5 class="js--popup--heading">Win the entire stock collection!</h5>
-      <p class="js--popup--paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. </p>
+
+      <p class="js--popup--paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.</p>
+
       <div class="form--block--widen">
         <div class="w-form js--popup--form">
 
@@ -36,7 +40,6 @@
       </div>
     </div>
   </div>
-  <div class="close--popup" data-ix="close-news-popup">X Close</div>
 </div>
 
 <style>
@@ -74,8 +77,16 @@
       localStorage.setItem('lastTimeSeen', new Date().getTime())
     }
 
-    $(document).on('click', '.close--popup, input#Subscribe', hideBanner)
+    $(document).on('click', '.close--popup, input#Subscribe, .dark-overlay', hideBanner)
     $(document).ready(checkLastTimeSeen)
+
+    $(document).on('click', '.page--popup--section', function(e) {
+      if (e.target !== this) {
+        return;
+      }
+
+      hideBanner();
+    })
   })()
 </script>
 

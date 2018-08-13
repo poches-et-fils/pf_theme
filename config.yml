@@ -15,7 +15,14 @@
 
 development:
   password: f70b440e90ecee3a754b2af0293b772d
-  theme_id: live
+  theme_id: "32782352447"
+  store: poches-development-mica.myshopify.com
+  ignore_files:
+    - settings_data.json
+
+development-live:
+  password: f70b440e90ecee3a754b2af0293b772d
+  theme_id: "12683640895"
   store: poches-development-mica.myshopify.com
   ignore_files:
     - settings_data.json

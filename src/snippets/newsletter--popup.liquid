@@ -56,25 +56,24 @@
 
 <script>
   (function () {
-
     const checkLastTimeSeen = _ => {
       const sevenDaysAgo = new Date(Date.now()-(1000 * 60 * 60 * 24 * 7)).getTime()
       const lastTimeSeen = localStorage.getItem('lastTimeSeen')
       
       if (sevenDaysAgo > lastTimeSeen || !lastTimeSeen ) {
-        //console.log('Last time > 7 days OR it is the first time. Displaying.')
         toggleBanner('open')
       } else {
-        console.log('Under 7 days. Leave closed.')
         toggleBanner('close')
       }
     }
     
     const toggleBanner = shouldDisplay => {
-      const overlay = $('.dark-overlay, .page--popup--section')
-      
+      const overlay = $('.dark-overlay, .page--popup--section');
+
       if (shouldDisplay === 'open') {
-        overlay.css({'display': 'flex', 'opacity': 1})
+        setTimeout(() => {
+          overlay.css({'display': 'flex', 'opacity': 1});
+        }, 10000);
       } else {
         overlay.css({'display': 'none', 'opacity': 0})
       }

@@ -1,21 +1,33 @@
- 
+
   <div class="section--promotions w-clearfix">
     <div class="promotion--left" style=" background-image: url('{{ section.settings.bgimg1 | img_url: '1000x1000' }}');">
-      <div class="slider--content {% if section.settings.bg-position1 == 'left' %}slider--content--right{% endif %}{% if section.settings.bg-position1 == 'right' %}slider--content--left{% endif %}{% if section.settings.bg-position1 == 'center' or section.settings.bg-position1 == 'fill' %}slider--content--center{% endif %}">
+      <div class="promotion--content
+        {% if section.settings.bg-position1 == 'left' %} promotion--content--right {% endif %}
+        {% if section.settings.bg-position1 == 'right' %} promotion--content--left {% endif %}
+        {% if section.settings.bg-position1 == 'center' or section.settings.bg-position1 == 'fill' %} promotion--content--center {% endif %}">
+
         <h1 class="slider--heading--main"  style="font-size: 55px;font-weight: 500;color: #fff;text-transform: uppercase;"> {{ section.settings.heading1 }}</h1>
-        <h3 class="slider--heading--text" style="font-size: 20px;color: #fff;"> {{ section.settings.subtitle1 }}</h3>
+        <h3 class="slider--heading--text"> {{ section.settings.subtitle1 }}</h3>
+
         {% if section.settings.btn1 %}
           <a href="{{section.settings.link1}}" style="background-color: rgba(255, 255, 255, 0.2);font-weight: 500;" class="slider--button--main w-button">{{section.settings.btn1}}</a>
         {%endif%}
+
       </div>
     </div>
     <div class="promotion--right"  style=" background-image: url('{{ section.settings.bgimg2 | img_url: '1000x1000' }}');">
-      <div class="slider--content {% if section.settings.bg-position2 == 'left' %}slider--content--right{% endif %}{% if section.settings.bg-position2 == 'right' %}slider--content--left{% endif %}{% if section.settings.bg-position2 == 'center' or section.settings.bg-position2 == 'fill' %}slider--content--center{% endif %}">
+      <div class="promotion--content
+        {% if section.settings.bg-position2 == 'left' %} promotion--content--right {% endif %}
+        {% if section.settings.bg-position2 == 'right' %} promotion--content--left {% endif %}
+        {% if section.settings.bg-position2 == 'center' or section.settings.bg-position2 == 'fill' %} promotion--content--center {% endif %}">
+
         <h1 class="slider--heading--main"  style="font-size: 55px;font-weight: 500;color: #fff;text-transform: uppercase;"> {{ section.settings.heading2 }}</h1>
-        <h3 class="slider--heading--text" style="font-size: 20px;color: #fff;"> {{ section.settings.subtitle2 }}</h3>
+        <h3 class="slider--heading--text"> {{ section.settings.subtitle2 }}</h3>
+
         {% if section.settings.btn2 %}
           <a href="{{section.settings.link2}}" style="background-color: rgba(255, 255, 255, 0.2);font-weight: 500;" class="slider--button--main w-button">{{section.settings.btn2}}</a>
         {%endif%}
+
       </div>
     </div>
   </div>

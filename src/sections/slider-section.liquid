@@ -1,6 +1,5 @@
 <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript" intergrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/mikhailarden/Shopify-OpenSource/1b3c1c33/Slider%20Section/slider--components.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/mikhailarden/Shopify-OpenSource/master/Slider%20Section/normalize.css">
 <script src="https://cdn.rawgit.com/mikhailarden/Shopify-OpenSource/master/Slider%20Section/components.js"> </script>
 
@@ -10,16 +9,33 @@
   <div data-delay="4000" data-animation="cross" data-autoplay="1" data-duration="500" data-infinite="1"  class="slider--section--slider w-slider">
     <div class="w-slider-mask">
       {% for block in section.blocks %}
-        <div class="home--slider {% if forloop.index == 1 %}one{% elsif forloop.index == 2 %}two{%else%}three{%endif%} w-slide"{% if block.settings.color %} style="background-color: {{block.settings.color}};" {%endif%}>
-          <div class="slider--image--overlay" style="{% if block.settings.bg-position != 'center' %}background-image: url('{{block.settings.image | img_url: '1000x1000'}}');{% endif %}{% if block.settings.bg-position == 'left' %}background-position: left;{% endif %}{% if block.settings.bg-position == 'right' %}background-position: right;{% endif %}{% if block.settings.bg-position == 'fill' %}background-size: cover;{% endif %}">
-            <div class="slider--content {% if block.settings.bg-position == 'left' %}slider--content--right{% endif %}{% if block.settings.bg-position == 'right' %}slider--content--left{% endif %}{% if block.settings.bg-position == 'center' or block.settings.bg-position == 'fill' %}slider--content--center{% endif %}">
-              <h1 class="slider--heading--main"  style="font-size: 55px;font-weight: 500;color: #fff;text-transform: uppercase;"> {{ block.settings.heading }}</h1>
-              <h3 class="slider--heading--text" style="font-size: 20px;color: #fff;"> {{ block.settings.subtitle }}</h3>
-              {% if block.settings.btn %}
-                <a href="{{block.settings.url}}" style="background-color: rgba(255, 255, 255, 0.2);font-weight: 500;" class="slider--button--main w-button">{{block.settings.btn}}</a>
-              {%endif%}
-            </div>
+        <div class="home--slider w-slide
+          {% if forloop.index == 1 %} one {% elsif forloop.index == 2 %} two {%else%} three {% endif %}"
+          {% if block.settings.color %} style="background-color: {{block.settings.color}} ;" {% endif %}
+        >
+
+          <div class="slider--content
+            {% if block.settings.bg-position == 'left' %} slider--content--right {% endif %}
+            {% if block.settings.bg-position == 'right' %} slider--content--left {% endif %}
+            {% if block.settings.bg-position == 'center' or block.settings.bg-position == 'fill' %} slider--content--center {% endif %}"
+          >
+            <h1 class="slider--heading--main"  style=""> {{ block.settings.heading }}</h1>
+            <h3 class="slider--heading--text" style=""> {{ block.settings.subtitle }}</h3>
+
+            {% if block.settings.btn %}
+            <a href="{{block.settings.url}}" class="slider--button--main slider--button--large w-button">{{block.settings.btn}}</a>
+            {%endif%}
+
           </div>
+
+          <div class="slider--image--container
+            {% if block.settings.bg-position == 'left' %} slider--image--container--left {% endif %}
+            {% if block.settings.bg-position == 'right' %} slider--image--container--right {% endif %}
+            {% if block.settings.bg-position == 'center' or block.settings.bg-position == 'fill' %} slider--image--container--center {% endif %}"
+          >
+            <img class="slider--image" src="{{ block.settings.image | img_url: '1000x1000' }}">
+          </div>
+
         </div>
       {%endfor%}
     </div>
@@ -33,76 +49,6 @@
     <div class="w-slider-nav w-shadow w-round"></div>
   </div>
 </div>
-
-{%comment%}
-Style Overrides to match merchant theme
-{%endcomment%}
-
-<style>
-  .slider--button--main:hover {
-  background-color: #fff!important;
-color: #000;
-    transition-duration: 800ms;
-  }
-
-  .w-slider {height: 60vh!important; }
-  .slider--container {height: 60vh!important;}
-
-  .slider--content {
-    position: absolute;
-  }
-  .slider--content--right {
-    text-align: right;
-    right: 5%;
-  }
-  .slider--content--left {
-    text-align: left;
-    left: 5%;
-  }
-  .slider--content--center {
-    text-align: center;
-    right: 0;
-    left: 0;
-    width: 100%;
-  }
-
-  .slider--heading--main {
-    font-size: 48px !important;
-  }
-  
-  .slider--heading--text {
-    font-size: 24px !important;
-  }
-  
-  a.slider--button--main.w-button {
-    font-size: 18px !important;
-  }
-  
-  .w-slider-nav.w-shadow.w-round {
-    display: none;
-  }
-  
-  .slider--image--overlay.centered {
-    background-size: 280px;
-  }
-  
-  @media (max-width: 796px) {
-    .slider--image--overlay {
-      justify-content: baseline!important;
-      background-position: bottom!important;
-    }
-    .slider--content {
-      float: none;
-      width: 100%;
-      text-align:center!important;
-      right: 0;
-      left: 0;
-      top: 2%;
-    }
-  }
-  
-
-</style>
 
 {% schema %}
 {
@@ -189,7 +135,7 @@ color: #000;
 "name": "Slider Slides ",
 "category": "Slider Blocks",
 "blocks": [
-{ 
+{
 "type": "select"
 },
 {

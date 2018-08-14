@@ -1,13 +1,16 @@
 <div id="MainContent" class="container product-grid-filters"{{ filter_type_tag }}{{ filter_gender_tag }} data-filter-tags="{{ current_tags | join: ',' }}" data-filter-collection="{{ collection.handle }}">
-  {% for product in collection.products %}
-    <a href="{{ product.url }}" class="product--skeleton product--grid--item--four three--row w-inline-block">
-      <div class="product--grid--item--image" style="background-color: rgba(230,230,230, 0.75);">
-        <div class="product--grid--item--variant--overlay" style="background-image: url('{{ product | img_url: 'x630' }}'); "></div>
-      </div>
-      <h5 class="product--grid--item--title">{{ product.title }}</h5>
-      <div>{{ product.price | money }}</div>
-    </a>
-  {% endfor %}
+  {% paginate collection.products by 9 %}
+    {% for product in collection.products %}
+      <a href="{{ product.url }}" class="product--skeleton product--grid--item--four three--row w-inline-block">
+        <div class="product--grid--item--image" style="background-color: rgba(230,230,230, 0.75);">
+          <div class="product--grid--item--variant--overlay" style="background-image: url('{{ product | img_url: 'x630' }}'); "></div>
+        </div>
+        <h5 class="product--grid--item--title">{{ product.title }}</h5>
+        <div>{{ product.price | money }}</div>
+      </a>
+    {% endfor %}
+    <div>{{ paginate | default_pagination }}</div>
+  {% endpaginate %}
 </div>
 
 <style>

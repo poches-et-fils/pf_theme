@@ -1,5 +1,8 @@
 .newsletter--popup {
-	.js--cart--details {
+	transition: opacity 600ms ease 0s;
+	top: 0;
+
+	.js--popup {
 		position: relative;
 	}
 

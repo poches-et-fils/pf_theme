@@ -258,7 +258,7 @@
             "on_sale": "En solde",
             "on_sale_from_html": "En solde {{ price }}",
             "from_text_html": "À partir de {{ price }}",
-            "quantity": "Quantité",
+            "quantity": "Quantité:",
             "add_to_cart": "Ajouter au panier"
         }
     },

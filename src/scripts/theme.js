@@ -20,6 +20,7 @@ window.theme = window.theme || {};
 
 /*================ Modules ================*/
 // =require modules/newsletter-popup.js
+// =require modules/add-to-cart.js
 
 $(document).ready(function() {
   var sections = new slate.Sections();

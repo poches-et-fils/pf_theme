@@ -275,8 +275,6 @@ const toggleWidth = _ => {
     'display': cartSelector.hasClass('closed--cart'),
     'opacity': cartSelector.css('opacity')
   }
-    
-  // console.log(currentCartStatus ? 'closed':'open')
   
   if (!currentCartStatus.display) {
     cartSelector.removeClass('open--cart').addClass('closed--cart')
@@ -289,6 +287,18 @@ const toggleWidth = _ => {
     'opacity': currentCartStatus.opacity > 0 ? 1:0
   })
 }
+
+const hideCart = _ => {
+  const darkOverlay = $('.dark-overlay')
+  const cartSelector = $('.ajax--cart--popout--section')
+
+  cartSelector.removeClass('open--cart').addClass('closed--cart')
+
+  darkOverlay.css({
+    'display': currentCartStatus.display ? 'block':'none',
+    'opacity': currentCartStatus.opacity > 0 ? 1:0
+  })
+};
 
 const refreshCounter = QTY => {
   const itemNumberLabel = $('.cart--items--block')
@@ -422,4 +432,5 @@ const freeShipping = currentAmount => {
 
 $(document).on('click', 'a[url="#"]', e => e.preventDefault())
 $(document).on('click', '.ajax--cart--item--quantity', updateQty)
-$(document).on('click', '.dark-overlay, *[data-keep-shopping]', toggleCart)
+$(document).on('click', '*[data-keep-shopping]', toggleCart)
+$(document).on('click', '.dark-overlay', hideCart)

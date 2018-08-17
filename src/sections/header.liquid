@@ -53,7 +53,9 @@
               {%- comment -%}navigation menu button for mobile{%- endcomment -%}
 
               <div class="menu-button w-nav-button">
-                <div class="nav--menu--icon w-icon-nav-menu"></div>
+                <div class="nav--menu--icon w-icon-nav-menu">
+                  {% include 'icon-close' %}
+                </div>
               </div>
             </div>
             <div class="nav--cart--block" onclick="toggleCart()">
@@ -86,72 +88,62 @@
 {% include 'dropdown-menus' %}
 {% schema %}
 {
-"name": "Header",
-"settings": [
-{
-"type": "image_picker",
-"id": "animg",
-"label": "Announcement Bar Background"
-},
-{
-"type": "color",
-"id": "bgcolor",
-"label": "Announcement Bar Color"
-},
-
-{
-"type": "text",
-"id": "antext",
-"label": "Announcement Bar Text"
-},
-{
-"type": "url",
-"id": "link",
-"label": "Announcement Bar Link"
-},
-
-{
-"type": "image_picker",
-"id": "logo",
-"label": "Logo image"
-},
-{
-"type": "range",
-"id": "logo_max_width",
-"min": 50,
-"max": 450,
-"step": 10,
-"unit": "px",
-"label": "Custom logo width",
-"default": 250
-},
-{
-"type": "link_list",
-"id": "left_linklist",
-"label": "Left Menu",
-"default": "main-menu"
-},
-{
-"type": "link_list",
-"id": "right_linklist",
-"label": "Right Menu",
-"default": "main-menu"
-},
-{
-"type": "image_picker",
-"id": "menimg",
-"label": "Men Dropdown image"
-},
-{
-"type": "image_picker",
-"id": "womenimg",
-"label": "Women Dropdown image"
-},
-{
-"type": "image_picker",
-"id": "youthimg",
-"label": "Youth Dropdown image"
-}
-]
+  "name": "Header",
+  "settings": [{
+    "type": "image_picker",
+    "id": "animg",
+    "label": "Announcement Bar Background"
+  }, {
+    "type": "color",
+    "id": "bgcolor",
+    "label": "Announcement Bar Color"
+  }, {
+    "type": "text",
+    "id": "antext",
+    "label": "Announcement Bar Text"
+  }, {
+    "type": "url",
+    "id": "link",
+    "label": "Announcement Bar Link"
+  }, {
+    "type": "image_picker",
+    "id": "logo",
+    "label": "Logo image"
+  }, {
+    "type": "range",
+    "id": "logo_max_width",
+    "min": 50,
+    "max": 450,
+    "step": 10,
+    "unit": "px",
+    "label": "Custom logo width",
+    "default": 250
+  }, {
+    "type": "link_list",
+    "id": "left_linklist",
+    "label": "Left Menu",
+    "default": "main-menu"
+  }, {
+    "type": "link_list",
+    "id": "right_linklist",
+    "label": "Right Menu",
+    "default": "main-menu"
+  }, {
+    "type": "link_list",
+    "id": "social_linklist",
+    "label": "Social Links"
+  }, {
+    "type": "image_picker",
+    "id": "menimg",
+    "label": "Men Dropdown image"
+  }, {
+    "type": "image_picker",
+    "id": "womenimg",
+    "label": "Women Dropdown image"
+  }, {
+    "type": "image_picker",
+    "id": "youthimg",
+    "label": "Youth Dropdown image"
+  }]
 }
 {% endschema %}

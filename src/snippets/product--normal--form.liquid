@@ -1,4 +1,56 @@
 <div class="product--form">
+  <form action="/cart/add" method="post" enctype="multipart/form-data" data-add-to-cart-form>
+    <div class="product--form--price" data-price-wrapper>
+      <span data-product-price>
+        {{ current_variant.price | money }}
+      </span>
+
+      {% if product.compare_at_price_max > product.price %}
+        <span class="visually-hidden" data-compare-text>{{ 'products.product.regular_price' | t }}</span>
+        <s data-compare-price>
+          {% if current_variant.compare_at_price > current_variant.price %}
+            {{ current_variant.compare_at_price | money }}
+          {% endif %}
+        </s>
+      {% endif %}
+    </div>
+
+    <select name="id" class="no-js" data-product-select>
+      {% for variant in product.variants %}
+        <option
+          {% if variant == current_variant %}selected="selected"{% endif %}
+          {% unless variant.available %}disabled="disabled"{% endunless %}
+          value="{{ variant.id }}"
+        >
+          {{ variant.title }}
+        </option>
+      {% endfor %}
+    </select>
+
+    <div class="product--form--qty">
+      <div><strong>{{ 'products.product.quantity' | t }}</strong></div>
+      <input type="number" id="Quantity" name="quantity" value="1" min="1">
+    </div>
+    
+
+    <button
+      type="submit"
+      name="add"
+      class="product--form--atc"
+      data-add-to-cart
+      {% unless current_variant.available %}disabled="disabled"{% endunless %}
+    >
+      <span data-add-to-cart-text>
+        {% if current_variant.available %}
+          {{ 'products.product.add_to_cart' | t }}
+        {% else %}
+          {{ 'products.product.sold_out' | t }}
+        {% endif %}
+      </span>
+    </button>
+  </form>
+
+{% comment %}
   <div class="w-form-1">
     <form id="email-form" name="email-form" data-name="Email Form">
       <div class="product--form--selector variant--images">
@@ -59,6 +111,7 @@
     </div>
   </div>
 </div>
+{% endcomment %}
 
 <style>
   .product--form--selector {

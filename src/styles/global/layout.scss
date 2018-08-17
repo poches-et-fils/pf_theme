@@ -11,7 +11,7 @@ html {
   margin: 0 auto;
 }
 
-@include media-query($large-down) {
+@include media-query($medium-down) {
   body.menu-open {
     overflow: hidden;
   }

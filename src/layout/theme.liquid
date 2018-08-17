@@ -77,10 +77,10 @@ Configured 2018
     {{ 'general.accessibility.skip_to_content' | t }}
   </a>
   {% section 'header' %}
-  
+  <div class="dark-overlay"></div>
+  <div id="CartHolder" style="position: relative; z-index: 1000"></div>
+
   <main role="main" id="MainContent">
-    <div class="dark-overlay"></div>
-    <div id="CartHolder" style="position: relative; z-index: 1000"></div>
     {{ content_for_layout }}
 
 

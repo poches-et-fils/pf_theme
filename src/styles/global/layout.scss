@@ -10,3 +10,9 @@ html {
   padding: 0 $gutter;
   margin: 0 auto;
 }
+
+@include media-query($large-down) {
+  body.menu-open {
+    overflow: hidden;
+  }
+}

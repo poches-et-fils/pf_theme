@@ -19,6 +19,7 @@ window.theme = window.theme || {};
 // =require templates/customers-login.js
 
 /*================ Modules ================*/
+// =require modules/header.js
 // =require modules/newsletter-popup.js
 // =require modules/add-to-cart.js
 

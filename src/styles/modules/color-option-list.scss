@@ -1,0 +1,66 @@
+.color-option-list {
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+
+	input {
+		display: none;
+	}
+
+	label {
+		background: #3F3F4E;
+		border: 1px solid transparent;
+		border-radius: 50%;
+		width: 24px;
+		height: 24px;
+		margin-right: 8px;
+		position: relative;
+	}
+
+	label:last-child {
+		margin-right: 0;
+	}
+
+	label.color--white {
+		background: #FBF7F7 !important;
+		border: 1px solid #EAEAEA;
+	}
+
+	label.color--black {
+		background: #161616 !important;
+	}
+
+	label.color--grey {
+		background: #C8C7C7 !important;
+	}
+
+	{%- for i in (1..20) -%}
+		{%- capture color_name %}product_color_name_{{i}}{% endcapture -%}
+		{%- capture color %}product_color_{{i}}{% endcapture -%}
+		{%- if settings[color_name] != blank -%}
+			label.color--{{ settings[color_name] | downcase }} {
+				background: {{ settings[color] }} !important;
+				{%- if settings[color_name] == 'white' -%}
+					border: 1px solid #EAEAEA;
+				{%- endif -%}
+			}
+		{%- endif -%}
+	{%- endfor -%}
+
+	label:hover::before,
+	input:checked + label::before {
+		background: transparent;
+		border-radius: 50%;
+		content: '';
+		display: block;
+		position: absolute;
+		top: -3px;
+		left: -3px;
+		border: 1px solid #353434;
+		width: 28px;
+		height: 28px;
+	}
+}

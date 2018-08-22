@@ -79,7 +79,6 @@ theme.Product = (function() {
       } else {
         $(selectors.addToCart, this.$container).prop('disabled', true);
         $(selectors.addToCartText, this.$container).html(theme.strings.unavailable);
-        $(selectors.priceWrapper, this.$container).addClass('hide');
         return;
       }
 

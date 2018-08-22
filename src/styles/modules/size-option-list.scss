@@ -1,0 +1,50 @@
+.size-option-list {
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+
+	input {
+		display: none;
+	}
+
+	label {
+		padding: 14px 19px;
+		color: #161616;
+		font-size: 16px;
+		font-weight: normal;
+		margin-right: 8px;
+	}
+
+	label:last-child {
+		margin-right: 0;
+	}
+
+	label:hover,
+	input:checked + label {
+		background: #EAEAEA;
+	}
+}
+
+.size-option-list input {
+	display: none;
+}
+
+.size-option-list label {
+	padding: 14px 19px;
+	color: #161616;
+	font-size: 16px;
+	font-weight: normal;
+	margin-right: 8px;
+}
+
+.size-option-list label:last-child {
+	margin-right: 0;
+}
+
+.size-option-list label:hover,
+.size-option-list input:checked + label {
+	background: #EAEAEA;
+}

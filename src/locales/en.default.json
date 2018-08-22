@@ -259,7 +259,8 @@
             "on_sale_from_html": "On Sale from {{ price }}",
             "from_text_html": "From {{ price }}",
             "quantity": "QTY:",
-            "add_to_cart": "Add to Cart"
+            "add_to_cart": "Add to Cart",
+            "size_guide_link": "Size guide"
         }
     },
     "gift_cards": {

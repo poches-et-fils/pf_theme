@@ -1,3 +1,6 @@
+{% assign option_one = product.options.first.name | downcase %}
+{% assign option_two = product.options.first.name | downcase %}
+
 <div class="product--form">
   <form action="/cart/add" method="post" enctype="multipart/form-data" data-add-to-cart-form>
     <div class="product--form--price" data-price-wrapper>
@@ -14,6 +17,91 @@
         </s>
       {% endif %}
     </div>
+
+    {% unless product.has_only_default_variant %}
+      {% for option in product.options_with_values %}
+        {% assign option_name = option.name | downcase %}
+
+        {% if option_name == 'size' %}
+          <div class="product--form--selector sizing js">
+            <div class="variant--selector--bar w-clearfix">
+              <div class="selector--heading--left">
+                <strong>{{ option.name }}:</strong> 
+                <span class="selector--heading--right nofloat">
+                  <a href="#" target="_BLANK" class="sizeguide-link">{{ 'products.product.size_guide_link' | t }}</a>
+                </span>
+              </div>
+            </div>
+            <div class="size-option-list">
+              {% for value in option.values %}
+                <input
+                  type="radio"
+                  id="SingleOptionSelector-{{ forloop.index0 }}-{{ value }}"
+                  data-index="option{{ option.position }}"
+                  data-single-option-selector
+                  value="{{ value }}"
+                  name="size-option"
+                  {%- if option.selected_value == value -%}checked="checked"{%- endif -%}
+                />
+                <label for="SingleOptionSelector-{{ forloop.index0 }}-{{ value }}">
+                  {{ value }}
+                </label>
+              {% endfor %}
+            </div>
+          </div>
+        {% elsif option_name contains 'colour' or option_name contains 'color' %}
+          <div class="product--form--selector sizing js">
+            <div class="variant--selector--bar w-clearfix">
+              <div class="selector--heading--left">
+                <strong>{{ option.name }}:</strong> 
+                <span class="selector--heading--right nofloat">
+                  {{ option.selected_value }}
+                </span>
+              </div>
+            </div>
+            <div class="color-option-list">
+              {% for value in option.values %}
+                <input
+                  type="radio"
+                  id="SingleOptionSelector-{{ forloop.index0 }}-{{ value }}"
+                  data-index="option{{ option.position }}"
+                  data-single-option-selector
+                  value="{{ value }}"
+                  name="color-option"
+                  {%- if option.selected_value == value -%}checked="checked"{%- endif -%}
+                />
+                <label
+                  for="SingleOptionSelector-{{ forloop.index0 }}-{{ value }}"
+                  class="color--{{ value | downcase }}"
+                  style="background-color: {{ value | downcase }}"
+                >
+                </label>
+              {% endfor %}
+            </div>
+          </div>
+        {% else %}
+          <div class="selector-wrapper js">
+            <label for="SingleOptionSelector-{{ forloop.index0 }}">
+              {{ option.name }}
+            </label>
+            <select
+              id="SingleOptionSelector-{{ forloop.index0 }}"
+              data-single-option-selector
+              data-index="option{{ option.position }}"
+            >
+              {% for value in option.values %}
+                <option
+                  value="{{ value | escape }}"
+                  {% if option.selected_value == value %}selected="selected"{% endif %}
+                >
+                  {{ value }}
+                </option>
+              {% endfor %}
+            </select>
+          </div>
+        {% endif %}
+      {% endfor %}
+    {% endunless %}
 
     <select name="id" class="no-js" data-product-select>
       {% for variant in product.variants %}
@@ -49,69 +137,7 @@
       </span>
     </button>
   </form>
-
-{% comment %}
-  <div class="w-form-1">
-    <form id="email-form" name="email-form" data-name="Email Form">
-      <div class="product--form--selector variant--images">
-        <div class="variant--selector--bar w-clearfix">
-          <div class="selector--heading--left">
-            <strong>Design:</strong> 
-            <span class="product--VA--name no-wrap">{{ product.title }}</span>
-            <span class="product--handle hide">{{ product.handle }}</span>
-          </div>
-          <div class="selector--heading--right open-design-modal">See all</div>
-        </div>
-
-        {% if product.options.first.name == "Size" %}
-          <div class="product--form--selector sizing">
-            <div class="variant--selector--bar w-clearfix">
-              <div class="selector--heading--left">
-                <strong>Size:</strong> 
-                <span class="selector--heading--right nofloat"><a href="#" target="_BLANK" class="sizeguide-link">size guide</a></span>
-              </div>
-            </div>
-            <div class="product--design--selector--grid">
-              {% for size_option in product.options.first.values %}
-                <div class="product--size--selector">{{ size_option }}</div>
-              {% endfor %}
-            </div>
-          </div>
-        {% endif %}
-
-        <div class="product--form--qty">
-          <div><strong>QTY:</strong></div>
-          <select id="field" name="field" class="product--form--qty--selector w-select">
-            <option value="1" selected>1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-          </select>
-        </div>
-
-        <button type="button"
-                data-wait="Please wait..." 
-                class="product--form--atc w-button">ADD TO CART</button>
-
-        <p class="cart-error text-error"></p>
-
-      </div>
-    </form>
-    <div class="w-form-done">
-      <div>Thank you! Your submission has been received!</div>
-    </div>
-    <div class="w-form-fail">
-      <div>Oops! Something went wrong while submitting the form.</div>
-    </div>
-  </div>
 </div>
-{% endcomment %}
 
 <style>
   .product--form--selector {

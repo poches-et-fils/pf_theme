@@ -1,7 +1,7 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Slate",
+    "theme_name": "Poches & Fils",
     "theme_version": "0.11.0",
     "theme_author": "Shopify",
     "theme_documentation_url": "https:\/\/shopify.github.io\/slate\/",
@@ -37,7 +37,211 @@
     ]
   },
   {
-    "name": "Colors",
+    "name": "Product Colors",
+    "settings": [{
+      "type": "text",
+      "id": "product_color_name_1",
+      "label": "Color Name One",
+      "info": "Enter the color name exactly as the color name placed on color variants"
+    }, {
+      "type": "color",
+      "id": "product_color_1",
+      "label": "Color One",
+      "default": "#000"
+    }, {
+      "type": "text",
+      "id": "product_color_name_2",
+      "label": "Color Name Two",
+      "info": "Enter the color name exactly as the color name placed on color variants"
+    }, {
+      "type": "color",
+      "id": "product_color_2",
+      "label": "Color Two",
+      "default": "#000"
+    }, {
+      "type": "text",
+      "id": "product_color_name_3",
+      "label": "Color Name Three",
+      "info": "Enter the color name exactly as the color name placed on color variants"
+    }, {
+      "type": "color",
+      "id": "product_color_3",
+      "label": "Color Three",
+      "default": "#000"
+    }, {
+      "type": "text",
+      "id": "product_color_name_4",
+      "label": "Color Name Four",
+      "info": "Enter the color name exactly as the color name placed on color variants"
+    }, {
+      "type": "color",
+      "id": "product_color_4",
+      "label": "Color Four",
+      "default": "#000"
+    }, {
+      "type": "text",
+      "id": "product_color_name_5",
+      "label": "Color Name Five",
+      "info": "Enter the color name exactly as the color name placed on color variants"
+    }, {
+      "type": "color",
+      "id": "product_color_5",
+      "label": "Color Five",
+      "default": "#000"
+    }, {
+      "type": "text",
+      "id": "product_color_name_6",
+      "label": "Color Name Six",
+      "info": "Enter the color name exactly as the color name placed on color variants"
+    }, {
+      "type": "color",
+      "id": "product_color_6",
+      "label": "Color Six",
+      "default": "#000"
+    }, {
+      "type": "text",
+      "id": "product_color_name_7",
+      "label": "Color Name Seven",
+      "info": "Enter the color name exactly as the color name placed on color variants"
+    }, {
+      "type": "color",
+      "id": "product_color_7",
+      "label": "Color Seven",
+      "default": "#000"
+    }, {
+      "type": "text",
+      "id": "product_color_name_8",
+      "label": "Color Name Eight",
+      "info": "Enter the color name exactly as the color name placed on color variants"
+    }, {
+      "type": "color",
+      "id": "product_color_8",
+      "label": "Color Eight",
+      "default": "#000"
+    }, {
+      "type": "text",
+      "id": "product_color_name_9",
+      "label": "Color Name Nine",
+      "info": "Enter the color name exactly as the color name placed on color variants"
+    }, {
+      "type": "color",
+      "id": "product_color_9",
+      "label": "Color Nine",
+      "default": "#000"
+    }, {
+      "type": "text",
+      "id": "product_color_name_10",
+      "label": "Color Name Ten",
+      "info": "Enter the color name exactly as the color name placed on color variants"
+    }, {
+      "type": "color",
+      "id": "product_color_10",
+      "label": "Color Ten",
+      "default": "#000"
+    }, {
+      "type": "text",
+      "id": "product_color_name_11",
+      "label": "Color Name Eleven",
+      "info": "Enter the color name exactly as the color name placed on color variants"
+    }, {
+      "type": "color",
+      "id": "product_color_11",
+      "label": "Color Eleven",
+      "default": "#000"
+    }, {
+      "type": "text",
+      "id": "product_color_name_12",
+      "label": "Color Name Twelve",
+      "info": "Enter the color name exactly as the color name placed on color variants"
+    }, {
+      "type": "color",
+      "id": "product_color_12",
+      "label": "Color Twelve",
+      "default": "#000"
+    }, {
+      "type": "text",
+      "id": "product_color_name_13",
+      "label": "Color Name Thirteen",
+      "info": "Enter the color name exactly as the color name placed on color variants"
+    }, {
+      "type": "color",
+      "id": "product_color_13",
+      "label": "Color Thirteen",
+      "default": "#000"
+    }, {
+      "type": "text",
+      "id": "product_color_name_14",
+      "label": "Color Name Fourteen",
+      "info": "Enter the color name exactly as the color name placed on color variants"
+    }, {
+      "type": "color",
+      "id": "product_color_14",
+      "label": "Color Fourteen",
+      "default": "#000"
+    }, {
+      "type": "text",
+      "id": "product_color_name_15",
+      "label": "Color Name Fifthteen",
+      "info": "Enter the color name exactly as the color name placed on color variants"
+    }, {
+      "type": "color",
+      "id": "product_color_15",
+      "label": "Color Fifthteen",
+      "default": "#000"
+    }, {
+      "type": "text",
+      "id": "product_color_name_16",
+      "label": "Color Name Sixteen",
+      "info": "Enter the color name exactly as the color name placed on color variants"
+    }, {
+      "type": "color",
+      "id": "product_color_16",
+      "label": "Color Sixteen",
+      "default": "#000"
+    }, {
+      "type": "text",
+      "id": "product_color_name_17",
+      "label": "Color Name Seventeen",
+      "info": "Enter the color name exactly as the color name placed on color variants"
+    }, {
+      "type": "color",
+      "id": "product_color_17",
+      "label": "Color Seventeen",
+      "default": "#000"
+    }, {
+      "type": "text",
+      "id": "product_color_name_18",
+      "label": "Color Name Eighteen",
+      "info": "Enter the color name exactly as the color name placed on color variants"
+    }, {
+      "type": "color",
+      "id": "product_color_18",
+      "label": "Color Eighteen",
+      "default": "#000"
+    }, {
+      "type": "text",
+      "id": "product_color_name_19",
+      "label": "Color Name Nineteen",
+      "info": "Enter the color name exactly as the color name placed on color variants"
+    }, {
+      "type": "color",
+      "id": "product_color_19",
+      "label": "Color Nineteen",
+      "default": "#000"
+    }, {
+      "type": "text",
+      "id": "product_color_name_20",
+      "label": "Color Name Twenty",
+      "info": "Enter the color name exactly as the color name placed on color variants"
+    }, {
+      "type": "color",
+      "id": "product_color_20",
+      "label": "Color Twenty",
+      "default": "#000"
+    }]
+  },
+  {
+    "name": "General Colors",
     "settings": [
       {
         "type": "header",

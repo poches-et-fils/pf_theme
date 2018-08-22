@@ -49,10 +49,8 @@
             <img src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg">
           </a>
         </div>
- {% for image in product.images limit: 1 %}
-        <div class="product--image--large"
-             style="background-image: url('{{ image.src | product_img_url: 'original' }}')">
-        </div>
+        {% for image in product.images limit: 1 %}
+          <div class="product--image--large" style="background-image: url('{{ image.src | product_img_url: 'original' }}')"></div>
         {%endfor%}
       </div>
 
@@ -66,20 +64,18 @@
   </div>
 
   {% unless product == empty %}
-  <script type="application/json" data-product-json>{{ product | json }}</script>
+    <script type="application/json" data-product-json>{{ product | json }}</script>
   {% endunless %}
 </div>
 
 {% schema %}
 {
-"name": "Product pages",
-"settings": [
-{
-"type": "checkbox",
-"id": "show_share_buttons",
-"label": "Show social sharing buttons",
-"default": true
-}
-]
+  "name": "Product pages",
+  "settings": [{
+    "type": "checkbox",
+    "id": "show_share_buttons",
+    "label": "Show social sharing buttons",
+    "default": true
+  }]
 }
 {% endschema %}

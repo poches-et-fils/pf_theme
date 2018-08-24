@@ -10,6 +10,7 @@ theme.Product = (function() {
 
   var selectors = {
     addToCart: '[data-add-to-cart]',
+    addToCartForm: '[data-add-to-cart-form]',
     addToCartText: '[data-add-to-cart-text]',
     comparePrice: '[data-compare-price]',
     comparePriceText: '[data-compare-text]',
@@ -19,7 +20,8 @@ theme.Product = (function() {
     productJson: '[data-product-json]',
     productPrice: '[data-product-price]',
     productThumbs: '[data-product-single-thumbnail]',
-    singleOptionSelector: '[data-single-option-selector]'
+    singleOptionSelector: '[data-single-option-selector]',
+    color: '[data-color-name]'
   };
 
   /**
@@ -53,6 +55,7 @@ theme.Product = (function() {
     this.$featuredImage = $(selectors.productFeaturedImage, this.$container);
 
     this.$container.on('variantChange' + this.namespace, this.updateAddToCartState.bind(this));
+    this.$container.on('variantChange' + this.namespace, this.updateColorOptions.bind(this));
     this.$container.on('variantPriceChange' + this.namespace, this.updateProductPrices.bind(this));
 
     if (this.$featuredImage.length > 0) {
@@ -73,6 +76,11 @@ theme.Product = (function() {
      */
     updateAddToCartState: function(evt) {
       var variant = evt.variant;
+
+      if (variant && $(selectors.color, this.$container).length > 0) {
+        const optionIndex = $(selectors.color, this.$container).data('index');
+        $(selectors.color, this.$container).text(variant[optionIndex]);
+      }
 
       if (variant) {
         $(selectors.priceWrapper, this.$container).removeClass('hide');
@@ -111,6 +119,36 @@ theme.Product = (function() {
       } else {
         $comparePrice.html('');
         $compareEls.addClass('hide');
+      }
+    },
+
+    /**
+     * Updates the DOM to only show available color variants
+     * based on the size selected
+     */
+    updateColorOptions: function() {
+      const size = $('.size-option-list input:checked').val();
+      const $colourList = $('.color-option-list');
+      const product = this.productSingleObject;
+      const colours = [];
+
+      if ($colourList.length === 0) {
+        return;
+      }
+
+      $colourList.find('input').removeClass('available');
+
+      product.variants
+        .filter(variant => variant.option1 === size)
+        .forEach(variant => {
+          $colourList.find(`input[value=${variant.option2}]`).addClass('available');
+        });
+
+      $colourList.find('input:not(.available) + label').hide();
+      $colourList.find('input.available + label').show();
+
+      if (!$colourList.find('input:checked').hasClass('available')) {
+        $colourList.find('input.available:first').click();
       }
     },
 

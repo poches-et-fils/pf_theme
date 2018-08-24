@@ -4,7 +4,7 @@
   "scripts": {
     "watch": "slate watch",
     "build": "slate build",
-    "deploy": "slate deploy -e development"
+    "deploy": "slate deploy -e development-live"
   },
   "devDependencies": {
     "@shopify/slate-tools": "0.13.0"

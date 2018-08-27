@@ -1,0 +1,46 @@
+.section--newsletter {
+	height: 70vh;
+	min-height: 421px;
+
+	.section--newsletter--signup {
+		max-width: 365px;
+		margin: 0 auto;
+		padding: 0;
+	}
+
+	h3.section--newsletter--heading,
+	p.section--newsletter--paragraph,
+	.message {
+		color: #161616;
+	}
+
+	h3.section--newsletter--heading {
+		font-family: Rubik, sans-serif;
+		font-size: 24px;
+		font-weight: bold;
+	}
+	
+	p.section--newsletter--paragraph {
+		font-size: 18px;
+		text-align: left;
+	}
+
+	.message {
+		margin-top: 17px;
+		width: 100%;
+		display: none;
+		text-align: left;
+	}
+
+	@media (max-width: 767px) {
+		height: auto;
+
+		.section--newsletter--signup {
+			margin: 125px auto;
+		}
+
+		h3.section--newsletter--heading {
+			text-align: left;
+		}
+	}
+}

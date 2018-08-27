@@ -20,7 +20,7 @@ window.theme = window.theme || {};
 
 /*================ Modules ================*/
 // =require modules/header.js
-// =require modules/newsletter-popup.js
+// =require modules/newsletter.js
 // =require modules/add-to-cart.js
 
 $(document).ready(function() {

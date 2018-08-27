@@ -1,107 +1,69 @@
-<div class="section--newsletter">
+<div class="section--newsletter newsletter">
   <div class="section--newsletter--flex">
     <div class="section--newsletter--image" style="background-image: url('{{ 'pf-gif.gif' | asset_url }}');"></div>
     <div class="section--newsletter--signup">
-      <h3 class="section--newsletter--heading">{{section.settings.title}}</h3>
-      <p>{{section.settings.paragraph}}</p>
-      <div class="w-form section--newsletter--form">
-        {% form 'customer' %}
-        {{ form.errors | default_errors }}
-        {% if form.posted_successfully? %}
-        <p class="form--success">{{section.settings.success}}</p>
-        {%else%}
-        <input type="hidden" name="contact[tags]" value="newsletter">
-        <input type="email" 
-               name="contact[email]"
-               id="Email"
-               class="section-settings--field w-input" 
-               maxlength="256" 
-               value="{% if customer %}{{ customer.email }}{% endif %}"
-               placeholder="{{section.settings.newsplace}}" 
-               autocorrect="off"
-               autocapitalize="off"
-               required="">
-
-        <button type="submit" 
-                id="Subscribe"
-                data-wait="Please wait..." 
-                class="section--newsletter--button w-button">
-          {{section.settings.btntext}}
-        </button>
+      <h3 class="section--newsletter--heading">
+        {% if section.settings.title != blank %}
+          {{ section.settings.title }}
+        {% else %}
+          {{ 'homepage.newsletter_popup.title' | t }}
         {% endif %}
-        {% endform %}
+      </h3>
+      <p class="section--newsletter--paragraph">
+        {% if section.settings.paragraph != blank %}
+          {{ section.settings.paragraph }}
+        {% else %}
+          {{ 'homepage.newsletter_popup.description' | t }}
+        {% endif %}
+      </p>
+
+      <div class="form--block--widen">
+        <div class="js--popup--form">
+          <form action="" id="newsletter-section-form" class="newsletter-form">
+            <input
+              type="email"
+              class="newsletter--input"
+              name="EMAIL"
+              maxlength="256"
+              value="{%- if customer -%}{{ customer.email }}{%- endif -%}"
+              placeholder="{{ 'homepage.newsletter_popup.email_placeholder' | t }}"
+              autocapitalize="off"
+              required
+            >
+
+            <input 
+              type="submit"
+              value="{{ 'homepage.newsletter_popup.button_text' | t }}"
+              data-wait="{{ 'homepage.newsletter_popup.loading_text' | t }}" 
+              class="newsletter--button"
+            >
+          </form>
+        </div>
       </div>
+
+      <p class="message"></p>
     </div>
   </div>
 </div>
 
-<style>
-  .contact-form{
-    display: flex;
-  }
-  
-  .overlay-newsletter {
-    display: none;
-    background: #000000c7;
-    height: 100%;
-    width: 100%; 
-    position: fixed; 
-    z-index: 1000000;
-    opacity: 0;
-    transition: 0.9s;
-  }
-</style>
-
-
-<div class="overlay-newsletter"></div>
-
 {% schema %}
 {
-"name": "Newsletter Section",
-"settings": [
-{
-"type": "text",
-"id": "title",
-"label": "Heading",
-"default": "Featured Newsletter"
-},
-{
-"type": "image_picker",
-"id": "bgimg",
-"label": "Background Image"
-},
-{
-"type": "text",
-"id": "paragraph",
-"label": "Newsletter Paragraph",
-"default": "Featured Newsletter"
-},
-{
-"type": "text",
-"id": "success",
-"label": "Newsletter Success Message",
-"default": "Thank you!"
-},
-{
-"type": "text",
-"id": "newsplace",
-"label": "Newsletter Placeholder",
-"default": "Email address"
-},
-{
-"type": "text",
-"id": "btntext",
-"label": "Button Text",
-"default": "Submit"
-}
-
-],
-"presets": [
-{
-"name": "Newsletter Section",
-"category": "Elements"
-}
-]
+  "name": "Newsletter Section",
+  "settings": [{
+    "type": "text",
+    "id": "title",
+    "label": "Heading",
+    "info": "If left blank this will default to the theme translations"
+  }, {
+    "type": "textarea",
+    "id": "paragraph",
+    "label": "Newsletter Paragraph",
+    "info": "If left blank this will default to the theme translations"
+  }],
+  "presets": [{
+    "name": "Newsletter Section",
+    "category": "Elements"
+  }]
 }
 
 {% endschema %}

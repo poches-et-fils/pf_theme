@@ -1,6 +1,6 @@
 (function () {
 	const toggleLoading = () => {
-		const $button = $('.newsletter--popup input[type="submit"]');
+		const $button = $('.newsletter input[type="submit"]');
 		const loadingText = $button.attr('data-wait');
 		const buttonText = $button.val();
 
@@ -10,8 +10,9 @@
 
 	const handleSubmit = e => {
 		e.preventDefault();
-		const $message = $('.newsletter--popup .message');
-		const email = $('.newsletter--popup input[name="EMAIL"]').val();
+		const $parent = $(e.currentTarget).parents('.newsletter');
+		const $message = $parent.find('.message');
+		const email = $parent.find('input[name="EMAIL"]').val();
 		const mailchimpUrl = 'https://pochesetfils.us11.list-manage.com/subscribe/post-json?u=079201818dbf290a767b95ffb&id=4abed72bd7';
 		const body = `&EMAIL=${email}&b_4753c07213be229168b88045d_0bdd4738d0=`;
 
@@ -29,7 +30,7 @@
 				return $message.html(message).show();
 			}
 
-			$('.newsletter--popup .form--block--widen').hide();
+			$parent.find('.form--block--widen').hide();
 			$message.html(message).show();
 			setTimeout(() => toggleBanner('close'), 3000);
 		});
@@ -65,7 +66,7 @@
 	}
 
 	$(document).on('click', '.close--popup, input#Subscribe, .dark-overlay', hideBanner)
-	$(document).on('submit', '#newsletter-popup-form', handleSubmit)
+	$(document).on('submit', '.newsletter form', handleSubmit)
 	$(document).ready(checkLastTimeSeen)
 
 	$(document).on('click', '.page--popup--section', function(e) {

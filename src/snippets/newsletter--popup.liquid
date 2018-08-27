@@ -1,4 +1,4 @@
-<div class="page--popup--section newsletter--popup" data-ix="page-popupoad">
+<div class="page--popup--section newsletter--popup newsletter" data-ix="page-popupoad">
   <div class="js--popup">
     <div class="js--cart--image"></div>
     <div class="js--cart--details">
@@ -17,7 +17,7 @@
           <form action="" id="newsletter-popup-form" class="newsletter-form">
             <input
               type="email"
-              class="js--popup--input"
+              class="newsletter--input"
               name="EMAIL"
               maxlength="256"
               value="{%- if customer -%}{{ customer.email }}{%- endif -%}"
@@ -30,7 +30,7 @@
               type="submit"
               value="{{ 'homepage.newsletter_popup.button_text' | t }}"
               data-wait="{{ 'homepage.newsletter_popup.loading_text' | t }}" 
-              class="section--newsletter--button"
+              class="newsletter--button"
             >
           </form>
         </div>

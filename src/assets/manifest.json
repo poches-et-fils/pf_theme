@@ -1,0 +1,14 @@
+{
+    "name": "Poches & Fils",
+    "short_name": "P&F",
+    "icons": [
+        {
+            "src": "https://cdn.shopify.com/s/files/1/0013/6685/1647/t/10/assets/android-chrome-144x144.png?4546596501679182054",
+            "sizes": "144x144",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "display": "standalone"
+}

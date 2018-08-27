@@ -3,11 +3,11 @@
  * by webflow JS.
  */
 
-(function () {
+!(function () {
 
 	const toggleMenuOpen = e => {
 		$('body').toggleClass('menu-open');
-	}
+	};
 
 	$(document).on('click', '.nav--menu--icon', toggleMenuOpen);
 

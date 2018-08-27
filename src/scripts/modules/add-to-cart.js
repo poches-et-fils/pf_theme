@@ -1,4 +1,4 @@
-(function () {
+!(function () {
 
 	const form = 'form[action="/cart/add"]';
 

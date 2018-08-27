@@ -11,17 +11,24 @@ window.theme = window.theme || {};
 // =require slate/images.js
 // =require slate/variants.js
 
+/*================ Modules ================*/
+// =require modules/dropdown-menus.js
+// =require modules/language-selector.js
+// =require modules/toggle-handler.js
+// =require modules/parse-urlparams.js
+// =require modules/shuffle-dom-siblings.js
+// =require modules/quickadd-handler.js
+// =require modules/popout-cart.js
+// =require modules/header.js
+// =require modules/newsletter.js
+// =require modules/add-to-cart.js
+
 /*================ Sections ================*/
 // =require sections/product.js
 
 /*================ Templates ================*/
 // =require templates/customers-addresses.js
 // =require templates/customers-login.js
-
-/*================ Modules ================*/
-// =require modules/header.js
-// =require modules/newsletter.js
-// =require modules/add-to-cart.js
 
 $(document).ready(function() {
   var sections = new slate.Sections();

@@ -1,4 +1,4 @@
-(function () {
+!(function () {
 	const toggleLoading = () => {
 		const $button = $('.newsletter input[type="submit"]');
 		const loadingText = $button.attr('data-wait');

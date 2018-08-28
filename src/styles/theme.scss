@@ -10,6 +10,9 @@
 /*================ SETTINGS ================*/
 @import url('settings/variables.scss.liquid');
 
+/*================ VENDOR ================*/
+@import url('vendor/glide.min.scss');
+
 /*================ COMMON ================*/
 @import url('global/normalize.scss');
 @import url('global/slate-reset.scss');
@@ -32,3 +35,5 @@
 @import url('modules/product-form.scss');
 @import url('modules/size-option-list.scss');
 @import url('modules/color-option-list.scss');
+@import url('modules/featured-collection.scss');
+@import url('modules/product-listing.scss');

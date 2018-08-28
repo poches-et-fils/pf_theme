@@ -1,29 +1,54 @@
-Deploy complete @ Mon Aug 27 2018 21:08:50 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
-Deploy complete @ Mon Aug 27 2018 21:09:24 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
-Deploy complete @ Mon Aug 27 2018 21:11:27 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
-Deploy complete @ Mon Aug 27 2018 21:11:34 GMT+0700 (+07). added/changed 1 file(s): snippets/dropdown-menus.liquid.
-Deploy complete @ Mon Aug 27 2018 21:11:39 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
-Deploy complete @ Mon Aug 27 2018 21:11:53 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
-Deploy complete @ Mon Aug 27 2018 21:16:51 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
-Deploy complete @ Mon Aug 27 2018 21:17:35 GMT+0700 (+07). added/changed 1 file(s): layout/theme.liquid.
-Deploy complete @ Mon Aug 27 2018 21:18:01 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
-Deploy complete @ Mon Aug 27 2018 21:19:27 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
-Deploy complete @ Mon Aug 27 2018 21:20:51 GMT+0700 (+07). added/changed 2 file(s): assets/vendor.js, assets/vendor.js.
-Deploy complete @ Mon Aug 27 2018 21:21:23 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
-Deploy complete @ Mon Aug 27 2018 21:22:22 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
-Deploy complete @ Mon Aug 27 2018 21:24:15 GMT+0700 (+07). added/changed 2 file(s): assets/jquery-3.3.1.min.js, assets/vendor.js.
-Deploy complete @ Mon Aug 27 2018 21:24:21 GMT+0700 (+07). added/changed 2 file(s): assets/vendor.js, assets/vendor.js.
-Deploy complete @ Mon Aug 27 2018 21:25:02 GMT+0700 (+07). added/changed 2 file(s): assets/jquery-3-3-1.min.js, assets/jquery-3-3-1.min.js.
-Deploy complete @ Mon Aug 27 2018 21:25:05 GMT+0700 (+07). removed 1 file(s): assets/jquery-3.3.1.min.js.
-Deploy complete @ Mon Aug 27 2018 21:25:31 GMT+0700 (+07). added/changed 1 file(s): layout/theme.liquid.
-Deploy complete @ Mon Aug 27 2018 21:31:23 GMT+0700 (+07). added/changed 1 file(s): sections/slider-section.liquid.
-Deploy complete @ Mon Aug 27 2018 21:32:37 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
-Deploy complete @ Mon Aug 27 2018 21:33:10 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
-Deploy complete @ Mon Aug 27 2018 21:33:30 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
-Deploy complete @ Mon Aug 27 2018 21:33:50 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
-Deploy complete @ Mon Aug 27 2018 21:34:22 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
-Deploy complete @ Mon Aug 27 2018 21:34:39 GMT+0700 (+07). added/changed 4 file(s): assets/giftcard.js, assets/theme.js, assets/giftcard.js, assets/theme.js.
-Deploy complete @ Mon Aug 27 2018 21:34:59 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
-Deploy complete @ Mon Aug 27 2018 21:35:13 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
-Deploy complete @ Mon Aug 27 2018 21:35:21 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
-Deploy complete @ Mon Aug 27 2018 21:38:29 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
+Deploy complete @ Tue Aug 28 2018 19:41:48 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
+Deploy complete @ Tue Aug 28 2018 19:42:19 GMT+0700 (+07). added/changed 1 file(s): sections/featured--collection--section.liquid.
+Deploy complete @ Tue Aug 28 2018 19:43:21 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
+Deploy complete @ Tue Aug 28 2018 19:43:55 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
+Deploy complete @ Tue Aug 28 2018 19:44:00 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
+Deploy complete @ Tue Aug 28 2018 19:46:28 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
+Deploy complete @ Tue Aug 28 2018 19:48:58 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
+Deploy complete @ Tue Aug 28 2018 19:50:17 GMT+0700 (+07). added/changed 2 file(s): assets/vendor.js, assets/vendor.js.
+Deploy complete @ Tue Aug 28 2018 19:51:44 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
+Deploy complete @ Tue Aug 28 2018 19:52:43 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
+Deploy complete @ Tue Aug 28 2018 19:55:15 GMT+0700 (+07). added/changed 1 file(s): sections/featured--collection--section.liquid.
+Deploy complete @ Tue Aug 28 2018 19:55:46 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
+Deploy complete @ Tue Aug 28 2018 19:56:09 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
+Deploy complete @ Tue Aug 28 2018 19:57:17 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
+Deploy complete @ Tue Aug 28 2018 19:57:50 GMT+0700 (+07). added/changed 1 file(s): sections/featured--collection--section.liquid.
+Deploy complete @ Tue Aug 28 2018 19:58:28 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
+Deploy complete @ Tue Aug 28 2018 20:01:38 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
+Deploy complete @ Tue Aug 28 2018 20:04:00 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
+Deploy complete @ Tue Aug 28 2018 20:07:07 GMT+0700 (+07). added/changed 1 file(s): sections/featured--collection--section.liquid.
+Deploy complete @ Tue Aug 28 2018 20:08:57 GMT+0700 (+07). added/changed 1 file(s): snippets/icon-chevron.liquid.
+Deploy complete @ Tue Aug 28 2018 20:09:09 GMT+0700 (+07). added/changed 1 file(s): sections/featured--collection--section.liquid.
+Deploy complete @ Tue Aug 28 2018 20:11:05 GMT+0700 (+07). added/changed 1 file(s): snippets/icon-chevron.liquid.
+Deploy complete @ Tue Aug 28 2018 20:15:58 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
+Deploy complete @ Tue Aug 28 2018 20:17:25 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
+Deploy complete @ Tue Aug 28 2018 20:17:58 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
+Deploy complete @ Tue Aug 28 2018 20:18:42 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
+Deploy complete @ Tue Aug 28 2018 20:19:27 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
+Deploy complete @ Tue Aug 28 2018 20:20:04 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
+Deploy complete @ Tue Aug 28 2018 20:20:35 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
+Deploy complete @ Tue Aug 28 2018 20:21:25 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
+Deploy complete @ Tue Aug 28 2018 20:22:04 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
+Deploy complete @ Tue Aug 28 2018 20:29:00 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
+Deploy complete @ Tue Aug 28 2018 20:29:24 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
+Deploy complete @ Tue Aug 28 2018 20:30:10 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
+Deploy complete @ Tue Aug 28 2018 20:30:45 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
+Deploy complete @ Tue Aug 28 2018 20:31:26 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
+Deploy complete @ Tue Aug 28 2018 20:33:24 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
+Deploy complete @ Tue Aug 28 2018 20:34:57 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
+Deploy complete @ Tue Aug 28 2018 20:35:03 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
+Deploy complete @ Tue Aug 28 2018 20:38:40 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
+Deploy complete @ Tue Aug 28 2018 20:38:53 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
+Deploy complete @ Tue Aug 28 2018 20:40:08 GMT+0700 (+07). added/changed 1 file(s): sections/featured--collection--section.liquid.
+Deploy complete @ Tue Aug 28 2018 20:41:33 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
+Deploy complete @ Tue Aug 28 2018 20:42:04 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
+Deploy complete @ Tue Aug 28 2018 20:42:15 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
+Deploy complete @ Tue Aug 28 2018 20:42:37 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
+Deploy complete @ Tue Aug 28 2018 20:42:41 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
+Deploy complete @ Tue Aug 28 2018 20:43:23 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
+Deploy complete @ Tue Aug 28 2018 20:43:49 GMT+0700 (+07). added/changed 1 file(s): sections/featured--collection--section.liquid.
+Deploy complete @ Tue Aug 28 2018 20:44:38 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
+Deploy complete @ Tue Aug 28 2018 20:45:19 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
+Deploy complete @ Tue Aug 28 2018 20:45:30 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
+Deploy complete @ Tue Aug 28 2018 20:45:35 GMT+0700 (+07). added/changed 2 file(s): assets/theme.scss.liquid, assets/theme.scss.liquid.
+Deploy complete @ Tue Aug 28 2018 20:50:02 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.

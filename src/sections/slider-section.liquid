@@ -1,146 +1,108 @@
-<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/mikhailarden/Shopify-OpenSource/master/Slider%20Section/normalize.css">
-<script src="https://cdn.rawgit.com/mikhailarden/Shopify-OpenSource/master/Slider%20Section/components.js"> </script>
-
-
-
-<div class="slider--section">
-  <div data-delay="4000" data-animation="cross" data-autoplay="1" data-duration="500" data-infinite="1"  class="slider--section--slider w-slider">
-    <div class="w-slider-mask">
+<div 
+  class="slider--section glide"
+  data-section-id="{{ section.id }}"
+  data-section-type="slider"
+  data-slider-speed="{{ section.settings.speed }}"
+>
+  <div class="glide__track" data-glide-el="track">
+    <ul class="glide__slides">
       {% for block in section.blocks %}
-        <div class="home--slider w-slide
-          {% if forloop.index == 1 %} one {% elsif forloop.index == 2 %} two {%else%} three {% endif %}"
-          {% if block.settings.color %} style="background-color: {{block.settings.color}} ;" {% endif %}
+        <li
+          class="glide__slide home--slider slider--position--{{ block.settings.position }}"
+          style="
+            {%- if block.settings.color -%} background-color: {{ block.settings.color }}; {%- endif -%}
+            {%- if block.settings.position == 'fill' -%} background-image: url({{ block.settings.image | img_url: '2000x' }}); {%- endif -%}
+          "
         >
+          <div class="slider--wrapper">
+            <div class="slider--content">
+              <h1 class="slider--heading--main">{{ block.settings.heading }}</h1>
+              <h3 class="slider--heading--text">{{ block.settings.subtitle }}</h3>
 
-          <div class="slider--content
-            {% if block.settings.bg-position == 'left' %} slider--content--right {% endif %}
-            {% if block.settings.bg-position == 'right' %} slider--content--left {% endif %}
-            {% if block.settings.bg-position == 'center' or block.settings.bg-position == 'fill' %} slider--content--center {% endif %}"
-          >
-            <h1 class="slider--heading--main"  style=""> {{ block.settings.heading }}</h1>
-            <h3 class="slider--heading--text" style=""> {{ block.settings.subtitle }}</h3>
+              {%- if block.settings.btn > '' -%}
+                <a href="{{block.settings.url}}" class="slider--button--main slider--button--large w-button">
+                  {{block.settings.btn}}
+                </a>
+              {%- endif -%}
+            </div>
 
-            {% if block.settings.btn %}
-            <a href="{{block.settings.url}}" class="slider--button--main slider--button--large w-button">{{block.settings.btn}}</a>
-            {%endif%}
-
+            {%- if block.settings.position != 'fill' -%}
+              <div class="slider--image--wrapper">
+                <img 
+                  class="slider--image"
+                  src="{{ block.settings.image | img_url: '1000x1000' }}"
+                />
+              </div>
+            {%- endif -%}
           </div>
-
-          <div class="slider--image--container
-            {% if block.settings.bg-position == 'left' %} slider--image--container--left {% endif %}
-            {% if block.settings.bg-position == 'right' %} slider--image--container--right {% endif %}
-            {% if block.settings.bg-position == 'center' or block.settings.bg-position == 'fill' %} slider--image--container--center {% endif %}"
-          >
-            <img class="slider--image" src="{{ block.settings.image | img_url: '1000x1000' }}">
-          </div>
-
-        </div>
-      {%endfor%}
-    </div>
-
-    <div class="slider--section--hideen--arrows w-slider-arrow-left">
-      <div class="w-icon-slider-left"></div>
-    </div>
-    <div class="slider--section--hideen--arrows w-slider-arrow-right">
-      <div class="w-icon-slider-right"></div>
-    </div>
-    <div class="w-slider-nav w-shadow w-round"></div>
+        </li>
+      {% endfor %}
+    </ul>
   </div>
 </div>
 
 {% schema %}
 {
-"name": "Slider",
-"max_blocks": 3,
-"settings": [
-{
-"id": "txtcolor",
-"type": "color",
-"label": "Text Color",
-"default": "#fff"
-}
-],
-"blocks": [
-
-{
-"type": "select",
-"name": "Add Slider",
-"settings": [
-{
-"id": "image",
-"type": "image_picker",
-"label": "Slider Image"
-},
-{
-"id": "heading",
-"type": "text",
-"label": "Slider Heading"
-},
-{
-"id": "color",
-"type": "color",
-"label": "Slider Overlay Color"
-},
-
-
-{
-"type":      "select",
-"id":        "bg-position",
-"label":     "Image Position",
-"options": [
-{ "value": "left", "label": "Left Aligned" },
-{ "value": "center", "label": "Center Aligned (No Image)" },
-{ "value": "right", "label": "Right Aligned" },
-{ "value": "fill", "label": "Fill Background" }
-],
-"default":   "left",
-"info":      "Moves the alignment of the background image"
-},
-
-
-{
-"id": "subtitle",
-"type": "text",
-"label": "Slider Subtitle"
-},
-{
-"id": "paragraph",
-"type": "textarea",
-"label": "Slider Pragraph"
-},
-{
-"id": "link",
-"type": "url",
-"label": "Button link"
-},
-{
-"id": "btn",
-"type": "text",
-"label": "Button text",
-"default": "Click here"
-},
-{
-"id": "btncolor",
-"type": "color",
-"label": "Button Color",
-"default": "#f36e21"
-}
-]
-}
-],
-"presets": [
-{
-"name": "Slider Slides ",
-"category": "Slider Blocks",
-"blocks": [
-{
-"type": "select"
-},
-{
-"type": "select"
-}
-]
-}
-]
+  "name": "Slider",
+  "max_blocks": 4,
+  "settings": [{
+    "id": "speed",
+    "type": "number",
+    "label": "Slide Duration",
+    "default": 6000,
+    "info": "How long the delay is between the carousel sliding from one slide to the next in milliseconds"
+  }],
+  "blocks": [{
+    "type": "slide",
+    "name": "Add Slide",
+    "settings": [{
+      "id": "image",
+      "type": "image_picker",
+      "label": "Slide Image",
+      "info": "For left or right alignments, upload a square image with a transparent background."
+    }, {
+      "type": "select",
+      "id": "position",
+      "label": "Image Position",
+      "options": [
+        {"value": "left", "label": "Left Aligned"},
+        {"value": "right", "label": "Right Aligned"},
+        {"value": "fill", "label": "Fill Background"},
+        {"value": "none", "label": "No Image"}
+      ],
+      "default": "left"
+    }, {
+      "id": "color",
+      "type": "color",
+      "label": "Slide Background Colour",
+      "default": "#40407A",
+      "info": "Recommended colours: #40407A or #2F81B7 or #FF793F"
+    }, {
+      "id": "heading",
+      "type": "text",
+      "label": "Slide Heading"
+    }, {
+      "id": "subtitle",
+      "type": "textarea",
+      "label": "Slider Subtitle"
+    }, {
+      "id": "link",
+      "type": "url",
+      "label": "Button link"
+    }, {
+      "id": "btn",
+      "type": "text",
+      "label": "Button text"
+    }]
+  }],
+  "presets": [{
+    "name": "Slider Slides",
+    "category": "Slider Blocks",
+    "blocks": [{
+      "type": "slide"
+    }, {
+      "type": "slide"
+    }]
+  }]
 }
 {% endschema %}

@@ -176,6 +176,10 @@ figcaption {
   z-index: 0;
 }
 
+.w-button {
+  transition: all 0.5s;
+}
+
 .button {
   height: 44px;
   padding: 0px 20px;
@@ -1173,7 +1177,7 @@ border-radius: 7px;
 .section--title--heading.bold--caps {
   margin-bottom: 30px;
   font-size: 30px;
-  font-weight: 500;
+  font-weight: bold;
   text-transform: uppercase;
 }
 
@@ -1200,7 +1204,6 @@ color: #000;
   color: #fff;
   font-weight: 700;
   font-size: 48px;
-  font-weight: 500;
   color: #fff;
   text-transform: uppercase;
 }
@@ -1222,8 +1225,15 @@ a.slider--button--main.w-button {
   text-align: left;
 }
 
-
-@media(min-width: 769px) {
+@media(min-width: 769px) { 
+  .slider--heading--main {
+    font-size: 32px;
+  }
+  .slider--heading--text {
+    font-size: 16px;
+  }
+}
+@media(min-width: 801px) {
   .slider--section {
     height: 30vw;
   }

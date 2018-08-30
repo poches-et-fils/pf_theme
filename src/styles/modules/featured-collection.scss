@@ -1,0 +1,21 @@
+.featured-collection {
+	padding: 0 54px;
+	margin: 40px 0 50px 0;
+
+	.glide__arrow {
+		top: 40%;
+	}
+
+	.glide__arrow.glide__arrow--right {
+		right: -47px;
+	}
+
+	.glide__arrow.glide__arrow--left {
+		left: -47px;
+	}
+
+	.glide__slide img {
+		width: 100%;
+		height: auto;
+	}
+}

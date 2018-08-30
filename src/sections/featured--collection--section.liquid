@@ -1,206 +1,61 @@
-{%- comment -%}
-Handles Product Grid in Collections on homepage. 
-{%- endcomment -%}
+{%- assign collection = collections[section.settings.collection] -%}
 
-<div class="section--products" 
-     data-section-id="{{ section.id }}" 
-     data-section-type="collection-custom-section">
+<div
+  class="section--products featured-collection"
+  data-section-id="{{ section.id }}"
+  data-section-type="collection-custom-section"
+>
   {% if section.settings.title != blank %}
-  <h1 class="section--title--heading bold--caps">{{ section.settings.title | escape }}</h1>
+    <h2 class="section--title--heading bold--caps">{{ section.settings.title | escape }}</h2>
   {% endif %}
-  {%- assign collection = collections[section.settings.collection] -%}
-  <div class="product--grid--block">
-    {% for product in collection.products limit:4 %}
 
-    {% for variant in product.variants limit:1 %}
-    {% if product.type == 'Pocket' %}
-    <a href="{{ product.url }}"
-       title="{{ product.title }} ({{ variant.title }})"
-       data-quickadd-info
-       data-variant-type="{{ product.type }}"
-       data-product-handle="{{ product.handle }}"
-       class="product--grid--item--four three--row w-inline-block">
-      <div class="product--grid--item--image random-colored-bg">
-        <div class="product--grid--item--variant--overlay" style="position: relative;">
-          <img src="{{ product.featured_image | product_img_url: 'medium' }}" 
-               width="45"
-               height="45"
-               class="product--grid--item--pocket" style="position: absolute;width:13%;height:auto;top:50%;left:50%;">
-        </div>
-        <div class="product--quickadd"><strong class="product--quickadd--CTA">+ QUICK ADD</strong><div class="product--quickadd--sizes product--design--selector--grid flex-row"><div class="product--size--selector">XS</div><div class="product--size--selector">S</div><div class="product--size--selector">M</div><div class="product--size--selector">L</div><div class="product--size--selector">XL</div><div class="product--size--selector">XXL</div></div></div>
-      </div>
-      <h5 class="product--grid--item--title">
-        {{ product.title }}
-        <span class="product--grid--item--params"
-              style="display: none">{{ variant.title }}</span>
-      </h5>
-      <div>{{ variant.price | money }}</div>
-      <div class="light-gray"><u><small>See more styles</small></u></div>
-    </a>
+  <div class="glide">
+    <div class="glide__track" data-glide-el="track">
+      <ul class="glide__slides">
+        {% for product in collection.products limit:8 %}
+          <li class="glide__slide product-listing">
+            <a href="{{product.url}}">
+              <img
+                src="{{ product.featured_image | product_img_url: '500x' }}"
+                width="500px"
+                height="500px"
+                alt="{{ product.title | escape }}"
+              />
+              <div class="product-listing__content">
+                <h5>{{product.title}}</h5>
+                <h6>{{ product.price | money }}</h6>
+                <div class="product-listing__see-more">See more styles</div>
+              </div>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
 
-    {%else%}
-    <a href="{{product.url}}/"
-       class="product--grid--item--four three--row w-inline-block"
-       title="{{ product.title }} ({{ variant.title }})"
-       data-variant-type="{{ product.type }}"
-       data-quickadd-info
-       data-quickadd-variantid="{{ variant.id }}">
-      <div class="product--grid--item--image random-colored-bg">
-        <div class="product--grid--item--variant--overlay">
-          <img src="{{ product.featured_image | product_img_url: 'master' }}" 
-               width="100%"
-               height="100%">
-        </div>
-        <div class="product--quickadd"><strong class="product--quickadd--CTA product-quickadd--no-options">+ QUICK ADD</strong></div>
-      </div>
-      <h5 class="product--grid--item--title">{{product.title}}</h5>
-      <div>{{ product.price | money }}</div>
-      <div class="product--grid--item--link">See more styles</div>
-    </a>
-    {%endif%}
-
-    {% endfor %}
-    {%endfor%}
+    <div class="glide__arrows" data-glide-el="controls">
+      <button class="glide__arrow glide__arrow--left" data-glide-dir="<">{% include 'icon-chevron' %}</button>
+      <button class="glide__arrow glide__arrow--right" data-glide-dir=">">{% include 'icon-chevron' %}</button>
+    </div>
   </div>
-</div> 
-
-<style>
-  .product--grid--item--four {width:23%!important;}
-
-  @media (max-width: 796px) {
-    .product--grid--item--four {
-      width: 48% !important;
-      height: 350px !important;
-    }
-  }
-</style>
-
-<script>
-  (function () {
-
-    const addCollectionImages = _ => {
-      const productList = $(`.product--grid--block > [data-variant-type=Pocket]`)
-      
-      $('.product--grid--item--variant--overlay > img').css({
-        'transition': '1s'
-      })
-
-      productList.map((index, item) => {
-        const product = $(item).find('.product--grid--item--image')
-
-        const bgImgURL = getRandImg()
-
-        var gender = 'Kid';
-        if(bgImgURL.includes('--Men--')) {
-          gender = 'Men';
-        }
-        if(bgImgURL.includes('--Women--')) {
-          gender = 'Women';
-        }
-        if(bgImgURL.includes('--Baby--')) {
-          gender = 'Baby';
-        }
-
-        var color = 'Black';
-        if(bgImgURL.includes('--White')) {
-          color = 'White';
-        }
-        if(bgImgURL.includes('--Grey')) {
-          color = 'Grey';
-        }
-        if(bgImgURL.includes('--Dark-Grey')) {
-          color = 'Dark-Grey';
-        }
-        if(bgImgURL.includes('--Navy')) {
-          color = 'Navy';
-        }
-        if(bgImgURL.includes('--Burgundy')) {
-          color = 'Burgundy';
-        }
-        
-
-        var type = 'T-Shirt';
-        if(bgImgURL.includes('--Sweatshirt--')) {
-          type = 'Sweatshirt';
-        }
-        if(bgImgURL.includes('--Tank-Top--')) {
-          type = 'Tank-Top';
-        }
-        if(bgImgURL.includes('--V-Neck--')) {
-          type = 'V-Neck';
-        }
-
-
-        if (!product.find('img').length) {
-          product.parent().hide()
-          console.log('img not found');
-        } else if(bgImgURL) {
-          product.parent().attr('href', product.parent().attr('href') + '?gender=' + gender + '&type=' + type + '&color=' + color)
-          product.attr('data-gender', gender)
-          product.attr('data-color', color)
-          product.attr('data-type', type)
-          product.parent().attr('data-option-gender', gender)
-          product.parent().attr('data-option-color', color)
-          product.parent().attr('data-option-type', type)
-          product.css('background-image', `url('${bgImgURL}')`)
-        } else {
-          product.parent().hide()
-          console.log('bgImgUrl not set');
-        }
-
-      })
-    }
-
-    const shuffleProducts = _ => {
-      addCollectionImages()
-      shuffleDOMSiblings('.EndlessScroll')
-      fillBg()
-      $('.pagination').remove()
-    }
-
-    $(document).ready(_ => {
-      // Set up jQuery handles
-      $(document).ready(_ => {
-        shuffleProducts()
-        ajaxify({'callback': shuffleProducts})
-      })
-    })
-  })()
-</script>
-
-<style>
-  .light-gray { color: gray; }
-
-  #shopify-section-collection--section { width: inherit; }
-
-  .EndlessScroll { 
-    display: flex;
-    flex-flow: row wrap;
-  }
-</style>
+</div>
 
 {% schema %}
 {
-"name": "Featured collection",
-"settings": [
-{
-"type": "text",
-"id": "title",
-"label": "Heading",
-"default": "Featured collection"
-},
-{
-"id": "collection",
-"type": "collection",
-"label": "Collection"
-}
-],
-"presets": [
-{
-"name": "Featured collection",
-"category": "Elements"
-}
-]
+  "name": "Featured collection",
+  "settings": [{
+    "type": "text",
+    "id": "title",
+    "label": "Heading",
+    "default": "Featured collection"
+  }, {
+    "id": "collection",
+    "type": "collection",
+    "label": "Collection"
+  }],
+  "presets": [{
+    "name": "Featured collection",
+    "category": "Elements"
+  }]
 }
 
 {% endschema %}

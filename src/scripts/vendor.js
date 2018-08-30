@@ -2,3 +2,4 @@
 // =require vendor/jquery-ui.js
 // =require vendor/ajaxify.min.js
 // =require vendor/functions.js
+// =require vendor/glide.min.js

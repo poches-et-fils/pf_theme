@@ -26,7 +26,7 @@
               {%- endif -%}
             </div>
 
-            {%- if block.settings.position != 'fill' -%}
+            {%- if block.settings.position != 'none' and block.settings.position != 'fill' -%}
               <div class="slider--image--wrapper">
                 <img 
                   class="slider--image"

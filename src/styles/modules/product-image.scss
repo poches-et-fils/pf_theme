@@ -1,0 +1,28 @@
+.product-image {
+	display: flex;
+	margin-right: 50px;
+
+	.product-image__thumbnails {
+		width: 64px;
+		margin-right: 16px;
+	}
+
+	.product-image__featured,
+	.product-image__thumbnail {
+		background: #F9F9F9;
+
+		img {
+			width: 100%;
+			height: auto;
+		}
+	}
+
+	.product-image__featured {
+		width: calc(100% - 80px);
+	}
+
+	.product-image__thumbnail {
+		display: block;
+		margin-bottom: 16px;
+	}	
+}

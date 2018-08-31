@@ -62,11 +62,24 @@ theme.Product = (function() {
       this.settings.imageSize = slate.Image.imageSize(this.$featuredImage.attr('src'));
       slate.Image.preload(this.productSingleObject.images, this.settings.imageSize);
 
-      this.$container.on('variantImageChange' + this.namespace, this.updateProductImage.bind(this));
+      this.$container.on('variantImageChange', this.updateProductImage.bind(this));
     }
+
+    this.initThumbs();
   }
 
   Product.prototype = $.extend({}, Product.prototype, {
+
+    initThumbs: function() {
+      if ($(selectors.productThumbs, this.$container).length === 0) {
+        return;
+      }
+
+      $(selectors.productThumbs, this.$container).on('click', e => {
+        e.preventDefault();
+        this.$featuredImage.attr('src', $(e.currentTarget).attr('href'));
+      });
+    },
 
     /**
      * Updates the DOM state of the add to cart button

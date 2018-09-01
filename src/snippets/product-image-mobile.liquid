@@ -1,0 +1,30 @@
+<div class="product-image__mobile">
+	<div class="glide">
+		<div class="glide__track" data-glide-el="track">
+			<ul class="glide__slides">
+				<li class="glide__slide">
+					<img src="{{ featured_image | img_url: '800x' }}" data-index="0"/>
+				</li>
+				{% assign loopIndex = 0 %}
+				{% for image in product.images %}
+					{% if image.src != featured_image %}
+						{% assign loopIndex = loopIndex | plus: 1 %}
+						<li class="glide__slide">
+							<img
+								src="{{ image.src | img_url: '800x' }}"
+								alt="{{ image.alt }}"
+								data-index="{{ loopIndex }}"
+							/>
+						</li>
+					{% endif %}
+				{% endfor %}
+			</ul>
+		</div>
+
+		<div class="glide__bullets" data-glide-el="controls[nav]">
+			{% for image in product.images %}
+				<button class="glide__bullet" data-glide-dir="={{ forloop.index0 }}"></button>
+			{% endfor %}
+		</div>
+	</div>
+</div>

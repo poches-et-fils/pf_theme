@@ -67,17 +67,19 @@ theme.Product = (function() {
 
     this.initThumbs();
     this.initZoom();
+    this.mobileSlider = this.initMobileSlider();
   }
 
   Product.prototype = $.extend({}, Product.prototype, {
     initZoom: function() {
       const lightbox = '.product-image-zoom';
       const slider = `${lightbox} .glide`;
-      const sliderOptions = {
-        type: 'carousel',
-        perView: 1
-      };
+      const sliderOptions = {type: 'carousel', perView: 1};
       const glide = new Glide(slider, sliderOptions).mount();
+
+      glide.on('move.after', () => {
+        this.$featuredImage.attr('src', $(`${lightbox} .glide__slide--active img`).attr('src'));
+      });
 
       this.$featuredImage.click(e => {
         e.preventDefault();
@@ -91,10 +93,6 @@ theme.Product = (function() {
         e.preventDefault();
         $(lightbox).removeClass('product-image-zoom--zoomed');
       });
-
-      glide.on('move.after', () => {
-        this.$featuredImage.attr('src', $(`${lightbox} .glide__slide--active img`).attr('src'));
-      });
     },
 
     initThumbs: function() {
@@ -106,6 +104,12 @@ theme.Product = (function() {
         e.preventDefault();
         this.$featuredImage.attr('src', $(e.currentTarget).attr('href'));
       });
+    },
+
+    initMobileSlider: function() {
+      const slider = '.product-image__mobile .glide';
+      const sliderOptions = {type: 'carousel', perView: 1};
+      return new Glide(slider, sliderOptions).mount();
     },
 
     /**
@@ -198,10 +202,12 @@ theme.Product = (function() {
      * @param {string} src - Image src URL
      */
     updateProductImage: function(evt) {
-      var variant = evt.variant;
-      var sizedImgUrl = slate.Image.getSizedImageUrl(variant.featured_image.src, this.settings.imageSize);
-
+      const variant = evt.variant;
+      const sizedImgUrl = slate.Image.getSizedImageUrl(variant.featured_image.src, this.settings.imageSize);
+      const slideIndex = $(`.product-image__mobile img[src="${sizedImgUrl}"]:first`).data('index');
+console.log(slideIndex);
       this.$featuredImage.attr('src', sizedImgUrl);
+      this.mobileSlider.go(`=${slideIndex}`);
     },
 
     /**

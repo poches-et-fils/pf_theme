@@ -6,7 +6,11 @@
 			<ul class="glide__slides">
 				{% for image in product.images %}
 					<li class="glide__slide">
-						<img src="{{ image.src | img_url: '800x' }}" alt="{{ image.alt }}" data-index="{{ forloop.index0 }}"/>
+						<img
+							src="{{ image.src | img_url: '800x' }}"
+							alt="{{ image.alt }}"
+							data-index="{{ forloop.index0 }}"
+						/>
 					</li>
 				{% endfor %}
 			</ul>

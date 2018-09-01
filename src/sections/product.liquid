@@ -16,19 +16,8 @@
 
   <div class="product--container">
     <div class="product--block">
-      <div class="product--block--left product-image">
-        <div class="product-image__thumbnails">
-          {% for image in product.images %}
-            <a href="{{ image.src | img_url: '800x' }}" class="product-image__thumbnail" data-product-single-thumbnail>
-              <img src="{{ image.src | img_url: '128x128' }}" alt="{{ image.alt }}"/>
-            </a>
-          {% endfor %}
-        </div>
-
-        <div class="product-image__featured">
-          <img src="{{ featured_image | img_url: '800x' }}" data-product-featured-image/>
-        </div>
-      </div>
+      {% include 'product-image-desktop' %}
+      {% include 'product-image-mobile' %}
 
       <div class="product--block--right product--form--container">
         {% include 'product--normal--form' %}
@@ -45,11 +34,6 @@
 {% schema %}
 {
   "name": "Product pages",
-  "settings": [{
-    "type": "checkbox",
-    "id": "show_share_buttons",
-    "label": "Show social sharing buttons",
-    "default": true
-  }]
+  "settings": []
 }
 {% endschema %}

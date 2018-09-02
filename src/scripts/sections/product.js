@@ -205,7 +205,7 @@ theme.Product = (function() {
       const variant = evt.variant;
       const sizedImgUrl = slate.Image.getSizedImageUrl(variant.featured_image.src, this.settings.imageSize);
       const slideIndex = $(`.product-image__mobile img[src="${sizedImgUrl}"]:first`).data('index');
-console.log(slideIndex);
+
       this.$featuredImage.attr('src', sizedImgUrl);
       this.mobileSlider.go(`=${slideIndex}`);
     },

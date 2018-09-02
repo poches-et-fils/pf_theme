@@ -34,6 +34,36 @@
 {% schema %}
 {
   "name": "Product pages",
-  "settings": []
+  "settings": [{
+    "id": "default_shipping_text",
+    "type": "richtext",
+    "label": "Default Shipping Text",
+    "info": "Text that will display in the shipping toggle section by default for all products"
+  }, {
+    "id": "default_sizing_text",
+    "type": "richtext",
+    "label": "Default Sizing Text",
+    "info": "Text that will display in the sizing toggle section by default for all products"
+  }, {
+    "id": "default_returns_text",
+    "type": "richtext",
+    "label": "Default Returns Text",
+    "info": "Text that will display in the returns toggle section by default for all products"
+  }],
+  "blocks": [{
+    "type": "size_text",
+    "name": "Product Type Size Text",
+    "settings": [{
+      "id": "product_type",
+      "type": "text",
+      "label": "Product Type",
+      "info": "The product type you would like the sizing text to display with, for example, t-shirt"
+    }, {
+      "id": "sizing_text",
+      "type": "richtext",
+      "label": "Sizing Text",
+      "info": "Text that will override the default sizing text and display in the sizing toggle section for the specified product type"
+    }]
+  }]
 }
 {% endschema %}

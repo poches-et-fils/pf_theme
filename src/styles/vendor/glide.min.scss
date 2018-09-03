@@ -14,3 +14,20 @@
 .glide__arrow.glide__arrow--right svg {
 	transform: rotate(180deg);
 }
+
+.glide__bullets {
+	bottom: 3em;
+
+	.glide__bullet {
+		border: 1px solid #898686;
+		box-shadow: none;
+		background-color: transparent;
+		opacity: 1;
+		width: 10px;
+		height: 10px;
+
+		&.glide__bullet--active {
+			background-color: #898686;
+		}
+	}
+}

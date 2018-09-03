@@ -260,7 +260,14 @@
             "from_text_html": "From {{ price }}",
             "quantity": "QTY:",
             "add_to_cart": "Add to Cart",
-            "size_guide_link": "Size guide"
+            "size_guide_link": "Size guide",
+            "toggle_section": {
+                "description": "Description",
+                "product_sku": "Product SKU",
+                "shipping": "Shipping",
+                "sizing": "Sizing",
+                "returns": "Returns"
+            }
         }
     },
     "gift_cards": {

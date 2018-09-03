@@ -1,0 +1,29 @@
+.toggles--section {
+	border-top: 1px solid #eaeaea;
+
+	.toggle--activation {
+		height: 60px;
+		align-items: center;
+	}
+
+	.toggle--item {
+		border-bottom: 1px solid #eaeaea;
+		.icon-minus { display: none; }
+	}
+
+	.toggle--item.toggle--item--open {
+		.icon-plus { display: none; }
+		.icon-minus { display: inline-block; }
+	}
+
+	.toggle--heading {
+		font-size: 16px !important;
+		font-weight: bold;
+		padding: 0;
+		text-transform: uppercase;
+	}
+
+	.toggle--contents {
+		margin-top: 0;
+	}
+}

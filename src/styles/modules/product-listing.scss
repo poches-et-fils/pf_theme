@@ -30,4 +30,19 @@
 		color: #898686;
 		text-decoration: underline;
 	}
+
+	.product-listing__content .product-listing__colors a {
+		width: 16px;
+		height: 16px;
+		border: 1px solid #d5d5d5;
+		margin-bottom: 7px;
+	}
+
+	.product-listing__image {
+		transition: opacity 0.5s;
+
+		&.product-listing__image--swapping {
+			opacity: 0.3;
+		}
+	}
 }

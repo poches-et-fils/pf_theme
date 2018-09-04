@@ -22,6 +22,7 @@ window.theme = window.theme || {};
 // =require modules/header.js
 // =require modules/newsletter.js
 // =require modules/add-to-cart.js
+// =require modules/product-listing-colors.js
 
 /*================ Sections ================*/
 // =require sections/product.js

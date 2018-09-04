@@ -14,19 +14,22 @@
       <ul class="glide__slides">
         {% for product in collection.products limit:8 %}
           <li class="glide__slide product-listing">
-            <a href="{{product.url}}">
+            <a href="{{product.url}}" class="product-listing__image">
               <img
                 src="{{ product.featured_image | product_img_url: '500x' }}"
                 width="500px"
                 height="500px"
                 alt="{{ product.title | escape }}"
               />
-              <div class="product-listing__content">
-                <h5>{{product.title}}</h5>
-                <h6>{{ product.price | money }}</h6>
-                <div class="product-listing__see-more">See more styles</div>
-              </div>
             </a>
+            <div class="product-listing__content">
+              {% include 'product-listing-colors' %}
+              <h5>{{ product.title }}</h5>
+              <h6>{{ product.price | money }}</h6>
+              <a href="{{product.url}}">
+                <div class="product-listing__see-more">See more styles</div>
+              </a>
+            </div>
           </li>
         {% endfor %}
       </ul>

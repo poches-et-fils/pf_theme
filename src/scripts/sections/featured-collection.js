@@ -10,5 +10,13 @@ theme.FeaturedCollection = function(container) {
 		}
 	};
 
-	new Glide(slider, sliderOptions).mount();
+	const glide = new Glide(slider, sliderOptions);
+
+	glide.on(['mount.after', 'update'], () => {
+		$container.trigger('glide.mounted');
+	});
+
+	$container.on('glide.update', () => glide.update());
+
+	glide.mount();
 };

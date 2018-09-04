@@ -76,6 +76,7 @@ theme.Product = (function() {
       const slider = `${lightbox} .glide`;
       const sliderOptions = {type: 'carousel', perView: 1};
       const glide = new Glide(slider, sliderOptions).mount();
+      let glided = false;
 
       glide.on('move.after', () => {
         this.$featuredImage.attr('src', $(`${lightbox} .glide__slide--active img`).attr('src'));

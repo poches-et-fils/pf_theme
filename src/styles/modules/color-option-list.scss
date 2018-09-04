@@ -10,7 +10,8 @@
 		display: none;
 	}
 
-	label {
+	label,
+	a {
 		background: #3F3F4E;
 		border: 1px solid transparent;
 		border-radius: 50%;
@@ -20,17 +21,23 @@
 		position: relative;
 	}
 
-	label:last-child {
+	label:last-child,
+	a:last-child {
 		margin-right: 0;
 	}
 
 	label.color--white,
-	label.color--blanc {
+	label.color--blanc,
+	a.color--white,
+	a.color--blanc {
 		background: #FBF7F7 !important;
 		border: 1px solid #EAEAEA;
 	}
 
-	label.color--black {
+	a.color--black,
+	a.color--noir,
+	label.color--black,
+	label.color--noir {
 		background: #161616 !important;
 	}
 
@@ -42,7 +49,8 @@
 		{%- capture color_name %}product_color_name_{{i}}{% endcapture -%}
 		{%- capture color %}product_color_{{i}}{% endcapture -%}
 		{%- if settings[color_name] != blank -%}
-			label.color--{{ settings[color_name] | downcase }} {
+			label.color--{{ settings[color_name] | downcase }},
+			a.color--{{ settings[color_name] | downcase }} {
 				background: {{ settings[color] }} !important;
 				{%- if settings[color_name] == 'white' -%}
 					border: 1px solid #EAEAEA;

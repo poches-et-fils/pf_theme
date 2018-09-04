@@ -1,38 +1,23 @@
-Deploy complete @ Sun Sep 02 2018 10:30:58 GMT+0700 (+07). added/changed 1 file(s): templates/product.liquid.
-Deploy complete @ Sun Sep 02 2018 12:40:16 GMT+0700 (+07). added/changed 1 file(s): snippets/product-toggle.liquid.
-Deploy complete @ Sun Sep 02 2018 12:41:47 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
-Deploy complete @ Sun Sep 02 2018 12:42:04 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
-Deploy complete @ Sun Sep 02 2018 12:43:13 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
-Deploy complete @ Sun Sep 02 2018 12:44:40 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
-Deploy complete @ Sun Sep 02 2018 12:44:58 GMT+0700 (+07). added/changed 3 file(s): assets/giftcard.js, assets/giftcard.js, assets/theme.js.
-Deploy complete @ Sun Sep 02 2018 12:46:07 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
-Deploy complete @ Sun Sep 02 2018 12:47:34 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
-Deploy complete @ Sun Sep 02 2018 12:52:26 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
-Deploy complete @ Sun Sep 02 2018 12:53:34 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
-Deploy complete @ Sun Sep 02 2018 12:54:03 GMT+0700 (+07). added/changed 1 file(s): snippets/product-toggle.liquid.
-Deploy complete @ Sun Sep 02 2018 12:54:44 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
-Deploy complete @ Sun Sep 02 2018 12:56:10 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
-Deploy complete @ Sun Sep 02 2018 12:58:08 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
-Deploy complete @ Sun Sep 02 2018 12:58:48 GMT+0700 (+07). added/changed 1 file(s): snippets/product-toggle.liquid.
-Deploy complete @ Sun Sep 02 2018 13:00:39 GMT+0700 (+07). added/changed 1 file(s): snippets/product-toggle.liquid.
-Deploy complete @ Sun Sep 02 2018 13:00:43 GMT+0700 (+07). added/changed 1 file(s): snippets/product-toggle.liquid.
-Deploy complete @ Sun Sep 02 2018 13:01:01 GMT+0700 (+07). added/changed 1 file(s): snippets/product-toggle.liquid.
-Deploy complete @ Sun Sep 02 2018 13:01:56 GMT+0700 (+07). added/changed 1 file(s): snippets/product-toggle.liquid.
-Deploy complete @ Sun Sep 02 2018 13:04:55 GMT+0700 (+07). added/changed 1 file(s): locales/en.default.json.
-Deploy complete @ Sun Sep 02 2018 13:05:03 GMT+0700 (+07). removed 1 file(s): locales/da.json.
-Deploy complete @ Sun Sep 02 2018 13:05:07 GMT+0700 (+07). removed 1 file(s): locales/de.json.
-Deploy complete @ Sun Sep 02 2018 13:05:11 GMT+0700 (+07). removed 1 file(s): locales/es.json.
-Deploy complete @ Sun Sep 02 2018 13:05:15 GMT+0700 (+07). removed 1 file(s): locales/nl.json.
-Deploy complete @ Sun Sep 02 2018 13:05:21 GMT+0700 (+07). removed 1 file(s): locales/pt-BR.json.
-Deploy complete @ Sun Sep 02 2018 13:05:24 GMT+0700 (+07). removed 1 file(s): locales/pt-PT.json.
-Deploy complete @ Sun Sep 02 2018 13:05:50 GMT+0700 (+07). added/changed 1 file(s): locales/fr.json.
-Deploy complete @ Sun Sep 02 2018 13:18:40 GMT+0700 (+07). added/changed 1 file(s): snippets/product-toggle.liquid.
-Deploy complete @ Sun Sep 02 2018 13:23:06 GMT+0700 (+07). added/changed 1 file(s): snippets/product-toggle.liquid.
-Deploy complete @ Sun Sep 02 2018 13:24:33 GMT+0700 (+07). added/changed 1 file(s): sections/product.liquid.
-Deploy complete @ Sun Sep 02 2018 13:27:11 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
-Deploy complete @ Sun Sep 02 2018 13:28:01 GMT+0700 (+07). added/changed 1 file(s): locales/en.default.json.
-Deploy complete @ Sun Sep 02 2018 13:32:14 GMT+0700 (+07). added/changed 1 file(s): sections/product.liquid.
-Deploy complete @ Sun Sep 02 2018 13:33:20 GMT+0700 (+07). added/changed 1 file(s): snippets/product-toggle.liquid.
-Deploy complete @ Sun Sep 02 2018 13:35:26 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
-Deploy complete @ Sun Sep 02 2018 14:09:36 GMT+0700 (+07). added/changed 1 file(s): snippets/product-toggle.liquid.
-Deploy complete @ Sun Sep 02 2018 14:24:54 GMT+0700 (+07). added/changed 1 file(s): assets/theme.scss.liquid.
+Deploy complete @ Tue Sep 04 2018 17:29:22 GMT+0700 (+07). added/changed 3 file(s): assets/giftcard.js, assets/giftcard.js, assets/theme.js.
+Deploy complete @ Tue Sep 04 2018 17:32:09 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
+Deploy complete @ Tue Sep 04 2018 17:32:34 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
+Deploy complete @ Tue Sep 04 2018 17:37:04 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
+Deploy complete @ Tue Sep 04 2018 17:38:42 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
+Deploy complete @ Tue Sep 04 2018 17:40:12 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
+Deploy complete @ Tue Sep 04 2018 17:40:41 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
+Deploy complete @ Tue Sep 04 2018 17:41:27 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
+Deploy complete @ Tue Sep 04 2018 17:42:42 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
+Deploy complete @ Tue Sep 04 2018 17:43:14 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
+Deploy complete @ Tue Sep 04 2018 17:47:10 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
+Deploy complete @ Tue Sep 04 2018 17:47:16 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
+Deploy complete @ Tue Sep 04 2018 17:47:46 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
+Deploy complete @ Tue Sep 04 2018 17:47:50 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
+Deploy complete @ Tue Sep 04 2018 17:51:15 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
+Deploy complete @ Tue Sep 04 2018 17:54:15 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
+Deploy complete @ Tue Sep 04 2018 17:56:54 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
+Deploy complete @ Tue Sep 04 2018 17:56:58 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
+Deploy complete @ Tue Sep 04 2018 18:00:51 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
+Deploy complete @ Tue Sep 04 2018 18:08:57 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
+Deploy complete @ Tue Sep 04 2018 18:09:54 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
+Deploy complete @ Tue Sep 04 2018 18:10:10 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.
+Deploy complete @ Tue Sep 04 2018 18:10:35 GMT+0700 (+07). added/changed 2 file(s): assets/giftcard.js, assets/theme.js.

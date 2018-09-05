@@ -1,0 +1,18 @@
+<a href="#" class="quick-add">
+	+ Quick Add
+</a>
+
+{% for option in product.options_with_values %}
+	{% assign option_name = option.name | downcase %}
+	{% if option_name == 'size' %}
+		<ul class="quick-add__sizes">
+			{% for value in option.values %}
+				<li>
+					<a href="#" class="quick-add__size" data-size="{{ value }}">
+						{{ value }}
+					</a>
+				</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+{% endfor %}

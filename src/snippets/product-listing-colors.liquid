@@ -2,14 +2,13 @@
 	{% assign option_name = option.name | downcase %}
 
 	{% if option_name contains 'colour' or option_name contains 'color' %}
-		<div class="color-option-list product-listing__colors" data-variants="{{ product.variants | json | escape }}">
+		<div class="color-option-list product-listing__colors">
 			{% for value in option.values %}
 				<a
 					href="#"
 					class="color--{{ value | downcase }} color-swatch"
 					style="background-color: {{ value | downcase }}"
 					data-color="{{ value }}"
-					onclick="javascript:e => e.preventDefault()"
 				></a>
 			{% endfor %}
 		</div>

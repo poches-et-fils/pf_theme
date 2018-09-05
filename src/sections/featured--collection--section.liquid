@@ -13,21 +13,24 @@
     <div class="glide__track" data-glide-el="track">
       <ul class="glide__slides">
         {% for product in collection.products limit:8 %}
-          <li class="glide__slide product-listing">
-            <a href="{{product.url}}" class="product-listing__image">
-              <img
-                src="{{ product.featured_image | product_img_url: '500x' }}"
-                width="500px"
-                height="500px"
-                alt="{{ product.title | escape }}"
-              />
-            </a>
+          <li class="glide__slide product-listing" data-variants="{{ product.variants | json | escape }}">
+            <div class="product-listing__image">
+              <a href="{{product.url}}">
+                <img
+                  src="{{ product.featured_image | product_img_url: '500x' }}"
+                  width="500px"
+                  height="500px"
+                  alt="{{ product.title | escape }}"
+                />
+              </a>
+              {% include 'quick-add' %}
+            </div>
             <div class="product-listing__content">
               {% include 'product-listing-colors' %}
               <h5>{{ product.title }}</h5>
               <h6>{{ product.price | money }}</h6>
               <a href="{{product.url}}">
-                <div class="product-listing__see-more">See more styles</div>
+                <div class="product-listing__see-more">See more details</div>
               </a>
             </div>
           </li>

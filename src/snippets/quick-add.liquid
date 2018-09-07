@@ -1,0 +1,24 @@
+<a href="#" class="quick-add">
+	{{ 'products.product.quick_add.button_text' | t }}
+</a>
+
+{% for option in product.options_with_values %}
+	{% assign option_name = option.name | downcase %}
+	{% if option_name == 'size' %}
+		<ul class="quick-add__sizes">
+			{% for value in option.values %}
+				<li>
+					<a href="#" class="quick-add__size" data-size="{{ value }}">
+						{{ value }}
+					</a>
+				</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+{% endfor %}
+
+<div class="quick-add__error">
+	<span class="quick-add__error--sold-out">{{ 'products.product.quick_add.option_sold_out' | t }}</span>
+	<span class="quick-add__error--unavailable">{{ 'products.product.quick_add.option_unavailable' | t }}</span>
+	<span class="quick-add__error--error">{{ 'products.product.quick_add.general_error' | t }}</span>
+</div>

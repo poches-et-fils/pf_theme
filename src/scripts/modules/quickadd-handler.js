@@ -1,79 +1,81 @@
-const handleQuickAdd = event => {
-	event.preventDefault()
+!(function() {
 
-	const button 				= $(event.target)
-	const hiddenQA 			= button.next('.product--quickadd--sizes')
-	const hiddenQAContainer 	= hiddenQA.parent()
+	const errorMessage = ($container, type) => {
+		$errorContainer = $container.find('.quick-add__error');
+		$error = $errorContainer.find(`.quick-add__error--${type}`);
 
-	if (button.is('[class="product--quickadd--CTA"]')) {
-		button.toggle()
-		hiddenQA.css({'display': 'flex', 'opacity': 1 })
-		hiddenQAContainer.css('opacity', 1)
+		$error.show();
+		$errorContainer.show();
+
+		setTimeout(() => {
+			$errorContainer.hide();
+			$error.hide();
+		}, 1800);
+	};
+
+	const getSelectedVariant = (variants, size, color) => {
+		return variants.find(variant => {
+			return variant.option1 === size && variant.option2 === color;
+		});
+	};
+
+	const getSelectedColor = $container => {
+		if ($container.find('.color-swatch--selected').length > 0) {
+			return $container.find('.color-swatch--selected').data('color');
+		}
+
+		return $container.find('.color-swatch').first().data('color');
+	};
+
+	const buy = e => {
+		e.preventDefault();
+		const $sizeButton = $(e.currentTarget);
+		const $container = $sizeButton.parents('.product-listing');
+		const variants = $container.data('variants');
+		const size = $sizeButton.data('size');
+		const color = getSelectedColor($container);
+		const variant = getSelectedVariant(variants, size, color);
+
+		if (!variant) {
+			return errorMessage($container, 'unavailable');
+		}
+
+		if (!variant.available) {
+			return errorMessage($container, 'sold-out');
+		}
+
+		$.post('/cart/add.js', {id: variant.id, quantity: 1})
+		.fail(() => errorMessage($container, 'error'))
+		.done(() => toggleCart());
 	}
-}
 
-const quickAdd = event => {
-	const button = $(event.target).closest('.product--quickadd')
-	const info = $(event.target).closest('*[data-quickadd-info]')
+	const closeSizes = () => {
+		$('.quick-add__sizes').removeClass('quick-add__sizes--active');
+	};
 
-	if(typeof info.attr('data-quickadd-variantid') !== 'undefined') {
-		$.post('/cart/add.js', {
-			'id': info.attr('data-quickadd-variantid'),
-			'quantity': 1
-		})
-		.error(error => console.log("Error:", error))
-		.complete(data => {
-			if (data.status === 200) {
-				button.css('opacity', 0)
-				toggleCart()
-			}
-		})
-	} else {
-		const option_size = $(event.target).text()
-		const product_handle = info.attr('data-product-handle')
-		const option_color = info.attr('data-option-color')
-		const option_type = info.attr('data-option-type')
-		const option_gender = info.attr('data-option-gender')
+	const openSizes = e => {
+		e.preventDefault();
+		closeSizes();
+		const $button = $(e.currentTarget);
+		const $sizes = $button.siblings('.quick-add__sizes');
+		$sizes.addClass('quick-add__sizes--active');
+	};
 
-		$.getJSON('/products/' + product_handle + '.json', function(productData) {
-			productData = productData['product']
-			var optionMap = {'Gender': '', 'Color': '', 'Type': ''}
-			for(var i = 0;i < productData['options'].length; i++) {
-				optionMap[productData['options'][i]['name']] = 'option' + productData['options'][i]['position']
-			}
-			var match = false
-			for(var i = 0;i < productData['variants'].length; i++) {
-				if(productData['variants'][i][optionMap['Gender']] == option_gender
-				&& productData['variants'][i][optionMap['Type']] == option_type
-				&& productData['variants'][i][optionMap['Color']] == option_color) {
-					match = productData['variants'][i]['id']
-					break
-				}
-			}
-			
-			if(match) {
-				$.post('/cart/add.js', {
-					'id': match,
-					'quantity': 1,
-					'properties': {
-						'size': option_size
-					}
-				})
-				.error(error => console.log("Error:", error))
-				.complete(data => {
-					if (data.status === 200) {
-						button.css('opacity', 0)
-						toggleCart()
-					}
-				})
-			} else {
-				console.log('Error: no match found')
-			}
-		})
+	const bindEvents = () => {
+		if ($(window).width() < 960) {
+			return;
+		}
+
+		$('.product-listing')
+			.off('click', '.quick-add')
+			.off('click', '.quick-add__size')
+			.off('mouseleave', '.product-listing__image')
+			.on('click', '.quick-add', openSizes)
+			.on('click', '.quick-add__size', buy)
+			.on('mouseleave', '.product-listing__image', closeSizes);
 	}
-}
 
-$(document).on('click', '.product--quickadd', e => e.preventDefault())
-$(document).on('click', '.product--quickadd--CTA', handleQuickAdd)
-$(document).on('click', '.product--quickadd--sizes .product--size--selector', quickAdd)
-$(document).on('click', '.product-quickadd--no-options', quickAdd)
+	bindEvents();
+	$('.featured-collection').on('glide.mounted', () => bindEvents());
+
+})();

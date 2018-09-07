@@ -30,13 +30,15 @@
 		e.preventDefault();
 		const $swatch = $(e.currentTarget);
 		const $container = $swatch.parents('.product-listing');
-		const $links = $container.find('a:not(.color-swatch)');
+		const $links = $container.find('a:not(.color-swatch):not(.quick-add__size)');
 		const $imageContainer = $container.find('.product-listing__image');
 		const color = $swatch.data('color');
 		const currentUrl = $links.first().attr('href');
-		const variants = $swatch.parents('.product-listing__colors').data('variants');
+		const variants = $swatch.parents('.product-listing').data('variants');
 		const variant = getSelectedVariant(variants, color);
 
+		$container.find('.color-swatch').removeClass('color-swatch--selected');
+		$swatch.addClass('color-swatch--selected');
 		$links.prop('href', variantUrl(variant, currentUrl));
 		swapImage($imageContainer, variant.featured_image.src);
 	}

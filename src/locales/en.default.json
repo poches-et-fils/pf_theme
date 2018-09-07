@@ -267,6 +267,12 @@
                 "shipping": "Shipping",
                 "sizing": "Sizing",
                 "returns": "Returns"
+            },
+            "quick_add": {
+                "button_text": "+ Quick Add",
+                "option_sold_out": "Option sold out",
+                "option_unavailable": "Option not available",
+                "general_error": "Error, click see more details."
             }
         }
     },

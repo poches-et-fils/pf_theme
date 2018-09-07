@@ -1,5 +1,5 @@
 <a href="#" class="quick-add">
-	+ Quick Add
+	{{ 'products.product.quick_add.button_text' | t }}
 </a>
 
 {% for option in product.options_with_values %}
@@ -16,3 +16,9 @@
 		</ul>
 	{% endif %}
 {% endfor %}
+
+<div class="quick-add__error">
+	<span class="quick-add__error--sold-out">{{ 'products.product.quick_add.option_sold_out' | t }}</span>
+	<span class="quick-add__error--unavailable">{{ 'products.product.quick_add.option_unavailable' | t }}</span>
+	<span class="quick-add__error--error">{{ 'products.product.quick_add.general_error' | t }}</span>
+</div>

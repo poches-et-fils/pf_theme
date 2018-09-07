@@ -1,8 +1,17 @@
 !(function() {
 
-	const errorMessage = ($container, message) => {
-		
-	}
+	const errorMessage = ($container, type) => {
+		$errorContainer = $container.find('.quick-add__error');
+		$error = $errorContainer.find(`.quick-add__error--${type}`);
+
+		$error.show();
+		$errorContainer.show();
+
+		setTimeout(() => {
+			$errorContainer.hide();
+			$error.hide();
+		}, 1800);
+	};
 
 	const getSelectedVariant = (variants, size, color) => {
 		return variants.find(variant => {
@@ -28,11 +37,15 @@
 		const variant = getSelectedVariant(variants, size, color);
 
 		if (!variant) {
-			errorMessage($container, 'Option not available.');
+			return errorMessage($container, 'unavailable');
+		}
+
+		if (!variant.available) {
+			return errorMessage($container, 'sold-out');
 		}
 
 		$.post('/cart/add.js', {id: variant.id, quantity: 1})
-		.fail(() => errorMessage($container, 'Error, click see more details.'))
+		.fail(() => errorMessage($container, 'error'))
 		.done(() => toggleCart());
 	}
 
@@ -49,6 +62,10 @@
 	};
 
 	const bindEvents = () => {
+		if ($(window).width() < 960) {
+			return;
+		}
+
 		$('.product-listing')
 			.off('click', '.quick-add')
 			.off('click', '.quick-add__size')
@@ -57,11 +74,6 @@
 			.on('click', '.quick-add__size', buy)
 			.on('mouseleave', '.product-listing__image', closeSizes);
 	}
-
-	$(document).on('click', '.product--quickadd', e => e.preventDefault())
-	$(document).on('click', '.product--quickadd--CTA', handleQuickAdd)
-	$(document).on('click', '.product--quickadd--sizes .product--size--selector', quickAdd)
-	$(document).on('click', '.product-quickadd--no-options', quickAdd)
 
 	bindEvents();
 	$('.featured-collection').on('glide.mounted', () => bindEvents());

@@ -1,0 +1,58 @@
+<div data-section-id="{{ section.id }}" data-section-type="designs">
+	<script type="application/json" data-design-json>
+		[
+		{%- for block in section.blocks -%}
+			{
+				"name": "{{ block.settings.name | downcase | escape }}",
+				"image": "{{ block.settings.image | img_url: '400x' }}",
+				"swatch": "{{ block.settings.swatch | img_url: '400x' }}",
+				"title": "{{ block.settings.title | escape }}",
+				"tagline": "{{ block.settings.tagline | escape }}",
+				"category": "{{ block.settings.category | downcase | escape }}"
+			}
+		{% endfor %}
+		]
+	</script>
+</div>
+
+{% schema %}
+{
+  "name": "Designs",
+  "settings": [],
+	"blocks": [{
+		"type": "design",
+		"name": "Add design",
+		"settings": [{
+			"id": "name",
+			"type": "text",
+			"label": "Vendor Name",
+			"info": "The vendor name of the design must exactly match the vendor field on products that use the design"
+		}, {
+			"id": "image",
+			"type": "image_picker",
+			"label": "Main Image",
+			"info": "Large design image that shows on product pages"
+		}, {
+			"id": "swatch",
+			"type": "image_picker",
+			"label": "Swatch Image",
+			"info": "Square design image that shows where designs are listed"
+		}, {
+			"id": "title",
+			"type": "text",
+			"label": "Title",
+			"info": "Shows on the product page and when hovering over items in the all designs view. Example, 'Got Milk?'"
+		}, {
+			"id": "tagline",
+			"type": "text",
+			"label": "Tagline",
+			"info": "A short optional line of text that sits under the title on product pages. Example, '#los tabernacos de tacos'"
+		}, {
+			"id": "category",
+			"type": "text",
+			"label": "Category",
+			"info": "Designs will be grouped based on the text entered here"
+		}]
+	}]
+}
+{% endschema %}

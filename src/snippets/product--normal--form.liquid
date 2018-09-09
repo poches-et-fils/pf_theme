@@ -4,9 +4,7 @@
 <div class="product--form">
   <form action="/cart/add" method="post" enctype="multipart/form-data" data-add-to-cart-form>
     <div class="product--form--price" data-price-wrapper>
-      <span data-product-price>
-        {{ current_variant.price | money }}
-      </span>
+      {% include 'product-design' %}
 
       {% if product.compare_at_price_max > product.price %}
         <span class="visually-hidden" data-compare-text>{{ 'products.product.regular_price' | t }}</span>

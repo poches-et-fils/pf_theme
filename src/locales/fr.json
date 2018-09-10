@@ -220,14 +220,15 @@
             "product_title": "Titre du produit",
             "collection_title": "Titre de la collection",
             "no_content": "Cette section ne contient actuellement aucun contenu. Ajoutez-en en utilisant la barre latérale."
-				},
-				"newsletter_popup": {
-					"title": "Win the entire stock collection!",
-					"description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.",
-					"email_placeholder": "Enter your email",
-					"button_text": "Submit",
-					"loading_text": "Please wait..."
-				}
+        },
+        "newsletter_popup": {
+            "title": "Win the entire stock collection!",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.",
+            "email_placeholder": "Enter your email",
+            "button_text": "Submit",
+            "loading_text": "Please wait...",
+            "success_message": "Merci pour votre inscription!"
+        }
     },
     "layout": {
         "cart": {

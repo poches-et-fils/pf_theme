@@ -8,6 +8,16 @@
 		$button.attr('data-wait', buttonText);
 	}; 
 
+	const hideBanner = _ => {
+		toggleBanner('close')
+		localStorage.setItem('lastTimeSeen', new Date().getTime())
+	}
+
+	const hideForAYear = _ => {
+		toggleBanner('close')
+		localStorage.setItem('lastTimeSeen', new Date(new Date().setFullYear(new Date().getFullYear() + 1)))
+	}
+
 	const handleSubmit = e => {
 		e.preventDefault();
 		const $parent = $(e.currentTarget).parents('.newsletter');
@@ -27,12 +37,15 @@
 			const message = res.msg.replace('0 -', '');
 
 			if (res.result === 'error') {
-				return $message.html(message).show();
+				$message.find('.message__error').html(message).show();
+				return $message.show();
 			}
 
 			$parent.find('.form--block--widen').hide();
-			$message.html(message).show();
-			setTimeout(() => toggleBanner('close'), 3000);
+			$message.find('.message__error').hide();
+			$message.find('.message__success').show();
+			$message.show();
+			setTimeout(() => hideForAYear(), 4000);
 		});
 	}
 
@@ -54,15 +67,10 @@
 			toggleBanner('close')
 			setTimeout(() => {
 				overlay.css({'display': 'flex', 'opacity': 1});
-			}, 10000);
+			}, 5000);
 		} else {
 			overlay.css({'display': 'none', 'opacity': 0})
 		}
-	}
-	
-	const hideBanner = _ => {
-		toggleBanner('close')
-		localStorage.setItem('lastTimeSeen', new Date().getTime())
 	}
 
 	$(document).on('click', '.close--popup, input#Subscribe, .dark-overlay', hideBanner)

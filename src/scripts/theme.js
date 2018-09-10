@@ -12,6 +12,7 @@ window.theme = window.theme || {};
 // =require slate/variants.js
 
 /*================ Modules ================*/
+// =require modules/product-designs.js
 // =require modules/dropdown-menus.js
 // =require modules/language-selector.js
 // =require modules/toggle-handler.js

@@ -19,9 +19,22 @@
 		`); 
 	};
 
-	const renderDesigns = (designs, product) => {
+	const renderDesigns = async (designs, product) => {
+		const client = algoliasearch('7M9U4OP0D8', 'dc5c134cd92b8d6fdaff3232cb7c9e83');
+		const index = client.initIndex('poches_dev_products');
+		const gender = product.tags.find(tag => {
+			return tag.indexOf('gender:') > -1
+		}).replace('gender:', '') || '';
 
-	}
+		const results = await index.search({
+			query: '',
+			hitsPerPage: 1000,
+			attributesToRetrieve: ['vendor', 'handle'],
+			filters: `product_type:"${product.type}" AND named_tags.gender:"${gender}" AND position = 1`,
+		});
+
+		console.log(results);
+	};
 
 	$(() => {
 		if ($('[data-design-json]').length === 0 || $('[data-product-json]').length === 0) {

@@ -43,4 +43,30 @@
 			font-weight: normal;
 		}
 	}
+
+	@media (max-width: 767px) {
+		flex-wrap: wrap;
+
+		.product-design__content,
+		.product-design__image {
+			text-align: center;
+			width: 100%;
+		}
+
+		.product-design__content {
+			order: 1;
+			
+			h4 {
+				margin-top: 0;
+				margin-bottom: 10px;
+			}
+		}
+
+		.product-design__image {
+			order: 2;
+			max-width: 120px;
+			margin: 20px auto 0 auto;
+			padding: 0;
+		}
+	}
 }

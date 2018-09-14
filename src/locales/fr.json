@@ -274,6 +274,9 @@
                 "option_sold_out": "Option sold out",
                 "option_unavailable": "Option not available",
                 "general_error": "Error, click see more details."
+            },
+            "related_products": {
+                "title": "Also looks good on"
             }
         }
     },

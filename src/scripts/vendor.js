@@ -3,3 +3,4 @@
 // =require vendor/ajaxify.min.js
 // =require vendor/functions.js
 // =require vendor/glide.min.js
+// =require vendor/algoliasearch.min.js

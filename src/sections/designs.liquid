@@ -9,7 +9,7 @@
 				"title": "{{ block.settings.title | escape }}",
 				"tagline": "{{ block.settings.tagline | escape }}",
 				"category": "{{ block.settings.category | downcase | escape }}"
-			}
+			}{%- unless forloop.last -%},{%- endunless -%}
 		{% endfor %}
 		]
 	</script>

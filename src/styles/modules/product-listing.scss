@@ -1,4 +1,15 @@
 .product-listing {
+	&.product-listing--grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		grid-column-gap: 10px;
+		grid-row-gap: 30px;
+	}
+
+	&.product-listing--grid.product-listing--grid-four {
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+	}
+
 	img {
 		width: 100%;
 		height: auto;
@@ -117,6 +128,11 @@
 		.product-listing__image:hover .quick-add,
 		.quick-add__sizes.quick-add__sizes--active {
 			display: none;
+		}
+
+		&.product-listing--grid,
+		&.product-listing--grid.product-listing--grid-four {
+			grid-template-columns: 1fr 1fr;
 		}
 	}
 }

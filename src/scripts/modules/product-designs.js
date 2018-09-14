@@ -1,5 +1,46 @@
 !(function() {
 
+	const getProductGender = product => product.tags.find(tag => {
+		return tag.indexOf('gender:') > -1
+	}).replace('gender:', '') || '';
+
+	const getDesignProducts = product => {
+		const client = algoliasearch('7M9U4OP0D8', 'dc5c134cd92b8d6fdaff3232cb7c9e83');
+		const index = client.initIndex('poches_dev_products');
+		const gender = getProductGender(product);
+
+		return index.search({
+			query: '',
+			hitsPerPage: 1000,
+			attributesToRetrieve: ['vendor', 'handle'],
+			filters: `product_type:"${product.type}" AND named_tags.gender:"${gender}" AND position = 1`,
+		});
+	}
+
+	const renderDesigns = async (designs, product) => {
+		const {hits: designProducts} = await getDesignProducts(product);
+
+		if (!designProducts) {
+			return;
+		}
+
+		const designsHtml = designProducts.map(designProduct => {
+			const vendor = designProduct.vendor.toLowerCase();
+			const design = designs.find(design => design.name.toLowerCase() === vendor);
+			const thisDesign = designProduct.vendor === product.vendor;
+
+			return design ? `
+				<div class="product-designs__design ${thisDesign ? 'product-designs__design--active' : ''}">
+					<a href="/products/${designProduct.handle}">
+						<img src="${design.swatch}" width="48" height="48"/>
+					</a>
+				</div>
+			` : '';
+		}).join('');
+
+		$('.product-designs').html(designsHtml);
+	};
+
 	const renderDesign = (designs, product) => {
 		const design = designs.find(design => design.name === product.vendor.toLowerCase());
 
@@ -17,23 +58,6 @@
 				<h6>${design.title}</h6>
 			</div>
 		`); 
-	};
-
-	const renderDesigns = async (designs, product) => {
-		const client = algoliasearch('7M9U4OP0D8', 'dc5c134cd92b8d6fdaff3232cb7c9e83');
-		const index = client.initIndex('poches_dev_products');
-		const gender = product.tags.find(tag => {
-			return tag.indexOf('gender:') > -1
-		}).replace('gender:', '') || '';
-
-		const results = await index.search({
-			query: '',
-			hitsPerPage: 1000,
-			attributesToRetrieve: ['vendor', 'handle'],
-			filters: `product_type:"${product.type}" AND named_tags.gender:"${gender}" AND position = 1`,
-		});
-
-		console.log(results);
 	};
 
 	$(() => {

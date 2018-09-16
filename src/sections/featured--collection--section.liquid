@@ -13,7 +13,7 @@
     <div class="glide__track" data-glide-el="track">
       <ul class="glide__slides">
         {% for product in collection.products limit:8 %}
-          <li class="glide__slide product-listing" data-variants="{{ product.variants | json | escape }}">
+          <li class="glide__slide product-listing product-listing__item" data-variants="{{ product.variants | json | escape }}">
             <div class="product-listing__image">
               <a href="{{product.url}}">
                 <img

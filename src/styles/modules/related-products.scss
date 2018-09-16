@@ -1,14 +1,18 @@
 .related-products-container {
-	margin: 80px 0;
+	margin-bottom: 90px;
 
 	h2 {
 		font-weight: bold;
 		font-size: 32px;
 		color: #161616;
-		margin-bottom: 20px;
+		margin-bottom: 30px;
 		text-transform: uppercase;
 		text-align: center;
 	}
 
 	.related-products {}
+
+	@media (max-width: 960px) {
+		padding: 0 25px;
+	}
 }

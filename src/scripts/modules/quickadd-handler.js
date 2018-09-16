@@ -30,7 +30,7 @@
 	const buy = e => {
 		e.preventDefault();
 		const $sizeButton = $(e.currentTarget);
-		const $container = $sizeButton.parents('.product-listing');
+		const $container = $sizeButton.parents('.product-listing__item');
 		const variants = $container.data('variants');
 		const size = $sizeButton.data('size');
 		const color = getSelectedColor($container);

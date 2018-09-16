@@ -29,12 +29,12 @@
 	const handleColorChange = e => {
 		e.preventDefault();
 		const $swatch = $(e.currentTarget);
-		const $container = $swatch.parents('.product-listing');
+		const $container = $swatch.parents('.product-listing__item');
 		const $links = $container.find('a:not(.color-swatch):not(.quick-add__size)');
 		const $imageContainer = $container.find('.product-listing__image');
 		const color = $swatch.data('color');
 		const currentUrl = $links.first().attr('href');
-		const variants = $swatch.parents('.product-listing').data('variants');
+		const variants = $container.data('variants');
 		const variant = getSelectedVariant(variants, color);
 
 		$container.find('.color-swatch').removeClass('color-swatch--selected');
@@ -46,8 +46,8 @@
 	$('.product-listing').on('click', '.product-listing__colors a', handleColorChange);
 
 	$('.featured-collection').on('glide.mounted', () => {
-		$('.featured-collection .product-listing').off('click', '.product-listing__colors a');
-		$('.featured-collection .product-listing').on('click', '.product-listing__colors a', handleColorChange);
+		$('.featured-collection .product-listing__item').off('click', '.product-listing__colors a');
+		$('.featured-collection .product-listing__item').on('click', '.product-listing__colors a', handleColorChange);
 	});
 
 })();

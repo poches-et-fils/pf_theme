@@ -1,5 +1,5 @@
 <script>
-	window.currencySymbol = '$';
+	window.currencySymbol = 'C$';
 	{% if shop.currency == 'EUR' %}
 		window.currencySymbol = '€';
 	{% endif %}
@@ -9,7 +9,13 @@
 		strings: {
 			addToCart: {{ 'products.product.add_to_cart' | t | json }},
 			soldOut: {{ 'products.product.sold_out' | t | json }},
-			unavailable: {{ 'products.product.unavailable' | t | json }}
+			unavailable: {{ 'products.product.unavailable' | t | json }},
+			quickAdd: {
+				buttonText: {{ 'products.product.quick_add.button_text' | t | json }},
+				soldOut: {{ 'products.product.quick_add.option_sold_out' | t | json }},
+				unavailable: {{ 'products.product.quick_add.option_unavailable' | t | json }},
+				generalError: {{ 'products.product.quick_add.general_error' | t | json }}
+			}
 		},
 		moneyFormat: {{ shop.money_format | json }}
 	};

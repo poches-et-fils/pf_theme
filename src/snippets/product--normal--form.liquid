@@ -3,19 +3,6 @@
 
 <div class="product--form">
   <form action="/cart/add" method="post" enctype="multipart/form-data" data-add-to-cart-form>
-    <div class="product--form--price" data-price-wrapper>
-      {% include 'product-design' %}
-
-      {% if product.compare_at_price_max > product.price %}
-        <span class="visually-hidden" data-compare-text>{{ 'products.product.regular_price' | t }}</span>
-        <s data-compare-price>
-          {% if current_variant.compare_at_price > current_variant.price %}
-            {{ current_variant.compare_at_price | money }}
-          {% endif %}
-        </s>
-      {% endif %}
-    </div>
-
     {% include 'product-designs' %}
 
     {% unless product.has_only_default_variant %}

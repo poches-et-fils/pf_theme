@@ -1,5 +1,11 @@
 !(function() {
 
+	const loading = isLoading => {
+		const $container = $('.product-designs-container');
+		const loaded = 'product-designs--loaded';
+		return isLoading ? $container.removeClass(loaded) : $container.addClass(loaded);
+	}
+
 	const getProductGender = product => product.tags.find(tag => {
 		return tag.indexOf('gender:') > -1
 	}).replace('gender:', '') || '';
@@ -39,6 +45,7 @@
 		}).join('');
 
 		$('.product-designs').html(designsHtml);
+		loading(false);
 	};
 
 	const renderDesign = (designs, product) => {
@@ -58,6 +65,8 @@
 				<h6>${design.title}</h6>
 			</div>
 		`); 
+
+		loading(false);
 	};
 
 	$(() => {
@@ -69,6 +78,8 @@
 		const product = JSON.parse($('[data-product-json]').html());
 		renderDesign(designs, product);
 		renderDesigns(designs, product);
+
+		$('.product-designs').on('click', '.product-designs__design', () => loading(true));
 	});
 
 })();

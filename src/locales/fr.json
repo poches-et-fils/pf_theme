@@ -43,6 +43,10 @@
             "title": "Effectuez une recherche",
             "placeholder": "Rechercher dans la boutique",
             "submit": "Recherche"
+        },
+        "all_designs": {
+            "title": "Our Designs",
+            "back_to_top": "Back to top"
         }
     },
     "blogs": {

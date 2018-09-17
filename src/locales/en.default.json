@@ -43,6 +43,10 @@
             "title": "Search for products on our site",
             "placeholder": "Search our store",
             "submit": "Search"
+        },
+        "all_designs": {
+            "title": "Our Designs",
+            "back_to_top": "Back to top"
         }
     },
     "blogs": {

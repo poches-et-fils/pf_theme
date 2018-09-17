@@ -1,0 +1,19 @@
+.full-page-popup {
+	display: none;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100vw;
+	height: 100vh;
+	min-height: 400px;
+	background: #FFFFFF;
+	z-index: 30;
+	overflow: auto;
+	padding: 0 85px;
+	align-items: center;
+	justify-content: center;
+
+	&.full-page-popup--open {
+		display: block;
+	}
+}

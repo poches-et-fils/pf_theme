@@ -40,5 +40,25 @@ slate.rte = {
       // Need to specifically target video and admin bar
       this.src = this.src;
     });
+  },
+
+  init: function() {
+    // Target tables to make them scrollable
+    var tableSelectors = '.rte table';
+
+    slate.rte.wrapTable({
+      $tables: $(tableSelectors),
+      tableWrapperClass: 'rte__table-wrapper',
+    });
+
+    // Target iframes to make them responsive
+    var iframeSelectors =
+      '.rte iframe[src*="youtube.com/embed"],' +
+      '.rte iframe[src*="player.vimeo"]';
+
+    slate.rte.wrapIframe({
+      $iframes: $(iframeSelectors),
+      iframeWrapperClass: 'rte__video-wrapper'
+    });
   }
 };

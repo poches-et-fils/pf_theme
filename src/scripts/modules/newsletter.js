@@ -1,4 +1,17 @@
 !(function () {
+	const toggleBanner = shouldDisplay => {
+		const overlay = $('.dark-overlay, .page--popup--section');
+
+		if (shouldDisplay === 'open') {
+			toggleBanner('close');
+			setTimeout(() => {
+				overlay.css({display: 'flex', opacity: 1});
+			}, 5000);
+		} else {
+			overlay.css({display: 'none', opacity: 0});
+		}
+	};
+
 	const toggleLoading = () => {
 		const $button = $('.newsletter input[type="submit"]');
 		const loadingText = $button.attr('data-wait');
@@ -6,17 +19,17 @@
 
 		$button.text(loadingText);
 		$button.attr('data-wait', buttonText);
-	}; 
+	};
 
 	const hideBanner = _ => {
-		toggleBanner('close')
-		localStorage.setItem('lastTimeSeen', new Date().getTime())
-	}
+		toggleBanner('close');
+		localStorage.setItem('lastTimeSeen', new Date().getTime());
+	};
 
 	const hideForAYear = _ => {
-		toggleBanner('close')
-		localStorage.setItem('lastTimeSeen', new Date(new Date().setFullYear(new Date().getFullYear() + 1)))
-	}
+		toggleBanner('close');
+		localStorage.setItem('lastTimeSeen', new Date(new Date().setFullYear(new Date().getFullYear() + 1)));
+	};
 
 	const handleSubmit = e => {
 		e.preventDefault();
@@ -47,37 +60,24 @@
 			$message.show();
 			setTimeout(() => hideForAYear(), 4000);
 		});
-	}
+	};
 
 	const checkLastTimeSeen = _ => {
-		const sevenDaysAgo = new Date(Date.now()-(1000 * 60 * 60 * 24 * 7)).getTime()
-		const lastTimeSeen = localStorage.getItem('lastTimeSeen')
-		
-		if (sevenDaysAgo > lastTimeSeen || !lastTimeSeen ) {
-			toggleBanner('open')
+		const sevenDaysAgo = new Date(Date.now()-(1000 * 60 * 60 * 24 * 7)).getTime();;
+		const lastTimeSeen = localStorage.getItem('lastTimeSeen');
+
+		if (sevenDaysAgo > lastTimeSeen || !lastTimeSeen) {
+			toggleBanner('open');
 		} else {
-			toggleBanner('close')
+			toggleBanner('close');
 		}
-	}
-	
-	const toggleBanner = shouldDisplay => {
-		const overlay = $('.dark-overlay, .page--popup--section');
+	};
 
-		if (shouldDisplay === 'open') {
-			toggleBanner('close')
-			setTimeout(() => {
-				overlay.css({'display': 'flex', 'opacity': 1});
-			}, 5000);
-		} else {
-			overlay.css({'display': 'none', 'opacity': 0})
-		}
-	}
+	$(document).on('click', '.close--popup, input#Subscribe, .dark-overlay', hideBanner);
+	$(document).on('submit', '.newsletter form', handleSubmit);
+	$(document).ready(checkLastTimeSeen);
 
-	$(document).on('click', '.close--popup, input#Subscribe, .dark-overlay', hideBanner)
-	$(document).on('submit', '.newsletter form', handleSubmit)
-	$(document).ready(checkLastTimeSeen)
-
-	$(document).on('click', '.page--popup--section', function(e) {
+	$(document).on('click', '.page--popup--section', function (e) {
 		if (e.target !== this) {
 			return;
 		}

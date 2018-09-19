@@ -45,20 +45,6 @@
 		background: #C8C7C7 !important;
 	}
 
-	{%- for i in (1..20) -%}
-		{%- capture color_name %}product_color_name_{{i}}{% endcapture -%}
-		{%- capture color %}product_color_{{i}}{% endcapture -%}
-		{%- if settings[color_name] != blank -%}
-			label.color--{{ settings[color_name] | downcase }},
-			a.color--{{ settings[color_name] | downcase }} {
-				background: {{ settings[color] }} !important;
-				{%- if settings[color_name] == 'white' -%}
-					border: 1px solid #EAEAEA;
-				{%- endif -%}
-			}
-		{%- endif -%}
-	{%- endfor -%}
-
 	label:hover::before,
 	input:checked + label::before {
 		background: transparent;

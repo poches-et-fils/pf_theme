@@ -1,0 +1,15 @@
+<style>
+	{%- for i in (1..20) -%}
+		{%- capture color_name %}product_color_name_{{i}}{% endcapture -%}
+		{%- capture color %}product_color_{{i}}{% endcapture -%}
+		{%- if settings[color_name] != blank -%}
+			.color-option-list label.color--{{ settings[color_name] | downcase }},
+			.color-option-list a.color--{{ settings[color_name] | downcase }} {
+				background: {{ settings[color] }} !important;
+				{%- if settings[color_name] == 'white' -%}
+					border: 1px solid #EAEAEA;
+				{%- endif -%}
+			}
+		{%- endif -%}
+	{%- endfor -%}
+</style>

@@ -2,16 +2,39 @@
   "name": "poches-et-fils",
   "version": "0.0.1",
   "scripts": {
-    "watch": "slate watch",
-    "build": "slate build",
-    "deploy": "slate deploy -e development-live",
-    "manual-deploy": "slate deploy -m"
+    "watch": "concurrently \"theme watch -e=development\" \"parcel watch src/scripts/theme.js --out-dir src/assets --out-file scripts.js\"",
+    "build": "parcel build src/scripts/theme.js --out-dir src/assets --out-file scripts.js"
+  },
+  "xo": {
+    "plugins": [
+      "babel"
+    ],
+    "envs": [
+      "browser"
+    ],
+    "globals": [
+      "fetch",
+      "$",
+      "slate"
+    ],
+    "rules": {
+      "import/first": 0,
+      "import/no-unassigned-import": 0
+    }
   },
   "devDependencies": {
-    "@shopify/slate-tools": "0.13.0"
+    "babel-core": "6.26.3",
+    "babel-polyfill": "6.26.0",
+    "babel-preset-env": "1.7.0",
+    "concurrently": "4.0.1",
+    "eslint-plugin-babel": "5.2.0",
+    "node-sass": "4.9.3",
+    "parcel-bundler": "1.9.7",
+    "xo": "0.23.0"
   },
   "dependencies": {
     "@shopify/slate": "^0.14.0",
+    "algoliasearch": "3.30.0",
     "global": "^4.3.2"
   }
 }

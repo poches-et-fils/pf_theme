@@ -1,49 +1,45 @@
 @charset "UTF-8";
-/*============================================================================
-  [replace with theme name] | Built with Slate
-    - You cannot use native CSS/Sass @imports in this file without a build script
-==============================================================================*/
 
 /*================ UTILS ================*/
-@import url('tools/mixins.scss');
+@import 'tools/mixins.scss';
 
 /*================ SETTINGS ================*/
-@import url('settings/variables.scss.liquid');
+@import 'settings/variables.scss';
 
 /*================ VENDOR ================*/
-@import url('vendor/glide.min.scss');
+@import 'vendor/glide.min.scss';
 
 /*================ COMMON ================*/
-@import url('global/normalize.scss');
-@import url('global/slate-reset.scss');
-@import url('global/helper-classes.scss');
-@import url('global/grid.scss');
-@import url('global/layout.scss');
-@import url('global/icons.scss');
-@import url('global/rte.scss');
-@import url('global/responsive-tables.scss');
-@import url('global/links-buttons.scss');
-@import url('global/forms.scss');
-@import url('global/blank-states.scss');
+@import 'global/normalize.scss';
+@import 'global/slate-reset.scss';
+@import 'global/helper-classes.scss';
+@import 'global/grid.scss';
+@import 'global/layout.scss';
+@import 'global/icons.scss';
+@import 'global/rte.scss';
+@import 'global/responsive-tables.scss';
+@import 'global/links-buttons.scss';
+@import 'global/forms.scss';
+@import 'global/blank-states.scss';
 
 /*================ MODULES ================*/
-@import url('modules/site-header.scss');
-@import url('modules/slider.scss');
-@import url('modules/gift-card-template.scss');
-@import url('modules/newsletter-form.scss');
-@import url('modules/newsletter-popup.scss');
-@import url('modules/newsletter-section.scss');
-@import url('modules/product-form.scss');
-@import url('modules/product-design.scss');
-@import url('modules/product-designs.scss');
-@import url('modules/related-products.scss');
-@import url('modules/size-option-list.scss');
-@import url('modules/color-option-list.scss');
-@import url('modules/featured-collection.scss');
-@import url('modules/product-listing.scss');
-@import url('modules/product-image.scss');
-@import url('modules/product-image-zoom.scss');
-@import url('modules/toggle.scss');
-@import url('modules/spinner.scss');
-@import url('modules/full-page-popup.scss');
-@import url('modules/all-designs.scss');
+@import 'modules/site-header.scss';
+@import 'modules/slider.scss';
+@import 'modules/gift-card-template.scss';
+@import 'modules/newsletter-form.scss';
+@import 'modules/newsletter-popup.scss';
+@import 'modules/newsletter-section.scss';
+@import 'modules/product-form.scss';
+@import 'modules/product-design.scss';
+@import 'modules/product-designs.scss';
+@import 'modules/related-products.scss';
+@import 'modules/size-option-list.scss';
+@import 'modules/color-option-list.scss';
+@import 'modules/featured-collection.scss';
+@import 'modules/product-listing.scss';
+@import 'modules/product-image.scss';
+@import 'modules/product-image-zoom.scss';
+@import 'modules/toggle.scss';
+@import 'modules/spinner.scss';
+@import 'modules/full-page-popup.scss';
+@import 'modules/all-designs.scss';

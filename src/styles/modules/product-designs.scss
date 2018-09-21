@@ -7,6 +7,21 @@
 		display: none;
 	}
 
+	.selector--heading--right,
+	.selector--heading--left,
+	.selector--heading--left a,
+	.selector--heading--right a {
+		color: #161616;
+		font-size: 14px;
+		font-weight: normal;
+		text-decoration: none;
+	}
+
+	.selector--heading--right a {
+		color: #898686;
+		text-decoration: underline !important;
+	}
+
 	&.product-designs--loaded {
 		.product-designs__loaded {
 			display: block;

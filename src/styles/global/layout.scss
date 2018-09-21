@@ -11,6 +11,10 @@ html {
   margin: 0 auto;
 }
 
+body.no-scroll {
+  overflow: hidden;
+}
+
 @include media-query($medium-down) {
   body.menu-open {
     overflow: hidden;

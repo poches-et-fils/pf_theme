@@ -1,5 +1,5 @@
+import productDesigns from '../designs/product-designs';
 import relatedProducts from './related-products';
-import productDesigns from './product-designs';
 
 /**
  * Product Template Script
@@ -132,7 +132,6 @@ export default (function() {
       }
   
       const designs = JSON.parse($('[data-design-json]').html());
-      const product = JSON.parse($('[data-product-json]').html());
       productDesigns(designs, this.productSingleObject);
     },
 

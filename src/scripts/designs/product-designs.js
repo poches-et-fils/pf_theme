@@ -1,5 +1,6 @@
 import algoliasearch from 'algoliasearch';
 import config from '../config';
+import allDesigns from './all-designs';
 
 const loading = isLoading => {
 	const $container = $('.product-designs-container');
@@ -24,28 +25,49 @@ const getDesignProducts = product => {
 	});
 };
 
-const renderDesigns = async (designs, product) => {
+const mergeProductsWithSettings = (designProducts, designSettings, product) => {
+	return designProducts.map(designProduct => {
+		const vendor = designProduct.vendor.toLowerCase();
+		const design = designSettings.find(designSetting => {
+			return designSetting.name.toLowerCase() === vendor;
+		});
+
+		if (!design) {
+			// There's no settings defined for the product, remove it.
+			return false;
+		}
+
+		return {
+			...designProduct,
+			...design,
+			thisDesign: designProduct.vendor === product.vendor
+		};
+	}).filter(a => a);
+};
+
+const onDesignSelected = design => {
+	loading(true);
+	window.location.href = `/products/${design.handle}`;
+};
+
+const renderDesigns = async (designSettings, product) => {
 	const {hits: designProducts} = await getDesignProducts(product);
 
 	if (!designProducts) {
 		return;
 	}
 
-	const designsHtml = designProducts.map(designProduct => {
-		const vendor = designProduct.vendor.toLowerCase();
-		const design = designs.find(design => design.name.toLowerCase() === vendor);
-		const thisDesign = designProduct.vendor === product.vendor;
+	const designs = mergeProductsWithSettings(designProducts, designSettings, product);
 
-		return design ? `
-			<div class="product-designs__design ${thisDesign ? 'product-designs__design--active' : ''}">
-				<a href="/products/${designProduct.handle}">
-					<img src="${design.swatch}" width="48" height="48"/>
-				</a>
-			</div>
-		` : '';
-	}).join('');
+	$('.product-designs').html(designs.map(design => `
+		<div class="product-designs__design ${design.thisDesign ? 'product-designs__design--active' : ''}">
+			<a href="/products/${design.handle}">
+				<img src="${design.swatch}" width="48" height="48"/>
+			</a>
+		</div>
+	`).join(''));
 
-	$('.product-designs').html(designsHtml);
+	allDesigns(designs, onDesignSelected);
 	loading(false);
 };
 

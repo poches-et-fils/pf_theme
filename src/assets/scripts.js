@@ -13486,7 +13486,329 @@ var config = {
 };
 
 exports.default = config;
-},{}],"product/related-products.js":[function(require,module,exports) {
+},{}],"../../node_modules/rafl/index.js":[function(require,module,exports) {
+
+var global = require('global')
+
+/**
+ * `requestAnimationFrame()`
+ */
+
+var request = global.requestAnimationFrame
+  || global.webkitRequestAnimationFrame
+  || global.mozRequestAnimationFrame
+  || fallback
+
+var prev = +new Date
+function fallback (fn) {
+  var curr = +new Date
+  var ms = Math.max(0, 16 - (curr - prev))
+  var req = setTimeout(fn, ms)
+  return prev = curr, req
+}
+
+/**
+ * `cancelAnimationFrame()`
+ */
+
+var cancel = global.cancelAnimationFrame
+  || global.webkitCancelAnimationFrame
+  || global.mozCancelAnimationFrame
+  || clearTimeout
+
+if (Function.prototype.bind) {
+  request = request.bind(global)
+  cancel = cancel.bind(global)
+}
+
+exports = module.exports = request
+exports.cancel = cancel
+
+},{"global":"../../node_modules/global/window.js"}],"../../node_modules/scroll/index.js":[function(require,module,exports) {
+var raf = require('rafl')
+var E_NOSCROLL = new Error('Element already at target scroll position')
+var E_CANCELLED = new Error('Scroll cancelled')
+var min = Math.min
+
+module.exports = {
+  left: make('scrollLeft'),
+  top: make('scrollTop')
+}
+
+function make (prop) {
+  return function scroll (el, to, opts, cb) {
+    opts = opts || {}
+
+    if (typeof opts == 'function') cb = opts, opts = {}
+    if (typeof cb != 'function') cb = noop
+
+    var start = +new Date
+    var from = el[prop]
+    var ease = opts.ease || inOutSine
+    var duration = !isNaN(opts.duration) ? +opts.duration : 350
+    var cancelled = false
+
+    return from === to ?
+      cb(E_NOSCROLL, el[prop]) :
+      raf(animate), cancel
+
+    function cancel () {
+      cancelled = true
+    }
+
+    function animate (timestamp) {
+      if (cancelled) return cb(E_CANCELLED, el[prop])
+
+      var now = +new Date
+      var time = min(1, ((now - start) / duration))
+      var eased = ease(time)
+
+      el[prop] = (eased * (to - from)) + from
+
+      time < 1 ? raf(animate) : raf(function () {
+        cb(null, el[prop])
+      })
+    }
+  }
+}
+
+function inOutSine (n) {
+  return 0.5 * (1 - Math.cos(Math.PI * n))
+}
+
+function noop () {}
+
+},{"rafl":"../../node_modules/rafl/index.js"}],"designs/all-designs.js":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _scroll = require('scroll');
+
+var _scroll2 = _interopRequireDefault(_scroll);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var togglePopup = function togglePopup(e) {
+	if (e) {
+		e.preventDefault();
+	}
+
+	window.scrollTo(0, 0);
+	$('.all-designs').toggleClass('full-page-popup--open');
+	$('body').toggleClass('no-scroll');
+};
+
+var backToTop = function backToTop(e) {
+	e.preventDefault();
+	_scroll2.default.top($('.all-designs')[0], 0);
+};
+
+var onCategoryFilter = function onCategoryFilter(e) {
+	e.preventDefault();
+	var $categoryLink = $(e.target);
+	var category = $categoryLink.data('category');
+
+	$('.all-designs__categories a').removeClass('active-category');
+	$categoryLink.addClass('active-category');
+
+	if (category === 'all') {
+		return $('.all-designs__design').addClass('category-active').show();
+	}
+
+	$('.all-designs__design').removeClass('category-active');
+	$('.all-designs__design[data-category="' + category + '"]').addClass('category-active').show();
+	$('.all-designs__design:not(.category-active)').hide();
+};
+
+var onDesignSelected = function onDesignSelected(e, designs, callback) {
+	var designName = $(e.currentTarget).data('design');
+	var design = designs.find(function (design) {
+		return design.name === designName;
+	});
+	callback(design);
+	togglePopup();
+};
+
+var categoryHtml = function categoryHtml(designs) {
+	return designs.reduce(function (categories, _ref) {
+		var category = _ref.category;
+
+		return categories.indexOf(category) > -1 ? categories : categories.concat(category);
+	}, []).map(function (category) {
+		return '\n\t<li><a href="#" data-category="' + category + '">' + category + '</a></li>\n';
+	}).join('');
+};
+
+var designsHtml = function designsHtml(designs) {
+	return designs.map(function (design) {
+		return '\n\t<div\n\t\tclass="all-designs__design"\n\t\tdata-design=\'' + design.name + '\'\n\t\tdata-category="' + design.category + '"\n\t>\n\t\t<img src="' + design.swatch + '" width="240" height="240"/>\n\t\t<div>' + design.title + '</div>\n\t</div>\n';
+	}).join('');
+};
+
+var allDesigns = function allDesigns(designs, callback) {
+	$('.see-all-designs').addClass('see-all-designs--loaded');
+	$('.all-designs__designs').append(designsHtml(designs));
+	$('.all-designs__categories').append(categoryHtml(designs));
+
+	$('.all-designs__close, .see-all-designs').click(togglePopup);
+	$('.all-designs__back').click(backToTop);
+	$('.all-designs__categories a').click(onCategoryFilter);
+
+	$('.all-designs__designs').on('click', '.all-designs__design', function (e) {
+		onDesignSelected(e, designs, callback);
+	});
+};
+
+exports.default = allDesigns;
+},{"scroll":"../../node_modules/scroll/index.js"}],"designs/product-designs.js":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+var _this = undefined;
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _algoliasearch = require('algoliasearch');
+
+var _algoliasearch2 = _interopRequireDefault(_algoliasearch);
+
+var _config = require('../config');
+
+var _config2 = _interopRequireDefault(_config);
+
+var _allDesigns = require('./all-designs');
+
+var _allDesigns2 = _interopRequireDefault(_allDesigns);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+var loading = function loading(isLoading) {
+	var $container = $('.product-designs-container');
+	var loaded = 'product-designs--loaded';
+	return isLoading ? $container.removeClass(loaded) : $container.addClass(loaded);
+};
+
+var getProductGender = function getProductGender(product) {
+	return product.tags.find(function (tag) {
+		return tag.indexOf('gender:') > -1;
+	}).replace('gender:', '') || '';
+};
+
+var getDesignProducts = function getDesignProducts(product) {
+	var client = (0, _algoliasearch2.default)(_config2.default.algolia.appId, _config2.default.algolia.apiKey);
+	var index = client.initIndex('poches_dev_products');
+	var gender = getProductGender(product);
+
+	return index.search({
+		query: '',
+		hitsPerPage: 1000,
+		attributesToRetrieve: ['vendor', 'handle'],
+		filters: 'product_type:"' + product.type + '" AND named_tags.gender:"' + gender + '" AND position = 1'
+	});
+};
+
+var mergeProductsWithSettings = function mergeProductsWithSettings(designProducts, designSettings, product) {
+	return designProducts.map(function (designProduct) {
+		var vendor = designProduct.vendor.toLowerCase();
+		var design = designSettings.find(function (designSetting) {
+			return designSetting.name.toLowerCase() === vendor;
+		});
+
+		if (!design) {
+			// There's no settings defined for the product, remove it.
+			return false;
+		}
+
+		return _extends({}, designProduct, design, {
+			thisDesign: designProduct.vendor === product.vendor
+		});
+	}).filter(function (a) {
+		return a;
+	});
+};
+
+var onDesignSelected = function onDesignSelected(design) {
+	loading(true);
+	window.location.href = '/products/' + design.handle;
+};
+
+var renderDesigns = function () {
+	var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(designSettings, product) {
+		var _ref2, designProducts, designs;
+
+		return regeneratorRuntime.wrap(function _callee$(_context) {
+			while (1) {
+				switch (_context.prev = _context.next) {
+					case 0:
+						_context.next = 2;
+						return getDesignProducts(product);
+
+					case 2:
+						_ref2 = _context.sent;
+						designProducts = _ref2.hits;
+
+						if (designProducts) {
+							_context.next = 6;
+							break;
+						}
+
+						return _context.abrupt('return');
+
+					case 6:
+						designs = mergeProductsWithSettings(designProducts, designSettings, product);
+
+
+						$('.product-designs').html(designs.map(function (design) {
+							return '\n\t\t<div class="product-designs__design ' + (design.thisDesign ? 'product-designs__design--active' : '') + '">\n\t\t\t<a href="/products/' + design.handle + '">\n\t\t\t\t<img src="' + design.swatch + '" width="48" height="48"/>\n\t\t\t</a>\n\t\t</div>\n\t';
+						}).join(''));
+
+						(0, _allDesigns2.default)(designs, onDesignSelected);
+						loading(false);
+
+					case 10:
+					case 'end':
+						return _context.stop();
+				}
+			}
+		}, _callee, _this);
+	}));
+
+	return function renderDesigns(_x, _x2) {
+		return _ref.apply(this, arguments);
+	};
+}();
+
+var renderDesign = function renderDesign(designs, product) {
+	var design = designs.find(function (design) {
+		return design.name === product.vendor.toLowerCase();
+	});
+
+	if (!design) {
+		return $('.product-design').addClass('product-design--not-found');
+	}
+
+	$('.product-design').html('\n\t\t<div class="product-design__image">\n\t\t\t<img src="' + design.image + '" alt="' + design.title + '"/>\n\t\t</div>\n\t\t<div class="product-design__content">\n\t\t\t<h4 data-product-price>' + $('[data-product-price]:first').text() + '</h4>\n\t\t\t<h5>' + design.tagline + '</h5>\n\t\t\t<h6>' + design.title + '</h6>\n\t\t</div>\n\t');
+
+	loading(false);
+};
+
+var productDesigns = function productDesigns(designs, product) {
+	renderDesign(designs, product);
+	renderDesigns(designs, product);
+	$('.product-designs').on('click', '.product-designs__design', function () {
+		return loading(true);
+	});
+};
+
+exports.default = productDesigns;
+},{"algoliasearch":"../../node_modules/algoliasearch/src/browser/builds/algoliasearch.js","../config":"config.js","./all-designs":"designs/all-designs.js"}],"product/related-products.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -13618,124 +13940,6 @@ var relatedProducts = function () {
 }();
 
 exports.default = relatedProducts;
-},{"algoliasearch":"../../node_modules/algoliasearch/src/browser/builds/algoliasearch.js","../config":"config.js"}],"product/product-designs.js":[function(require,module,exports) {
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-var _this = undefined;
-
-var _algoliasearch = require('algoliasearch');
-
-var _algoliasearch2 = _interopRequireDefault(_algoliasearch);
-
-var _config = require('../config');
-
-var _config2 = _interopRequireDefault(_config);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-var loading = function loading(isLoading) {
-	var $container = $('.product-designs-container');
-	var loaded = 'product-designs--loaded';
-	return isLoading ? $container.removeClass(loaded) : $container.addClass(loaded);
-};
-
-var getProductGender = function getProductGender(product) {
-	return product.tags.find(function (tag) {
-		return tag.indexOf('gender:') > -1;
-	}).replace('gender:', '') || '';
-};
-
-var getDesignProducts = function getDesignProducts(product) {
-	var client = (0, _algoliasearch2.default)(_config2.default.algolia.appId, _config2.default.algolia.apiKey);
-	var index = client.initIndex('poches_dev_products');
-	var gender = getProductGender(product);
-
-	return index.search({
-		query: '',
-		hitsPerPage: 1000,
-		attributesToRetrieve: ['vendor', 'handle'],
-		filters: 'product_type:"' + product.type + '" AND named_tags.gender:"' + gender + '" AND position = 1'
-	});
-};
-
-var renderDesigns = function () {
-	var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(designs, product) {
-		var _ref2, designProducts, designsHtml;
-
-		return regeneratorRuntime.wrap(function _callee$(_context) {
-			while (1) {
-				switch (_context.prev = _context.next) {
-					case 0:
-						_context.next = 2;
-						return getDesignProducts(product);
-
-					case 2:
-						_ref2 = _context.sent;
-						designProducts = _ref2.hits;
-
-						if (designProducts) {
-							_context.next = 6;
-							break;
-						}
-
-						return _context.abrupt('return');
-
-					case 6:
-						designsHtml = designProducts.map(function (designProduct) {
-							var vendor = designProduct.vendor.toLowerCase();
-							var design = designs.find(function (design) {
-								return design.name.toLowerCase() === vendor;
-							});
-							var thisDesign = designProduct.vendor === product.vendor;
-
-							return design ? '\n\t\t\t<div class="product-designs__design ' + (thisDesign ? 'product-designs__design--active' : '') + '">\n\t\t\t\t<a href="/products/' + designProduct.handle + '">\n\t\t\t\t\t<img src="' + design.swatch + '" width="48" height="48"/>\n\t\t\t\t</a>\n\t\t\t</div>\n\t\t' : '';
-						}).join('');
-
-
-						$('.product-designs').html(designsHtml);
-						loading(false);
-
-					case 9:
-					case 'end':
-						return _context.stop();
-				}
-			}
-		}, _callee, _this);
-	}));
-
-	return function renderDesigns(_x, _x2) {
-		return _ref.apply(this, arguments);
-	};
-}();
-
-var renderDesign = function renderDesign(designs, product) {
-	var design = designs.find(function (design) {
-		return design.name === product.vendor.toLowerCase();
-	});
-
-	if (!design) {
-		return $('.product-design').addClass('product-design--not-found');
-	}
-
-	$('.product-design').html('\n\t\t<div class="product-design__image">\n\t\t\t<img src="' + design.image + '" alt="' + design.title + '"/>\n\t\t</div>\n\t\t<div class="product-design__content">\n\t\t\t<h4 data-product-price>' + $('[data-product-price]:first').text() + '</h4>\n\t\t\t<h5>' + design.tagline + '</h5>\n\t\t\t<h6>' + design.title + '</h6>\n\t\t</div>\n\t');
-
-	loading(false);
-};
-
-var productDesigns = function productDesigns(designs, product) {
-	renderDesign(designs, product);
-	renderDesigns(designs, product);
-	$('.product-designs').on('click', '.product-designs__design', function () {
-		return loading(true);
-	});
-};
-
-exports.default = productDesigns;
 },{"algoliasearch":"../../node_modules/algoliasearch/src/browser/builds/algoliasearch.js","../config":"config.js"}],"product/product-section.js":[function(require,module,exports) {
 'use strict';
 
@@ -13743,13 +13947,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _productDesigns = require('../designs/product-designs');
+
+var _productDesigns2 = _interopRequireDefault(_productDesigns);
+
 var _relatedProducts = require('./related-products');
 
 var _relatedProducts2 = _interopRequireDefault(_relatedProducts);
-
-var _productDesigns = require('./product-designs');
-
-var _productDesigns2 = _interopRequireDefault(_productDesigns);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -13888,7 +14092,6 @@ exports.default = function () {
       }
 
       var designs = JSON.parse($('[data-design-json]').html());
-      var product = JSON.parse($('[data-product-json]').html());
       (0, _productDesigns2.default)(designs, this.productSingleObject);
     },
 
@@ -13999,7 +14202,7 @@ exports.default = function () {
 
   return Product;
 }();
-},{"./related-products":"product/related-products.js","./product-designs":"product/product-designs.js"}],"modules/featured-collection.js":[function(require,module,exports) {
+},{"../designs/product-designs":"designs/product-designs.js","./related-products":"product/related-products.js"}],"modules/featured-collection.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14365,7 +14568,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '49667' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '58332' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

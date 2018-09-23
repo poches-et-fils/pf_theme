@@ -1,4 +1,5 @@
 import algoliasearch from 'algoliasearch';
+import slug from '@sindresorhus/slugify';
 import config from '../config';
 import allDesigns from './all-designs';
 
@@ -50,6 +51,49 @@ const onDesignSelected = design => {
 	window.location.href = `/products/${design.handle}`;
 };
 
+const updateDesignCategoryText = newCategory => {
+	$('.product-design-list-container .selector--heading--left span').text(newCategory);
+};
+
+const getDesignCategories = designs => {
+	const thisCategory = slug(designs.find(design => design.thisDesign).category);
+	const categories = designs.reduce((categories, design) => {
+		const categorySlug = slug(design.category);
+
+		if (categories[categorySlug]) {
+			categories[categorySlug].designs.push(design);
+		} else {
+			categories[categorySlug] = {
+				title: design.category,
+				designs: [design]
+			};
+		}
+
+		return categories;
+	}, {});
+
+	return Object.keys(categories)
+		.sort(category => category === thisCategory ? -1 : 1)
+		.map(category => categories[category]);
+};
+
+const initDesignCategorySlider = () => {
+	const slider = '.product-designs.glide';
+	const sliderOptions = {type: 'carousel', perView: 1};
+	const glide = new Glide(slider, sliderOptions);
+
+	glide.on(['mount.after'], () => {
+		$('.product-designs__design a').click(() => loading(true));
+	});
+
+	glide.on(['run.after'], () => {
+		const newCategory = $('.product-designs .glide__slide--active').data('category');
+		updateDesignCategoryText(newCategory);
+	});
+
+	glide.mount();
+};
+
 const renderDesigns = async (designSettings, product) => {
 	const {hits: designProducts} = await getDesignProducts(product);
 
@@ -58,15 +102,22 @@ const renderDesigns = async (designSettings, product) => {
 	}
 
 	const designs = mergeProductsWithSettings(designProducts, designSettings, product);
+	const designCategories = getDesignCategories(designs);
 
-	$('.product-designs').html(designs.map(design => `
-		<div class="product-designs__design ${design.thisDesign ? 'product-designs__design--active' : ''}">
-			<a href="/products/${design.handle}">
-				<img src="${design.swatch}" width="48" height="48"/>
-			</a>
-		</div>
+	$('.product-designs .glide__slides').html(designCategories.map(({title, designs}) => `
+		<li class="glide__slide" data-category="${title}">
+			${designs.map(design => `
+				<div class="product-designs__design ${design.thisDesign ? 'product-designs__design--active' : ''}">
+					<a href="/products/${design.handle}">
+						<img src="${design.swatch}" width="48" height="48"/>
+					</a>
+				</div>
+			`).join('')}
+		</li>
 	`).join(''));
 
+	updateDesignCategoryText(designCategories[0].title);
+	initDesignCategorySlider();
 	allDesigns(designs, onDesignSelected);
 	loading(false);
 };
@@ -95,7 +146,11 @@ const renderDesign = (designs, product) => {
 const productDesigns = (designs, product) => {
 	renderDesign(designs, product);
 	renderDesigns(designs, product);
-	$('.product-designs').on('click', '.product-designs__design', () => loading(true));
+
+	$('.featured-collection').on('glide.mounted', () => {
+		$('.featured-collection .product-listing__item').off('click', '.product-listing__colors a');
+		$('.featured-collection .product-listing__item').on('click', '.product-listing__colors a', handleColorChange);
+	});
 };
 
 export default productDesigns;

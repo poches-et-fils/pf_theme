@@ -3,6 +3,7 @@ development:
   password: f70b440e90ecee3a754b2af0293b772d
   theme_id: "32821510207"
   store: poches-development-mica.myshopify.com
+  timeout: 200s
   ignore_files:
     - settings_data.json
 
@@ -11,9 +12,9 @@ development-live:
   password: f70b440e90ecee3a754b2af0293b772d
   theme_id: "32877084735"
   store: poches-development-mica.myshopify.com
+  timeout: 200s
   ignore_files:
     - settings_data.json
-  timeout: 200s
 
 developmentfr:
   directory: src

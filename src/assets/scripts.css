@@ -1749,10 +1749,13 @@ textarea.input-error {
         padding: 0; } }
 
 .product-designs-container .product-designs__loading {
-  margin-bottom: 35px; }
+  margin: 50px 50px 80px 50px; }
 
 .product-designs-container .product-designs__loaded {
   display: none; }
+
+.product-designs-container .variant--selector--bar {
+  margin-bottom: 0; }
 
 .product-designs-container .selector--heading--right,
 .product-designs-container .selector--heading--left,
@@ -1773,18 +1776,47 @@ textarea.input-error {
 .product-designs-container.product-designs--loaded .product-designs__loading {
   display: none; }
 
-.product-designs-container .product-designs {
+.product-designs-container .product-designs .glide__track {
+  margin: 0 -5px; }
+
+.product-designs-container .product-designs .glide__slides {
+  margin: 0; }
+
+.product-designs-container .product-designs .glide__slide {
   display: flex;
   flex-wrap: wrap;
-  margin: -10px -8px 0 -8px; }
-  .product-designs-container .product-designs .product-designs__design {
+  margin: 0; }
+  .product-designs-container .product-designs .glide__slide .product-designs__design {
     padding: 3px;
     margin: 5px; }
-    .product-designs-container .product-designs .product-designs__design img {
+    .product-designs-container .product-designs .glide__slide .product-designs__design img {
       width: 48px;
       height: 48px; }
-  .product-designs-container .product-designs .product-designs__design--active {
+  .product-designs-container .product-designs .glide__slide .product-designs__design--active {
     border: 1px solid #353434; }
+
+.product-designs-container .product-designs .glide__arrow--left,
+.product-designs-container .product-designs .glide__arrow--right {
+  top: 50%; }
+
+.product-designs-container .product-designs .glide__arrow--left {
+  left: -60px; }
+
+.product-designs-container .product-designs .glide__arrow--right {
+  right: -60px; }
+
+@media (max-width: 900px) {
+  .product-designs-container .product-designs__loading svg {
+    display: block;
+    margin: 0 auto; }
+  .product-designs-container .product-designs .glide__arrow--left svg,
+  .product-designs-container .product-designs .glide__arrow--right svg {
+    height: 15px;
+    width: 15px; }
+  .product-designs-container .product-designs .glide__arrow--left {
+    left: -33px; }
+  .product-designs-container .product-designs .glide__arrow--right {
+    right: -33px; } }
 
 .related-products-container {
   margin-bottom: 90px; }

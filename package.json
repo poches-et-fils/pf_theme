@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "@shopify/slate": "^0.14.0",
+    "@sindresorhus/slugify": "0.3.0",
     "algoliasearch": "3.30.0",
     "global": "^4.3.2",
     "scroll": "2.0.3"

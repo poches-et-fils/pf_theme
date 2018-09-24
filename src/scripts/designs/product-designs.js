@@ -77,8 +77,14 @@ const getDesignCategories = designs => {
 		.map(category => categories[category]);
 };
 
-const initDesignCategorySlider = () => {
+const initDesignCategorySlider = categories => {
 	const slider = '.product-designs.glide';
+
+	if (categories.length <= 1) {
+		$(slider).find('.glide__arrows').hide();
+		return;
+	}
+
 	const sliderOptions = {type: 'carousel', perView: 1};
 	const glide = new Glide(slider, sliderOptions);
 
@@ -117,7 +123,7 @@ const renderDesigns = async (designSettings, product) => {
 	`).join(''));
 
 	updateDesignCategoryText(designCategories[0].title);
-	initDesignCategorySlider();
+	initDesignCategorySlider(designCategories);
 	allDesigns(designs, onDesignSelected);
 	loading(false);
 };

@@ -21,12 +21,11 @@
 </style>
 
 
-<div class="cs-faq-section">
+<div class="faq cs-faq-section">
   <h1 class="faq-heading">FAQs</h1>
-  <div class="form-block w-form">
-
+  <div class="faq__search-form">
     <form action="/search" class="cs-faq-form">
-      <input class="cs-faq-text-field w-input" maxlength="256" autofocus="true" type="text"  name="q" value="{{ search.terms | escape }}"  placeholder="What can we help you with ?"  />
+      <input class="faq__search" maxlength="256" autofocus="true" type="text"  name="q" value="{{ search.terms | escape }}"  placeholder="What can we help you with ?"  />
       <input hidden type="submit" value="Search" />
     </form>
   </div>
@@ -36,9 +35,7 @@
   <div class="cs-faq-side-info">
     <div class="div-block-3">
       <div class="faq-questions-live-chat">
-
         {% comment %}
-
         The goal is to make these faq-links hide/show the corresponding blocks when clicked.
         The default visibile item is #drop1
 
@@ -49,13 +46,9 @@
         faq3 == drop3
         faq4 == drop4
         faq5 == drop5
+        {% endcomment %}
 
-
-        {%endcomment%}
-
-
-      
-         <a href="#" class="faq-link" id="faq1">Most Popular Questions</a>
+        <a href="#" class="faq-link" id="faq1">Most Popular Questions</a>
         <a href="#" class="faq-link" id="faq1">Products</a>
         <a href="#" class="faq-link" id="faq2">Payments</a>
         <a href="#" class="faq-link" id="faq3">Orders</a>
@@ -66,156 +59,113 @@
         <div class="need-help">Need Help ?</div>
         <div class="need-help-subheading">Our team is ready to help you on live chat.</div>
         <a href="#" class="live-chat-button w-button">Live Chat</a></div>
-      <div class="faq-questions-live-chat light">
-        <h2 style="font-size: 48px;font-weight: bold;">Contact Us</h2>
-        <h5 class="company-name">Poches ET Fils hq</h5>
-        <p>2005 Street Name,<br>City, State, <br>Country<br><br>Tel: 555-555-5555<br>info@business.com</p>
-        <h5 class="company-name">Where to find us</h5>
-        <p>2005 Street Name,<br>City, State, <br>Country<br><br>Tel: 555-555-5555<br>info@business.com</p>
+        <div class="faq-questions-live-chat light">
+          <h2 style="font-size: 48px;font-weight: bold;">Contact Us</h2>
+          <h5 class="company-name">Poches ET Fils hq</h5>
+          <p>2005 Street Name,<br>City, State, <br>Country<br><br>Tel: 555-555-5555<br>info@business.com</p>
+          <h5 class="company-name">Where to find us</h5>
+          <p>2005 Street Name,<br>City, State, <br>Country<br><br>Tel: 555-555-5555<br>info@business.com</p>
+        </div>
       </div>
-    </div>
-    <div class="div-block-4">
-      <div class="products-faq-toggle">
+      <div class="div-block-4">
+        <div class="products-faq-toggle">
+          {% for block in section.blocks %}  
+            {% comment %}
+              The 'cycle' iteration will dynamically add the number based on the amount of blocks in the shopify admin.
+            {%endcomment%}
 
-
-
-
-
-        {% for block in section.blocks %}  
-
-        {%comment%}
-
-        The 'cycle' iteration will dynamically add the number based on the amount of blocks in the shopify admin.
-
-        {%endcomment%}
-
-        <div id="drop-container-{% cycle '1', '2', '3', '4', '5', '6' %}">
-
-          <h1 class="toggle-heading">{{block.settings.title}}</h1>
-          <div class="toggles--section">
-
-
-            {%  for article in blogs.frequently-asked-questions.articles limit: 5%}
-
-
-            {% if article.tags contains block.settings.tag %}
-
-            <div class="toggle--item">
-              <div class="toggle--activation" data-ix="toggle-interaction">
-                <h4 class="toggle--heading">{{ article.title }}</h4>
-                <img src="https://cdn.shopify.com/s/files/1/0013/6685/1647/files/minus.svg" class="toggle--icon--minus" style="display: none">
-                <img src="https://cdn.shopify.com/s/files/1/0013/6685/1647/files/plus.svg" class="toggle--icon--plus"></div>
-              <div class="toggle--contents">
-
-                <p>
-                  {{ article.content | strip_html | truncatewords: 100 }}
-                </p>
-
-
-                <a href="{{ article.url }}"> Read more</a>
+            <div id="drop-container-{% cycle '1', '2', '3', '4', '5', '6' %}">
+              <h1 class="toggle-heading">{{block.settings.title}}</h1>
+              <div class="toggles--section">
+                {% for article in blogs.frequently-asked-questions.articles limit: 5 %}
+                  {% if article.tags contains block.settings.tag %}
+                  <div class="toggle--item">
+                    <div class="toggle--activation" data-ix="toggle-interaction">
+                      <h4 class="toggle--heading">{{ article.title }}</h4>
+                      <img src="https://cdn.shopify.com/s/files/1/0013/6685/1647/files/minus.svg" class="toggle--icon--minus" style="display: none">
+                      <img src="https://cdn.shopify.com/s/files/1/0013/6685/1647/files/plus.svg" class="toggle--icon--plus"></div>
+                      <div class="toggle--contents">
+                      <p>{{ article.content | strip_html | truncatewords: 100 }}</p>
+                      <a href="{{ article.url }}"> Read more</a>
+                    </div>
+                  </div>
+                  {% endif %}
+                {% endfor %}
               </div>
             </div>
-
-            {% endif %}
-            {% endfor %}
-
-          </div>
-
+          {% endfor %}
         </div>
+        <div class="cs-map-block">
+          <div class="cs-map w-widget w-widget-map">
+
+<script>
+  const toggleFAQ = event => {
+    const FAQ_ID  = $(event.target).attr('id')
+    const DROP_ID = `drop-container-${FAQ_ID.replace(/\D+/, '')}`
+    
+    const container = $(`#${DROP_ID}`)
+    const otherToggles = $('*[id^=drop-container-]').not(container)
+    
+    console.log(container)
+
+    container.show()
+
+    otherToggles.hide()
+  }
 
 
-        {%endfor%}
+  const toggleProductInfo = event => {
+    const container = $(event.target).closest('.toggle--item')
+    const otherToggles = $('.toggle--item').not(container)
+
+    container.find('.toggle--contents').toggle("fast")
+    container.find('img.toggle--icon--plus').toggle()
+    container.find('img.toggle--icon--minus').toggle()
+
+    otherToggles.find('.toggle--contents').hide()
+  }
 
 
+  $(document).ready(_ => {
+    $(document).on('click', '.toggle--activation', toggleProductInfo)
+    $(document).on('click', '*[id^=faq]', toggleFAQ)
+    toggleFAQ($('a#faq1').click())
+  })
+</script>
 
-
-
-
-      </div>
-      <div class="cs-map-block">
-        <div class="cs-map w-widget w-widget-map">
-
-
-          <script>
-            const toggleFAQ = event => {
-              const FAQ_ID  = $(event.target).attr('id')
-              const DROP_ID = `drop-container-${FAQ_ID.replace(/\D+/, '')}`
-              
-              const container = $(`#${DROP_ID}`)
-              const otherToggles = $('*[id^=drop-container-]').not(container)
-              
-              console.log(container)
-
-              container.show()
-
-              otherToggles.hide()
-            }
-            
-
-            const toggleProductInfo = event => {
-              const container = $(event.target).closest('.toggle--item')
-              const otherToggles = $('.toggle--item').not(container)
-
-              container.find('.toggle--contents').toggle("fast")
-              container.find('img.toggle--icon--plus').toggle()
-              container.find('img.toggle--icon--minus').toggle()
-
-              otherToggles.find('.toggle--contents').hide()
-            }
-
-
-            $(document).ready(_ => {
-              $(document).on('click', '.toggle--activation', toggleProductInfo)
-              $(document).on('click', '*[id^=faq]', toggleFAQ)
-              toggleFAQ($('a#faq1').click())
-            })
-          </script>
-          
-          {% schema %}
-          {
-          "name": "FAQ Blocks",
-          "max_blocks": 6,
-          "settings": [
-          {
-          "id": "text-box",
-          "type": "text",
-          "label": "Heading",
-          "default": "Title"
-          }
-          ],
-          "blocks": [
-          {
-          "type": "select",
-          "name": "Add Button",
-          "settings": [
-          {
-          "id": "title",
-          "type": "text",
-          "label": "Block Title"
-          },
-          {
-          "id": "tag",
-          "type": "text",
-          "label": "Tag text (lowercase}",
-          "default": "product"
-          }
-          ]
-          }
-          ],
-          "presets": [
-          {
-          "name": "Call to Action Blocks",
-          "category": "CTA button",
-          "blocks": [
-          { 
-          "type": "select"
-          },
-          {
-          "type": "select"
-          }
-          ]
-          }
-          ]
-          }
-          {% endschema %}
+{% schema %}
+{
+  "name": "FAQ Blocks",
+  "max_blocks": 6,
+  "settings": [{
+    "id": "text-box",
+    "type": "text",
+    "label": "Heading",
+    "default": "Title"
+  }],
+  "blocks": [{
+    "type": "select",
+    "name": "Add Button",
+    "settings": [{
+      "id": "title",
+      "type": "text",
+      "label": "Block Title"
+    }, {
+      "id": "tag",
+      "type": "text",
+      "label": "Tag text (lowercase}",
+      "default": "product"
+    }]
+  }],
+  "presets": [{
+    "name": "Call to Action Blocks",
+    "category": "CTA button",
+    "blocks": [{ 
+      "type": "select"
+    }, {
+      "type": "select"
+    }]
+  }]
+}
+{% endschema %}
 

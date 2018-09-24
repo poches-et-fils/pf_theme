@@ -2277,3 +2277,21 @@ textarea.input-error {
         font-size: 18px;
         text-align: left;
         margin: 20px 0 20px 0; } }
+
+.faq .faq__search-form {
+  width: 100%;
+  max-width: 704px;
+  margin: 0 auto; }
+
+.faq .faq__search {
+  background-image: url(https://cdn.shopify.com/s/files/1/0013/6685/1647/files/search.svg?3246824400830046954);
+  background-repeat: no-repeat;
+  background-position: 20px;
+  border-radius: 0;
+  height: 70.4px;
+  width: 100%;
+  padding: 24px 0 24px 60px; }
+  .faq .faq__search:focus {
+    outline: none; }
+  .faq .faq__search::placeholder {
+    color: #161616; }

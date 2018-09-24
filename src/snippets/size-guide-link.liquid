@@ -1,0 +1,28 @@
+{% assign size_guide_link = '' %}
+{% assign type_size_guide_link = '' %}
+
+{% for block in section.blocks %}
+  {% if block.type == 'size_text' %}
+    {% if block.settings.product_type == product.type %}
+      {% assign type_size_guide_link = block.settings.size_guide_link %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+ 
+{% if product.metafields.product_info.size_guide_link != 'none' %}
+	{% assign size_guide_link = product.metafields.product_info.size_guide_link %}
+{% elsif type_size_guide_link > '' %}
+	{% assign size_guide_link = type_size_guide_link %}
+{% else %}
+	{% assign size_guide_link = section.settings.default_size_guide_link %}
+{% endif %}
+
+{% if size_guide_link > '' %}
+	<a
+		href="{{ size_guide_link }}"
+		target="_BLANK"
+		class="sizeguide-link"
+	>
+		{{ 'products.product.size_guide_link' | t }}
+	</a>
+{% endif %}

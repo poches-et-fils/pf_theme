@@ -14129,21 +14129,13 @@ var renderDesigns = function () {
 			while (1) {
 				switch (_context.prev = _context.next) {
 					case 0:
-						_context.next = 2;
+						_context.prev = 0;
+						_context.next = 3;
 						return getDesignProducts(product);
 
-					case 2:
+					case 3:
 						_ref2 = _context.sent;
 						designProducts = _ref2.hits;
-
-						if (designProducts) {
-							_context.next = 6;
-							break;
-						}
-
-						return _context.abrupt('return');
-
-					case 6:
 						designs = mergeProductsWithSettings(designProducts, designSettings, product);
 						designCategories = getDesignCategories(designs);
 
@@ -14151,22 +14143,30 @@ var renderDesigns = function () {
 						$('.product-designs .glide__slides').html(designCategories.map(function (_ref3) {
 							var title = _ref3.title,
 							    designs = _ref3.designs;
-							return '\n\t\t<li class="glide__slide" data-category="' + title + '">\n\t\t\t' + designs.map(function (design) {
-								return '\n\t\t\t\t<div class="product-designs__design ' + (design.thisDesign ? 'product-designs__design--active' : '') + '">\n\t\t\t\t\t<a href="/products/' + design.handle + '">\n\t\t\t\t\t\t<img src="' + design.swatch + '" width="48" height="48"/>\n\t\t\t\t\t</a>\n\t\t\t\t</div>\n\t\t\t';
-							}).join('') + '\n\t\t</li>\n\t';
+							return '\n\t\t\t<li class="glide__slide" data-category="' + title + '">\n\t\t\t\t' + designs.map(function (design) {
+								return '\n\t\t\t\t\t<div class="product-designs__design ' + (design.thisDesign ? 'product-designs__design--active' : '') + '">\n\t\t\t\t\t\t<a href="/products/' + design.handle + '">\n\t\t\t\t\t\t\t<img src="' + design.swatch + '" width="48" height="48"/>\n\t\t\t\t\t\t</a>\n\t\t\t\t\t</div>\n\t\t\t\t';
+							}).join('') + '\n\t\t\t</li>\n\t\t';
 						}).join(''));
 
 						updateDesignCategoryText(designCategories[0].title);
 						initDesignCategorySlider(designCategories);
 						(0, _allDesigns2.default)(designs, onDesignSelected);
 						loading(false);
+						_context.next = 17;
+						break;
 
-					case 13:
+					case 14:
+						_context.prev = 14;
+						_context.t0 = _context['catch'](0);
+
+						$('.product-design-list-container').hide();
+
+					case 17:
 					case 'end':
 						return _context.stop();
 				}
 			}
-		}, _callee, _this);
+		}, _callee, _this, [[0, 14]]);
 	}));
 
 	return function renderDesigns(_x, _x2) {
@@ -14180,6 +14180,7 @@ var renderDesign = function renderDesign(designs, product) {
 	});
 
 	if (!design) {
+		loading(false);
 		return $('.product-design').addClass('product-design--not-found');
 	}
 

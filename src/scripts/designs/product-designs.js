@@ -101,37 +101,37 @@ const initDesignCategorySlider = categories => {
 };
 
 const renderDesigns = async (designSettings, product) => {
-	const {hits: designProducts} = await getDesignProducts(product);
+	try {
+		const {hits: designProducts} = await getDesignProducts(product);
+		const designs = mergeProductsWithSettings(designProducts, designSettings, product);
+		const designCategories = getDesignCategories(designs);
 
-	if (!designProducts) {
-		return;
+		$('.product-designs .glide__slides').html(designCategories.map(({title, designs}) => `
+			<li class="glide__slide" data-category="${title}">
+				${designs.map(design => `
+					<div class="product-designs__design ${design.thisDesign ? 'product-designs__design--active' : ''}">
+						<a href="/products/${design.handle}">
+							<img src="${design.swatch}" width="48" height="48"/>
+						</a>
+					</div>
+				`).join('')}
+			</li>
+		`).join(''));
+
+		updateDesignCategoryText(designCategories[0].title);
+		initDesignCategorySlider(designCategories);
+		allDesigns(designs, onDesignSelected);
+		loading(false);
+	} catch (error) {
+		$('.product-design-list-container').hide();
 	}
-
-	const designs = mergeProductsWithSettings(designProducts, designSettings, product);
-	const designCategories = getDesignCategories(designs);
-
-	$('.product-designs .glide__slides').html(designCategories.map(({title, designs}) => `
-		<li class="glide__slide" data-category="${title}">
-			${designs.map(design => `
-				<div class="product-designs__design ${design.thisDesign ? 'product-designs__design--active' : ''}">
-					<a href="/products/${design.handle}">
-						<img src="${design.swatch}" width="48" height="48"/>
-					</a>
-				</div>
-			`).join('')}
-		</li>
-	`).join(''));
-
-	updateDesignCategoryText(designCategories[0].title);
-	initDesignCategorySlider(designCategories);
-	allDesigns(designs, onDesignSelected);
-	loading(false);
 };
 
 const renderDesign = (designs, product) => {
 	const design = designs.find(design => design.name === product.vendor.toLowerCase());
 
 	if (!design) {
+		loading(false);
 		return $('.product-design').addClass('product-design--not-found');
 	}
 

@@ -1665,6 +1665,12 @@ textarea.input-error {
 
 .product--form--container {
   margin-left: 50px; }
+  .product--form--container .product--form--selector {
+    margin: 0;
+    min-height: unset;
+    padding: 10px 0; }
+  .product--form--container .hide {
+    display: none; }
   .product--form--container .product--form {
     border-bottom: none; }
   .product--form--container .product--form--price {

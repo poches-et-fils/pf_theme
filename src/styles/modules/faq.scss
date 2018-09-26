@@ -1,8 +1,9 @@
 .faq {
 	.faq__search-form {
 		width: 100%;
-		max-width: 704px;
+		max-width: 754px;
 		margin: 0 auto;
+		padding: 0 25px;
 	}
 
 	.faq__search {
@@ -10,16 +11,106 @@
 		background-repeat: no-repeat;
 		background-position: 20px;
 		border-radius: 0;
-		height: 70.4px;
+		height: 70px;
 		width: 100%;
 		padding: 24px 0 24px 60px;
-		
+	
 		&:focus {
 			outline: none;
 		}
 
 		&::placeholder {
 			color: #161616;
+		}
+	}
+
+	.faq__container {
+		padding: 80px 80px 0 80px;
+	}
+
+	.faq__sidebar-layout {
+		display: flex;
+	}
+
+	.faq__sidebar {
+		width: 25%;
+		padding: 20px;
+		background: #EAEAEA;
+
+		h3 {
+			margin-top: 0;
+			margin-bottom: 15px;
+			font-size: 16px;
+			font-weight: normal;
+		}
+
+		ul {
+			list-style: none;
+			margin-bottom: 30px;
+			padding-left: 0;
+		}
+
+		ul li {
+			margin-bottom: 10px;
+		}
+
+		ul li a {
+			font-size: 16px;
+			text-decoration: none;
+			&.active { font-weight: bold; }
+		}
+
+		p {
+			font-size: 14px;
+			margin-top: -8px;
+			margin-bottom: 5px;
+		}
+
+		a.live-chat-button {
+			width: 100%;
+			font-weight: 600;
+			font-size: 14px;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			text-align: center;
+			margin-bottom: 0;
+			&:active, &:hover { color: #fff; }
+		}
+	}
+
+	.faq__questions {
+		width: 75%;
+		padding-left: 40px;
+
+		h2 {
+			font-weight: bold;
+			font-size: 42px;
+			margin-top: 10px;
+			margin-bottom: 40px;
+		}
+
+		.toggles--section {
+			border-top: 1px solid #898686;
+		}
+
+		.toggles--section .toggle--item {
+			border-bottom: 1px solid #898686;
+		}
+
+		.toggles--section .toggle--heading {
+			text-transform: none;
+		}
+
+		.toggles--section .toggle--contents {
+			font-size: 14px;
+		}
+	}
+
+	@media (max-width: 900px) {
+		.faq__search {
+			height: 55px;
+			font-size: 14px;
+			background-size: 20px;
 		}
 	}
 }

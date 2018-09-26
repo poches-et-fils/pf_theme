@@ -301,5 +301,15 @@
     },
     "date_formats": {
         "month_day_year": "%d %B, %Y"
+    },
+    "faq_page": {
+        "title": "FAQs",
+        "search_bar": "What can we help you with?",
+        "sidebar_title": "Most Popular Questions",
+        "live_chat": {
+            "title": "Need help?",
+            "text": "Our team is ready to help you on live chat",
+            "button_text": "Live Chat"
+        }
     }
 }

@@ -14695,7 +14695,1799 @@ var handleAddItemSubmit = function handleAddItemSubmit(e) {
 
 exports.addItem = addItem;
 exports.handleAddItemSubmit = handleAddItemSubmit;
-},{"../header/popout-cart":"header/popout-cart.js"}],"theme.js":[function(require,module,exports) {
+},{"../header/popout-cart":"header/popout-cart.js"}],"../../node_modules/js-search/dist/commonjs/IndexStrategy/AllSubstringsIndexStrategy.js":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * Indexes for all substring searches (e.g. the term "cat" is indexed as "c", "ca", "cat", "a", "at", and "t").
+ */
+var AllSubstringsIndexStrategy = exports.AllSubstringsIndexStrategy = function () {
+  function AllSubstringsIndexStrategy() {
+    _classCallCheck(this, AllSubstringsIndexStrategy);
+  }
+
+  _createClass(AllSubstringsIndexStrategy, [{
+    key: 'expandToken',
+
+
+    /**
+     * @inheritDocs
+     */
+    value: function expandToken(token) {
+      var expandedTokens = [];
+      var string;
+
+      for (var i = 0, length = token.length; i < length; ++i) {
+        string = '';
+
+        for (var j = i; j < length; ++j) {
+          string += token.charAt(j);
+          expandedTokens.push(string);
+        }
+      }
+
+      return expandedTokens;
+    }
+  }]);
+
+  return AllSubstringsIndexStrategy;
+}();
+
+;
+//# sourceMappingURL=AllSubstringsIndexStrategy.js.map
+},{}],"../../node_modules/js-search/dist/commonjs/IndexStrategy/ExactWordIndexStrategy.js":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * Indexes for exact word matches.
+ */
+var ExactWordIndexStrategy = exports.ExactWordIndexStrategy = function () {
+  function ExactWordIndexStrategy() {
+    _classCallCheck(this, ExactWordIndexStrategy);
+  }
+
+  _createClass(ExactWordIndexStrategy, [{
+    key: 'expandToken',
+
+
+    /**
+     * @inheritDocs
+     */
+    value: function expandToken(token) {
+      return token ? [token] : [];
+    }
+  }]);
+
+  return ExactWordIndexStrategy;
+}();
+
+;
+//# sourceMappingURL=ExactWordIndexStrategy.js.map
+},{}],"../../node_modules/js-search/dist/commonjs/IndexStrategy/PrefixIndexStrategy.js":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * Indexes for prefix searches (e.g. the term "cat" is indexed as "c", "ca", and "cat" allowing prefix search lookups).
+ */
+var PrefixIndexStrategy = exports.PrefixIndexStrategy = function () {
+  function PrefixIndexStrategy() {
+    _classCallCheck(this, PrefixIndexStrategy);
+  }
+
+  _createClass(PrefixIndexStrategy, [{
+    key: 'expandToken',
+
+
+    /**
+     * @inheritDocs
+     */
+    value: function expandToken(token) {
+      var expandedTokens = [];
+      var string = '';
+
+      for (var i = 0, length = token.length; i < length; ++i) {
+        string += token.charAt(i);
+        expandedTokens.push(string);
+      }
+
+      return expandedTokens;
+    }
+  }]);
+
+  return PrefixIndexStrategy;
+}();
+
+;
+//# sourceMappingURL=PrefixIndexStrategy.js.map
+},{}],"../../node_modules/js-search/dist/commonjs/IndexStrategy/index.js":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _AllSubstringsIndexStrategy = require('./AllSubstringsIndexStrategy');
+
+Object.defineProperty(exports, 'AllSubstringsIndexStrategy', {
+  enumerable: true,
+  get: function get() {
+    return _AllSubstringsIndexStrategy.AllSubstringsIndexStrategy;
+  }
+});
+
+var _ExactWordIndexStrategy = require('./ExactWordIndexStrategy');
+
+Object.defineProperty(exports, 'ExactWordIndexStrategy', {
+  enumerable: true,
+  get: function get() {
+    return _ExactWordIndexStrategy.ExactWordIndexStrategy;
+  }
+});
+
+var _PrefixIndexStrategy = require('./PrefixIndexStrategy');
+
+Object.defineProperty(exports, 'PrefixIndexStrategy', {
+  enumerable: true,
+  get: function get() {
+    return _PrefixIndexStrategy.PrefixIndexStrategy;
+  }
+});
+//# sourceMappingURL=index.js.map
+},{"./AllSubstringsIndexStrategy":"../../node_modules/js-search/dist/commonjs/IndexStrategy/AllSubstringsIndexStrategy.js","./ExactWordIndexStrategy":"../../node_modules/js-search/dist/commonjs/IndexStrategy/ExactWordIndexStrategy.js","./PrefixIndexStrategy":"../../node_modules/js-search/dist/commonjs/IndexStrategy/PrefixIndexStrategy.js"}],"../../node_modules/js-search/dist/commonjs/Sanitizer/CaseSensitiveSanitizer.js":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * Enforces case-sensitive text matches.
+ */
+var CaseSensitiveSanitizer = exports.CaseSensitiveSanitizer = function () {
+  function CaseSensitiveSanitizer() {
+    _classCallCheck(this, CaseSensitiveSanitizer);
+  }
+
+  _createClass(CaseSensitiveSanitizer, [{
+    key: 'sanitize',
+
+
+    /**
+     * @inheritDocs
+     */
+    value: function sanitize(text) {
+      return text ? text.trim() : '';
+    }
+  }]);
+
+  return CaseSensitiveSanitizer;
+}();
+
+;
+//# sourceMappingURL=CaseSensitiveSanitizer.js.map
+},{}],"../../node_modules/js-search/dist/commonjs/Sanitizer/LowerCaseSanitizer.js":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * Sanitizes text by converting to a locale-friendly lower-case version and triming leading and trailing whitespace.
+ */
+var LowerCaseSanitizer = exports.LowerCaseSanitizer = function () {
+  function LowerCaseSanitizer() {
+    _classCallCheck(this, LowerCaseSanitizer);
+  }
+
+  _createClass(LowerCaseSanitizer, [{
+    key: 'sanitize',
+
+
+    /**
+     * @inheritDocs
+     */
+    value: function sanitize(text) {
+      return text ? text.toLocaleLowerCase().trim() : '';
+    }
+  }]);
+
+  return LowerCaseSanitizer;
+}();
+
+;
+//# sourceMappingURL=LowerCaseSanitizer.js.map
+},{}],"../../node_modules/js-search/dist/commonjs/Sanitizer/index.js":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _CaseSensitiveSanitizer = require('./CaseSensitiveSanitizer');
+
+Object.defineProperty(exports, 'CaseSensitiveSanitizer', {
+  enumerable: true,
+  get: function get() {
+    return _CaseSensitiveSanitizer.CaseSensitiveSanitizer;
+  }
+});
+
+var _LowerCaseSanitizer = require('./LowerCaseSanitizer');
+
+Object.defineProperty(exports, 'LowerCaseSanitizer', {
+  enumerable: true,
+  get: function get() {
+    return _LowerCaseSanitizer.LowerCaseSanitizer;
+  }
+});
+//# sourceMappingURL=index.js.map
+},{"./CaseSensitiveSanitizer":"../../node_modules/js-search/dist/commonjs/Sanitizer/CaseSensitiveSanitizer.js","./LowerCaseSanitizer":"../../node_modules/js-search/dist/commonjs/Sanitizer/LowerCaseSanitizer.js"}],"../../node_modules/js-search/dist/commonjs/getNestedFieldValue.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = getNestedFieldValue;
+/**
+ * Find and return a nested object value.
+ *
+ * @param object to crawl
+ * @param path Property path
+ * @returns {any}
+ */
+function getNestedFieldValue(object, path) {
+  path = path || [];
+  object = object || {};
+
+  var value = object;
+
+  // walk down the property path
+  for (var i = 0; i < path.length; i++) {
+    value = value[path[i]];
+
+    if (value == null) {
+      return null;
+    }
+  }
+
+  return value;
+}
+//# sourceMappingURL=getNestedFieldValue.js.map
+},{}],"../../node_modules/js-search/dist/commonjs/SearchIndex/TfIdfSearchIndex.js":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.TfIdfSearchIndex = undefined;
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _getNestedFieldValue = require('../getNestedFieldValue');
+
+var _getNestedFieldValue2 = _interopRequireDefault(_getNestedFieldValue);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * Search index capable of returning results matching a set of tokens and ranked according to TF-IDF.
+ */
+var TfIdfSearchIndex = exports.TfIdfSearchIndex = function () {
+  function TfIdfSearchIndex(uidFieldName) {
+    _classCallCheck(this, TfIdfSearchIndex);
+
+    this._uidFieldName = uidFieldName;
+    this._tokenToIdfCache = {};
+    this._tokenMap = {};
+  }
+
+  /**
+   * @inheritDocs
+   */
+
+
+  _createClass(TfIdfSearchIndex, [{
+    key: 'indexDocument',
+    value: function indexDocument(token, uid, doc) {
+      this._tokenToIdfCache = {}; // New index invalidates previous IDF caches
+
+      var tokenMap = this._tokenMap;
+      var tokenDatum;
+
+      if (_typeof(tokenMap[token]) !== 'object') {
+        tokenMap[token] = tokenDatum = {
+          $numDocumentOccurrences: 0,
+          $totalNumOccurrences: 1,
+          $uidMap: {}
+        };
+      } else {
+        tokenDatum = tokenMap[token];
+        tokenDatum.$totalNumOccurrences++;
+      }
+
+      var uidMap = tokenDatum.$uidMap;
+
+      if (_typeof(uidMap[uid]) !== 'object') {
+        tokenDatum.$numDocumentOccurrences++;
+        uidMap[uid] = {
+          $document: doc,
+          $numTokenOccurrences: 1
+        };
+      } else {
+        uidMap[uid].$numTokenOccurrences++;
+      }
+    }
+
+    /**
+     * @inheritDocs
+     */
+
+  }, {
+    key: 'search',
+    value: function search(tokens, corpus) {
+      var uidToDocumentMap = {};
+
+      for (var i = 0, numTokens = tokens.length; i < numTokens; i++) {
+        var token = tokens[i];
+        var tokenMetadata = this._tokenMap[token];
+
+        // Short circuit if no matches were found for any given token.
+        if (!tokenMetadata) {
+          return [];
+        }
+
+        if (i === 0) {
+          var keys = Object.keys(tokenMetadata.$uidMap);
+          for (var j = 0, numKeys = keys.length; j < numKeys; j++) {
+            var uid = keys[j];
+
+            uidToDocumentMap[uid] = tokenMetadata.$uidMap[uid].$document;
+          }
+        } else {
+          var keys = Object.keys(uidToDocumentMap);
+          for (var j = 0, numKeys = keys.length; j < numKeys; j++) {
+            var uid = keys[j];
+
+            if (_typeof(tokenMetadata.$uidMap[uid]) !== 'object') {
+              delete uidToDocumentMap[uid];
+            }
+          }
+        }
+      }
+
+      var documents = [];
+
+      for (var uid in uidToDocumentMap) {
+        documents.push(uidToDocumentMap[uid]);
+      }
+
+      var calculateTfIdf = this._createCalculateTfIdf();
+
+      // Return documents sorted by TF-IDF
+      return documents.sort(function (documentA, documentB) {
+        return calculateTfIdf(tokens, documentB, corpus) - calculateTfIdf(tokens, documentA, corpus);
+      });
+    }
+  }, {
+    key: '_createCalculateIdf',
+    value: function _createCalculateIdf() {
+      var tokenMap = this._tokenMap;
+      var tokenToIdfCache = this._tokenToIdfCache;
+
+      return function calculateIdf(token, documents) {
+        if (!tokenToIdfCache[token]) {
+          var numDocumentsWithToken = typeof tokenMap[token] !== 'undefined' ? tokenMap[token].$numDocumentOccurrences : 0;
+
+          tokenToIdfCache[token] = 1 + Math.log(documents.length / (1 + numDocumentsWithToken));
+        }
+
+        return tokenToIdfCache[token];
+      };
+    }
+  }, {
+    key: '_createCalculateTfIdf',
+    value: function _createCalculateTfIdf() {
+      var tokenMap = this._tokenMap;
+      var uidFieldName = this._uidFieldName;
+      var calculateIdf = this._createCalculateIdf();
+
+      return function calculateTfIdf(tokens, document, documents) {
+        var score = 0;
+
+        for (var i = 0, numTokens = tokens.length; i < numTokens; ++i) {
+          var token = tokens[i];
+
+          var inverseDocumentFrequency = calculateIdf(token, documents);
+
+          if (inverseDocumentFrequency === Infinity) {
+            inverseDocumentFrequency = 0;
+          }
+
+          var uid;
+          if (uidFieldName instanceof Array) {
+            uid = document && (0, _getNestedFieldValue2.default)(document, uidFieldName);
+          } else {
+            uid = document && document[uidFieldName];
+          }
+
+          var termFrequency = typeof tokenMap[token] !== 'undefined' && typeof tokenMap[token].$uidMap[uid] !== 'undefined' ? tokenMap[token].$uidMap[uid].$numTokenOccurrences : 0;
+
+          score += termFrequency * inverseDocumentFrequency;
+        }
+
+        return score;
+      };
+    }
+  }]);
+
+  return TfIdfSearchIndex;
+}();
+
+;
+//# sourceMappingURL=TfIdfSearchIndex.js.map
+},{"../getNestedFieldValue":"../../node_modules/js-search/dist/commonjs/getNestedFieldValue.js"}],"../../node_modules/js-search/dist/commonjs/SearchIndex/UnorderedSearchIndex.js":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * Search index capable of returning results matching a set of tokens but without any meaningful rank or order.
+ */
+var UnorderedSearchIndex = exports.UnorderedSearchIndex = function () {
+  function UnorderedSearchIndex() {
+    _classCallCheck(this, UnorderedSearchIndex);
+
+    this._tokenToUidToDocumentMap = {};
+  }
+
+  /**
+   * @inheritDocs
+   */
+
+
+  _createClass(UnorderedSearchIndex, [{
+    key: 'indexDocument',
+    value: function indexDocument(token, uid, doc) {
+      if (_typeof(this._tokenToUidToDocumentMap[token]) !== 'object') {
+        this._tokenToUidToDocumentMap[token] = {};
+      }
+
+      this._tokenToUidToDocumentMap[token][uid] = doc;
+    }
+
+    /**
+     * @inheritDocs
+     */
+
+  }, {
+    key: 'search',
+    value: function search(tokens, corpus) {
+      var intersectingDocumentMap = {};
+
+      var tokenToUidToDocumentMap = this._tokenToUidToDocumentMap;
+
+      for (var i = 0, numTokens = tokens.length; i < numTokens; i++) {
+        var token = tokens[i];
+        var documentMap = tokenToUidToDocumentMap[token];
+
+        // Short circuit if no matches were found for any given token.
+        if (!documentMap) {
+          return [];
+        }
+
+        if (i === 0) {
+          var keys = Object.keys(documentMap);
+
+          for (var j = 0, numKeys = keys.length; j < numKeys; j++) {
+            var uid = keys[j];
+
+            intersectingDocumentMap[uid] = documentMap[uid];
+          }
+        } else {
+          var keys = Object.keys(intersectingDocumentMap);
+
+          for (var j = 0, numKeys = keys.length; j < numKeys; j++) {
+            var uid = keys[j];
+
+            if (_typeof(documentMap[uid]) !== 'object') {
+              delete intersectingDocumentMap[uid];
+            }
+          }
+        }
+      }
+
+      var keys = Object.keys(intersectingDocumentMap);
+      var documents = [];
+
+      for (var i = 0, numKeys = keys.length; i < numKeys; i++) {
+        var uid = keys[i];
+
+        documents.push(intersectingDocumentMap[uid]);
+      }
+
+      return documents;
+    }
+  }]);
+
+  return UnorderedSearchIndex;
+}();
+
+;
+//# sourceMappingURL=UnorderedSearchIndex.js.map
+},{}],"../../node_modules/js-search/dist/commonjs/SearchIndex/index.js":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _TfIdfSearchIndex = require('./TfIdfSearchIndex');
+
+Object.defineProperty(exports, 'TfIdfSearchIndex', {
+  enumerable: true,
+  get: function get() {
+    return _TfIdfSearchIndex.TfIdfSearchIndex;
+  }
+});
+
+var _UnorderedSearchIndex = require('./UnorderedSearchIndex');
+
+Object.defineProperty(exports, 'UnorderedSearchIndex', {
+  enumerable: true,
+  get: function get() {
+    return _UnorderedSearchIndex.UnorderedSearchIndex;
+  }
+});
+//# sourceMappingURL=index.js.map
+},{"./TfIdfSearchIndex":"../../node_modules/js-search/dist/commonjs/SearchIndex/TfIdfSearchIndex.js","./UnorderedSearchIndex":"../../node_modules/js-search/dist/commonjs/SearchIndex/UnorderedSearchIndex.js"}],"../../node_modules/js-search/dist/commonjs/Tokenizer/SimpleTokenizer.js":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var REGEX = /[^a-zа-яё0-9\-']+/i;
+
+/**
+ * Simple tokenizer that splits strings on whitespace characters and returns an array of all non-empty substrings.
+ */
+
+
+var SimpleTokenizer = exports.SimpleTokenizer = function () {
+  function SimpleTokenizer() {
+    _classCallCheck(this, SimpleTokenizer);
+  }
+
+  _createClass(SimpleTokenizer, [{
+    key: 'tokenize',
+
+
+    /**
+     * @inheritDocs
+     */
+    value: function tokenize(text) {
+      return text.split(REGEX).filter(function (text) {
+        return text;
+      } // Filter empty tokens
+      );
+    }
+  }]);
+
+  return SimpleTokenizer;
+}();
+
+;
+//# sourceMappingURL=SimpleTokenizer.js.map
+},{}],"../../node_modules/js-search/dist/commonjs/Tokenizer/StemmingTokenizer.js":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * Stemming is the process of reducing search tokens to their root (or stem) so that searches for different forms of a
+ * word will match. For example "search", "searching" and "searched" are all reduced to the stem "search".
+ *
+ * <p>This stemming tokenizer converts tokens (words) to their stem forms before returning them. It requires an
+ * external stemming function to be provided; for this purpose I recommend the NPM 'porter-stemmer' library.
+ *
+ * <p>For more information see http : //tartarus.org/~martin/PorterStemmer/
+ */
+var StemmingTokenizer = exports.StemmingTokenizer = function () {
+
+  /**
+   * Constructor.
+   *
+   * @param stemmingFunction Function capable of accepting a word and returning its stem.
+   * @param decoratedIndexStrategy Index strategy to be run after all stop words have been removed.
+   */
+  function StemmingTokenizer(stemmingFunction, decoratedTokenizer) {
+    _classCallCheck(this, StemmingTokenizer);
+
+    this._stemmingFunction = stemmingFunction;
+    this._tokenizer = decoratedTokenizer;
+  }
+
+  /**
+   * @inheritDocs
+   */
+
+
+  _createClass(StemmingTokenizer, [{
+    key: 'tokenize',
+    value: function tokenize(text) {
+      return this._tokenizer.tokenize(text).map(this._stemmingFunction);
+    }
+  }]);
+
+  return StemmingTokenizer;
+}();
+
+;
+//# sourceMappingURL=StemmingTokenizer.js.map
+},{}],"../../node_modules/js-search/dist/commonjs/StopWordsMap.js":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var StopWordsMap = exports.StopWordsMap = {
+  a: true,
+  able: true,
+  about: true,
+  across: true,
+  after: true,
+  all: true,
+  almost: true,
+  also: true,
+  am: true,
+  among: true,
+  an: true,
+  and: true,
+  any: true,
+  are: true,
+  as: true,
+  at: true,
+  be: true,
+  because: true,
+  been: true,
+  but: true,
+  by: true,
+  can: true,
+  cannot: true,
+  could: true,
+  dear: true,
+  did: true,
+  'do': true,
+  does: true,
+  either: true,
+  'else': true,
+  ever: true,
+  every: true,
+  'for': true,
+  from: true,
+  'get': true,
+  got: true,
+  had: true,
+  has: true,
+  have: true,
+  he: true,
+  her: true,
+  hers: true,
+  him: true,
+  his: true,
+  how: true,
+  however: true,
+  i: true,
+  'if': true,
+  'in': true,
+  into: true,
+  is: true,
+  it: true,
+  its: true,
+  just: true,
+  least: true,
+  let: true,
+  like: true,
+  likely: true,
+  may: true,
+  me: true,
+  might: true,
+  most: true,
+  must: true,
+  my: true,
+  neither: true,
+  no: true,
+  nor: true,
+  not: true,
+  of: true,
+  off: true,
+  often: true,
+  on: true,
+  only: true,
+  or: true,
+  other: true,
+  our: true,
+  own: true,
+  rather: true,
+  said: true,
+  say: true,
+  says: true,
+  she: true,
+  should: true,
+  since: true,
+  so: true,
+  some: true,
+  than: true,
+  that: true,
+  the: true,
+  their: true,
+  them: true,
+  then: true,
+  there: true,
+  these: true,
+  they: true,
+  'this': true,
+  tis: true,
+  to: true,
+  too: true,
+  twas: true,
+  us: true,
+  wants: true,
+  was: true,
+  we: true,
+  were: true,
+  what: true,
+  when: true,
+  where: true,
+  which: true,
+  'while': true,
+  who: true,
+  whom: true,
+  why: true,
+  will: true,
+  'with': true,
+  would: true,
+  yet: true,
+  you: true,
+  your: true
+};
+
+// Prevent false positives for inherited properties
+StopWordsMap.constructor = false;
+StopWordsMap.hasOwnProperty = false;
+StopWordsMap.isPrototypeOf = false;
+StopWordsMap.propertyIsEnumerable = false;
+StopWordsMap.toLocaleString = false;
+StopWordsMap.toString = false;
+StopWordsMap.valueOf = false;
+//# sourceMappingURL=StopWordsMap.js.map
+},{}],"../../node_modules/js-search/dist/commonjs/Tokenizer/StopWordsTokenizer.js":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.StopWordsTokenizer = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _StopWordsMap = require('../StopWordsMap');
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * Stop words are very common (e.g. "a", "and", "the") and are often not semantically meaningful in the context of a
+ * search. This tokenizer removes stop words from a set of tokens before passing the remaining tokens along for
+ * indexing or searching purposes.
+ */
+var StopWordsTokenizer = exports.StopWordsTokenizer = function () {
+
+  /**
+   * Constructor.
+   *
+   * @param decoratedIndexStrategy Index strategy to be run after all stop words have been removed.
+   */
+  function StopWordsTokenizer(decoratedTokenizer) {
+    _classCallCheck(this, StopWordsTokenizer);
+
+    this._tokenizer = decoratedTokenizer;
+  }
+
+  /**
+   * @inheritDocs
+   */
+
+
+  _createClass(StopWordsTokenizer, [{
+    key: 'tokenize',
+    value: function tokenize(text) {
+      return this._tokenizer.tokenize(text).filter(function (token) {
+        return !_StopWordsMap.StopWordsMap[token];
+      });
+    }
+  }]);
+
+  return StopWordsTokenizer;
+}();
+
+;
+//# sourceMappingURL=StopWordsTokenizer.js.map
+},{"../StopWordsMap":"../../node_modules/js-search/dist/commonjs/StopWordsMap.js"}],"../../node_modules/js-search/dist/commonjs/Tokenizer/index.js":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _SimpleTokenizer = require('./SimpleTokenizer');
+
+Object.defineProperty(exports, 'SimpleTokenizer', {
+  enumerable: true,
+  get: function get() {
+    return _SimpleTokenizer.SimpleTokenizer;
+  }
+});
+
+var _StemmingTokenizer = require('./StemmingTokenizer');
+
+Object.defineProperty(exports, 'StemmingTokenizer', {
+  enumerable: true,
+  get: function get() {
+    return _StemmingTokenizer.StemmingTokenizer;
+  }
+});
+
+var _StopWordsTokenizer = require('./StopWordsTokenizer');
+
+Object.defineProperty(exports, 'StopWordsTokenizer', {
+  enumerable: true,
+  get: function get() {
+    return _StopWordsTokenizer.StopWordsTokenizer;
+  }
+});
+//# sourceMappingURL=index.js.map
+},{"./SimpleTokenizer":"../../node_modules/js-search/dist/commonjs/Tokenizer/SimpleTokenizer.js","./StemmingTokenizer":"../../node_modules/js-search/dist/commonjs/Tokenizer/StemmingTokenizer.js","./StopWordsTokenizer":"../../node_modules/js-search/dist/commonjs/Tokenizer/StopWordsTokenizer.js"}],"../../node_modules/js-search/dist/commonjs/Search.js":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Search = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _getNestedFieldValue = require('./getNestedFieldValue');
+
+var _getNestedFieldValue2 = _interopRequireDefault(_getNestedFieldValue);
+
+var _index = require('./IndexStrategy/index');
+
+var _index2 = require('./Sanitizer/index');
+
+var _index3 = require('./SearchIndex/index');
+
+var _index4 = require('./Tokenizer/index');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * Simple client-side searching within a set of documents.
+ *
+ * <p>Documents can be searched by any number of fields. Indexing and search strategies are highly customizable.
+ */
+var Search = exports.Search = function () {
+
+  /**
+   * Constructor.
+   * @param uidFieldName Field containing values that uniquely identify search documents; this field's values are used
+   *                     to ensure that a search result set does not contain duplicate objects.
+   */
+
+
+  /**
+   * Array containing either a property name or a path (list of property names) to a nested value
+   */
+  function Search(uidFieldName) {
+    _classCallCheck(this, Search);
+
+    if (!uidFieldName) {
+      throw Error('js-search requires a uid field name constructor parameter');
+    }
+
+    this._uidFieldName = uidFieldName;
+
+    // Set default/recommended strategies
+    this._indexStrategy = new _index.PrefixIndexStrategy();
+    this._searchIndex = new _index3.TfIdfSearchIndex(uidFieldName);
+    this._sanitizer = new _index2.LowerCaseSanitizer();
+    this._tokenizer = new _index4.SimpleTokenizer();
+
+    this._documents = [];
+    this._searchableFields = [];
+  }
+
+  /**
+   * Override the default index strategy.
+   * @param value Custom index strategy
+   * @throws Error if documents have already been indexed by this search instance
+   */
+
+
+  _createClass(Search, [{
+    key: 'addDocument',
+
+
+    /**
+     * Add a searchable document to the index. Document will automatically be indexed for search.
+     * @param document
+     */
+    value: function addDocument(document) {
+      this.addDocuments([document]);
+    }
+
+    /**
+     * Adds searchable documents to the index. Documents will automatically be indexed for search.
+     * @param document
+     */
+
+  }, {
+    key: 'addDocuments',
+    value: function addDocuments(documents) {
+      this._documents = this._documents.concat(documents);
+      this.indexDocuments_(documents, this._searchableFields);
+    }
+
+    /**
+     * Add a new searchable field to the index. Existing documents will automatically be indexed using this new field.
+     *
+     * @param field Searchable field or field path. Pass a string to index a top-level field and an array of strings for nested fields.
+     */
+
+  }, {
+    key: 'addIndex',
+    value: function addIndex(field) {
+      this._searchableFields.push(field);
+      this.indexDocuments_(this._documents, [field]);
+    }
+
+    /**
+     * Search all documents for ones matching the specified query text.
+     * @param query
+     * @returns {Array<Object>}
+     */
+
+  }, {
+    key: 'search',
+    value: function search(query) {
+      var tokens = this._tokenizer.tokenize(this._sanitizer.sanitize(query));
+
+      return this._searchIndex.search(tokens, this._documents);
+    }
+
+    /**
+     * @param documents
+     * @param _searchableFields Array containing property names and paths (lists of property names) to nested values
+     * @private
+     */
+
+  }, {
+    key: 'indexDocuments_',
+    value: function indexDocuments_(documents, _searchableFields) {
+      this._initialized = true;
+
+      var indexStrategy = this._indexStrategy;
+      var sanitizer = this._sanitizer;
+      var searchIndex = this._searchIndex;
+      var tokenizer = this._tokenizer;
+      var uidFieldName = this._uidFieldName;
+
+      for (var di = 0, numDocuments = documents.length; di < numDocuments; di++) {
+        var doc = documents[di];
+        var uid;
+
+        if (uidFieldName instanceof Array) {
+          uid = (0, _getNestedFieldValue2.default)(doc, uidFieldName);
+        } else {
+          uid = doc[uidFieldName];
+        }
+
+        for (var sfi = 0, numSearchableFields = _searchableFields.length; sfi < numSearchableFields; sfi++) {
+          var fieldValue;
+          var searchableField = _searchableFields[sfi];
+
+          if (searchableField instanceof Array) {
+            fieldValue = (0, _getNestedFieldValue2.default)(doc, searchableField);
+          } else {
+            fieldValue = doc[searchableField];
+          }
+
+          if (fieldValue != null && typeof fieldValue !== 'string' && fieldValue.toString) {
+            fieldValue = fieldValue.toString();
+          }
+
+          if (typeof fieldValue === 'string') {
+            var fieldTokens = tokenizer.tokenize(sanitizer.sanitize(fieldValue));
+
+            for (var fti = 0, numFieldValues = fieldTokens.length; fti < numFieldValues; fti++) {
+              var fieldToken = fieldTokens[fti];
+              var expandedTokens = indexStrategy.expandToken(fieldToken);
+
+              for (var eti = 0, nummExpandedTokens = expandedTokens.length; eti < nummExpandedTokens; eti++) {
+                var expandedToken = expandedTokens[eti];
+
+                searchIndex.indexDocument(expandedToken, uid, doc);
+              }
+            }
+          }
+        }
+      }
+    }
+  }, {
+    key: 'indexStrategy',
+    set: function set(value) {
+      if (this._initialized) {
+        throw Error('IIndexStrategy cannot be set after initialization');
+      }
+
+      this._indexStrategy = value;
+    },
+    get: function get() {
+      return this._indexStrategy;
+    }
+
+    /**
+     * Override the default text sanitizing strategy.
+     * @param value Custom text sanitizing strategy
+     * @throws Error if documents have already been indexed by this search instance
+     */
+
+  }, {
+    key: 'sanitizer',
+    set: function set(value) {
+      if (this._initialized) {
+        throw Error('ISanitizer cannot be set after initialization');
+      }
+
+      this._sanitizer = value;
+    },
+    get: function get() {
+      return this._sanitizer;
+    }
+
+    /**
+     * Override the default search index strategy.
+     * @param value Custom search index strategy
+     * @throws Error if documents have already been indexed
+     */
+
+  }, {
+    key: 'searchIndex',
+    set: function set(value) {
+      if (this._initialized) {
+        throw Error('ISearchIndex cannot be set after initialization');
+      }
+
+      this._searchIndex = value;
+    },
+    get: function get() {
+      return this._searchIndex;
+    }
+
+    /**
+     * Override the default text tokenizing strategy.
+     * @param value Custom text tokenizing strategy
+     * @throws Error if documents have already been indexed by this search instance
+     */
+
+  }, {
+    key: 'tokenizer',
+    set: function set(value) {
+      if (this._initialized) {
+        throw Error('ITokenizer cannot be set after initialization');
+      }
+
+      this._tokenizer = value;
+    },
+    get: function get() {
+      return this._tokenizer;
+    }
+  }]);
+
+  return Search;
+}();
+//# sourceMappingURL=Search.js.map
+},{"./getNestedFieldValue":"../../node_modules/js-search/dist/commonjs/getNestedFieldValue.js","./IndexStrategy/index":"../../node_modules/js-search/dist/commonjs/IndexStrategy/index.js","./Sanitizer/index":"../../node_modules/js-search/dist/commonjs/Sanitizer/index.js","./SearchIndex/index":"../../node_modules/js-search/dist/commonjs/SearchIndex/index.js","./Tokenizer/index":"../../node_modules/js-search/dist/commonjs/Tokenizer/index.js"}],"../../node_modules/js-search/dist/commonjs/TokenHighlighter.js":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.TokenHighlighter = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _index = require('./IndexStrategy/index');
+
+var _index2 = require('./Sanitizer/index');
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * This utility highlights the occurrences of tokens within a string of text. It can be used to give visual indicators
+ * of match criteria within searchable fields.
+ *
+ * <p>For performance purposes this highlighter only works with full-word or prefix token indexes.
+ */
+var TokenHighlighter = exports.TokenHighlighter = function () {
+
+  /**
+   * Constructor.
+   *
+   * @param opt_indexStrategy Index strategy used by Search
+   * @param opt_sanitizer Sanitizer used by Search
+   * @param opt_wrapperTagName Optional wrapper tag name; defaults to 'mark' (e.g. <mark>)
+   */
+  function TokenHighlighter(opt_indexStrategy, opt_sanitizer, opt_wrapperTagName) {
+    _classCallCheck(this, TokenHighlighter);
+
+    this._indexStrategy = opt_indexStrategy || new _index.PrefixIndexStrategy();
+    this._sanitizer = opt_sanitizer || new _index2.LowerCaseSanitizer();
+    this._wrapperTagName = opt_wrapperTagName || 'mark';
+  }
+
+  /**
+   * Highlights token occurrences within a string by wrapping them with a DOM element.
+   *
+   * @param text e.g. "john wayne"
+   * @param tokens e.g. ["wa"]
+   * @returns {string} e.g. "john <mark>wa</mark>yne"
+   */
+
+
+  _createClass(TokenHighlighter, [{
+    key: 'highlight',
+    value: function highlight(text, tokens) {
+      var tagsLength = this._wrapText('').length;
+
+      var tokenDictionary = {};
+
+      // Create a token map for easier lookup below.
+      for (var i = 0, numTokens = tokens.length; i < numTokens; i++) {
+        var token = this._sanitizer.sanitize(tokens[i]);
+        var expandedTokens = this._indexStrategy.expandToken(token);
+
+        for (var j = 0, numExpandedTokens = expandedTokens.length; j < numExpandedTokens; j++) {
+          var expandedToken = expandedTokens[j];
+
+          if (!tokenDictionary[expandedToken]) {
+            tokenDictionary[expandedToken] = [token];
+          } else {
+            tokenDictionary[expandedToken].push(token);
+          }
+        }
+      }
+
+      // Track actualCurrentWord and sanitizedCurrentWord separately in case we encounter nested tags.
+      var actualCurrentWord = '';
+      var sanitizedCurrentWord = '';
+      var currentWordStartIndex = 0;
+
+      // Note this assumes either prefix or full word matching.
+      for (var i = 0, textLength = text.length; i < textLength; i++) {
+        var character = text.charAt(i);
+
+        if (character === ' ') {
+          actualCurrentWord = '';
+          sanitizedCurrentWord = '';
+          currentWordStartIndex = i + 1;
+        } else {
+          actualCurrentWord += character;
+          sanitizedCurrentWord += this._sanitizer.sanitize(character);
+        }
+
+        if (tokenDictionary[sanitizedCurrentWord] && tokenDictionary[sanitizedCurrentWord].indexOf(sanitizedCurrentWord) >= 0) {
+
+          actualCurrentWord = this._wrapText(actualCurrentWord);
+          text = text.substring(0, currentWordStartIndex) + actualCurrentWord + text.substring(i + 1);
+
+          i += tagsLength;
+          textLength += tagsLength;
+        }
+      }
+
+      return text;
+    }
+
+    /**
+     * @param text to wrap
+     * @returns Text wrapped by wrapper tag (e.g. "foo" becomes "<mark>foo</mark>")
+     * @private
+     */
+
+  }, {
+    key: '_wrapText',
+    value: function _wrapText(text) {
+      var tagName = this._wrapperTagName;
+      return '<' + tagName + '>' + text + '</' + tagName + '>';
+    }
+  }]);
+
+  return TokenHighlighter;
+}();
+
+;
+//# sourceMappingURL=TokenHighlighter.js.map
+},{"./IndexStrategy/index":"../../node_modules/js-search/dist/commonjs/IndexStrategy/index.js","./Sanitizer/index":"../../node_modules/js-search/dist/commonjs/Sanitizer/index.js"}],"../../node_modules/js-search/dist/commonjs/index.js":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _index = require('./IndexStrategy/index');
+
+Object.defineProperty(exports, 'AllSubstringsIndexStrategy', {
+  enumerable: true,
+  get: function get() {
+    return _index.AllSubstringsIndexStrategy;
+  }
+});
+Object.defineProperty(exports, 'ExactWordIndexStrategy', {
+  enumerable: true,
+  get: function get() {
+    return _index.ExactWordIndexStrategy;
+  }
+});
+Object.defineProperty(exports, 'PrefixIndexStrategy', {
+  enumerable: true,
+  get: function get() {
+    return _index.PrefixIndexStrategy;
+  }
+});
+
+var _index2 = require('./Sanitizer/index');
+
+Object.defineProperty(exports, 'CaseSensitiveSanitizer', {
+  enumerable: true,
+  get: function get() {
+    return _index2.CaseSensitiveSanitizer;
+  }
+});
+Object.defineProperty(exports, 'LowerCaseSanitizer', {
+  enumerable: true,
+  get: function get() {
+    return _index2.LowerCaseSanitizer;
+  }
+});
+
+var _index3 = require('./SearchIndex/index');
+
+Object.defineProperty(exports, 'TfIdfSearchIndex', {
+  enumerable: true,
+  get: function get() {
+    return _index3.TfIdfSearchIndex;
+  }
+});
+Object.defineProperty(exports, 'UnorderedSearchIndex', {
+  enumerable: true,
+  get: function get() {
+    return _index3.UnorderedSearchIndex;
+  }
+});
+
+var _index4 = require('./Tokenizer/index');
+
+Object.defineProperty(exports, 'SimpleTokenizer', {
+  enumerable: true,
+  get: function get() {
+    return _index4.SimpleTokenizer;
+  }
+});
+Object.defineProperty(exports, 'StemmingTokenizer', {
+  enumerable: true,
+  get: function get() {
+    return _index4.StemmingTokenizer;
+  }
+});
+Object.defineProperty(exports, 'StopWordsTokenizer', {
+  enumerable: true,
+  get: function get() {
+    return _index4.StopWordsTokenizer;
+  }
+});
+
+var _Search = require('./Search');
+
+Object.defineProperty(exports, 'Search', {
+  enumerable: true,
+  get: function get() {
+    return _Search.Search;
+  }
+});
+
+var _StopWordsMap = require('./StopWordsMap');
+
+Object.defineProperty(exports, 'StopWordsMap', {
+  enumerable: true,
+  get: function get() {
+    return _StopWordsMap.StopWordsMap;
+  }
+});
+
+var _TokenHighlighter = require('./TokenHighlighter');
+
+Object.defineProperty(exports, 'TokenHighlighter', {
+  enumerable: true,
+  get: function get() {
+    return _TokenHighlighter.TokenHighlighter;
+  }
+});
+//# sourceMappingURL=index.js.map
+},{"./IndexStrategy/index":"../../node_modules/js-search/dist/commonjs/IndexStrategy/index.js","./Sanitizer/index":"../../node_modules/js-search/dist/commonjs/Sanitizer/index.js","./SearchIndex/index":"../../node_modules/js-search/dist/commonjs/SearchIndex/index.js","./Tokenizer/index":"../../node_modules/js-search/dist/commonjs/Tokenizer/index.js","./Search":"../../node_modules/js-search/dist/commonjs/Search.js","./StopWordsMap":"../../node_modules/js-search/dist/commonjs/StopWordsMap.js","./TokenHighlighter":"../../node_modules/js-search/dist/commonjs/TokenHighlighter.js"}],"../../node_modules/strict-uri-encode/index.js":[function(require,module,exports) {
+'use strict';
+
+module.exports = str => encodeURIComponent(str).replace(/[!'()*]/g, x => '%' + x.charCodeAt(0).toString(16).toUpperCase());
+},{}],"../../node_modules/decode-uri-component/index.js":[function(require,module,exports) {
+'use strict';
+
+var token = '%[a-f0-9]{2}';
+var singleMatcher = new RegExp(token, 'gi');
+var multiMatcher = new RegExp('(' + token + ')+', 'gi');
+
+function decodeComponents(components, split) {
+	try {
+		// Try to decode the entire string first
+		return decodeURIComponent(components.join(''));
+	} catch (err) {
+		// Do nothing
+	}
+
+	if (components.length === 1) {
+		return components;
+	}
+
+	split = split || 1;
+
+	// Split the array in 2 parts
+	var left = components.slice(0, split);
+	var right = components.slice(split);
+
+	return Array.prototype.concat.call([], decodeComponents(left), decodeComponents(right));
+}
+
+function decode(input) {
+	try {
+		return decodeURIComponent(input);
+	} catch (err) {
+		var tokens = input.match(singleMatcher);
+
+		for (var i = 1; i < tokens.length; i++) {
+			input = decodeComponents(tokens, i).join('');
+
+			tokens = input.match(singleMatcher);
+		}
+
+		return input;
+	}
+}
+
+function customDecodeURIComponent(input) {
+	// Keep track of all the replacements and prefill the map with the `BOM`
+	var replaceMap = {
+		'%FE%FF': '\uFFFD\uFFFD',
+		'%FF%FE': '\uFFFD\uFFFD'
+	};
+
+	var match = multiMatcher.exec(input);
+	while (match) {
+		try {
+			// Decode as big chunks as possible
+			replaceMap[match[0]] = decodeURIComponent(match[0]);
+		} catch (err) {
+			var result = decode(match[0]);
+
+			if (result !== match[0]) {
+				replaceMap[match[0]] = result;
+			}
+		}
+
+		match = multiMatcher.exec(input);
+	}
+
+	// Add `%C2` at the end of the map to make sure it does not replace the combinator before everything else
+	replaceMap['%C2'] = '\uFFFD';
+
+	var entries = Object.keys(replaceMap);
+
+	for (var i = 0; i < entries.length; i++) {
+		// Replace all decoded components
+		var key = entries[i];
+		input = input.replace(new RegExp(key, 'g'), replaceMap[key]);
+	}
+
+	return input;
+}
+
+module.exports = function (encodedURI) {
+	if (typeof encodedURI !== 'string') {
+		throw new TypeError('Expected `encodedURI` to be of type `string`, got `' + typeof encodedURI + '`');
+	}
+
+	try {
+		encodedURI = encodedURI.replace(/\+/g, ' ');
+
+		// Try the built in decoder first
+		return decodeURIComponent(encodedURI);
+	} catch (err) {
+		// Fallback to a more advanced decoder
+		return customDecodeURIComponent(encodedURI);
+	}
+};
+},{}],"../../node_modules/query-string/index.js":[function(require,module,exports) {
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var strictUriEncode = require('strict-uri-encode');
+var decodeComponent = require('decode-uri-component');
+
+function encoderForArrayFormat(options) {
+	switch (options.arrayFormat) {
+		case 'index':
+			return function (key, value, index) {
+				return value === null ? [encode(key, options), '[', index, ']'].join('') : [encode(key, options), '[', encode(index, options), ']=', encode(value, options)].join('');
+			};
+		case 'bracket':
+			return function (key, value) {
+				return value === null ? [encode(key, options), '[]'].join('') : [encode(key, options), '[]=', encode(value, options)].join('');
+			};
+		default:
+			return function (key, value) {
+				return value === null ? encode(key, options) : [encode(key, options), '=', encode(value, options)].join('');
+			};
+	}
+}
+
+function parserForArrayFormat(options) {
+	var result = void 0;
+
+	switch (options.arrayFormat) {
+		case 'index':
+			return function (key, value, accumulator) {
+				result = /\[(\d*)\]$/.exec(key);
+
+				key = key.replace(/\[\d*\]$/, '');
+
+				if (!result) {
+					accumulator[key] = value;
+					return;
+				}
+
+				if (accumulator[key] === undefined) {
+					accumulator[key] = {};
+				}
+
+				accumulator[key][result[1]] = value;
+			};
+		case 'bracket':
+			return function (key, value, accumulator) {
+				result = /(\[\])$/.exec(key);
+				key = key.replace(/\[\]$/, '');
+
+				if (!result) {
+					accumulator[key] = value;
+					return;
+				}
+
+				if (accumulator[key] === undefined) {
+					accumulator[key] = [value];
+					return;
+				}
+
+				accumulator[key] = [].concat(accumulator[key], value);
+			};
+		default:
+			return function (key, value, accumulator) {
+				if (accumulator[key] === undefined) {
+					accumulator[key] = value;
+					return;
+				}
+
+				accumulator[key] = [].concat(accumulator[key], value);
+			};
+	}
+}
+
+function encode(value, options) {
+	if (options.encode) {
+		return options.strict ? strictUriEncode(value) : encodeURIComponent(value);
+	}
+
+	return value;
+}
+
+function decode(value, options) {
+	if (options.decode) {
+		return decodeComponent(value);
+	}
+
+	return value;
+}
+
+function keysSorter(input) {
+	if (Array.isArray(input)) {
+		return input.sort();
+	}
+
+	if ((typeof input === 'undefined' ? 'undefined' : _typeof(input)) === 'object') {
+		return keysSorter(Object.keys(input)).sort(function (a, b) {
+			return Number(a) - Number(b);
+		}).map(function (key) {
+			return input[key];
+		});
+	}
+
+	return input;
+}
+
+function extract(input) {
+	var queryStart = input.indexOf('?');
+	if (queryStart === -1) {
+		return '';
+	}
+	return input.slice(queryStart + 1);
+}
+
+function parse(input, options) {
+	options = Object.assign({ decode: true, arrayFormat: 'none' }, options);
+
+	var formatter = parserForArrayFormat(options);
+
+	// Create an object with no prototype
+	var ret = Object.create(null);
+
+	if (typeof input !== 'string') {
+		return ret;
+	}
+
+	input = input.trim().replace(/^[?#&]/, '');
+
+	if (!input) {
+		return ret;
+	}
+
+	for (var param of input.split('&')) {
+		var [key, value] = param.replace(/\+/g, ' ').split('=');
+
+		// Missing `=` should be `null`:
+		// http://w3.org/TR/2012/WD-url-20120524/#collect-url-parameters
+		value = value === undefined ? null : decode(value, options);
+
+		formatter(decode(key, options), value, ret);
+	}
+
+	return Object.keys(ret).sort().reduce(function (result, key) {
+		var value = ret[key];
+		if (Boolean(value) && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object' && !Array.isArray(value)) {
+			// Sort object keys, not values
+			result[key] = keysSorter(value);
+		} else {
+			result[key] = value;
+		}
+
+		return result;
+	}, Object.create(null));
+}
+
+exports.extract = extract;
+exports.parse = parse;
+
+exports.stringify = function (obj, options) {
+	var defaults = {
+		encode: true,
+		strict: true,
+		arrayFormat: 'none'
+	};
+
+	options = Object.assign(defaults, options);
+
+	if (options.sort === false) {
+		options.sort = function () {};
+	}
+
+	var formatter = encoderForArrayFormat(options);
+
+	return obj ? Object.keys(obj).sort(options.sort).map(function (key) {
+		var value = obj[key];
+
+		if (value === undefined) {
+			return '';
+		}
+
+		if (value === null) {
+			return encode(key, options);
+		}
+
+		if (Array.isArray(value)) {
+			var result = [];
+
+			for (var value2 of value.slice()) {
+				if (value2 === undefined) {
+					continue;
+				}
+
+				result.push(formatter(key, value2, result.length));
+			}
+
+			return result.join('&');
+		}
+
+		return encode(key, options) + '=' + encode(value, options);
+	}).filter(function (x) {
+		return x.length > 0;
+	}).join('&') : '';
+};
+
+exports.parseUrl = function (input, options) {
+	return {
+		url: input.split('?')[0] || '',
+		query: parse(extract(input), options)
+	};
+};
+},{"strict-uri-encode":"../../node_modules/strict-uri-encode/index.js","decode-uri-component":"../../node_modules/decode-uri-component/index.js"}],"modules/faq.js":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _jsSearch = require('js-search');
+
+var JsSearch = _interopRequireWildcard(_jsSearch);
+
+var _queryString = require('query-string');
+
+var _queryString2 = _interopRequireDefault(_queryString);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+var updateTitle = function updateTitle(title) {
+	$('.faq__questions h2').text(title);
+};
+
+var updateCategoryLink = function updateCategoryLink(category) {
+	$('.faq__sidebar a').removeClass('active');
+
+	if (!category) {
+		return;
+	}
+
+	$('.faq__sidebar a[data-category="' + category + '"]').addClass('active');
+};
+
+var updateQuestions = function updateQuestions(questions) {
+	var $toggleSection = $('.faq__questions .toggles--section');
+	var questionHtml = questions.map(function (_ref) {
+		var question = _ref.question,
+		    answer = _ref.answer;
+		return '\n\t\t<div class="toggle--item">\n\t\t\t<div class="toggle--activation" data-ix="toggle-interaction">\n\t\t\t\t<h4 class="toggle--heading">' + question + '</h4>\n\t\t\t\t<svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-minus" viewBox="0 0 20 20"><path fill="#444" d="M17.543 11.029H2.1A1.032 1.032 0 0 1 1.071 10c0-.566.463-1.029 1.029-1.029h15.443c.566 0 1.029.463 1.029 1.029 0 .566-.463 1.029-1.029 1.029z"/></svg>\n\t\t\t\t<svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-plus" viewBox="0 0 20 20"><path fill="#444" d="M17.409 8.929h-6.695V2.258c0-.566-.506-1.029-1.071-1.029s-1.071.463-1.071 1.029v6.671H1.967C1.401 8.929.938 9.435.938 10s.463 1.071 1.029 1.071h6.605V17.7c0 .566.506 1.029 1.071 1.029s1.071-.463 1.071-1.029v-6.629h6.695c.566 0 1.029-.506 1.029-1.071s-.463-1.071-1.029-1.071z"/></svg>\n\t\t\t</div>\n\t\t\t<div class="toggle--contents">\n\t\t\t\t' + $('<div/>').html(answer).text() + '\n\t\t\t</div>\n\t\t</div>\n\t';
+	}).join('');
+
+	$toggleSection.html(questionHtml);
+};
+
+var questions = function questions(questionJson) {
+	var questionSearch = new JsSearch.Search('id');
+	questionSearch.addIndex('question');
+	questionSearch.addDocuments(questionJson);
+
+	var category = function category(categorySlug) {
+		var categoryQuestions = questionJson.filter(function (q) {
+			return q.categorySlug === categorySlug;
+		});
+		updateQuestions(categoryQuestions);
+		updateCategoryLink(categorySlug);
+		updateTitle(categoryQuestions[0].category);
+	};
+
+	var search = function search(query) {
+		var searchedQuestions = questionSearch.search(query);
+		updateQuestions(searchedQuestions);
+		updateCategoryLink();
+		updateTitle('Search: ' + query);
+	};
+
+	return { category: category, search: search };
+};
+
+var faq = function faq() {
+	return $(function () {
+		if ($('[data-questions-json]').length === 0) {
+			return;
+		}
+
+		var question = questions(JSON.parse($('[data-questions-json]').html()));
+		var urlQuery = _queryString2.default.parse(location.search).q;
+
+		if (urlQuery) {
+			question.search(urlQuery);
+		}
+
+		$('.faq__sidebar a').click(function (e) {
+			e.preventDefault();
+			var category = $(e.currentTarget).data('category');
+			question.category(category);
+		});
+
+		$('.faq__search-form').submit(function (e) {
+			e.preventDefault();
+			var query = $('.faq__search').val();
+			question.search(query);
+		});
+	});
+};
+
+exports.default = faq;
+},{"js-search":"../../node_modules/js-search/dist/commonjs/index.js","query-string":"../../node_modules/query-string/index.js"}],"theme.js":[function(require,module,exports) {
 'use strict';
 
 require('core-js/modules/es6.typed.array-buffer');
@@ -14920,6 +16712,10 @@ var _toggleHandler2 = _interopRequireDefault(_toggleHandler);
 
 var _addToCart = require('./modules/add-to-cart');
 
+var _faq = require('./modules/faq');
+
+var _faq2 = _interopRequireDefault(_faq);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 $(function () {
@@ -14927,11 +16723,12 @@ $(function () {
 	sections.register('product', _productSection2.default);
 	sections.register('collection-custom-section', _featuredCollection2.default);
 	sections.register('slider', _slider2.default);
+	(0, _faq2.default)();
 
 	$(document).on('submit', 'form[action="/cart/add"]', _addToCart.handleAddItemSubmit);
 	$(document).on('click', '.toggle--activation', _toggleHandler2.default);
 });
-},{"core-js/modules/es6.typed.array-buffer":"../../node_modules/core-js/modules/es6.typed.array-buffer.js","core-js/modules/es6.typed.int8-array":"../../node_modules/core-js/modules/es6.typed.int8-array.js","core-js/modules/es6.typed.uint8-array":"../../node_modules/core-js/modules/es6.typed.uint8-array.js","core-js/modules/es6.typed.uint8-clamped-array":"../../node_modules/core-js/modules/es6.typed.uint8-clamped-array.js","core-js/modules/es6.typed.int16-array":"../../node_modules/core-js/modules/es6.typed.int16-array.js","core-js/modules/es6.typed.uint16-array":"../../node_modules/core-js/modules/es6.typed.uint16-array.js","core-js/modules/es6.typed.int32-array":"../../node_modules/core-js/modules/es6.typed.int32-array.js","core-js/modules/es6.typed.uint32-array":"../../node_modules/core-js/modules/es6.typed.uint32-array.js","core-js/modules/es6.typed.float32-array":"../../node_modules/core-js/modules/es6.typed.float32-array.js","core-js/modules/es6.typed.float64-array":"../../node_modules/core-js/modules/es6.typed.float64-array.js","core-js/modules/es6.map":"../../node_modules/core-js/modules/es6.map.js","core-js/modules/es6.set":"../../node_modules/core-js/modules/es6.set.js","core-js/modules/es6.weak-map":"../../node_modules/core-js/modules/es6.weak-map.js","core-js/modules/es6.weak-set":"../../node_modules/core-js/modules/es6.weak-set.js","core-js/modules/es6.reflect.apply":"../../node_modules/core-js/modules/es6.reflect.apply.js","core-js/modules/es6.reflect.construct":"../../node_modules/core-js/modules/es6.reflect.construct.js","core-js/modules/es6.reflect.define-property":"../../node_modules/core-js/modules/es6.reflect.define-property.js","core-js/modules/es6.reflect.delete-property":"../../node_modules/core-js/modules/es6.reflect.delete-property.js","core-js/modules/es6.reflect.get":"../../node_modules/core-js/modules/es6.reflect.get.js","core-js/modules/es6.reflect.get-own-property-descriptor":"../../node_modules/core-js/modules/es6.reflect.get-own-property-descriptor.js","core-js/modules/es6.reflect.get-prototype-of":"../../node_modules/core-js/modules/es6.reflect.get-prototype-of.js","core-js/modules/es6.reflect.has":"../../node_modules/core-js/modules/es6.reflect.has.js","core-js/modules/es6.reflect.is-extensible":"../../node_modules/core-js/modules/es6.reflect.is-extensible.js","core-js/modules/es6.reflect.own-keys":"../../node_modules/core-js/modules/es6.reflect.own-keys.js","core-js/modules/es6.reflect.prevent-extensions":"../../node_modules/core-js/modules/es6.reflect.prevent-extensions.js","core-js/modules/es6.reflect.set":"../../node_modules/core-js/modules/es6.reflect.set.js","core-js/modules/es6.reflect.set-prototype-of":"../../node_modules/core-js/modules/es6.reflect.set-prototype-of.js","core-js/modules/es6.promise":"../../node_modules/core-js/modules/es6.promise.js","core-js/modules/es6.symbol":"../../node_modules/core-js/modules/es6.symbol.js","core-js/modules/es6.object.freeze":"../../node_modules/core-js/modules/es6.object.freeze.js","core-js/modules/es6.object.seal":"../../node_modules/core-js/modules/es6.object.seal.js","core-js/modules/es6.object.prevent-extensions":"../../node_modules/core-js/modules/es6.object.prevent-extensions.js","core-js/modules/es6.object.is-frozen":"../../node_modules/core-js/modules/es6.object.is-frozen.js","core-js/modules/es6.object.is-sealed":"../../node_modules/core-js/modules/es6.object.is-sealed.js","core-js/modules/es6.object.is-extensible":"../../node_modules/core-js/modules/es6.object.is-extensible.js","core-js/modules/es6.object.get-own-property-descriptor":"../../node_modules/core-js/modules/es6.object.get-own-property-descriptor.js","core-js/modules/es6.object.get-prototype-of":"../../node_modules/core-js/modules/es6.object.get-prototype-of.js","core-js/modules/es6.object.keys":"../../node_modules/core-js/modules/es6.object.keys.js","core-js/modules/es6.object.get-own-property-names":"../../node_modules/core-js/modules/es6.object.get-own-property-names.js","core-js/modules/es6.object.assign":"../../node_modules/core-js/modules/es6.object.assign.js","core-js/modules/es6.object.is":"../../node_modules/core-js/modules/es6.object.is.js","core-js/modules/es6.object.set-prototype-of":"../../node_modules/core-js/modules/es6.object.set-prototype-of.js","core-js/modules/es6.function.name":"../../node_modules/core-js/modules/es6.function.name.js","core-js/modules/es6.string.raw":"../../node_modules/core-js/modules/es6.string.raw.js","core-js/modules/es6.string.from-code-point":"../../node_modules/core-js/modules/es6.string.from-code-point.js","core-js/modules/es6.string.code-point-at":"../../node_modules/core-js/modules/es6.string.code-point-at.js","core-js/modules/es6.string.repeat":"../../node_modules/core-js/modules/es6.string.repeat.js","core-js/modules/es6.string.starts-with":"../../node_modules/core-js/modules/es6.string.starts-with.js","core-js/modules/es6.string.ends-with":"../../node_modules/core-js/modules/es6.string.ends-with.js","core-js/modules/es6.string.includes":"../../node_modules/core-js/modules/es6.string.includes.js","core-js/modules/es6.regexp.flags":"../../node_modules/core-js/modules/es6.regexp.flags.js","core-js/modules/es6.regexp.match":"../../node_modules/core-js/modules/es6.regexp.match.js","core-js/modules/es6.regexp.replace":"../../node_modules/core-js/modules/es6.regexp.replace.js","core-js/modules/es6.regexp.split":"../../node_modules/core-js/modules/es6.regexp.split.js","core-js/modules/es6.regexp.search":"../../node_modules/core-js/modules/es6.regexp.search.js","core-js/modules/es6.array.from":"../../node_modules/core-js/modules/es6.array.from.js","core-js/modules/es6.array.of":"../../node_modules/core-js/modules/es6.array.of.js","core-js/modules/es6.array.copy-within":"../../node_modules/core-js/modules/es6.array.copy-within.js","core-js/modules/es6.array.find":"../../node_modules/core-js/modules/es6.array.find.js","core-js/modules/es6.array.find-index":"../../node_modules/core-js/modules/es6.array.find-index.js","core-js/modules/es6.array.fill":"../../node_modules/core-js/modules/es6.array.fill.js","core-js/modules/es6.array.iterator":"../../node_modules/core-js/modules/es6.array.iterator.js","core-js/modules/es6.number.is-finite":"../../node_modules/core-js/modules/es6.number.is-finite.js","core-js/modules/es6.number.is-integer":"../../node_modules/core-js/modules/es6.number.is-integer.js","core-js/modules/es6.number.is-safe-integer":"../../node_modules/core-js/modules/es6.number.is-safe-integer.js","core-js/modules/es6.number.is-nan":"../../node_modules/core-js/modules/es6.number.is-nan.js","core-js/modules/es6.number.epsilon":"../../node_modules/core-js/modules/es6.number.epsilon.js","core-js/modules/es6.number.min-safe-integer":"../../node_modules/core-js/modules/es6.number.min-safe-integer.js","core-js/modules/es6.number.max-safe-integer":"../../node_modules/core-js/modules/es6.number.max-safe-integer.js","core-js/modules/es6.math.acosh":"../../node_modules/core-js/modules/es6.math.acosh.js","core-js/modules/es6.math.asinh":"../../node_modules/core-js/modules/es6.math.asinh.js","core-js/modules/es6.math.atanh":"../../node_modules/core-js/modules/es6.math.atanh.js","core-js/modules/es6.math.cbrt":"../../node_modules/core-js/modules/es6.math.cbrt.js","core-js/modules/es6.math.clz32":"../../node_modules/core-js/modules/es6.math.clz32.js","core-js/modules/es6.math.cosh":"../../node_modules/core-js/modules/es6.math.cosh.js","core-js/modules/es6.math.expm1":"../../node_modules/core-js/modules/es6.math.expm1.js","core-js/modules/es6.math.fround":"../../node_modules/core-js/modules/es6.math.fround.js","core-js/modules/es6.math.hypot":"../../node_modules/core-js/modules/es6.math.hypot.js","core-js/modules/es6.math.imul":"../../node_modules/core-js/modules/es6.math.imul.js","core-js/modules/es6.math.log1p":"../../node_modules/core-js/modules/es6.math.log1p.js","core-js/modules/es6.math.log10":"../../node_modules/core-js/modules/es6.math.log10.js","core-js/modules/es6.math.log2":"../../node_modules/core-js/modules/es6.math.log2.js","core-js/modules/es6.math.sign":"../../node_modules/core-js/modules/es6.math.sign.js","core-js/modules/es6.math.sinh":"../../node_modules/core-js/modules/es6.math.sinh.js","core-js/modules/es6.math.tanh":"../../node_modules/core-js/modules/es6.math.tanh.js","core-js/modules/es6.math.trunc":"../../node_modules/core-js/modules/es6.math.trunc.js","core-js/modules/es7.array.includes":"../../node_modules/core-js/modules/es7.array.includes.js","core-js/modules/es7.object.values":"../../node_modules/core-js/modules/es7.object.values.js","core-js/modules/es7.object.entries":"../../node_modules/core-js/modules/es7.object.entries.js","core-js/modules/es7.object.get-own-property-descriptors":"../../node_modules/core-js/modules/es7.object.get-own-property-descriptors.js","core-js/modules/es7.string.pad-start":"../../node_modules/core-js/modules/es7.string.pad-start.js","core-js/modules/es7.string.pad-end":"../../node_modules/core-js/modules/es7.string.pad-end.js","core-js/modules/web.timers":"../../node_modules/core-js/modules/web.timers.js","core-js/modules/web.immediate":"../../node_modules/core-js/modules/web.immediate.js","core-js/modules/web.dom.iterable":"../../node_modules/core-js/modules/web.dom.iterable.js","regenerator-runtime/runtime":"../../node_modules/regenerator-runtime/runtime.js","../styles/theme.scss":"../styles/theme.scss","./slate/slate":"slate/slate.js","./modules/newsletter":"modules/newsletter.js","./header/header":"header/header.js","./product/product-listing-colors":"product/product-listing-colors.js","./product/quickadd-handler":"product/quickadd-handler.js","./product/product-section":"product/product-section.js","./modules/featured-collection":"modules/featured-collection.js","./modules/slider":"modules/slider.js","./modules/toggle-handler":"modules/toggle-handler.js","./modules/add-to-cart":"modules/add-to-cart.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"core-js/modules/es6.typed.array-buffer":"../../node_modules/core-js/modules/es6.typed.array-buffer.js","core-js/modules/es6.typed.int8-array":"../../node_modules/core-js/modules/es6.typed.int8-array.js","core-js/modules/es6.typed.uint8-array":"../../node_modules/core-js/modules/es6.typed.uint8-array.js","core-js/modules/es6.typed.uint8-clamped-array":"../../node_modules/core-js/modules/es6.typed.uint8-clamped-array.js","core-js/modules/es6.typed.int16-array":"../../node_modules/core-js/modules/es6.typed.int16-array.js","core-js/modules/es6.typed.uint16-array":"../../node_modules/core-js/modules/es6.typed.uint16-array.js","core-js/modules/es6.typed.int32-array":"../../node_modules/core-js/modules/es6.typed.int32-array.js","core-js/modules/es6.typed.uint32-array":"../../node_modules/core-js/modules/es6.typed.uint32-array.js","core-js/modules/es6.typed.float32-array":"../../node_modules/core-js/modules/es6.typed.float32-array.js","core-js/modules/es6.typed.float64-array":"../../node_modules/core-js/modules/es6.typed.float64-array.js","core-js/modules/es6.map":"../../node_modules/core-js/modules/es6.map.js","core-js/modules/es6.set":"../../node_modules/core-js/modules/es6.set.js","core-js/modules/es6.weak-map":"../../node_modules/core-js/modules/es6.weak-map.js","core-js/modules/es6.weak-set":"../../node_modules/core-js/modules/es6.weak-set.js","core-js/modules/es6.reflect.apply":"../../node_modules/core-js/modules/es6.reflect.apply.js","core-js/modules/es6.reflect.construct":"../../node_modules/core-js/modules/es6.reflect.construct.js","core-js/modules/es6.reflect.define-property":"../../node_modules/core-js/modules/es6.reflect.define-property.js","core-js/modules/es6.reflect.delete-property":"../../node_modules/core-js/modules/es6.reflect.delete-property.js","core-js/modules/es6.reflect.get":"../../node_modules/core-js/modules/es6.reflect.get.js","core-js/modules/es6.reflect.get-own-property-descriptor":"../../node_modules/core-js/modules/es6.reflect.get-own-property-descriptor.js","core-js/modules/es6.reflect.get-prototype-of":"../../node_modules/core-js/modules/es6.reflect.get-prototype-of.js","core-js/modules/es6.reflect.has":"../../node_modules/core-js/modules/es6.reflect.has.js","core-js/modules/es6.reflect.is-extensible":"../../node_modules/core-js/modules/es6.reflect.is-extensible.js","core-js/modules/es6.reflect.own-keys":"../../node_modules/core-js/modules/es6.reflect.own-keys.js","core-js/modules/es6.reflect.prevent-extensions":"../../node_modules/core-js/modules/es6.reflect.prevent-extensions.js","core-js/modules/es6.reflect.set":"../../node_modules/core-js/modules/es6.reflect.set.js","core-js/modules/es6.reflect.set-prototype-of":"../../node_modules/core-js/modules/es6.reflect.set-prototype-of.js","core-js/modules/es6.promise":"../../node_modules/core-js/modules/es6.promise.js","core-js/modules/es6.symbol":"../../node_modules/core-js/modules/es6.symbol.js","core-js/modules/es6.object.freeze":"../../node_modules/core-js/modules/es6.object.freeze.js","core-js/modules/es6.object.seal":"../../node_modules/core-js/modules/es6.object.seal.js","core-js/modules/es6.object.prevent-extensions":"../../node_modules/core-js/modules/es6.object.prevent-extensions.js","core-js/modules/es6.object.is-frozen":"../../node_modules/core-js/modules/es6.object.is-frozen.js","core-js/modules/es6.object.is-sealed":"../../node_modules/core-js/modules/es6.object.is-sealed.js","core-js/modules/es6.object.is-extensible":"../../node_modules/core-js/modules/es6.object.is-extensible.js","core-js/modules/es6.object.get-own-property-descriptor":"../../node_modules/core-js/modules/es6.object.get-own-property-descriptor.js","core-js/modules/es6.object.get-prototype-of":"../../node_modules/core-js/modules/es6.object.get-prototype-of.js","core-js/modules/es6.object.keys":"../../node_modules/core-js/modules/es6.object.keys.js","core-js/modules/es6.object.get-own-property-names":"../../node_modules/core-js/modules/es6.object.get-own-property-names.js","core-js/modules/es6.object.assign":"../../node_modules/core-js/modules/es6.object.assign.js","core-js/modules/es6.object.is":"../../node_modules/core-js/modules/es6.object.is.js","core-js/modules/es6.object.set-prototype-of":"../../node_modules/core-js/modules/es6.object.set-prototype-of.js","core-js/modules/es6.function.name":"../../node_modules/core-js/modules/es6.function.name.js","core-js/modules/es6.string.raw":"../../node_modules/core-js/modules/es6.string.raw.js","core-js/modules/es6.string.from-code-point":"../../node_modules/core-js/modules/es6.string.from-code-point.js","core-js/modules/es6.string.code-point-at":"../../node_modules/core-js/modules/es6.string.code-point-at.js","core-js/modules/es6.string.repeat":"../../node_modules/core-js/modules/es6.string.repeat.js","core-js/modules/es6.string.starts-with":"../../node_modules/core-js/modules/es6.string.starts-with.js","core-js/modules/es6.string.ends-with":"../../node_modules/core-js/modules/es6.string.ends-with.js","core-js/modules/es6.string.includes":"../../node_modules/core-js/modules/es6.string.includes.js","core-js/modules/es6.regexp.flags":"../../node_modules/core-js/modules/es6.regexp.flags.js","core-js/modules/es6.regexp.match":"../../node_modules/core-js/modules/es6.regexp.match.js","core-js/modules/es6.regexp.replace":"../../node_modules/core-js/modules/es6.regexp.replace.js","core-js/modules/es6.regexp.split":"../../node_modules/core-js/modules/es6.regexp.split.js","core-js/modules/es6.regexp.search":"../../node_modules/core-js/modules/es6.regexp.search.js","core-js/modules/es6.array.from":"../../node_modules/core-js/modules/es6.array.from.js","core-js/modules/es6.array.of":"../../node_modules/core-js/modules/es6.array.of.js","core-js/modules/es6.array.copy-within":"../../node_modules/core-js/modules/es6.array.copy-within.js","core-js/modules/es6.array.find":"../../node_modules/core-js/modules/es6.array.find.js","core-js/modules/es6.array.find-index":"../../node_modules/core-js/modules/es6.array.find-index.js","core-js/modules/es6.array.fill":"../../node_modules/core-js/modules/es6.array.fill.js","core-js/modules/es6.array.iterator":"../../node_modules/core-js/modules/es6.array.iterator.js","core-js/modules/es6.number.is-finite":"../../node_modules/core-js/modules/es6.number.is-finite.js","core-js/modules/es6.number.is-integer":"../../node_modules/core-js/modules/es6.number.is-integer.js","core-js/modules/es6.number.is-safe-integer":"../../node_modules/core-js/modules/es6.number.is-safe-integer.js","core-js/modules/es6.number.is-nan":"../../node_modules/core-js/modules/es6.number.is-nan.js","core-js/modules/es6.number.epsilon":"../../node_modules/core-js/modules/es6.number.epsilon.js","core-js/modules/es6.number.min-safe-integer":"../../node_modules/core-js/modules/es6.number.min-safe-integer.js","core-js/modules/es6.number.max-safe-integer":"../../node_modules/core-js/modules/es6.number.max-safe-integer.js","core-js/modules/es6.math.acosh":"../../node_modules/core-js/modules/es6.math.acosh.js","core-js/modules/es6.math.asinh":"../../node_modules/core-js/modules/es6.math.asinh.js","core-js/modules/es6.math.atanh":"../../node_modules/core-js/modules/es6.math.atanh.js","core-js/modules/es6.math.cbrt":"../../node_modules/core-js/modules/es6.math.cbrt.js","core-js/modules/es6.math.clz32":"../../node_modules/core-js/modules/es6.math.clz32.js","core-js/modules/es6.math.cosh":"../../node_modules/core-js/modules/es6.math.cosh.js","core-js/modules/es6.math.expm1":"../../node_modules/core-js/modules/es6.math.expm1.js","core-js/modules/es6.math.fround":"../../node_modules/core-js/modules/es6.math.fround.js","core-js/modules/es6.math.hypot":"../../node_modules/core-js/modules/es6.math.hypot.js","core-js/modules/es6.math.imul":"../../node_modules/core-js/modules/es6.math.imul.js","core-js/modules/es6.math.log1p":"../../node_modules/core-js/modules/es6.math.log1p.js","core-js/modules/es6.math.log10":"../../node_modules/core-js/modules/es6.math.log10.js","core-js/modules/es6.math.log2":"../../node_modules/core-js/modules/es6.math.log2.js","core-js/modules/es6.math.sign":"../../node_modules/core-js/modules/es6.math.sign.js","core-js/modules/es6.math.sinh":"../../node_modules/core-js/modules/es6.math.sinh.js","core-js/modules/es6.math.tanh":"../../node_modules/core-js/modules/es6.math.tanh.js","core-js/modules/es6.math.trunc":"../../node_modules/core-js/modules/es6.math.trunc.js","core-js/modules/es7.array.includes":"../../node_modules/core-js/modules/es7.array.includes.js","core-js/modules/es7.object.values":"../../node_modules/core-js/modules/es7.object.values.js","core-js/modules/es7.object.entries":"../../node_modules/core-js/modules/es7.object.entries.js","core-js/modules/es7.object.get-own-property-descriptors":"../../node_modules/core-js/modules/es7.object.get-own-property-descriptors.js","core-js/modules/es7.string.pad-start":"../../node_modules/core-js/modules/es7.string.pad-start.js","core-js/modules/es7.string.pad-end":"../../node_modules/core-js/modules/es7.string.pad-end.js","core-js/modules/web.timers":"../../node_modules/core-js/modules/web.timers.js","core-js/modules/web.immediate":"../../node_modules/core-js/modules/web.immediate.js","core-js/modules/web.dom.iterable":"../../node_modules/core-js/modules/web.dom.iterable.js","regenerator-runtime/runtime":"../../node_modules/regenerator-runtime/runtime.js","../styles/theme.scss":"../styles/theme.scss","./slate/slate":"slate/slate.js","./modules/newsletter":"modules/newsletter.js","./header/header":"header/header.js","./product/product-listing-colors":"product/product-listing-colors.js","./product/quickadd-handler":"product/quickadd-handler.js","./product/product-section":"product/product-section.js","./modules/featured-collection":"modules/featured-collection.js","./modules/slider":"modules/slider.js","./modules/toggle-handler":"modules/toggle-handler.js","./modules/add-to-cart":"modules/add-to-cart.js","./modules/faq":"modules/faq.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -14960,7 +16757,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '58957' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '62092' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

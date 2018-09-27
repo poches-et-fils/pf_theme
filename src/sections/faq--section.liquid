@@ -6,7 +6,7 @@
 <div class="faq cs-faq-section">
   <h1 class="faq-heading">{{ 'faq_page.title' | t }}</h1>
   <div class="faq__search-form">
-    <form action="/search" class="cs-faq-form">
+    <form action="/search" class="cs-faq-form faq__search-form">
       <input class="faq__search" maxlength="256" autofocus="true" type="text" name="q" value="{{ search.terms | escape }}"  placeholder="{{ 'faq_page.search_bar' | t }}"  />
       <input hidden type="submit" value="Search" />
     </form>
@@ -16,87 +16,95 @@
 <div class="faq">
   <div class="faq__sidebar-layout faq__container">
     <aside class="faq__sidebar">
-      <h3>{{ 'faq_page.sidebar_title' | t }}</h3>
-      <ul>
-        <li><a href="#" data-category="products" class="active">Products</a></li>
-        <li><a href="#" data-category="payment">Payment</a></li>
-        <li><a href="#" data-category="orders">Orders</a></li>
-        <li><a href="#" data-category="shipping">Shipping</a></li>
-        <li><a href="#" data-category="returns">Returns</a></li>
-        <li><a href="#" data-category="other">Other</a></li>
-      </ul>
+      <div>
+        <ul>
+          {% capture categories %}{% endcapture %}
+          {% for block in section.blocks %}
+            {% assign thisCategory = block.settings.category | handle %}
+            {% unless categories contains thisCategory %}
+              {% capture categories %}{{ categories }}, {{ thisCategory | handle }}{% endcapture %}
+              <li>
+                <a 
+                  href="#"
+                  data-category="{{ block.settings.category | handle }}"
+                  class="{%- if forloop.first -%}active{%- endif -%}"
+                >
+                  {{ block.settings.category }}
+                </a>
+              </li>
+            {% endunless %}
+          {% endfor %}
+        </ul>
 
-      <h3>{{ 'faq_page.live_chat.title' | t }}</h3>
-      <p>{{ 'faq_page.live_chat.text' | t }}</p>
-      <a href="#" class="live-chat-button w-button">
-        {{ 'faq_page.live_chat.button_text' | t }}
-      </a>
+        <h3>{{ 'faq_page.live_chat.title' | t }}</h3>
+        <p>{{ 'faq_page.live_chat.text' | t }}</p>
+        <a href="#" class="live-chat-button w-button">
+          {{ 'faq_page.live_chat.button_text' | t }}
+        </a>
+      </div>
     </aside>
 
     <div class="faq__questions">
-      <h2>Products</h2>
+      {% assign activeCategory = section.blocks[0].settings.category %}
+
+      <h2>{{ activeCategory }}</h2>
 
       <div class="toggles--section">
-        <div class="toggle--item">
-          <div class="toggle--activation" data-ix="toggle-interaction">
-            <h4 class="toggle--heading">What are your T-shirts made of?</h4>
-            {% include 'icon-minus' %}
-            {% include 'icon-plus' %}
-          </div>
-          <div class="toggle--contents">
-            <p>Basically, they’re made out of antimatter, a fusion of atomic protons, just follow the link here to see the formula: Product Chart.</p>
-          </div>
-        </div>
-        <div class="toggle--item">
-          <div class="toggle--activation" data-ix="toggle-interaction">
-            <h4 class="toggle--heading">Where do your t-shirts come from?</h4>
-            {% include 'icon-minus' %}
-            {% include 'icon-plus' %}
-          </div>
-          <div class="toggle--contents">
-            <p>Basically, they’re made out of antimatter, a fusion of atomic protons, just follow the link here to see the formula: Product Chart.</p>
-            <p>Basically, they’re made out of antimatter, a fusion of atomic protons, just follow the link here to see the formula: Product Chart.</p>
-            <p>Basically, they’re made out of antimatter, a fusion of atomic protons, just follow the link here to see the formula: Product Chart.</p>
-          </div>
-        </div>
+        {% for block in section.blocks %}
+          {% if block.settings.category == activeCategory %}
+            <div class="toggle--item">
+              <div class="toggle--activation" data-ix="toggle-interaction">
+                <h4 class="toggle--heading">{{ block.settings.title }}</h4>
+                {% include 'icon-minus' %}
+                {% include 'icon-plus' %}
+              </div>
+              <div class="toggle--contents">
+                {{ block.settings.answer }}
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
       </div>
     </div>
   </div>
 </div>
 
+<script type="application/json" data-questions-json>
+  [
+  {%- for block in section.blocks -%}
+    {
+      "id": "{{ block.id }}",
+      "question": "{{ block.settings.title | escape }}",
+      "answer": "{{ block.settings.answer | escape | strip_newlines }}",
+      "category": "{{ block.settings.category | escape }}",
+      "categorySlug": "{{ block.settings.category | handle }}"
+    }{%- unless forloop.last -%},{%- endunless -%}
+  {% endfor %}
+  ]
+</script>
+
 {% schema %}
 {
-  "name": "FAQ Blocks",
-  "max_blocks": 6,
-  "settings": [{
-    "id": "text-box",
-    "type": "text",
-    "label": "Heading",
-    "default": "Title"
-  }],
+  "name": "FAQ questions",
+  "settings": [],
   "blocks": [{
-    "type": "select",
-    "name": "Add Button",
+    "type": "question",
+    "name": "Add Question",
     "settings": [{
       "id": "title",
       "type": "text",
-      "label": "Block Title"
+      "label": "Question"
     }, {
-      "id": "tag",
+      "id": "answer", 
+      "type": "richtext",
+      "label": "Answer"
+    }, {
+      "id": "category",
       "type": "text",
-      "label": "Tag text (lowercase}",
-      "default": "product"
+      "label": "Category"
     }]
   }],
-  "presets": [{
-    "name": "Call to Action Blocks",
-    "category": "CTA button",
-    "blocks": [{ 
-      "type": "select"
-    }, {
-      "type": "select"
-    }]
-  }]
+  "presets": []
 }
 {% endschema %}
 

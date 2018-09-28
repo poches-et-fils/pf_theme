@@ -67,7 +67,7 @@ const faq = () => $(() => {
 		question.search(urlQuery);
 	}
 
-	$('.faq__sidebar a').click(e => {
+	$('.faq__sidebar ul a').click(e => {
 		e.preventDefault();
 		const category = $(e.currentTarget).data('category');
 		question.category(category);
@@ -77,6 +77,11 @@ const faq = () => $(() => {
 		e.preventDefault();
 		const query = $('.faq__search').val();
 		question.search(query);
+	});
+
+	$('.live-chat-button').click(e => {
+		e.preventDefault();
+		$('.facebook-message-us-button > img').trigger('click');
 	});
 });
 

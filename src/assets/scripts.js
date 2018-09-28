@@ -16472,7 +16472,7 @@ var faq = function faq() {
 			question.search(urlQuery);
 		}
 
-		$('.faq__sidebar a').click(function (e) {
+		$('.faq__sidebar ul a').click(function (e) {
 			e.preventDefault();
 			var category = $(e.currentTarget).data('category');
 			question.category(category);
@@ -16482,6 +16482,11 @@ var faq = function faq() {
 			e.preventDefault();
 			var query = $('.faq__search').val();
 			question.search(query);
+		});
+
+		$('.live-chat-button').click(function (e) {
+			e.preventDefault();
+			$('.facebook-message-us-button > img').trigger('click');
 		});
 	});
 };
@@ -16757,7 +16762,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '62092' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '51539' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

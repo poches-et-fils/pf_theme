@@ -1473,6 +1473,10 @@ textarea.input-error {
     height: auto;
     padding-bottom: 40px; }
 
+.nav--announcement > div {
+  font-weight: normal;
+  font-size: 14px; }
+
 .slider--section {
   height: auto;
   min-height: 250px; }

@@ -1,0 +1,26 @@
+<div class="contact-details">
+	<h2>{{ 'contact_details.title' | t }}</h2>
+	<h3>{{ 'contact_details.name' | t }}</h3>
+	<p>
+		{{ 'contact_details.address_line_one' | t }}, <br/>
+		{{ 'contact_details.city' | t }}, {{ 'contact_details.zip' | t }}, <br/>
+		{{ 'contact_details.country' | t }}
+	</p>
+	<p>
+		{{ 'contact_details.phone' | t }}
+	</p>
+	<p>
+		{{ 'contact_details.email' | t }}
+	</p>
+
+	<div class="contact-details__social">
+    {% if linklists['social-links'].links.size > 0 %}
+      {% for link in linklists['social-links'].links %}
+        {%- capture social_icon -%}icon-{{ link.handle }}{%- endcapture -%}
+        <a class="social--icons w-inline-block" href="{{ link.url }}">
+          {% include social_icon %}
+        </a>
+      {% endfor %}
+    {% endif %}
+  </div>
+</div>

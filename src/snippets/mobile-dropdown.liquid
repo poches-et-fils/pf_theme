@@ -11,9 +11,8 @@
   {%endfor%}
 
   <div class="social--icons--mobile--dropdown">
-    {%- assign social_linklist = section.settings.social_linklist -%}
-    {% if linklists[social_linklist].links.size > 0 %}
-      {% for link in linklists[social_linklist].links %}
+    {% if linklists['social-links'].links.size > 0 %}
+      {% for link in linklists['social-links'].links %}
         {%- capture social_icon -%}icon-{{ link.handle }}{%- endcapture -%}
         <a class="social--icons w-inline-block" href="{{ link.url }}">
           {% include social_icon %}

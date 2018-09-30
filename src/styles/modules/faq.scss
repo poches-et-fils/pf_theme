@@ -24,7 +24,7 @@
 		}
 	}
 
-	.faq__container {
+	&.faq__container, .faq__container {
 		padding: 80px;
 	}
 
@@ -109,12 +109,53 @@
 		}
 	}
 
+	&.faq__store-locator.faq__container {
+		padding-top: 0px;
+	}
+
+	&.faq__store-locator {
+		h3 {
+			font-size: 16px;
+			font-weight: bold;
+			text-transform: uppercase;
+		}
+
+		#store_map {
+			margin-top: -246px;
+		}
+
+		#addresses_list {
+			height: 236px !important;
+			margin-top: 10px;
+		}
+
+		#addresses_list .distance {
+			width: 35px;
+		}
+
+		#addresses_list li {
+			background-image: url("https://cdn.shopify.com/s/files/1/0013/6685/1647/t/10/assets/map-pin.svg?202537047854379801");
+			background-position: 0 17px;
+			border-top: none;
+			padding: 15px 0;
+		}
+
+		#addresses_list li a span {
+			font-size: 14px;
+		}
+
+		#addresses_list li a span.name {
+			color: #161616;
+			font-weight: normal;
+		}
+	}
+
 	@media (max-width: 900px) {
 		.faq__sidebar-layout {
 			flex-wrap: wrap;
 		}
 
-		.faq__container {
+		&.faq__container, .faq__container {
 			padding: 60px 25px;
 		}
 
@@ -136,6 +177,10 @@
 			height: 55px;
 			font-size: 14px;
 			background-size: 20px;
+		}
+
+		&.faq__store-locator #store_map {
+			margin-top: 0;
 		}
 	}
 }

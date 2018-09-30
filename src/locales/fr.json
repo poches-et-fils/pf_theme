@@ -103,15 +103,15 @@
             "link_title": "Consultez la collection {{ title }}"
         }
     },
-    "contact": {
-        "form": {
-            "name": "Nom",
-            "email": "Courriel",
-            "phone": "Téléphone",
-            "message": "Message",
-            "send": "Envoyer",
-            "post_success": "Merci de nous avoir avoir contacté. Nous vous reviendrons le plus rapidement possible."
-        }
+    "contact_details": {
+        "title": "Contact Us",
+        "name": "Poches et fils hq",
+        "address_line_one": "2055 Parthenals",
+        "city": "Montreal",
+        "zip": "H2K 3TI QC",
+        "country": "Canada",
+        "phone": "555-555-5555",
+        "email": "info@pochesetfils.com"
     },
     "customer": {
         "account": {

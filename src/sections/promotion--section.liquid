@@ -1,69 +1,74 @@
-
-  <div class="section--promotions w-clearfix">
-    <div class="promotion--left" style=" background-image: url('{{ section.settings.bgimg1 | img_url: '1000x1000' }}');">
-      <div class="promotion--content
-        {% if section.settings.bg-position1 == 'left' %} promotion--content--right {% endif %}
-        {% if section.settings.bg-position1 == 'right' %} promotion--content--left {% endif %}
-        {% if section.settings.bg-position1 == 'center' or section.settings.bg-position1 == 'fill' %} promotion--content--center {% endif %}">
-
-        <h1 class="slider--heading--main"  style="font-size: 55px;font-weight: 500;color: #fff;text-transform: uppercase;"> {{ section.settings.heading1 }}</h1>
-        <h3 class="slider--heading--text"> {{ section.settings.subtitle1 }}</h3>
-
-        {% if section.settings.btn1 %}
-          <a href="{{section.settings.link1}}" style="background-color: rgba(255, 255, 255, 0.2);font-weight: 500;" class="slider--button--main w-button">{{section.settings.btn1}}</a>
-        {%endif%}
-
-      </div>
-    </div>
-    <div class="promotion--right"  style=" background-image: url('{{ section.settings.bgimg2 | img_url: '1000x1000' }}');">
-      <div class="promotion--content
-        {% if section.settings.bg-position2 == 'left' %} promotion--content--right {% endif %}
-        {% if section.settings.bg-position2 == 'right' %} promotion--content--left {% endif %}
-        {% if section.settings.bg-position2 == 'center' or section.settings.bg-position2 == 'fill' %} promotion--content--center {% endif %}">
-
-        <h1 class="slider--heading--main"  style="font-size: 55px;font-weight: 500;color: #fff;text-transform: uppercase;"> {{ section.settings.heading2 }}</h1>
-        <h3 class="slider--heading--text"> {{ section.settings.subtitle2 }}</h3>
-
-        {% if section.settings.btn2 %}
-          <a href="{{section.settings.link2}}" style="background-color: rgba(255, 255, 255, 0.2);font-weight: 500;" class="slider--button--main w-button">{{section.settings.btn2}}</a>
-        {%endif%}
-
-      </div>
+<div class="section--promotions w-clearfix">
+  <div 
+    class="
+      promotion--left
+      {% if section.settings.bg-position1 == 'left' %} promotion--content--left {% endif %}
+      {% if section.settings.bg-position1 == 'right' %} promotion--content--right {% endif %}
+      {% if section.settings.bg-position1 == 'center' %} promotion--content--center {% endif %}
+    "
+    style="background-image: url('{{ section.settings.bgimg1 | img_url: '1000x' }}');"
+  >
+    <div class="promotion--content">
+      <h1>{{ section.settings.heading1 }}</h1>
+      <h3>{{ section.settings.subtitle1 }}</h3>
+      {% if section.settings.btn1 %}
+        <a href="{{section.settings.link1}}" class="slider--button--main w-button">{{section.settings.btn1}}</a>
+      {%endif%}
     </div>
   </div>
+  <div
+    class="
+      promotion--right
+      {% if section.settings.bg-position2 == 'left' %} promotion--content--left {% endif %}
+      {% if section.settings.bg-position2 == 'right' %} promotion--content--right {% endif %}
+      {% if section.settings.bg-position2 == 'center' %} promotion--content--center {% endif %}
+    "
+    style="background-image: url('{{ section.settings.bgimg2 | img_url: '1000x1000' }}');"
+  >
+    <div class="promotion--content">
+      <h1>{{ section.settings.heading2 }}</h1>
+      <h3>{{ section.settings.subtitle2 }}</h3>
+      {% if section.settings.btn2 %}
+        <a href="{{section.settings.link2}}" class="slider--button--main w-button">{{section.settings.btn2}}</a>
+      {%endif%}
+    </div>
+  </div>
+</div>
 
 
-  {% schema %}
+{% schema %}
 {
   "name": "Promotion  Blocks",
   "settings": [
+    {
+      "type": "header",
+      "content": "Left Image"
+    },
     {
       "id": "bgimg1",
       "type": "image_picker",
       "label": "Promotion Image"
     },
     {
-      "type":      "select",
-      "id":        "bg-position1",
-      "label":     "Image Position",
+      "type": "select",
+      "id": "bg-position1",
+      "label": "Text Position",
       "options": [
         { "value": "left", "label": "Left Aligned" },
         { "value": "center", "label": "Center Aligned" },
-        { "value": "right", "label": "Right Aligned" },
-        { "value": "fill", "label": "Fill Background" }
+        { "value": "right", "label": "Right Aligned" }
       ],
-      "default":   "left",
-      "info":      "Moves the alignment of the background image"
+      "default": "left"
     },
     {
       "id": "heading1",
       "type": "text",
-      "label": "Slider Heading"
+      "label": "Title"
     },
     {
       "id": "subtitle1",
       "type": "text",
-      "label": "Slider Subtitle"
+      "label": "Subtitle"
     },
     {
       "id": "link1",
@@ -77,55 +82,46 @@
       "default": "Click here"
     },
     {
-      "id": "btncolor1",
-      "type": "color",
-      "label": "Button Color",
-      "default": "#f36e21"
+      "type": "header",
+      "content": "Right Image"
     },
     {
       "id": "bgimg2",
       "type": "image_picker",
-      "label": "Promotion Image 2"
+      "label": "Promotion Image"
     },
     {
-      "type":      "select",
-      "id":        "bg-position2",
-      "label":     "Image Position 2",
+      "type": "select",
+      "id": "bg-position2",
+      "label": "Text Position",
       "options": [
         { "value": "left", "label": "Left Aligned" },
         { "value": "center", "label": "Center Aligned" },
-        { "value": "right", "label": "Right Aligned" },
-        { "value": "fill", "label": "Fill Background" }
+        { "value": "right", "label": "Right Aligned" }
       ],
-      "default":   "left",
-      "info":      "Moves the alignment of the background image"
+      "default": "left",
+      "info": "Moves the alignment of the background image"
     },
     {
       "id": "heading2",
       "type": "text",
-      "label": "Slider Heading 2"
+      "label": "Title"
     },
     {
       "id": "subtitle2",
       "type": "text",
-      "label": "Slider Subtitle 2"
+      "label": "Subtitle"
     },
     {
       "id": "link2",
       "type": "url",
-      "label": "Button link 2"
+      "label": "Button link"
     },
     {
       "id": "btn2",
       "type": "text",
-      "label": "Button text 2",
+      "label": "Button text",
       "default": "Click here"
-    },
-    {
-      "id": "btncolor2",
-      "type": "color",
-      "label": "Button Color 2",
-      "default": "#f36e21"
     }
   ],
   "presets": [

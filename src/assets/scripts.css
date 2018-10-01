@@ -2430,3 +2430,89 @@ textarea.input-error {
 @media (max-width: 900px) {
   .contact-details h2 {
     font-size: 42px; } }
+
+.section--promotions {
+  padding: 40px 0;
+  margin-bottom: 40px; }
+  .section--promotions .promotion--left,
+  .section--promotions .promotion--right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 480px;
+    height: auto;
+    margin: 0; }
+    .section--promotions .promotion--left.promotion--left,
+    .section--promotions .promotion--right.promotion--left {
+      margin-right: 10px; }
+    .section--promotions .promotion--left.promotion--right,
+    .section--promotions .promotion--right.promotion--right {
+      margin-left: 10px; }
+    .section--promotions .promotion--left.promotion--content--left,
+    .section--promotions .promotion--right.promotion--content--left {
+      justify-content: flex-start; }
+    .section--promotions .promotion--left.promotion--content--right,
+    .section--promotions .promotion--right.promotion--content--right {
+      justify-content: flex-end;
+      text-align: right; }
+      .section--promotions .promotion--left.promotion--content--right .promotion--content h1,
+      .section--promotions .promotion--left.promotion--content--right .promotion--content h3,
+      .section--promotions .promotion--right.promotion--content--right .promotion--content h1,
+      .section--promotions .promotion--right.promotion--content--right .promotion--content h3 {
+        text-align: right; }
+    .section--promotions .promotion--left.promotion--content--center,
+    .section--promotions .promotion--right.promotion--content--center {
+      justify-content: center;
+      text-align: center; }
+      .section--promotions .promotion--left.promotion--content--center .promotion--content h1,
+      .section--promotions .promotion--left.promotion--content--center .promotion--content h3,
+      .section--promotions .promotion--right.promotion--content--center .promotion--content h1,
+      .section--promotions .promotion--right.promotion--content--center .promotion--content h3 {
+        text-align: center; }
+  .section--promotions .promotion--left .promotion--content,
+  .section--promotions .promotion--right .promotion--content {
+    margin: 0;
+    display: block;
+    max-width: 420px;
+    width: 100%;
+    padding: 60px 80px; }
+    .section--promotions .promotion--left .promotion--content h1, .section--promotions .promotion--left .promotion--content h3,
+    .section--promotions .promotion--right .promotion--content h1,
+    .section--promotions .promotion--right .promotion--content h3 {
+      color: #fff;
+      margin: 0; }
+    .section--promotions .promotion--left .promotion--content h1,
+    .section--promotions .promotion--right .promotion--content h1 {
+      font-size: 24px;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-bottom: 15px; }
+    .section--promotions .promotion--left .promotion--content h3,
+    .section--promotions .promotion--right .promotion--content h3 {
+      font-size: 16px;
+      font-weight: normal;
+      margin-bottom: 25px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); }
+    .section--promotions .promotion--left .promotion--content a.w-button,
+    .section--promotions .promotion--right .promotion--content a.w-button {
+      background-color: rgba(255, 255, 255, 0.35);
+      font-weight: 500;
+      font-size: 14px;
+      margin: 0;
+      letter-spacing: 2px;
+      padding: 13px 32px; }
+  @media (max-width: 900px) {
+    .section--promotions {
+      display: block; }
+      .section--promotions .promotion--left.promotion--left,
+      .section--promotions .promotion--right.promotion--right {
+        min-height: 400px;
+        background-position: center;
+        width: 100%;
+        margin: 0; }
+        .section--promotions .promotion--left.promotion--left .promotion--content,
+        .section--promotions .promotion--right.promotion--right .promotion--content {
+          padding: 30px;
+          width: 100%; }
+      .section--promotions .promotion--left.promotion--left {
+        margin-bottom: 20px; } }

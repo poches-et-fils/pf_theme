@@ -378,11 +378,11 @@ const updateQty = event => {
 	if (operation === 'add') {
 		newQty++;
 		button.removeProp('disabled');
-		refreshCounter(refreshCounter() + 1);
+		refreshCounter(Number(refreshCounter()) + 1);
 	} else if (operation === 'substract') {
 		if (newQty > 1) {
 			newQty--;
-			refreshCounter(refreshCounter() - 1);
+			refreshCounter(Number(refreshCounter()) - 1);
 		} else {
 			button.prop('disabled', true);
 		}

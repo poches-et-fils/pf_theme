@@ -6784,11 +6784,11 @@ var updateQty = function updateQty(event) {
 	if (operation === 'add') {
 		newQty++;
 		button.removeProp('disabled');
-		refreshCounter(refreshCounter() + 1);
+		refreshCounter(Number(refreshCounter()) + 1);
 	} else if (operation === 'substract') {
 		if (newQty > 1) {
 			newQty--;
-			refreshCounter(refreshCounter() - 1);
+			refreshCounter(Number(refreshCounter()) - 1);
 		} else {
 			button.prop('disabled', true);
 		}
@@ -16762,7 +16762,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '50162' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '54606' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

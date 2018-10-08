@@ -7,9 +7,10 @@ import './product/product-listing-colors';
 import './product/quickadd-handler';
 
 import ProductSection from './product/product-section';
+import collection from './collection/collection';
 import FeaturedCollectionSection from './modules/featured-collection';
 import SliderSection from './modules/slider';
-import toggleHandler from './modules/toggle-handler';
+import toggleHandler from './modules/toggle-list';
 import {handleAddItemSubmit} from './modules/add-to-cart';
 import faq from './modules/faq';
 
@@ -19,6 +20,7 @@ $(() => {
 	sections.register('collection-custom-section', FeaturedCollectionSection);
 	sections.register('slider', SliderSection);
 	faq();
+	collection();
 
 	$(document).on('submit', 'form[action="/cart/add"]', handleAddItemSubmit);
 	$(document).on('click', '.toggle--activation', toggleHandler);

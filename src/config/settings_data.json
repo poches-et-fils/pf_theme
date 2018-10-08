@@ -170,61 +170,9 @@
       },
       "collection--sidebar": {
         "type": "collection--sidebar",
-        "blocks": {
-          "1523986728867": {
-            "type": "select",
-            "settings": {
-              "toplink": "\/collections\/men\/tops",
-              "toplinktitle": "Tops",
-              "sublink1": "\/collections\/men\/tshirt",
-              "sublinktitle1": "T-Shirts",
-              "sublink2": "\/collections\/men\/sweatshirt",
-              "sublinktitle2": "Sweatshirt",
-              "sublink3": "\/collections\/men\/tanktop",
-              "sublinktitle3": "Tank Tops",
-              "sublink4": "\/collections\/men\/vneck",
-              "sublinktitle4": "V-Necks"
-            }
-          },
-          "1524752507744": {
-            "type": "select",
-            "settings": {
-              "toplink": "",
-              "toplinktitle": "Bottoms",
-              "sublink1": "shopify:\/\/collections\/men",
-              "sublinktitle1": "Boxers",
-              "sublink2": "",
-              "sublinktitle2": "",
-              "sublink3": "",
-              "sublinktitle3": "",
-              "sublink4": "",
-              "sublinktitle4": ""
-            }
-          },
-          "1524752548319": {
-            "type": "select",
-            "settings": {
-              "toplink": "",
-              "toplinktitle": "Accessories",
-              "sublink1": "shopify:\/\/collections\/men",
-              "sublinktitle1": "Unisex Socks",
-              "sublink2": "shopify:\/\/collections\/men",
-              "sublinktitle2": "Phone Cases",
-              "sublink3": "shopify:\/\/collections\/men",
-              "sublinktitle3": "Hats",
-              "sublink4": "shopify:\/\/collections\/men",
-              "sublinktitle4": "Bundles"
-            }
-          }
-        },
-        "block_order": [
-          "1523986728867",
-          "1524752507744",
-          "1524752548319"
-        ],
-        "settings": {
-          "text-box": "Title"
-        }
+        "blocks": {},
+        "block_order": [],
+        "settings": {}
       },
       "collection--section": {
         "type": "collection--section",

@@ -100,7 +100,9 @@
     "collections": {
         "general": {
             "no_matches": "Aucun produit ne correspond à votre recherche.",
-            "link_title": "Consultez la collection {{ title }}"
+            "men": "Men",
+            "women": "Women",
+            "youth": "Youth"
         }
     },
     "contact_details": {

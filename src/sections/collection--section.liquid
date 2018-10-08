@@ -1,30 +1,33 @@
-<div id="MainContent" class="container product-grid-filters"{{ filter_type_tag }}{{ filter_gender_tag }} data-filter-tags="{{ current_tags | join: ',' }}" data-filter-collection="{{ collection.handle }}">
-  {% paginate collection.products by 9 %}
-    {% for product in collection.products %}
-      <a href="{{ product.url }}" class="product--skeleton product--grid--item--four three--row w-inline-block">
-        <div class="product--grid--item--image" style="background-color: rgba(230,230,230, 0.75);">
-          <div class="product--grid--item--variant--overlay" style="background-image: url('{{ product | img_url: 'x630' }}'); "></div>
-        </div>
-        <h5 class="product--grid--item--title">{{ product.title }}</h5>
-        <div>{{ product.price | money }}</div>
-      </a>
-    {% endfor %}
-    <div>{{ paginate | default_pagination }}</div>
-  {% endpaginate %}
+{% paginate collection.products by 12 %}
+
+<div class="product-listing product-listing--grid product-listing--grid-three product-listing--collection">
+  {% for product in collection.products %}
+    <div class="product-listing__item" data-variants="{{ product.variants | json | escape }}">
+      <div class="product-listing__image">
+        <a href="{{product.url}}">
+          <img
+            src="{{ product.featured_image | product_img_url: '500x' }}"
+            width="500px"
+            height="500px"
+            alt="{{ product.title | escape }}"
+          />
+        </a>
+        {% include 'quick-add' %}
+      </div>
+      <div class="product-listing__content">
+        {% include 'product-listing-colors' %}
+        <h5>{{ product.title }}</h5>
+        <h6>{{ product.price | money }}</h6>
+        <a href="{{product.url}}">
+          <div class="product-listing__see-more">See more details</div>
+        </a>
+      </div>
+    </div>
+  {% endfor %}
 </div>
 
-<style>
-  .light-gray { color: gray; }
+<div class="product-collection__loading">
+  {% include 'spinner' %}
+</div>
 
-  #shopify-section-collection--section { width: inherit; }
-
-  .EndlessScroll { 
-    display: flex;
-    flex-flow: row wrap;
-  }
-  
-  .visible {
-    opacity: 1 !important;
-    transition: 5s;
-  }
-</style>
+{% endpaginate %}

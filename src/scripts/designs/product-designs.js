@@ -1,7 +1,7 @@
 import algoliasearch from 'algoliasearch';
-import slug from '@sindresorhus/slugify';
 import config from '../config';
 import allDesigns from './all-designs';
+import getCategories from './get-categories';
 
 const loading = isLoading => {
 	const $container = $('.product-designs-container');
@@ -55,28 +55,6 @@ const updateDesignCategoryText = newCategory => {
 	$('.product-design-list-container .selector--heading--left span').text(newCategory);
 };
 
-const getDesignCategories = designs => {
-	const thisCategory = slug(designs.find(design => design.thisDesign).category);
-	const categories = designs.reduce((categories, design) => {
-		const categorySlug = slug(design.category);
-
-		if (categories[categorySlug]) {
-			categories[categorySlug].designs.push(design);
-		} else {
-			categories[categorySlug] = {
-				title: design.category,
-				designs: [design]
-			};
-		}
-
-		return categories;
-	}, {});
-
-	return Object.keys(categories)
-		.sort(category => category === thisCategory ? -1 : 1)
-		.map(category => categories[category]);
-};
-
 const initDesignCategorySlider = categories => {
 	const slider = '.product-designs.glide';
 
@@ -104,7 +82,7 @@ const renderDesigns = async (designSettings, product) => {
 	try {
 		const {hits: designProducts} = await getDesignProducts(product);
 		const designs = mergeProductsWithSettings(designProducts, designSettings, product);
-		const designCategories = getDesignCategories(designs);
+		const designCategories = getCategories(designs);
 
 		$('.product-designs .glide__slides').html(designCategories.map(({title, designs}) => `
 			<li class="glide__slide" data-category="${title}">

@@ -14021,7 +14021,7 @@ var getDesignCategories = function getDesignCategories(designs) {
 	}, {});
 
 	return Object.keys(categories).sort(function (category) {
-		return category === thisCategory ? -1 : 1;
+		return category === thisCategory ? 1 : -1;
 	}).map(function (category) {
 		return categories[category];
 	});
@@ -14297,7 +14297,9 @@ var getProducts = function () {
 						variants = _ref4.hits;
 
 
-						window.collectionState.set('maxPages', maxPages - 1);
+						if ($('[data-collection]').length > 0) {
+							window.collectionState.set('maxPages', maxPages - 1);
+						}
 
 						return _context.abrupt('return', products.map(function (product) {
 							product.variants = variants.filter(function (variant) {
@@ -14423,23 +14425,26 @@ var relatedProducts = function () {
 						index = client.initIndex('poches_dev_products');
 						filterString = ' AND NOT handle:"' + handle + '" AND vendor:"' + vendor + '"';
 						_context.next = 8;
-						return (0, _products2.default)({ index: index, filterString: filterString });
+						return (0, _products2.default)({ index: index, filters: {}, filterString: filterString });
 
 					case 8:
 						productHtml = _context.sent;
 
+						console.log(productHtml);
+
 						if (productHtml) {
-							_context.next = 11;
+							_context.next = 12;
 							break;
 						}
 
 						return _context.abrupt('return', $('.related-products-container').hide());
 
-					case 11:
+					case 12:
 
 						$relatedProducts.html(productHtml);
+						$relatedProducts.find('.product-listing__item').removeClass('loading');
 
-					case 12:
+					case 14:
 					case 'end':
 						return _context.stop();
 				}
@@ -17322,7 +17327,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '53441' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '64665' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

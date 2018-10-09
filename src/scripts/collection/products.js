@@ -40,7 +40,9 @@ const getProducts = async ({index, page, handle, filters, filterString}) => {
 		}).join(' ')
 	});
 
-	window.collectionState.set('maxPages', maxPages - 1);
+	if ($('[data-collection]').length > 0) {
+		window.collectionState.set('maxPages', maxPages - 1);
+	}
 
 	return products.map(product => {
 		product.variants = variants

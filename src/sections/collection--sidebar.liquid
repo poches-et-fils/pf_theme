@@ -9,7 +9,9 @@
 {% endif %}
 
 <div class="collection--sidebar" data-collection="{{ collection.handle }}">
-  <div class="sidebar--block">
+  <a class="collection--sidebar--close">{% include 'icon-close' %}</a>
+
+  <div class="sidebar--block sidebar--block--collections">
     <h4 class="sidebar--heading">Collections</h4>
     <ul class="sidebar--links--block">
       <li><a href="/collections/all" class="{%- if collection.handle == 'all' -%}sidebar-link--active{%- endif -%}">Shop all</a></li>
@@ -20,7 +22,7 @@
   </div>
 
   {% if gender > '' %}
-    <div class="sidebar--block">
+    <div class="sidebar--block sidebar--block--shop">
       <h4 class="sidebar--heading">Shop</h4>
 
       <ul class="sidebar--links--block" data-type-filters>
@@ -50,7 +52,7 @@
     </div>
   {% endif %}
 
-  <div class="sidebar--block">
+  <div class="sidebar--block sidebar--block--designs">
     <h4 class="sidebar--heading sidebar--heading--no-border sidebar--heading--designs">
       <div>DESIGNS</div>
       <a href="#" class="see-all-designs">See all</a>
@@ -89,6 +91,36 @@
       </div>
     </div>
   </div>
+
+  <div class="sidebar--actions">
+    <a href="#" class="clear-filters button">Clear</a>
+    <a href="#" class="close-filters button black">Done</a>
+  </div>
+</div>
+
+<div class="collection--sidebar--mobile">
+  <select data-type-select-filters>
+    {% for link in linklists['header-menu'].links %}
+      {% if link.handle == gender %}
+        {% for second_level_link in link.links %}
+          <option value="{{ second_level_link.object.handle }}" {%- if second_level_link.active -%} selected="selected"{%- endif -%}>
+            {{ second_level_link.title }}
+          </option>
+          {% if link.levels > 0 %}
+            {% for third_level_link in second_level_link.links %}
+              <option value="{{ third_level_link.object.handle }}" {%- if third_level_link.active -%} selected="selected"{%- endif -%}>
+                {{ third_level_link.title }}
+              </option>
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+  </select>
+
+  <a href="#" class="show-mobile-filters">
+    {% include 'icon-options' %}
+  </a>
 </div>
 
 {% schema %}

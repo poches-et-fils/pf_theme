@@ -61,8 +61,11 @@ const filter = (type, value) => {
 	const collectionState = window.collectionState;
 	const prevState = collectionState.get();
 
-	if (type === 'type') {
+	if (type === 'type' || type === 'reset') {
 		prevState.filters = {designs: [], sizes: [], colors: []};
+	}
+
+	if (type === 'type') {
 		collectionState.set('handle', value);
 	}
 
@@ -111,10 +114,17 @@ const renderSidebar = async ({handle, index, designs, filters}) => {
 
 const handleTypeClick = e => {
 	e.preventDefault();
-	$('[data-type-filters] a').removeClass('sidebar-link--active')
-	const $link = $(e.currentTarget);
-	const handle = $link.data('collection-handle');
-	$link.addClass('sidebar-link--active');
+	const $target = $(e.currentTarget);
+	let handle = '';
+	
+	if ($target.is('a')) {
+		$('[data-type-filters] a').removeClass('sidebar-link--active')
+		handle = $target.data('collection-handle');
+		$target.addClass('sidebar-link--active');
+	} else {
+		handle = $target.val();
+	}
+
 	filter('type', handle);
 	renderSidebar(window.collectionState.get());
 };
@@ -127,8 +137,20 @@ const handleDesignClick = e => {
 	filter('designs', designName);
 };
 
-const handleColorClick = e => filter('colors', e.target.value);
-const handleSizeClick = e => filter('sizes', e.target.value);
+const toggleMobileFilters = e => {
+	e.preventDefault();
+	window.scrollTo(0, 0);
+	$('body').toggleClass('no-scroll');
+	$('.collection--sidebar').toggleClass('open');
+}
+
+const handleFiterClear = e => {
+	e.preventDefault();
+	filter('reset');
+	$('body').removeClass('no-scroll');
+	$('.collection--sidebar').removeClass('open');
+	renderSidebar(window.collectionState.get());
+}
 
 const collection = async () => {
 	if ($('[data-collection]').length === 0) {
@@ -154,14 +176,20 @@ const collection = async () => {
 	renderSidebar(window.collectionState.get());
 
 	if (state.filters.designs.length > 0 || state.filters.sizes.length > 0 || state.filters.colors.length > 0) {
-		filter('reset');
+		filter('reload');
 	} 
 
 	$('.collection--sidebar')
 		.on('click', '[data-type-filters] a', handleTypeClick)
 		.on('click', '.sidebar-designs__design', handleDesignClick)
-		.on('change', '[data-color-filters] input', handleColorClick)
-		.on('change', '[data-size-filters] input', handleSizeClick);
+		.on('change', '[data-color-filters] input', e => filter('colors', e.target.value))
+		.on('change', '[data-size-filters] input', e => filter('sizes', e.target.value))
+		.on('click', '.collection--sidebar--close, .close-filters', toggleMobileFilters)
+		.on('click', '.clear-filters', handleFiterClear);
+
+	$('.collection--sidebar--mobile')
+		.on('change', '[data-type-select-filters]', handleTypeClick)
+		.on('click', '.show-mobile-filters', toggleMobileFilters);
 
 	$(document).off('scroll').scroll(() => pager());
 };

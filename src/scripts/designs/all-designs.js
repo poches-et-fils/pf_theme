@@ -61,11 +61,11 @@ const allDesigns = (designs, callback) => {
 	$('.all-designs__designs').append(designsHtml(designs));
 	$('.all-designs__categories').append(categoryHtml(designs));
 
-	$('.all-designs__close, .see-all-designs').click(togglePopup);
-	$('.all-designs__back').click(backToTop);
-	$('.all-designs__categories a').click(onCategoryFilter);
+	$('.all-designs__close, .see-all-designs').off('click').click(togglePopup);
+	$('.all-designs__back').off('click').click(backToTop);
+	$('.all-designs__categories a').off('click').click(onCategoryFilter);
 
-	$('.all-designs__designs').on('click', '.all-designs__design', e => {
+	$('.all-designs__designs').off('click', '.all-designs__design').on('click', '.all-designs__design', e => {
 		onDesignSelected(e, designs, callback);
 	});
 };

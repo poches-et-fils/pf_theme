@@ -13653,11 +13653,11 @@ var allDesigns = function allDesigns(designs, callback) {
 	$('.all-designs__designs').append(designsHtml(designs));
 	$('.all-designs__categories').append(categoryHtml(designs));
 
-	$('.all-designs__close, .see-all-designs').click(togglePopup);
-	$('.all-designs__back').click(backToTop);
-	$('.all-designs__categories a').click(onCategoryFilter);
+	$('.all-designs__close, .see-all-designs').off('click').click(togglePopup);
+	$('.all-designs__back').off('click').click(backToTop);
+	$('.all-designs__categories a').off('click').click(onCategoryFilter);
 
-	$('.all-designs__designs').on('click', '.all-designs__design', function (e) {
+	$('.all-designs__designs').off('click', '.all-designs__design').on('click', '.all-designs__design', function (e) {
 		onDesignSelected(e, designs, callback);
 	});
 };
@@ -17327,7 +17327,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '64665' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '56430' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

@@ -41,7 +41,8 @@ const onDesignSelected = (e, designs, callback) => {
 
 const categoryHtml = designs => designs.reduce((categories, {category}) => {
 	return categories.indexOf(category) > -1 ? categories : categories.concat(category);
-}, []).map(category => `
+}, []).map((category, index) => `
+	${index === 0 ? '<li><a href="#" class="active-category" data-category="all">All</a></li>' : ''}
 	<li><a href="#" data-category="${category}">${category}</a></li>
 `).join('');
 
@@ -58,8 +59,8 @@ const designsHtml = designs => designs.map(design => `
 
 const allDesigns = (designs, callback) => {
 	$('.see-all-designs').addClass('see-all-designs--loaded');
-	$('.all-designs__designs').append(designsHtml(designs));
-	$('.all-designs__categories').append(categoryHtml(designs));
+	$('.all-designs__designs').html(designsHtml(designs));
+	$('.all-designs__categories').html(categoryHtml(designs));
 
 	$('.all-designs__close, .see-all-designs').off('click').click(togglePopup);
 	$('.all-designs__back').off('click').click(backToTop);

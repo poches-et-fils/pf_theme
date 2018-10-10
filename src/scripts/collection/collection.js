@@ -91,16 +91,18 @@ const renderSidebar = async ({handle, index, designs, filters}) => {
 		filters: handle === 'all' ? '' : `collections:${handle}`
 	});
 
+	const filteredDesgins = facets.vendor && Object.keys(facets.vendor).map(designName => {
+		return designs.find(design => design.name.toLowerCase() === designName.toLowerCase());
+	}).filter(design => Boolean(design));
+
 	sidebar({
-		designs: facets.vendor && Object.keys(facets.vendor).map(designName => {
-			return designs.find(design => design.name.toLowerCase() === designName.toLowerCase());
-		}).filter(design => Boolean(design)),
+		designs: filteredDesgins,
 		colors: facets['options.color'] && Object.keys(facets['options.color']),
 		sizes: facets['options.size'] && Object.keys(facets['options.size']),
 		filters
 	});
 
-	allDesigns(designs, design => {
+	allDesigns(filteredDesgins, design => {
 		const $designOption = $(`[data-design="${design.name}"]`);
 		$designOption.addClass('sidebar-designs__design--active');
 

@@ -13637,8 +13637,8 @@ var categoryHtml = function categoryHtml(designs) {
 		var category = _ref.category;
 
 		return categories.indexOf(category) > -1 ? categories : categories.concat(category);
-	}, []).map(function (category) {
-		return '\n\t<li><a href="#" data-category="' + category + '">' + category + '</a></li>\n';
+	}, []).map(function (category, index) {
+		return '\n\t' + (index === 0 ? '<li><a href="#" class="active-category" data-category="all">All</a></li>' : '') + '\n\t<li><a href="#" data-category="' + category + '">' + category + '</a></li>\n';
 	}).join('');
 };
 
@@ -13650,8 +13650,8 @@ var designsHtml = function designsHtml(designs) {
 
 var allDesigns = function allDesigns(designs, callback) {
 	$('.see-all-designs').addClass('see-all-designs--loaded');
-	$('.all-designs__designs').append(designsHtml(designs));
-	$('.all-designs__categories').append(categoryHtml(designs));
+	$('.all-designs__designs').html(designsHtml(designs));
+	$('.all-designs__categories').html(categoryHtml(designs));
 
 	$('.all-designs__close, .see-all-designs').off('click').click(togglePopup);
 	$('.all-designs__back').off('click').click(backToTop);
@@ -15311,7 +15311,7 @@ var renderSidebar = function () {
 		    designs = _ref2.designs,
 		    filters = _ref2.filters;
 
-		var _ref4, facets;
+		var _ref4, facets, filteredDesgins;
 
 		return regeneratorRuntime.wrap(function _callee2$(_context2) {
 			while (1) {
@@ -15328,22 +15328,23 @@ var renderSidebar = function () {
 					case 2:
 						_ref4 = _context2.sent;
 						facets = _ref4.facets;
+						filteredDesgins = facets.vendor && Object.keys(facets.vendor).map(function (designName) {
+							return designs.find(function (design) {
+								return design.name.toLowerCase() === designName.toLowerCase();
+							});
+						}).filter(function (design) {
+							return Boolean(design);
+						});
 
 
 						(0, _sidebar2.default)({
-							designs: facets.vendor && Object.keys(facets.vendor).map(function (designName) {
-								return designs.find(function (design) {
-									return design.name.toLowerCase() === designName.toLowerCase();
-								});
-							}).filter(function (design) {
-								return Boolean(design);
-							}),
+							designs: filteredDesgins,
 							colors: facets['options.color'] && Object.keys(facets['options.color']),
 							sizes: facets['options.size'] && Object.keys(facets['options.size']),
 							filters: filters
 						});
 
-						(0, _allDesigns2.default)(designs, function (design) {
+						(0, _allDesigns2.default)(filteredDesgins, function (design) {
 							var $designOption = $('[data-design="' + design.name + '"]');
 							$designOption.addClass('sidebar-designs__design--active');
 
@@ -15354,7 +15355,7 @@ var renderSidebar = function () {
 							filter('designs', design.name);
 						});
 
-					case 6:
+					case 7:
 					case 'end':
 						return _context2.stop();
 				}
@@ -17327,7 +17328,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '56430' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '56907' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

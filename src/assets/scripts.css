@@ -2602,7 +2602,7 @@ textarea.input-error {
     text-transform: none;
     letter-spacing: initial; }
   .collection--sidebar .sidebar--actions {
-    display: flex; }
+    display: none; }
     .collection--sidebar .sidebar--actions a {
       display: block;
       width: calc(50% - 10px);
@@ -2661,6 +2661,8 @@ textarea.input-error {
         display: none; }
       .collection--sidebar .toggle--item .toggle--contents {
         display: block !important; }
+      .collection--sidebar .sidebar--actions {
+        display: flex; }
       .collection--sidebar .sidebar--block--designs,
       .collection--sidebar .sidebar--block--collections,
       .collection--sidebar .sidebar--block--shop {

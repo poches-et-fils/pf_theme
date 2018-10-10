@@ -102,6 +102,15 @@
   <select data-type-select-filters>
     {% for link in linklists['header-menu'].links %}
       {% if link.handle == gender %}
+        <option value="{{ gender }}" {%- if collection.handle == gender -%} selected="selected"{%- endif -%}>
+          {% if collection.handle contains 'women' %}
+            {{ 'collections.general.women' | t }}
+          {% elsif collection.handle contains 'men' %}
+            {{ 'collections.general.men' | t }}
+          {% elsif collection.handle contains 'youth' %}
+            {{ 'collections.general.youth' | t }}
+          {% endif %}
+        </option>
         {% for second_level_link in link.links %}
           <option value="{{ second_level_link.object.handle }}" {%- if second_level_link.active -%} selected="selected"{%- endif -%}>
             {{ second_level_link.title }}

@@ -10,7 +10,7 @@ const relatedProducts = async () => {
 	const index = client.initIndex('poches_dev_products');
 	const filterString = ` AND NOT handle:"${handle}" AND vendor:"${vendor}"`;
 	const productHtml = await products({index, filters: {}, filterString});
-console.log(productHtml);
+
 	if (!productHtml) {
 		return $('.related-products-container').hide();
 	}

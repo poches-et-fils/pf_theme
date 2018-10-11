@@ -1,0 +1,78 @@
+.shopify-section--instagram {
+	z-index: 31;
+}
+
+.section--instagram {
+	margin: 80px 100px;
+
+	h2.section--title--heading {
+		margin-bottom: 0;
+	}
+
+	h4 {
+		font-size: 24px;
+		font-weight: normal;
+
+		&:nth-child(2) {
+			margin: 0 10px -5px 10px;
+		}
+
+		a {
+			text-decoration: none;
+		}
+	}
+
+	#evm-shop-by-instagram {
+		padding-top: 15px !important;
+	}
+
+	div#evm-shop-by-instagram-slider::after {
+    display: table;
+    clear: both;
+    content: '';
+	}
+
+	.evm_slide_next,
+	.evm_slide_prev {
+		z-index: 50;
+	}
+
+	.evminstagramlink {
+		display: none;
+	}
+
+	.evmpopuptext {
+		font-size: 16px;
+		margin-top: 35px;
+	}
+
+	.evmsocialsharetext {
+		font-family: Rubik, sans-serif;
+		font-size: 14px;
+		color: #161616;
+		margin-top: 3px;
+	}
+
+	.evmsocialshare > a {
+		color: #161616;
+	}
+
+	.sec_evmpopup .sec_close {
+		top: 10px;
+    right: 10px;
+		font-size: 43px !important;
+	}
+
+	.sec_evmpopup {
+		border-radius: 0;
+	}
+
+	.evm_left_image {
+		padding: 20px;
+	}
+
+	@media(max-width: 900px) {
+		margin-left: 25px;
+		margin-right: 25px;
+	}
+}

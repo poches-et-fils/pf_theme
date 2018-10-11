@@ -2701,3 +2701,51 @@ textarea.input-error {
     .collection--sidebar--mobile {
       display: flex;
       padding: 10px 0; } }
+
+.shopify-section--instagram {
+  z-index: 31; }
+
+.section--instagram {
+  margin: 80px 100px; }
+  .section--instagram h2.section--title--heading {
+    margin-bottom: 0; }
+  .section--instagram h4 {
+    font-size: 24px;
+    font-weight: normal; }
+    .section--instagram h4:nth-child(2) {
+      margin: 0 10px -5px 10px; }
+    .section--instagram h4 a {
+      text-decoration: none; }
+  .section--instagram #evm-shop-by-instagram {
+    padding-top: 15px !important; }
+  .section--instagram div#evm-shop-by-instagram-slider::after {
+    display: table;
+    clear: both;
+    content: ''; }
+  .section--instagram .evm_slide_next,
+  .section--instagram .evm_slide_prev {
+    z-index: 50; }
+  .section--instagram .evminstagramlink {
+    display: none; }
+  .section--instagram .evmpopuptext {
+    font-size: 16px;
+    margin-top: 35px; }
+  .section--instagram .evmsocialsharetext {
+    font-family: Rubik, sans-serif;
+    font-size: 14px;
+    color: #161616;
+    margin-top: 3px; }
+  .section--instagram .evmsocialshare > a {
+    color: #161616; }
+  .section--instagram .sec_evmpopup .sec_close {
+    top: 10px;
+    right: 10px;
+    font-size: 43px !important; }
+  .section--instagram .sec_evmpopup {
+    border-radius: 0; }
+  .section--instagram .evm_left_image {
+    padding: 20px; }
+  @media (max-width: 900px) {
+    .section--instagram {
+      margin-left: 25px;
+      margin-right: 25px; } }

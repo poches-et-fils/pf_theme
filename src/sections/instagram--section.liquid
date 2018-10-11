@@ -1,24 +1,30 @@
+<div class="section--instagram">
+  <h2 class="section--title--heading bold--caps">
+    {{ section.settings.title | escape }}
+  </h2>
+  <div id="instagram--lower"> 
+    <h4>
+      <a href="http://instagram.com/{{section.settings.insta}}">
+        @{{section.settings.insta}}
+      </a>
+    </h4>
+    <h4> | </h4>
+    <h4>
+      <a href="http://instagram.com/explore/tags/{{section.settings.hash}}">
+        {{section.settings.hash}}
+      </a>
+    </h4>
+  </div>
 
-
-  <div class="section--instagram">
-    
-     <h2 class="section--title--heading bold--caps">{{ section.settings.title | escape }}</h2>
-    <div id="instagram--lower"> 
-    
-      
-      <h4><a style="text-decoration: none;" href="http://instagram.com/{{section.settings.insta}}"> @{{section.settings.insta}}</a> </h4>
-      <h4 style="margin-left: 10px; margin-right: 10px;"> | </h4>
-      <h4> <a style="text-decoration: none;" href="http://instagram.com/explore/tags/{{section.settings.hash}}"> {{section.settings.hash | remove: "#"}} </a></h4>
-      
-    </div> 
-
-<div id="evm_shopify_app"></div><script src="https://www.expertvillagemedia.com/shopbyinstagram_with_tag/shopify/js/embed.js" data-shop-id="poches-development-mica.myshopify.com" data-viewall-id="true"  type="text/javascript"  data-gallery="0"></script>
+  <div id="evm_shopify_app"></div>
+  <script src="https://www.expertvillagemedia.com/shopbyinstagram_with_tag/shopify/js/embed.js" data-shop-id="poches-development-mica.myshopify.com" data-viewall-id="true" type="text/javascript" data-gallery="1016" async></script>
 </div>
 
 
 {% schema %}
 {
   "name": "Instagram  Blocks",
+  "class": "shopify-section--instagram",
   "settings": [
     {
       "id": "title",

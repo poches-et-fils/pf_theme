@@ -5,7 +5,9 @@
 			{
 				"name": "{{ block.settings.name | downcase | escape }}",
 				"image": "{{ block.settings.image | img_url: '400x' }}",
+				"imageAlternate": "{%- if block.settings.image_alternate != blank -%}{{ block.settings.image_alternate | img_url: '400x' }}{%- endif -%}",
 				"swatch": "{{ block.settings.swatch | img_url: '400x' }}",
+				"swatchAlternate": "{%- if block.settings.swatch_alternate != blank -%}{{ block.settings.swatch_alternate | img_url: '400x' }}{%- endif -%}",
 				"title": "{{ block.settings.title | escape }}",
 				"tagline": "{{ block.settings.tagline | escape }}",
 				"category": "{{ block.settings.category | escape }}"
@@ -33,10 +35,20 @@
 			"label": "Main Image",
 			"info": "Large design image that shows on product pages"
 		}, {
+			"id": "image_alternate",
+			"type": "image_picker",
+			"label": "Alternate Main Image",
+			"info": "An alternate optional large design image that shows for non-pocket type products"
+		}, {
 			"id": "swatch",
 			"type": "image_picker",
 			"label": "Swatch Image",
 			"info": "Square design image that shows where designs are listed, minimum of 280x280px recommended"
+		}, {
+			"id": "swatch_alternate",
+			"type": "image_picker",
+			"label": "Alternate Swatch Image",
+			"info": "An alternate optional square design swatch image that shows for non-pocket type products"
 		}, {
 			"id": "title",
 			"type": "text",

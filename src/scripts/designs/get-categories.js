@@ -20,7 +20,7 @@ const getDesignCategories = designs => {
 	}, {});
 
 	return Object.keys(categories)
-		.sort(category => category.toLowerCase() === thisCategory.toLowerCase() ? -1 : 1)
+		.sort(category => thisCategory && category.toLowerCase() === thisCategory.toLowerCase() ? -1 : 1)
 		.map(category => categories[category]);
 };
 

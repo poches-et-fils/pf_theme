@@ -14021,7 +14021,7 @@ var getDesignCategories = function getDesignCategories(designs) {
 	}, {});
 
 	return Object.keys(categories).sort(function (category) {
-		return category.toLowerCase() === thisCategory.toLowerCase() ? -1 : 1;
+		return thisCategory && category.toLowerCase() === thisCategory.toLowerCase() ? -1 : 1;
 	}).map(function (category) {
 		return categories[category];
 	});
@@ -14057,6 +14057,25 @@ var _getCategories2 = _interopRequireDefault(_getCategories);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+var getDesignImage = function getDesignImage(design, product) {
+	var pocketProducts = ['T-shirt à poche'];
+
+	var main = design.image;
+	var swatch = design.swatch;
+
+	if (pocketProducts.indexOf(product.type) === -1) {
+		if (design.imageAlternate) {
+			main = design.imageAlternate;
+		}
+
+		if (design.swatchAlternate) {
+			swatch = design.swatchAlternate;
+		}
+	}
+
+	return { main: main, swatch: swatch };
+};
 
 var loading = function loading(isLoading) {
 	var $container = $('.product-designs-container');
@@ -14160,7 +14179,7 @@ var renderDesigns = function () {
 							var title = _ref3.title,
 							    designs = _ref3.designs;
 							return '\n\t\t\t<li class="glide__slide" data-category="' + title + '">\n\t\t\t\t' + designs.map(function (design) {
-								return '\n\t\t\t\t\t<div class="product-designs__design ' + (design.thisDesign ? 'product-designs__design--active' : '') + '">\n\t\t\t\t\t\t<a href="/products/' + design.handle + '">\n\t\t\t\t\t\t\t<img src="' + design.swatch + '" width="48" height="48"/>\n\t\t\t\t\t\t</a>\n\t\t\t\t\t</div>\n\t\t\t\t';
+								return '\n\t\t\t\t\t<div class="product-designs__design ' + (design.thisDesign ? 'product-designs__design--active' : '') + '">\n\t\t\t\t\t\t<a href="/products/' + design.handle + '">\n\t\t\t\t\t\t\t<img src="' + getDesignImage(design, product).swatch + '" width="48" height="48"/>\n\t\t\t\t\t\t</a>\n\t\t\t\t\t</div>\n\t\t\t\t';
 							}).join('') + '\n\t\t\t</li>\n\t\t';
 						}).join(''));
 
@@ -14194,13 +14213,12 @@ var renderDesign = function renderDesign(designs, product) {
 	var design = designs.find(function (design) {
 		return design.name === product.vendor.toLowerCase();
 	});
-
 	if (!design) {
 		loading(false);
 		return $('.product-design').addClass('product-design--not-found');
 	}
 
-	$('.product-design').html('\n\t\t<div class="product-design__image">\n\t\t\t<img src="' + design.image + '" alt="' + design.title + '"/>\n\t\t</div>\n\t\t<div class="product-design__content">\n\t\t\t<h4 data-product-price>' + $('[data-product-price]:first').text() + '</h4>\n\t\t\t<h5>' + design.tagline + '</h5>\n\t\t\t<h6>' + design.title + '</h6>\n\t\t</div>\n\t');
+	$('.product-design').html('\n\t\t<div class="product-design__image">\n\t\t\t<img src="' + getDesignImage(design, product).main + '" alt="' + design.title + '"/>\n\t\t</div>\n\t\t<div class="product-design__content">\n\t\t\t<h4 data-product-price>' + $('[data-product-price]:first').text() + '</h4>\n\t\t\t<h5>' + design.tagline + '</h5>\n\t\t\t<h6>' + design.title + '</h6>\n\t\t</div>\n\t');
 
 	loading(false);
 };
@@ -17326,7 +17344,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '59534' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '58970' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

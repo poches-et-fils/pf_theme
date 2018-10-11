@@ -3,6 +3,27 @@ import config from '../config';
 import allDesigns from './all-designs';
 import getCategories from './get-categories';
 
+const getDesignImage = (design, product) => {
+	const pocketProducts = [
+		'T-shirt à poche'
+	];
+
+	let main = design.image;
+	let swatch = design.swatch;
+
+	if (pocketProducts.indexOf(product.type) === -1) { 
+		if (design.imageAlternate) {
+			main = design.imageAlternate;
+		}
+
+		if (design.swatchAlternate) {
+			swatch = design.swatchAlternate;
+		}
+	}
+
+	return {main, swatch};
+};
+
 const loading = isLoading => {
 	const $container = $('.product-designs-container');
 	const loaded = 'product-designs--loaded';
@@ -89,7 +110,7 @@ const renderDesigns = async (designSettings, product) => {
 				${designs.map(design => `
 					<div class="product-designs__design ${design.thisDesign ? 'product-designs__design--active' : ''}">
 						<a href="/products/${design.handle}">
-							<img src="${design.swatch}" width="48" height="48"/>
+							<img src="${getDesignImage(design, product).swatch}" width="48" height="48"/>
 						</a>
 					</div>
 				`).join('')}
@@ -107,7 +128,6 @@ const renderDesigns = async (designSettings, product) => {
 
 const renderDesign = (designs, product) => {
 	const design = designs.find(design => design.name === product.vendor.toLowerCase());
-
 	if (!design) {
 		loading(false);
 		return $('.product-design').addClass('product-design--not-found');
@@ -115,7 +135,7 @@ const renderDesign = (designs, product) => {
 
 	$('.product-design').html(`
 		<div class="product-design__image">
-			<img src="${design.image}" alt="${design.title}"/>
+			<img src="${getDesignImage(design, product).main}" alt="${design.title}"/>
 		</div>
 		<div class="product-design__content">
 			<h4 data-product-price>${$('[data-product-price]:first').text()}</h4>

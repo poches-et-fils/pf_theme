@@ -1,0 +1,61 @@
+.legal-page {
+	display: flex;
+	max-width: 1138px;
+	margin: 0 auto;
+	padding: 80px 25px 0 25px;
+	padding-top: 80px;
+
+	aside {
+		width: 160px;
+		margin-top: 15px;
+
+		ul {
+			padding: 0;
+			margin: 0;
+			list-style-type: none;
+		}
+
+		li {
+			margin-bottom: 15px;
+		}
+
+		a {
+			font-size: 16px;
+			color: #161616;
+			text-decoration: none;
+		}
+
+		a:hover {
+			color: #239F85;
+		}
+
+		a.active {
+			font-weight: bold;
+		}
+	}
+
+	article {
+		width: calc(100% - 160px);
+		padding-left: 70px;
+		margin-bottom: 80px;
+
+		h1 {
+			margin-top: 0;
+			font-size: 48px;
+			font-weight: bold;
+		}
+	}
+
+	@media (max-width: 900px) {
+		display: block;
+
+		aside, article {
+			width: 100%;
+			padding-left: 0;
+		}
+
+		aside {
+			margin-bottom: 50px;
+		}
+	}
+}

@@ -1567,6 +1567,24 @@ textarea.input-error {
     .slider--section .slider--button--main {
       margin-top: 5px; } }
 
+.rte-text {
+  color: #161616; }
+  .rte-text h1, .rte-text h2, .rte-text h3 {
+    font-weight: bold; }
+  .rte-text h1 {
+    font-size: 48px; }
+  .rte-text h2 {
+    font-size: 22px; }
+  .rte-text h3 {
+    font-size: 16px; }
+  .rte-text p, .rte-text ul, .rte-text ol, .rte-text a {
+    font-size: 14px; }
+  .rte-text a {
+    color: #239F85;
+    text-decoration: none; }
+  .rte-text img, .rte-text iframe {
+    width: 100%; }
+
 /*================ Giftcard Template ================*/
 .giftcard-qr img {
   display: block;
@@ -2778,3 +2796,43 @@ textarea.input-error {
 @media (max-width: 900px) {
   ._404--section {
     padding: 25px; } }
+
+.legal-page {
+  display: flex;
+  max-width: 1138px;
+  margin: 0 auto;
+  padding: 80px 25px 0 25px;
+  padding-top: 80px; }
+  .legal-page aside {
+    width: 160px;
+    margin-top: 15px; }
+    .legal-page aside ul {
+      padding: 0;
+      margin: 0;
+      list-style-type: none; }
+    .legal-page aside li {
+      margin-bottom: 15px; }
+    .legal-page aside a {
+      font-size: 16px;
+      color: #161616;
+      text-decoration: none; }
+    .legal-page aside a:hover {
+      color: #239F85; }
+    .legal-page aside a.active {
+      font-weight: bold; }
+  .legal-page article {
+    width: calc(100% - 160px);
+    padding-left: 70px;
+    margin-bottom: 80px; }
+    .legal-page article h1 {
+      margin-top: 0;
+      font-size: 48px;
+      font-weight: bold; }
+  @media (max-width: 900px) {
+    .legal-page {
+      display: block; }
+      .legal-page aside, .legal-page article {
+        width: 100%;
+        padding-left: 0; }
+      .legal-page aside {
+        margin-bottom: 50px; } }

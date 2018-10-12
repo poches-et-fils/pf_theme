@@ -1,0 +1,16 @@
+<div class="legal-page">
+  <aside>
+		<ul class="legal-page__links">
+			{% for link in linklists['legal-links'].links %}
+				<li><a href="{{ link.url }}" class="{% if link.active %}active{% endif %}">{{ link.title }}</a></li>
+			{% endfor %}
+		</ul>
+  </aside>
+
+  <article>
+    <h1>{{page.title}}</h1>
+    <div class="rte-text">
+			{{page.content}}
+		</div>
+  </article>
+</div>

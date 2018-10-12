@@ -1,0 +1,125 @@
+{% for block in section.blocks %}
+	{% assign blockHandle = block.settings.title | handleize %}
+	{% assign articleHandle = article.title | handleize %}
+
+	{% if blockHandle == articleHandle %}
+		{% for i in (1..2) %}
+			{% capture section_show %}show_{{i}}{% endcapture %}
+			{% capture section_image %}image_{{i}}{% endcapture %}
+			{% capture section_image_position %}image_position_{{i}}{% endcapture %}
+			{% capture section_title %}title_{{i}}{% endcapture %}
+			{% capture section_description %}description_{{i}}{% endcapture %}
+			{% capture section_button_text %}button_text_{{i}}{% endcapture %}
+			{% capture section_button_url %}button_url_{{i}}{% endcapture %}
+
+			{% if block.settings[section_show] %}
+				<section class="lookbook__section {% if block.settings[section_image_position] == 'right' %}lookbook__section--image-right{% endif %}">
+					<div class="lookbook__section-image">
+						<img src="{{ block.settings[section_image] | img_url: '600x' }}" alt="{{ block.settings[section_title] | escape }}"/>
+					</div>
+					<div class="lookbook__section-content">
+						<h3>{{ block.settings[section_title] }}</h3>
+						{{ block.settings[section_description] }}
+						{% if block.settings[section_button_text] != blank %}
+							<a href="{{ block.settings[section_button_url] }}">
+								{{ block.settings[section_button_text] }}
+								{% include 'arrow-right' %}
+							</a>
+						{% endif %}
+					</div>
+				</section>
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+{% endfor %}
+
+{% schema %}
+{
+  "name": "lookbook",
+  "settings": [],
+  "blocks": [{
+		"type": "lookbook_section",
+    "name": "Lookbook Section",
+		"settings": [{
+			"id": "title",
+			"type": "text",
+			"label": "Post Title",
+			"info": "Enter the exact title given to the lookbook post the sections below should display for"
+		}, {
+			"type": "header",
+			"content": "Section One"
+		}, {
+			"id": "show_1",
+			"type": "checkbox",
+			"label": "Show this section?"
+		}, {
+			"id": "image_1",
+			"type": "image_picker",
+			"label": "Image",
+			"info": "Large Square Image 600 x 600px or larger"
+		}, {
+			"id": "image_position_1",
+			"type": "select",
+			"label": "Image Postion",
+			"options": [
+				{ "value": "left", "label": "Left Aligned" },
+				{ "value": "right", "label": "Right Aligned" }
+			]
+		}, {
+			"id": "title_1",
+			"type": "text",
+			"label": "Title"
+		}, {
+			"id": "description_1",
+			"type": "richtext",
+			"label": "Description"
+		}, {
+			"id": "button_text_1",
+			"type": "text",
+			"label": "Button Text",
+			"info": "Leave this blank if the button should not show for the section"
+		}, {
+			"id": "button_url_1",
+			"type": "url",
+			"label": "Button Link"
+		}, {
+			"type": "header",
+			"content": "Section Two"
+		}, {
+			"id": "show_2",
+			"type": "checkbox",
+			"label": "Show this section?"
+		}, {
+			"id": "image_2",
+			"type": "image_picker",
+			"label": "Image",
+			"info": "Large Square Image 600 x 600px or larger"
+		}, {
+			"id": "image_position_2",
+			"type": "select",
+			"label": "Image Postion",
+			"options": [
+				{ "value": "left", "label": "Left Aligned" },
+				{ "value": "right", "label": "Right Aligned" }
+			]
+		}, {
+			"id": "title_2",
+			"type": "text",
+			"label": "Title"
+		}, {
+			"id": "description_2",
+			"type": "richtext",
+			"label": "Description"
+		}, {
+			"id": "button_text_2",
+			"type": "text",
+			"label": "Button Text",
+			"info": "Leave this blank if the button should not show for the section"
+		}, {
+			"id": "button_url_2",
+			"type": "url",
+			"label": "Button Link"
+		}]
+	}]
+}
+{% endschema %}

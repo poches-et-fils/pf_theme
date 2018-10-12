@@ -1,0 +1,148 @@
+.lookbook {
+	padding: 50px 0;
+
+	> h2 {
+		font-size: 32px;
+		font-weight: bold;
+		color: #161616;
+		margin-bottom: 40px;
+		text-transform: uppercase;
+		text-align: center;
+	}
+
+	.lookbook__posts {
+		list-style-type: none;
+		margin: 50px auto;
+		padding: 0 25px;
+		max-width: 1280px;
+
+		li {
+			padding-right: 5px;
+			display: inline-block;
+		}
+
+		span {
+			padding-left: 5px;
+		}
+
+		a { color: #161616; text-decoration: none; }
+		a:hover { color: #239F85; }
+		a.active { font-weight: bold; }
+	}
+
+	.lookbook__featured {
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: left;
+		height: 90vh;
+		min-height: 400px;
+		padding: 50px 90px;
+		display: flex;
+		align-items: flex-end;
+		justify-content: flex-end;
+
+		h1 {
+			color: #fff;
+			font-size: 48px;
+			font-weight: bold;
+			text-transform: uppercase;
+		}
+	}
+
+	.lookbook__section {
+		margin: 60px 0;
+		display: flex;
+		color: #161616;
+
+		&.lookbook__section--image-right {
+			.lookbook__section-image { order: 2; }
+			.lookbook__section-content { order: 1; }
+		}
+
+		.lookbook__section-image,
+		.lookbook__section-content {
+			width: 50%;
+		}
+
+		.lookbook__section-image img {
+			width: 100%;
+			height: auto;
+			display: block;
+		}
+
+		.lookbook__section-content {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			padding: 25px;
+
+			h3, p, a {
+				display: block;
+				width: 100%;
+				max-width: 432px;
+			}
+		}
+
+		.lookbook__section-content h3 {
+			font-size: 16px;
+			font-weight: bold;
+			text-transform: uppercase;
+			margin-bottom: 20px;
+			text-align: left;
+		}
+
+		.lookbook__section-content p {
+			font-size: 16px;
+			margin-bottom: 20px;
+		}
+
+		.lookbook__section-content a {
+			color: #239F85;
+			text-decoration: none;
+			font-size: 16px;
+
+			svg {
+				width: 14px;
+				height: 14px;
+				display: inline-block;
+				margin-left: 15px;
+			}
+		}
+	}
+
+	@media (max-width: 900px) {
+		.lookbook__featured {
+			max-height: 500px;
+			padding: 25px;
+
+			h1 {
+				text-align: center;
+				font-size: 36px
+			}
+		}
+
+		.lookbook__section {
+			flex-direction: column;
+
+			.lookbook__section-image,
+			.lookbook__section-content {
+				width: 100%;
+			}
+
+			&.lookbook__section--image-right {
+				.lookbook__section-image { order: 1; }
+				.lookbook__section-content { order: 2; }
+			}
+
+			.lookbook__section-content {
+				padding-top: 50px;
+			}
+
+			.lookbook__section-image img {
+				max-width: 500px;
+				margin: 0 auto;
+			}
+		}
+	}
+}

@@ -4,14 +4,10 @@ import allDesigns from './all-designs';
 import getCategories from './get-categories';
 
 const getDesignImage = (design, product) => {
-	const pocketProducts = [
-		'T-shirt à poche'
-	];
-
 	let main = design.image;
 	let swatch = design.swatch;
 
-	if (pocketProducts.indexOf(product.type) === -1) { 
+	if (!product.type.includes('poche') && !product.type.includes('pocket')) {
 		if (design.imageAlternate) {
 			main = design.imageAlternate;
 		}

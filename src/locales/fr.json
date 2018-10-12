@@ -50,6 +50,9 @@
         }
     },
     "blogs": {
+        "lookbook": {
+            "title": "Lookbook"
+        },
         "article": {
             "author_on_date_html": "Publié par {{ author }} le {{ date }}",
             "comment_meta_html": "{{ author }} le {{ date }}",

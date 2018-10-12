@@ -2749,3 +2749,32 @@ textarea.input-error {
     .section--instagram {
       margin-left: 25px;
       margin-right: 25px; } }
+
+.four-o-four__heading,
+.four-o-four__subheading,
+.four-o-four__button {
+  color: #161616;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.2); }
+
+.four-o-four__heading {
+  font-size: 48px;
+  font-weight: bold;
+  text-transform: uppercase;
+  max-width: 438px; }
+
+.four-o-four__subheading {
+  font-size: 24px;
+  font-weight: normal;
+  margin-bottom: 30px; }
+
+.four-o-four__button {
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  border: 3px solid #161616;
+  letter-spacing: 1.5px;
+  background: transparent; }
+
+@media (max-width: 900px) {
+  ._404--section {
+    padding: 25px; } }

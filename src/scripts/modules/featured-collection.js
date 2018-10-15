@@ -10,6 +10,10 @@ const FeaturedCollection = function (container) {
 		}
 	};
 
+	if ($container.find('.glide__slide').length === 0) {
+		return;
+	}
+
 	const glide = new Glide(slider, sliderOptions);
 
 	glide.on(['mount.after', 'update'], () => {

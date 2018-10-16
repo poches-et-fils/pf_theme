@@ -69,38 +69,12 @@ export default (function() {
     }
 
     this.initThumbs();
-    this.initZoom();
     this.initRelatedProducts();
     this.initProductDesigns();
     this.mobileSlider = this.initMobileSlider();
   }
 
   Product.prototype = $.extend({}, Product.prototype, {
-    initZoom: function() {
-      const lightbox = '.product-image-zoom';
-      const slider = `${lightbox} .glide`;
-      const sliderOptions = {type: 'carousel', perView: 1};
-      const glide = new Glide(slider, sliderOptions).mount();
-      let glided = false;
-
-      glide.on('move.after', () => {
-        this.$featuredImage.attr('src', $(`${lightbox} .glide__slide--active img`).attr('src'));
-      });
-
-      this.$featuredImage.click(e => {
-        e.preventDefault();
-        $(lightbox).addClass('product-image-zoom--zoomed');
-        const currentImg = this.$featuredImage.attr('src');
-        const startIndex = $(`${lightbox} img[src="${currentImg}"]:first`).data('index');
-        glide.update({startAt: startIndex || 0});
-      });
-
-      $(`${lightbox}__close`).click(e => {
-        e.preventDefault();
-        $(lightbox).removeClass('product-image-zoom--zoomed');
-      });
-    },
-
     initThumbs: function() {
       if ($(selectors.productThumbs, this.$container).length === 0) {
         return;
@@ -229,6 +203,7 @@ export default (function() {
       const sizedImgUrl = slate.Image.getSizedImageUrl(variant.featured_image.src, this.settings.imageSize);
       const slideIndex = $(`.product-image__mobile img[src="${sizedImgUrl}"]:first`).data('index');
 
+      MagicZoom.switchTo($('#productImage')[0], $(`[data-zoom-id="productImage"][href="${sizedImgUrl}"]`).index());
       this.$featuredImage.attr('src', sizedImgUrl);
       this.mobileSlider.go(`=${slideIndex}`);
     },

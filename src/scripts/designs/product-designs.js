@@ -129,14 +129,9 @@ const renderDesign = (designs, product) => {
 		return $('.product-design').addClass('product-design--not-found');
 	}
 
-	$('.product-design').html(`
+	$('.product-design').prepend(`
 		<div class="product-design__image">
 			<img src="${getDesignImage(design, product).main}" alt="${design.title}"/>
-		</div>
-		<div class="product-design__content">
-			<h4 data-product-price>${$('[data-product-price]:first').text()}</h4>
-			<h5>${design.tagline}</h5>
-			<h6>${design.title}</h6>
 		</div>
 	`);
 

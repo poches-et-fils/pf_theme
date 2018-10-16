@@ -11,7 +11,7 @@ const relatedProducts = async () => {
 	const filterString = ` AND NOT handle:"${handle}" AND vendor:"${vendor}"`;
 	const productHtml = await products({index, filters: {}, filterString});
 
-	if (!productHtml) {
+	if (!productHtml || !vendor || vendor === 'Poches & Fils') {
 		return $('.related-products-container').hide();
 	}
 

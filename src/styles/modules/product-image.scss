@@ -14,6 +14,12 @@
 		background: #F9F9F9;
 	}
 
+	.product-image__thumbnail.mz-thumb:hover:not(.mz-thumb-selected) img,
+	.product-image__thumbnail.mz-thumb.mz-thumb-selected img {
+		filter: none;
+		box-shadow: none;
+	}
+
 	.product-image__featured {
 		width: calc(100% - 80px);
 		cursor: zoom-in;
@@ -52,5 +58,60 @@
 
 	@media (max-width: 900px) {
 		display: block;
+	}
+}
+
+.mz-expand-thumbnails .magic-thumbs .magic-thumb {
+	width: 15px;
+	height: 15px;
+	background: transparent;
+	border: 1px solid #898686;
+	border-radius: 50%;
+	padding: 0;
+	vertical-align: center;
+
+	&.magic-thumb-selected {
+		background: #898686;
+		filter: none;
+	}
+
+	&:hover {
+		opacity: 0.2;
+	}
+
+	img { opacity: 0; }
+}
+
+:root:not(.mobile-magic) button.mz-button,
+button.mz-button {
+	&.mz-button-prev::before,
+	&.mz-button-next::before {
+		content: ' ';
+		background-image: url('https://cdn.shopify.com/s/files/1/0013/6685/1647/t/10/assets/large-chevron-left.png?10141097979285405739');
+		background-size: cover;
+		background-repeat: no-repeat;
+		width: 20px;
+		height: 40px;
+		display: block;
+	}
+
+	&.mz-button-next::before {
+		transform: rotate(180deg);
+	}
+
+	&.mz-button-close::before {
+		content: ' ';
+		background-image: url('https://cdn.shopify.com/s/files/1/0013/6685/1647/t/10/assets/Large-X.png?5559395986410852149');
+		background-size: cover;
+		background-repeat: no-repeat;
+		width: 24px;
+		height: 24px;
+		display: block;
+	}
+
+	&,
+	&:hover {
+		border: none !important;
+		transform: none !important;
 	}
 }

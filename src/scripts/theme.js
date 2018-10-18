@@ -13,6 +13,7 @@ import SliderSection from './modules/slider';
 import toggleHandler from './modules/toggle-list';
 import {handleAddItemSubmit} from './modules/add-to-cart';
 import faq from './modules/faq';
+import giftCardThemes from './modules/gift-card-themes';
 
 $(() => {
 	const sections = new slate.Sections();
@@ -21,6 +22,7 @@ $(() => {
 	sections.register('slider', SliderSection);
 	faq();
 	collection();
+	giftCardThemes();
 
 	$(document).on('submit', 'form[action="/cart/add"]', handleAddItemSubmit);
 	$(document).on('click', '.toggle--activation', toggleHandler);

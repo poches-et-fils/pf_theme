@@ -1,0 +1,115 @@
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+
+<div data-section-id="1" data-section-type="product">
+	<div class="product--container">
+		<div class="product--block gift-card">
+			<div class="product--block--left product-image">
+				<div class="product-image__featured">
+					<img src="{{ product | img_url: '800x' }}">
+				</div>
+			</div>
+
+			<div class="product--block--right product--form--container">
+				<div class="gift-card__details">
+					<h1>{{ product.title }}</h1>
+					{{ product.description }}
+				</div>
+
+				<form action="/cart/add" method="post" enctype="multipart/form-data" class="gift-card__form" data-add-to-cart-form>
+					{% for option in product.options_with_values %}
+						{% assign option_name = option.name | downcase %}
+
+						{% if option_name == 'theme' %}
+							<div class="product--form--selector sizing js gift-card__themes-container">
+								<div class="variant--selector--bar w-clearfix">
+									<div class="selector--heading--left">
+										<strong>{{ option.name }}: </strong> 
+										<span data-theme-name data-index="option{{ option.position }}">
+											{{ option.selected_value }}
+										</span>
+									</div>
+								</div>
+								<div class="gift-card__themes">
+									{% for value in option.values %}
+										<input
+											type="radio"
+											id="SingleOptionSelector-{{ forloop.index0 }}-{{ value }}"
+											data-index="option{{ option.position }}"
+											data-single-option-selector
+											value="{{ value }}"
+											name="theme"
+											{%- if option.selected_value == value -%}checked="checked"{%- endif -%}
+										/>
+										<label for="SingleOptionSelector-{{ forloop.index0 }}-{{ value }}">
+											{%- for variant in product.variants -%}
+												{%- if variant.option1 == value -%}
+													<img src="{{ variant | img_url: '300x' }}"/>
+													{%- break -%}
+												{%- endif -%}
+											{%- endfor -%}
+										</label>
+									{% endfor %}
+								</div>
+							</div>
+						{% endif %}
+
+						{% if option_name == 'amount' %}
+							<div class="product--form--qty">
+								<div><strong>{{ option.name }}: </strong></div>
+								<select
+									id="SingleOptionSelector-{{ forloop.index0 }}"
+									data-single-option-selector
+									data-index="option{{ option.position }}"
+								>
+									{% for value in option.values %}
+										<option
+											value="{{ value | escape }}"
+											{% if option.selected_value == value %}selected="selected"{% endif %}
+										>
+											{{ value }}
+										</option>
+									{% endfor %}
+								</select>
+							</div>
+						{% endif %}
+					{% endfor %}
+				
+					<select name="id" class="no-js" data-product-select>
+						{% for variant in product.variants %}
+							<option
+								{% if variant == current_variant %}selected="selected"{% endif %}
+								{% unless variant.available %}disabled="disabled"{% endunless %}
+								value="{{ variant.id }}"
+							>
+								{{ variant.title }}
+							</option>
+						{% endfor %}
+					</select>
+
+					<input type="hidden" id="Quantity" name="quantity" value="1" min="1">
+
+					<button
+						type="submit"
+						name="add"
+						class="product--form--atc"
+						data-add-to-cart
+						{% unless current_variant.available %}disabled="disabled"{% endunless %}
+					>
+						<span data-add-to-cart-text>
+							{% if current_variant.available %}
+								{{ 'products.product.add_to_cart' | t }}
+							{% else %}
+								{{ 'products.product.sold_out' | t }}
+							{% endif %}
+						</span>
+					</button>
+				</form>
+
+			</div>
+		</div>
+	</div>
+
+	{% unless product == empty %}
+		<script type="application/json" data-product-json>{{ product | json }}</script>
+	{% endunless %}
+</div>

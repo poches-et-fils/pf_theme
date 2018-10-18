@@ -87,6 +87,10 @@ export default (function() {
     },
 
     initMobileSlider: function() {
+      if ($('.product-image__mobile .glide').length === 0) {
+        return;
+      }
+
       const slider = '.product-image__mobile .glide';
       const sliderOptions = {type: 'carousel', perView: 1};
       return new Glide(slider, sliderOptions).mount();

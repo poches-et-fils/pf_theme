@@ -1,11 +1,71 @@
-/*================ Giftcard Template ================*/
-.giftcard-qr {
-  img {
-    display: block;
-    margin: 0 auto;
+.gift-card {
+  .gift-card__details h1 {
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+
+  .gift-card__details p {
+    font-size: 14px;
+  }
+
+  .gift-card__themes {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  
+    input {
+      display: none;
+    }
+
+    label {
+      width: 96px;
+      height: 96px;
+      margin-right: 12px;
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    label:last-child {
+      margin-right: 0;
+    }
+
+    label:hover::before,
+    input:checked + label::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: -3px;
+      left: -3px;
+      border: 1px solid #353434;
+      width: 102px;
+      height: 102px;
+    }
+
+    label img {
+      display: block;
+      width: 100%;
+      height: auto; 
+    }
+  }
+
+  @media (max-width: 900px) {
+    .product-image {
+      width: 100%;
+      display: block;
+  
+      .product-image__featured {
+        margin: 0 auto;
+      }
+    }
   }
 }
 
+
+/*================ Giftcard Template ================*/
 .apple-wallet-image {
   display: block;
   margin: 0 auto;

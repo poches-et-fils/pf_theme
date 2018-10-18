@@ -44,11 +44,3 @@ en-live:
   store: pochesetfils-en.myshopify.com
   ignore_files:
     - settings_data.json
-
-temp:
-  directory: src
-  password: a5ceeed5f05d605284b6c3dfb837711b
-  theme_id: "45805731958"
-  store: danwebb.myshopify.com
-  ignore_files:
-    - settings_data.json

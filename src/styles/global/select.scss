@@ -1,4 +1,4 @@
-select {
+select:not(.country-switcher-dropdown) {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;

@@ -55,7 +55,8 @@
           "right_linklist": "right-menu",
           "menimg": "",
           "womenimg": "",
-          "youthimg": ""
+          "youthimg": "",
+          "accessoriesimg": ""
         }
       },
       "footer": {
@@ -165,8 +166,7 @@
       },
       "collection--design": {
         "type": "collection--design",
-        "settings": {
-        }
+        "settings": {}
       },
       "collection--sidebar": {
         "type": "collection--sidebar",
@@ -176,8 +176,7 @@
       },
       "collection--section": {
         "type": "collection--section",
-        "settings": {
-        }
+        "settings": {}
       },
       "lookbook-one": {
         "type": "lookbook-one",
@@ -299,18 +298,15 @@
           "blocks": {
             "collection-list-0": {
               "type": "collection",
-              "settings": {
-              }
+              "settings": {}
             },
             "collection-list-1": {
               "type": "collection",
-              "settings": {
-              }
+              "settings": {}
             },
             "collection-list-2": {
               "type": "collection",
-              "settings": {
-              }
+              "settings": {}
             }
           },
           "block_order": [
@@ -318,8 +314,7 @@
             "collection-list-1",
             "collection-list-2"
           ],
-          "settings": {
-          }
+          "settings": {}
         },
         "featured-collection": {
           "type": "featured-collection",
@@ -329,8 +324,7 @@
         },
         "featured-product": {
           "type": "featured-product",
-          "settings": {
-          }
+          "settings": {}
         }
       },
       "content_for_index": [

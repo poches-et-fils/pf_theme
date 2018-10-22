@@ -25,6 +25,13 @@
                   sizes="(max-width: 991px) 100vw, 114px"
                   class="image" />
             {% endif %}
+            {% if link.title == "Accessories" %}
+              <img src="{{section.settings.accessoriesimg | img_url: '1000x1000'}}"
+                  width="200"
+                  height="200"
+                  sizes="(max-width: 991px) 100vw, 114px"
+                  class="image" />
+            {% endif %}
           </div>
 
           {% for sub_link in link.links %}

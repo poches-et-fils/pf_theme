@@ -4,6 +4,8 @@
   {% assign gender = 'collections.general.men' | t | downcase %}
 {% elsif collection.handle contains 'youth' %}
   {% assign gender = 'collections.general.youth' | t | downcase %}
+{% elsif collection.handle contains 'accessories' %}
+  {% assign gender = 'collections.general.accessories' | t | downcase %}
 {% else %}
   {% assign gender = '' %}
 {% endif %}
@@ -109,6 +111,8 @@
             {{ 'collections.general.men' | t }}
           {% elsif collection.handle contains 'youth' %}
             {{ 'collections.general.youth' | t }}
+          {% elsif collection.handle contains 'accessories' %}
+            {{ 'collections.general.accessories' | t }}
           {% endif %}
         </option>
         {% for second_level_link in link.links %}

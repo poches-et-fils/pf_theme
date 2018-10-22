@@ -2,7 +2,7 @@
   "name": "poches-et-fils",
   "version": "0.0.1",
   "scripts": {
-    "watch": "concurrently \"theme watch -e=temp\" \"parcel watch src/scripts/theme.js --out-dir src/assets --out-file scripts.js\"",
+    "watch": "concurrently \"theme watch\" \"parcel watch src/scripts/theme.js --out-dir src/assets --out-file scripts.js\"",
     "build": "parcel build src/scripts/theme.js --out-dir src/assets --out-file scripts.js"
   },
   "xo": {

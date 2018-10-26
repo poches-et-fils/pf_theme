@@ -13,12 +13,14 @@ html {
   margin: 0 auto;
 }
 
-body.no-scroll {
+html.no-scroll, body.no-scroll {
+  position: fixed;
   overflow: hidden;
 }
 
 @include media-query($medium-down) {
-  body.menu-open {
+  html.menu-open, body.menu-open {
+    position: fixed;
     overflow: hidden;
   }
 }

@@ -7,7 +7,7 @@ const togglePopup = e => {
 
 	window.scrollTo(0, 0);
 	$('.all-designs').toggleClass('full-page-popup--open');
-	$('body').toggleClass('no-scroll');
+	$('html, body').toggleClass('no-scroll');
 };
 
 const backToTop = e => {

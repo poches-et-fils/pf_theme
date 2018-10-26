@@ -142,7 +142,7 @@ const handleDesignClick = e => {
 const toggleMobileFilters = e => {
 	e.preventDefault();
 	window.scrollTo(0, 0);
-	$('body').toggleClass('no-scroll');
+	$('html, body').toggleClass('no-scroll');
 	$('.collection--sidebar').toggleClass('open');
 }
 

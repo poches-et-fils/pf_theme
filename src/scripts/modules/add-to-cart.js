@@ -6,7 +6,11 @@ const addItem = (id, quantity) => {
 		dataType: 'json',
 		data: {
 			id,
-			quantity: typeof quantity === 'undefined' ? 1 : quantity
+			quantity: typeof quantity === 'undefined' ? 1 : quantity,
+			properties: {
+				gender: 'Men',
+				type: 'T-shirt'
+			}
 		}
 	});
 };

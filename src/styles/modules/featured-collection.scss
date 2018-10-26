@@ -2,6 +2,10 @@
 	padding: 0 54px;
 	margin: 40px 0 50px 0;
 
+	.product-listing__item {
+		max-width: 500px;
+	}
+
 	.glide__arrow {
 		top: 40%;
 	}

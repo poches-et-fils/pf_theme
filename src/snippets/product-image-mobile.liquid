@@ -8,14 +8,16 @@
 				{% assign loopIndex = 0 %}
 				{% for image in product.images %}
 					{% if image.src != featured_image %}
-						{% assign loopIndex = loopIndex | plus: 1 %}
-						<li class="glide__slide">
-							<img
-								src="{{ image.src | img_url: '800x' }}"
-								alt="{{ image.alt }}"
-								data-index="{{ loopIndex }}"
-							/>
-						</li>
+						{% unless image.alt contains 'color:' %}
+							{% assign loopIndex = loopIndex | plus: 1 %}
+							<li class="glide__slide">
+								<img
+									src="{{ image.src | img_url: '800x' }}"
+									alt="{{ image.alt }}"
+									data-index="{{ loopIndex }}"
+								/>
+							</li>
+						{% endunless %}
 					{% endif %}
 				{% endfor %}
 			</ul>
@@ -23,7 +25,9 @@
 
 		<div class="glide__bullets" data-glide-el="controls[nav]">
 			{% for image in product.images %}
-				<button class="glide__bullet" data-glide-dir="={{ forloop.index0 }}"></button>
+				{% unless image.alt contains 'color:' %}
+					<button class="glide__bullet" data-glide-dir="={{ forloop.index0 }}"></button>
+				{% endunless %}
 			{% endfor %}
 		</div>
 	</div>

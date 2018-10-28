@@ -1,9 +1,11 @@
 <div class="product--block--left product-image">
 	<div class="product-image__thumbnails">
 		{% for image in product.images %}
-			<a href="{{ image.src | img_url: '800x' }}" data-zoom-id="productImage" data-image="{{ image.src | img_url: '800x' }}" class="product-image__thumbnail" data-product-single-thumbnail>
-				<img src="{{ image.src | img_url: '128x128' }}" alt="{{ image.alt }}"/>
-			</a>
+			{% unless image.alt contains 'color:' %}
+				<a href="{{ image.src | img_url: '800x' }}" data-zoom-id="productImage" data-image="{{ image.src | img_url: '800x' }}" class="product-image__thumbnail" data-product-single-thumbnail>
+					<img src="{{ image.src | img_url: '128x128' }}" alt="{{ image.alt }}"/>
+				</a>
+			{% endunless %}
 		{% endfor %}
 	</div>
 

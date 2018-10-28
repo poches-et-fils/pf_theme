@@ -43,7 +43,7 @@ const getProducts = async ({index, page, handle, filters, filterString}) => {
 	if ($('[data-collection]').length > 0) {
 		window.collectionState.set('maxPages', maxPages - 1);
 	}
-
+console.log(products);
 	return products.map(product => {
 		product.variants = variants
 			.filter(variant => product.handle === variant.handle)
@@ -53,7 +53,9 @@ const getProducts = async ({index, page, handle, filters, filterString}) => {
 				option2: variant.option2,
 				id: variant.objectID,
 				available: Boolean(variant.inventory_quantity),
-				featured_image: {src: variant.image}
+				featured_image: {src: variant.image},
+				gender: product.named_tags.gender,
+				type: product.named_tags.type
 			}));
 
 		return product;

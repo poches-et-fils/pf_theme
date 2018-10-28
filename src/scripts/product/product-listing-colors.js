@@ -35,6 +35,7 @@
 		const color = $swatch.data('color');
 		const currentUrl = $links.first().attr('href');
 		const variants = $container.data('variants');
+		console.log(variants, color);
 		const variant = getSelectedVariant(variants, color);
 
 		$container.find('.color-swatch').removeClass('color-swatch--selected');

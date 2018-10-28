@@ -1,16 +1,15 @@
 import {toggleCart} from '../header/popout-cart';
 
-const addItem = (id, quantity) => {
+const addItem = (id, quantity, properties) => {
+	properties = properties || {};
+
 	return $.ajax({
 		url: '/cart/add.js',
 		dataType: 'json',
 		data: {
 			id,
 			quantity: typeof quantity === 'undefined' ? 1 : quantity,
-			properties: {
-				gender: 'Men',
-				type: 'T-shirt'
-			}
+			properties
 		}
 	});
 };
@@ -20,7 +19,10 @@ const handleAddItemSubmit = e => {
 	const $form = $(e.target);
 	const id = $form.find('select[name="id"]').val();
 	const quantity = $form.find('input[name="quantity"]').val();
-	addItem(id, quantity).done(toggleCart);
+	const gender = $form.find('input[name="gender"]').val();
+	const type = $form.find('input[name="type"]').val();
+
+	addItem(id, quantity, {gender, type}).done(toggleCart);
 };
 
 export {addItem, handleAddItemSubmit};

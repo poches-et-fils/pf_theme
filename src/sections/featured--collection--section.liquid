@@ -13,7 +13,8 @@
     <div class="glide__track" data-glide-el="track">
       <ul class="glide__slides">
         {% for product in collection.products limit:8 %}
-          <li class="glide__slide product-listing product-listing__item" data-variants="{{ product.variants | json | escape }}">
+          {%- capture variantJson -%}{%- include "variant-json" -%}{%- endcapture -%}
+          <li class="glide__slide product-listing product-listing__item" data-variants="{{ variantJson | escape }}">
             <div class="product-listing__image">
               <a href="{{product.url}}">
                 <img

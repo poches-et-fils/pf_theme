@@ -37,7 +37,7 @@ import {toggleCart} from '../header/popout-cart';
 		const size = $sizeButton.data('size');
 		const color = getSelectedColor($container);
 		const variant = getSelectedVariant(variants, size, color);
-
+console.log(variants, variant);
 		if (!variant) {
 			return errorMessage($container, 'unavailable');
 		}
@@ -46,9 +46,18 @@ import {toggleCart} from '../header/popout-cart';
 			return errorMessage($container, 'sold-out');
 		}
 
-		$.post('/cart/add.js', {id: variant.id, quantity: 1})
-			.fail(() => errorMessage($container, 'error'))
-			.done(() => toggleCart());
+		$.post('/cart/add.js', {
+			id: variant.id,
+			quantity: 1,
+			properties: {
+				gender: variant.gender || '',
+				type: variant.type || ''
+			}
+		}).fail(() => {
+			errorMessage($container, 'error');
+		}).done(() => {
+			toggleCart();
+		});
 	};
 
 	const closeSizes = () => {

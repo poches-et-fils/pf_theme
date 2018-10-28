@@ -106,7 +106,14 @@
       <div><strong>{{ 'products.product.quantity' | t }}</strong></div>
       <input type="number" id="Quantity" name="quantity" value="1" min="1">
     </div>
-    
+
+    {%- for tag in product.tags -%}
+      {%- if tag contains 'gender' -%}
+        <input type="hidden" name="gender" value="{{ tag | remove: 'gender:' | escape }}"/>
+      {%- endif -%}
+    {%- endfor -%}
+
+    <input type="hidden" name="type" value="{{ product.type | escape }}"/>
 
     <button
       type="submit"

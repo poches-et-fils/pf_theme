@@ -2,7 +2,8 @@
 
 <div class="product-listing product-listing--grid product-listing--grid-three product-listing--collection">
   {% for product in collection.products %}
-    <div class="product-listing__item" data-variants="{{ product.variants | json | escape }}">
+    {%- capture variantJson -%}{%- include "variant-json" -%}{%- endcapture -%}
+    <div class="product-listing__item" data-variants="{{ variantJson | escape }}">
       <div class="product-listing__image">
         <a href="{{product.url}}">
           <img

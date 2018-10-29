@@ -6958,11 +6958,27 @@ require('./language-selector');
 var _popoutCart = require('./popout-cart');
 
 (function () {
-	var toggleMenuOpen = function toggleMenuOpen(e) {
-		$('body').toggleClass('menu-open');
+	var freezeScroll = function freezeScroll(e) {
+		return e.preventDefault();
 	};
 
-	$(document).on('click', '.nav--menu--icon', toggleMenuOpen).on('click', 'a[url="#"]', function (e) {
+	var toggleMenuOpen = function toggleMenuOpen() {
+		if ($('body').hasClass('menu-open')) {
+			$('html, body').removeClass('menu-open');
+			document.body.addEventListener('touchmove', freezeScroll, false);
+			document.ontouchmove = function () {
+				return true;
+			};
+		} else {
+			$('html, body').addClass('menu-open');
+			document.body.removeEventListener('touchmove', freezeScroll, false);
+		}
+
+		$('.all-designs').removeClass('full-page-popup--open');
+		$('.collection--sidebar').removeClass('open');
+	};
+
+	$(document).on('click', '.menu-button', toggleMenuOpen).on('click', 'a[url="#"]', function (e) {
 		return e.preventDefault();
 	}).on('click', '.ajax--cart--item--quantity', _popoutCart.updateQty).on('click', '.nav--cart--block', _popoutCart.toggleCart).on('click', '*[data-keep-shopping], .dark-overlay', _popoutCart.hideCart);
 })();
@@ -7006,6 +7022,7 @@ var _popoutCart = require('./popout-cart');
 		var color = $swatch.data('color');
 		var currentUrl = $links.first().attr('href');
 		var variants = $container.data('variants');
+		console.log(variants, color);
 		var variant = getSelectedVariant(variants, color);
 
 		$container.find('.color-swatch').removeClass('color-swatch--selected');
@@ -7063,7 +7080,7 @@ var _popoutCart = require('../header/popout-cart');
 		var size = $sizeButton.data('size');
 		var color = getSelectedColor($container);
 		var variant = getSelectedVariant(variants, size, color);
-
+		console.log(variants, variant);
 		if (!variant) {
 			return errorMessage($container, 'unavailable');
 		}
@@ -7072,10 +7089,17 @@ var _popoutCart = require('../header/popout-cart');
 			return errorMessage($container, 'sold-out');
 		}
 
-		$.post('/cart/add.js', { id: variant.id, quantity: 1 }).fail(function () {
-			return errorMessage($container, 'error');
+		$.post('/cart/add.js', {
+			id: variant.id,
+			quantity: 1,
+			properties: {
+				gender: variant.gender || '',
+				type: variant.type || ''
+			}
+		}).fail(function () {
+			errorMessage($container, 'error');
 		}).done(function () {
-			return (0, _popoutCart.toggleCart)();
+			(0, _popoutCart.toggleCart)();
 		});
 	};
 
@@ -13532,7 +13556,7 @@ var togglePopup = function togglePopup(e) {
 
 	window.scrollTo(0, 0);
 	$('.all-designs').toggleClass('full-page-popup--open');
-	$('body').toggleClass('no-scroll');
+	$('html, body').toggleClass('no-scroll');
 };
 
 var backToTop = function backToTop(e) {
@@ -14250,7 +14274,7 @@ var getProducts = function () {
 						if ($('[data-collection]').length > 0) {
 							window.collectionState.set('maxPages', maxPages - 1);
 						}
-
+						console.log(products);
 						return _context.abrupt('return', products.map(function (product) {
 							product.variants = variants.filter(function (variant) {
 								return product.handle === variant.handle;
@@ -14262,14 +14286,16 @@ var getProducts = function () {
 									option2: variant.option2,
 									id: variant.objectID,
 									available: Boolean(variant.inventory_quantity),
-									featured_image: { src: variant.image }
+									featured_image: { src: variant.image },
+									gender: product.named_tags.gender,
+									type: product.named_tags.type
 								};
 							});
 
 							return product;
 						}));
 
-					case 13:
+					case 14:
 					case 'end':
 						return _context.stop();
 				}
@@ -15321,7 +15347,7 @@ var handleDesignClick = function handleDesignClick(e) {
 var toggleMobileFilters = function toggleMobileFilters(e) {
 	e.preventDefault();
 	window.scrollTo(0, 0);
-	$('body').toggleClass('no-scroll');
+	$('html, body').toggleClass('no-scroll');
 	$('.collection--sidebar').toggleClass('open');
 };
 
@@ -15470,17 +15496,16 @@ exports.handleAddItemSubmit = exports.addItem = undefined;
 
 var _popoutCart = require('../header/popout-cart');
 
-var addItem = function addItem(id, quantity) {
+var addItem = function addItem(id, quantity, properties) {
+	properties = properties || {};
+
 	return $.ajax({
 		url: '/cart/add.js',
 		dataType: 'json',
 		data: {
 			id: id,
 			quantity: typeof quantity === 'undefined' ? 1 : quantity,
-			properties: {
-				gender: 'Men',
-				type: 'T-shirt'
-			}
+			properties: properties
 		}
 	});
 };
@@ -15490,7 +15515,10 @@ var handleAddItemSubmit = function handleAddItemSubmit(e) {
 	var $form = $(e.target);
 	var id = $form.find('select[name="id"]').val();
 	var quantity = $form.find('input[name="quantity"]').val();
-	addItem(id, quantity).done(_popoutCart.toggleCart);
+	var gender = $form.find('input[name="gender"]').val();
+	var type = $form.find('input[name="type"]').val();
+
+	addItem(id, quantity, { gender: gender, type: type }).done(_popoutCart.toggleCart);
 };
 
 exports.addItem = addItem;
@@ -17285,7 +17313,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '50038' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '64033' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

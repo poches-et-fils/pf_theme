@@ -1,0 +1,34 @@
+.breadcrumbs {
+	ul {
+		list-style-type: none;
+		padding: 0;
+	}
+
+	li {
+		display: inline-block;
+
+		&:not(:last-child)::after {
+			content: '/';
+			display: inline-block;
+			padding: 0 10px;
+		}
+	}
+
+	li, a {
+		font-size: 14px;
+		text-decoration: none;
+	}
+
+	a:hover {
+		color: #4b9e84;
+	}
+
+	@media(max-width: 900px) {
+		padding: 15px 25px 15px 25px;
+		margin: 0;
+
+		ul {
+			margin: 0;
+		}
+	}
+}

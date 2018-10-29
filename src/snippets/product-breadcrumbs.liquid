@@ -1,0 +1,21 @@
+{% assign gender = '' %}
+{% for tag in product.tags %}
+	{% if tag contains 'gender:' %}
+		{% assign gender = tag | remove: 'gender:' %}
+	{% endif %}
+{% endfor %}
+{% assign typeHandle = gender | append: '-' | append: product.type | handle %}
+
+<div class="breadcrumbs">
+  <ul>
+		{% if gender > '' %}
+    	<li><a href="/collections/{{ gender | handle }}">{{ gender | capitalize }}</a></li>
+		{% else %}
+			<li><a href="/">{{ 'general.breadcrumbs.home' | t }}</a>
+		{% endif %}
+		{% if collections[typeHandle].products.size > 0 %}
+			<li><a href="/collections/{{ typeHandle }}">{{ product.type }}</a></li>
+		{% endif %}
+		<li>{{ product.title }}</li>
+  </ul>
+</div><!-- /.breadcrumbs -->

@@ -15,6 +15,8 @@
   <meta itemprop="description" content="{{ product.description | strip_html | escape }}">
 
   <div class="product--container">
+    {% include 'product-breadcrumbs' %}
+
     <div class="product--block">
       {% include 'product-image-desktop' %}
       {% include 'product-image-mobile' %}

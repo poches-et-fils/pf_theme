@@ -1,0 +1,155 @@
+<div class="about">
+	<div class="about__featured" style="background-image: url({{ section.settings.image | img_url: '2000x' }})">
+		<h1>{{ section.settings.title }}</h1>
+	</div>
+
+	<div class="about__wrap">
+		<div class="about__sections">
+			<div class="about__title">
+				<h2>{{ section.settings.sections_title }}</h2>
+				{{ section.settings.sections_description }}
+			</div>
+
+			{% for block in section.blocks %}
+				{% if block.type == 'about_section' %}
+					<section class="about__section {% if block.settings.image_position == 'right' %}about__section--image-right{% endif %}">
+						<div class="about__section-image">
+							<div>
+								<img src="{{ block.settings.image | img_url: '600x' }}" alt="{{ block.settings.title | escape }}"/>
+							</div>
+						</div>
+						<div class="about__section-content">
+							<h3>{{ block.settings.title }}</h3>
+							{{ block.settings.description }}
+							{% if block.settings.button_text != blank %}
+								<a href="{{ block.settings.button_url }}">
+									{{ block.settings.button_text }}
+									{% include 'arrow-right' %}
+								</a>
+							{% endif %}
+						</div>
+					</section>
+				{% endif %}
+			{% endfor %}
+		</div>
+
+		<div class="about__team">
+			<div class="about__title">
+				<h2>{{ section.settings.team_title }}</h2>
+				{{ section.settings.team_description }}
+			</div>
+
+			<div class="about__team-members">
+				{% for block in section.blocks %}
+					{% if block.type == 'team_member' %}
+						<div class="about__team-member">
+							<div>
+								<img src="{{ block.settings.image | img_url: '220x' }}" alt="{{ block.settings.name | escape }}" width="160" height="160"/>
+								<div class="about__section-content">
+									<h3>{{ block.settings.title }}</h3>
+									<h4>{{ block.settings.role }}</h4>
+								</div>
+							</div>
+						</div>
+					{% endif %}
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>
+
+{% schema %}
+{
+  "name": "about",
+  "settings": [{
+		"type": "header",
+		"content": "Main Image"
+	}, {
+		"id": "image",
+    "type": "image_picker",
+    "label": "Image",
+    "info": "Large wide image that displays at the top of the page, remember white text overlays this."
+	}, {
+		"id": "title",
+		"type": "text",
+		"label": "title",
+		"info": "Title that displays on top of the main image"
+	}, {
+		"type": "header",
+		"content": "Sections Title"
+	}, {
+		"id": "sections_title",
+		"type": "text",
+		"label": "title",
+		"info": "Title that displays on top of the About P&F history sections"
+	}, {
+		"id": "sections_description",
+		"type": "richtext",
+		"label": "Subtitle"
+	}, {
+		"type": "header",
+		"content": "Team Title"
+	}, {
+		"id": "team_title",
+		"type": "text",
+		"label": "title",
+		"info": "Title that displays on top of the team members"
+	}, {
+		"id": "team_description",
+		"type": "richtext",
+		"label": "Subtitle"
+	}],
+  "blocks": [{
+		"type": "about_section",
+    "name": "About Section",
+		"settings": [{
+			"id": "title",
+			"type": "text",
+			"label": "Title"
+		}, {
+			"id": "image",
+			"type": "image_picker",
+			"label": "Image",
+			"info": "Large Square Image 600 x 600px or larger"
+		}, {
+			"id": "image_position",
+			"type": "select",
+			"label": "Image Postion",
+			"options": [
+				{ "value": "left", "label": "Left Aligned" },
+				{ "value": "right", "label": "Right Aligned" }
+			]
+		}, {
+			"id": "description",
+			"type": "richtext",
+			"label": "Description"
+		}, {
+			"id": "button_text",
+			"type": "text",
+			"label": "Button Text",
+			"info": "Leave this blank if the button should not show for the section"
+		}, {
+			"id": "button_url",
+			"type": "url",
+			"label": "Button Link"
+		}]
+	}, {
+		"type": "team_member",
+    "name": "Team Member",
+		"settings": [{
+			"id": "title",
+			"type": "text",
+			"label": "Name"
+		}, {
+			"id": "image",
+			"type": "image_picker",
+			"label": "Image",
+			"info": "Large Square Image 600 x 600px or larger"
+		}, {
+			"id": "role",
+			"type": "text",
+			"label": "Role"
+		}]
+	}]
+}
+{% endschema %}

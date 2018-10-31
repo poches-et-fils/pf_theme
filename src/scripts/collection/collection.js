@@ -91,18 +91,18 @@ const renderSidebar = async ({handle, index, designs, filters}) => {
 		filters: handle === 'all' ? '' : `collections:${handle}`
 	});
 
-	const filteredDesgins = facets.vendor && Object.keys(facets.vendor).map(designName => {
+	const filteredDesigns = facets.vendor && Object.keys(facets.vendor).map(designName => {
 		return designs.find(design => design.name.toLowerCase() === designName.toLowerCase());
 	}).filter(design => Boolean(design));
 
 	sidebar({
-		designs: filteredDesgins,
+		designs: filteredDesigns,
 		colors: facets['options.color'] && Object.keys(facets['options.color']),
 		sizes: facets['options.size'] && Object.keys(facets['options.size']),
 		filters
 	});
 
-	allDesigns(filteredDesgins, design => {
+	allDesigns(filteredDesigns, design => {
 		const $designOption = $(`[data-design="${design.name}"]`);
 		$designOption.addClass('sidebar-designs__design--active');
 
@@ -118,11 +118,15 @@ const handleTypeClick = e => {
 	e.preventDefault();
 	const $target = $(e.currentTarget);
 	let handle = '';
-	
+
 	if ($target.is('a')) {
-		$('[data-type-filters] a').removeClass('sidebar-link--active')
-		handle = $target.data('collection-handle');
-		$target.addClass('sidebar-link--active');
+		if ($target.hasClass('breadcrumb__link')) {
+			handle = $target.data('collection-handle');
+		} else {
+			$('[data-type-filters] a').removeClass('sidebar-link--active');
+			handle = $target.data('collection-handle');
+			$target.addClass('sidebar-link--active');
+		}
 	} else {
 		handle = $target.val();
 	}
@@ -180,6 +184,8 @@ const collection = async () => {
 	if (state.filters.designs.length > 0 || state.filters.sizes.length > 0 || state.filters.colors.length > 0) {
 		filter('reload');
 	} 
+
+	$('.collection--divider--crumbs').on('click', '.breadcrumb__link', handleTypeClick);
 
 	$('.collection--sidebar')
 		.on('click', '[data-type-filters] a', handleTypeClick)

@@ -14274,7 +14274,7 @@ var getProducts = function () {
 						if ($('[data-collection]').length > 0) {
 							window.collectionState.set('maxPages', maxPages - 1);
 						}
-						console.log(products);
+
 						return _context.abrupt('return', products.map(function (product) {
 							product.variants = variants.filter(function (variant) {
 								return product.handle === variant.handle;
@@ -14295,7 +14295,7 @@ var getProducts = function () {
 							return product;
 						}));
 
-					case 14:
+					case 13:
 					case 'end':
 						return _context.stop();
 				}
@@ -15027,12 +15027,13 @@ var openActiveToggles = function openActiveToggles() {
 
 var renderDesignOptions = function renderDesignOptions(designs, activeDesigns) {
 	var $designs = $('[data-design-filters]');
-
+	console.log(designs);
 	if (!designs || designs.length === 0) {
 		return $designs.parents('.sidebar--block').hide();
 	}
 
 	var categories = (0, _getCategories2.default)(designs);
+	console.log(categories);
 	var options = categories.map(function (category) {
 		return (0, _toggleList.toggleItem)({
 			title: category.title,
@@ -15082,6 +15083,7 @@ var sidebar = function sidebar(_ref) {
 	    sizes = _ref.sizes,
 	    filters = _ref.filters;
 
+	console.log(designs);
 	renderDesignOptions(designs, filters.designs);
 	renderColorOptions(colors, filters.colors);
 	renderSizeOptions(sizes, filters.sizes);
@@ -15262,7 +15264,7 @@ var renderSidebar = function () {
 		    designs = _ref2.designs,
 		    filters = _ref2.filters;
 
-		var _ref4, facets, filteredDesgins;
+		var _ref4, facets, filteredDesigns;
 
 		return regeneratorRuntime.wrap(function _callee2$(_context2) {
 			while (1) {
@@ -15279,7 +15281,7 @@ var renderSidebar = function () {
 					case 2:
 						_ref4 = _context2.sent;
 						facets = _ref4.facets;
-						filteredDesgins = facets.vendor && Object.keys(facets.vendor).map(function (designName) {
+						filteredDesigns = facets.vendor && Object.keys(facets.vendor).map(function (designName) {
 							return designs.find(function (design) {
 								return design.name.toLowerCase() === designName.toLowerCase();
 							});
@@ -15289,13 +15291,13 @@ var renderSidebar = function () {
 
 
 						(0, _sidebar2.default)({
-							designs: filteredDesgins,
+							designs: filteredDesigns,
 							colors: facets['options.color'] && Object.keys(facets['options.color']),
 							sizes: facets['options.size'] && Object.keys(facets['options.size']),
 							filters: filters
 						});
 
-						(0, _allDesigns2.default)(filteredDesgins, function (design) {
+						(0, _allDesigns2.default)(filteredDesigns, function (design) {
 							var $designOption = $('[data-design="' + design.name + '"]');
 							$designOption.addClass('sidebar-designs__design--active');
 
@@ -15325,9 +15327,13 @@ var handleTypeClick = function handleTypeClick(e) {
 	var handle = '';
 
 	if ($target.is('a')) {
-		$('[data-type-filters] a').removeClass('sidebar-link--active');
-		handle = $target.data('collection-handle');
-		$target.addClass('sidebar-link--active');
+		if ($target.hasClass('breadcrumb__link')) {
+			handle = $target.data('collection-handle');
+		} else {
+			$('[data-type-filters] a').removeClass('sidebar-link--active');
+			handle = $target.data('collection-handle');
+			$target.addClass('sidebar-link--active');
+		}
 	} else {
 		handle = $target.val();
 	}
@@ -15397,6 +15403,8 @@ var collection = function () {
 							filter('reload');
 						}
 
+						$('.collection--divider--crumbs').on('click', '.breadcrumb__link', handleTypeClick);
+
 						$('.collection--sidebar').on('click', '[data-type-filters] a', handleTypeClick).on('click', '.sidebar-designs__design', handleDesignClick).on('change', '[data-color-filters] input', function (e) {
 							return filter('colors', e.target.value);
 						}).on('change', '[data-size-filters] input', function (e) {
@@ -15409,7 +15417,7 @@ var collection = function () {
 							return pager();
 						});
 
-					case 11:
+					case 12:
 					case 'end':
 						return _context3.stop();
 				}
@@ -17313,7 +17321,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '64033' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '54626' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

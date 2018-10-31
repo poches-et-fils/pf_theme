@@ -43,7 +43,7 @@ const getProducts = async ({index, page, handle, filters, filterString}) => {
 	if ($('[data-collection]').length > 0) {
 		window.collectionState.set('maxPages', maxPages - 1);
 	}
-console.log(products);
+
 	return products.map(product => {
 		product.variants = variants
 			.filter(variant => product.handle === variant.handle)

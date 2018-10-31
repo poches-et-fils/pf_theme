@@ -96,6 +96,7 @@
           {% if variant == current_variant %}selected="selected"{% endif %}
           {% unless variant.available %}disabled="disabled"{% endunless %}
           value="{{ variant.id }}"
+          data-inv="{{ variant.inventory_policy }}"
         >
           {{ variant.title }}
         </option>

@@ -6,6 +6,35 @@ import sidebar from './sidebar';
 import {updateUrl} from './url';
 import products from './products';
 
+const updateBreadcrumbs = (second, third) => {
+	const $breadcrumbs = $('.collection--divider--crumbs ul');
+	$breadcrumbs.find('li:first').nextAll().remove();
+
+	if (!second || second === $breadcrumbs.find('li:first a').data('collection')) {
+		return;
+	}
+
+	const [secondHandle, secondTitle] = second.split(':');
+	$breadcrumbs.append(`
+		<li>
+			<a href="/collections/${secondHandle}" data-collection="${secondHandle}:${secondTitle}" class="breadcrumb__link">
+				${secondTitle}
+			</a>
+		</li>
+	`);
+
+	if (third) {
+		const [thirdHandle, thirdTitle] = third.split(':');
+		$breadcrumbs.append(`
+			<li>
+				<a href="/collections/${thirdHandle}" data-parent-collection="${secondHandle}:${secondTitle}" data-collection="${thirdHandle}:${thirdTitle}" class="breadcrumb__link">
+					${thirdTitle}
+				</a>
+			</li>
+		`);
+	}
+};
+
 const collectionState = initialState => {
 	const state = initialState;
 
@@ -123,13 +152,20 @@ const handleTypeClick = e => {
 	if ($target.is('a')) {
 		if ($target.hasClass('breadcrumb__link')) {
 			newCollection = $target.data('collection');
+			updateBreadcrumbs($target.data('collection'));
 		} else {
 			$('[data-type-filters] a').removeClass('sidebar-link--active');
 			newCollection = $target.data('collection');
 			$target.addClass('sidebar-link--active');
+			if ($target.data('parent-collection')) {
+				updateBreadcrumbs($target.data('parent-collection'), $target.data('collection'));
+			} else {
+				updateBreadcrumbs($target.data('collection'));
+			}
 		}
 	} else {
 		newCollection = $target.val();
+		updateBreadcrumbs($target.val());
 	}
 
 	filter('type', newCollection);

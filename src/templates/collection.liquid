@@ -1,18 +1,4 @@
-{% assign women = 'collections.general.women' | t %}
-{% assign men = 'collections.general.men' | t %}
-{% assign youth = 'collections.general.youth' | t %}
-{% assign accessories = 'collections.general.accessories' | t %}
-
-{% if collection.title contains women %}
-  {% assign gender = women %}
-{% elsif collection.title contains men %}
-  {% assign gender = men %}
-{% elsif collection.title contains youth %}
-  {% assign gender = youth %}
-{% else %}
-  {% assign gender = accessories %}
-{% endif %}
-{% assign genderHandle = gender | handle %}
+{% include 'collection-gender' %}
 
 <div>
   {% if collection.image %}
@@ -25,7 +11,7 @@
   {% endif %}
 
   <div class="collection--divider--crumbs">
-    <div class="breadcrumbs">
+    <div class="breadcrumbs breadcrumbs--collection">
       <ul>
         <li>
           <a href="/collections/{{ genderHandle }}" data-collection="{{ genderHandle }}:{{ gender }}" class="breadcrumb__link">

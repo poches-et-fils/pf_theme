@@ -34,7 +34,7 @@ const renderProducts = async state => {
 		$collection.removeClass('loading');
 		$collection.find('.product-listing__item').removeClass('loading');
 	}
-}
+};
 
 const pager = () => {
 	const collectionState = window.collectionState;
@@ -66,7 +66,8 @@ const filter = (type, value) => {
 	}
 
 	if (type === 'type') {
-		collectionState.set('handle', value);
+		collectionState.set('collectionHandle', value.split(':')[0]);
+		collectionState.set('collectionTitle', value.split(':')[1]);
 	}
 
 	if (type === 'designs' || type === 'colors' || type === 'sizes') {
@@ -83,12 +84,12 @@ const filter = (type, value) => {
 	return renderProducts(state);
 };
 
-const renderSidebar = async ({handle, index, designs, filters}) => {
+const renderSidebar = async ({collectionTitle, index, designs, filters}) => {
 	const {facets} = await index.search({
 		query: '',
 		hitsPerPage: 1,
 		facets: ['options.color', 'options.size', 'vendor'],
-		filters: handle === 'all' ? '' : `collections:${handle}`
+		filters: collectionTitle === 'all' ? '' : `named_tags.collection:"${collectionTitle}"`
 	});
 
 	const filteredDesigns = facets.vendor && Object.keys(facets.vendor).map(designName => {
@@ -117,21 +118,21 @@ const renderSidebar = async ({handle, index, designs, filters}) => {
 const handleTypeClick = e => {
 	e.preventDefault();
 	const $target = $(e.currentTarget);
-	let handle = '';
+	let newCollection = '';
 
 	if ($target.is('a')) {
 		if ($target.hasClass('breadcrumb__link')) {
-			handle = $target.data('collection-handle');
+			newCollection = $target.data('collection');
 		} else {
 			$('[data-type-filters] a').removeClass('sidebar-link--active');
-			handle = $target.data('collection-handle');
+			newCollection = $target.data('collection');
 			$target.addClass('sidebar-link--active');
 		}
 	} else {
-		handle = $target.val();
+		newCollection = $target.val();
 	}
 
-	filter('type', handle);
+	filter('type', newCollection);
 	renderSidebar(window.collectionState.get());
 };
 
@@ -148,7 +149,7 @@ const toggleMobileFilters = e => {
 	window.scrollTo(0, 0);
 	$('html, body').toggleClass('no-scroll');
 	$('.collection--sidebar').toggleClass('open');
-}
+};
 
 const handleFiterClear = e => {
 	e.preventDefault();
@@ -156,7 +157,7 @@ const handleFiterClear = e => {
 	$('body').removeClass('no-scroll');
 	$('.collection--sidebar').removeClass('open');
 	renderSidebar(window.collectionState.get());
-}
+};
 
 const collection = async () => {
 	if ($('[data-collection]').length === 0) {
@@ -167,13 +168,14 @@ const collection = async () => {
 	const urlParams = queryString.parse(location.search);
 	const state = {
 		page: 0,
-		handle: $('.collection--sidebar').data('collection'),
+		collectionTitle: $('.collection--sidebar').data('collection'),
+		collectionHandle: $('.collection--sidebar').data('collection-handle'),
 		index: client.initIndex('poches_dev_products'),
 		designs: JSON.parse($('[data-design-json]').html()),
 		filterString: '',
 		filters: {
-			designs: urlParams.designs ? urlParams.designs.split(',') : [], 
-			sizes: urlParams.sizes ? urlParams.sizes.split(',') : [], 
+			designs: urlParams.designs ? urlParams.designs.split(',') : [],
+			sizes: urlParams.sizes ? urlParams.sizes.split(',') : [],
 			colors: urlParams.colors ? urlParams.colors.split(',') : []
 		}
 	};
@@ -183,7 +185,7 @@ const collection = async () => {
 
 	if (state.filters.designs.length > 0 || state.filters.sizes.length > 0 || state.filters.colors.length > 0) {
 		filter('reload');
-	} 
+	}
 
 	$('.collection--divider--crumbs').on('click', '.breadcrumb__link', handleTypeClick);
 

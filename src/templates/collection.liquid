@@ -1,13 +1,16 @@
-{% if collection.handle contains 'women' %}
-  {% assign gender = 'collections.general.women' | t | downcase %}
-{% elsif collection.handle contains 'men' %}
-  {% assign gender = 'collections.general.men' | t | downcase %}
-{% elsif collection.handle contains 'youth' %}
-  {% assign gender = 'collections.general.youth' | t | downcase %}
-{% elsif collection.handle contains 'accessories' %}
-  {% assign gender = 'collections.general.accessories' | t | downcase %}
+{% assign women = 'collections.general.women' | t %}
+{% assign men = 'collections.general.men' | t %}
+{% assign youth = 'collections.general.youth' | t %}
+{% assign accessories = 'collections.general.accessories' | t %}
+
+{% if collection.title contains women %}
+  {% assign gender = women %}
+{% elsif collection.title contains men %}
+  {% assign gender = men %}
+{% elsif collection.title contains youth %}
+  {% assign gender = youth %}
 {% else %}
-  {% assign gender = '' %}
+  {% assign gender = accessories %}
 {% endif %}
 {% assign genderHandle = gender | handle %}
 
@@ -25,13 +28,13 @@
     <div class="breadcrumbs">
       <ul>
         <li>
-          <a href="/collections/{{ genderHandle }}" data-collection-handle="{{ genderHandle }}" class="breadcrumb__link">
+          <a href="/collections/{{ genderHandle }}" data-collection="{{ genderHandle }}:{{ gender }}" class="breadcrumb__link">
             {{ gender | capitalize }}
           </a>
         </li>
-        {% if collection.handle != genderHandle %}
+        {% if collection.title != gender %}
         <li>
-          <a href="{{ collection.url }}" data-collection-handle="{{ collection.handle }}" class="breadcrumb__link">
+          <a href="{{ collection.url }}" data-collection="{{ collection.handle }}:{{ collection.title }}" class="breadcrumb__link">
             {{collection.title}}
           </a>
         </li>

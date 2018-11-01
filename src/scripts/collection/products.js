@@ -18,17 +18,17 @@ const generateFilterString = (filters, filterString) => {
 	}).filter(v => Boolean(v)).join(' AND ');
 
 	return filterParams ? `${filterString} AND ${filterParams}` : filterString;
-}
+};
 
-const getProducts = async ({index, page, handle, filters, filterString}) => {
-	const collectionHandle = handle === 'all' || !handle ? 'position > -1' : `collections:${handle}`;
+const getProducts = async ({index, page, collectionTitle, filters, filterString}) => {
+	const collection = collectionTitle === 'all' || !collectionTitle ? 'position > -1' : `named_tags.collection:"${collectionTitle}"`;
 	filterString = generateFilterString(filters, filterString);
 
 	const {hits: products, nbPages: maxPages} = await index.search({
 		query: '',
 		hitsPerPage: 12,
 		page: page ? page : 0,
-		filters: `${collectionHandle}${filterString}`,
+		filters: `${collection}${filterString}`,
 		distinct: 1
 	});
 
@@ -36,7 +36,7 @@ const getProducts = async ({index, page, handle, filters, filterString}) => {
 		query: '',
 		hitsPerPage: 1000,
 		filters: products.map((product, index) => {
-			return `handle:${product.handle}${index + 1 === products.length ? '' : ' OR'}`
+			return `handle:${product.handle}${index + 1 === products.length ? '' : ' OR'}`;
 		}).join(' ')
 	});
 

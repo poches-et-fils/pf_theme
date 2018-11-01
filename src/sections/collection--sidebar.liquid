@@ -1,4 +1,22 @@
-<div class="collection--sidebar" data-collection="{{ collection.handle }}">
+{% assign women = 'collections.general.women' | t %}
+{% assign men = 'collections.general.men' | t %}
+{% assign youth = 'collections.general.youth' | t %}
+{% assign accessories = 'collections.general.accessories' | t %}
+
+{% if collection.title contains women %}
+  {% assign gender = women %}
+{% elsif collection.title contains men %}
+  {% assign gender = men %}
+{% elsif collection.title contains youth %}
+  {% assign gender = youth %}
+{% elsif collection.title contains accessories %}
+  {% assign gender = accessories %}
+{% else %}
+  {% assign gender = '' %}
+{% endif %}
+{% assign genderHandle = gender | handle %}
+
+<div class="collection--sidebar" data-collection="{{ collection.title }}" data-collection-handle="{{ collection.handle }}">
   <a class="collection--sidebar--close">{% include 'icon-close' %}</a>
 
   <div class="sidebar--block sidebar--block--collections">
@@ -17,17 +35,17 @@
 
       <ul class="sidebar--links--block" data-type-filters>
         {% for link in linklists['header-menu'].links %}
-          {% if link.handle == gender %}
+          {% if link.handle == genderHandle %}
             {% for second_level_link in link.links %}
               <li>
-                <a href="{{ second_level_link.url }}" data-collection-handle="{{ second_level_link.object.handle }}" class="{%- if second_level_link.active -%}sidebar-link--active{%- endif -%}">
+                <a href="{{ second_level_link.url }}" data-collection="{{ second_level_link.object.handle }}:{{ second_level_link.object.title }}" class="{%- if second_level_link.active -%}sidebar-link--active{%- endif -%}">
                   {{ second_level_link.title }}
                 </a>
                 {% if link.levels > 0 %}
                   <ul>
                     {% for third_level_link in second_level_link.links %}
                       <li>
-                        <a href="{{ third_level_link.url }}" data-collection-handle="{{ third_level_link.object.handle }}" class="{%- if third_level_link.active -%}sidebar-link--active{%- endif -%}">
+                        <a href="{{ third_level_link.url }}" data-collection="{{ third_level_link.object.handle }}:{{ third_level_link.object.title }}" class="{%- if third_level_link.active -%}sidebar-link--active{%- endif -%}">
                           {{ third_level_link.title }}
                         </a>
                       </li>
@@ -104,12 +122,12 @@
           {% endif %}
         </option>
         {% for second_level_link in link.links %}
-          <option value="{{ second_level_link.object.handle }}" {%- if second_level_link.active -%} selected="selected"{%- endif -%}>
+          <option value="{{ second_level_link.object.handle }}:{{ second_level_link.object.title }}" {%- if second_level_link.active -%} selected="selected"{%- endif -%}>
             {{ second_level_link.title }}
           </option>
           {% if link.levels > 0 %}
             {% for third_level_link in second_level_link.links %}
-              <option value="{{ third_level_link.object.handle }}" {%- if third_level_link.active -%} selected="selected"{%- endif -%}>
+              <option value="{{ third_level_link.object.handle }}:{{ third_level_link.object.title }}" {%- if third_level_link.active -%} selected="selected"{%- endif -%}>
                 {{ third_level_link.title }}
               </option>
             {% endfor %}

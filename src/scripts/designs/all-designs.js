@@ -58,6 +58,10 @@ const designsHtml = designs => designs.map(design => `
 `).join('');
 
 const allDesigns = (designs, callback) => {
+	if (!designs) {
+		designs = [];
+	}
+
 	$('.see-all-designs').addClass('see-all-designs--loaded');
 	$('.all-designs__designs').html(designsHtml(designs));
 	$('.all-designs__categories').html(categoryHtml(designs));

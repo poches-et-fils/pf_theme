@@ -9,13 +9,12 @@ const openActiveToggles = () => setTimeout(() => {
 
 const renderDesignOptions = (designs, activeDesigns) => {
 	const $designs = $('[data-design-filters]');
-console.log(designs);
+
 	if (!designs || designs.length === 0) {
 		return $designs.parents('.sidebar--block').hide();
 	}
 
 	const categories = getDesignCategories(designs);
-	console.log(categories);
 	const options = categories.map(category => toggleItem({
 		title: category.title,
 		contents: category.designs.map(design => `
@@ -35,7 +34,7 @@ console.log(designs);
 const renderColorOptions = (colors, activeColors) => {
 	const $colors = $('[data-color-filters]');
 
-	if (!colors) { 
+	if (!colors) {
 		return $colors.parents('.toggle--item').hide();
 	}
 
@@ -94,11 +93,10 @@ const renderSizeOptions = (sizes, activeSizes) => {
 };
 
 const sidebar = ({designs, colors, sizes, filters}) => {
-	console.log(designs);
 	renderDesignOptions(designs, filters.designs);
 	renderColorOptions(colors, filters.colors);
 	renderSizeOptions(sizes, filters.sizes);
 	openActiveToggles();
-}
+};
 
 export default sidebar;

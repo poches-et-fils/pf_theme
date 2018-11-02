@@ -29,7 +29,7 @@
         {% include 'icon-plus' %}
       </div>
       <div class="toggle--contents">
-        {% if product.metafields.product_info.shipping != 'none' %}
+        {% if product.metafields.product_info.shipping and product.metafields.product_info.shipping != 'none' %}
           <p>{{ product.metafields.product_info.shipping }}</p>
         {% else %}
           {{ section.settings.default_shipping_text }}
@@ -46,7 +46,7 @@
         {% include 'icon-plus' %}
       </div>
       <div class="toggle--contents">
-        {% if product.metafields.product_info.sizing != 'none' %}
+        {% if product.metafields.product_info.sizing and product.metafields.product_info.sizing != 'none' %}
           <p>{{ product.metafields.product_info.sizing }}</p>
         {% elsif size_text > '' %}
           {{ size_text }}
@@ -65,7 +65,7 @@
         {% include 'icon-plus' %}
       </div>
       <div class="toggle--contents">
-        {% if product.metafields.product_info.returns != 'none' %}
+        {% if product.metafields.product_info.returns and product.metafields.product_info.returns != 'none' %}
           <p>{{ product.metafields.product_info.returns }}</p>
         {% else %}
           {{ section.settings.default_returns_text }}

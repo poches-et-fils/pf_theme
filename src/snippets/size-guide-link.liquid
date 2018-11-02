@@ -9,7 +9,7 @@
   {% endif %}
 {% endfor %}
  
-{% if product.metafields.product_info.size_guide_link != 'none' %}
+{% if product.metafields.product_info.size_guide_link and product.metafields.product_info.size_guide_link != 'none' %}
 	{% assign size_guide_link = product.metafields.product_info.size_guide_link %}
 {% elsif type_size_guide_link > '' %}
 	{% assign size_guide_link = type_size_guide_link %}

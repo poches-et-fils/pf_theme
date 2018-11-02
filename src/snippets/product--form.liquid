@@ -15,7 +15,7 @@
             <span class="thumb-nav-arrow go-next">›</span>
           </section>
           <div class="thumbnails-container">
-            {% assign design_categories = "random,animals,sports,patterns,food,collaboration" | split: "," %}
+            {% assign design_categories = "animaux,sports,patterns,bouffe,collab,drinks,fi-fille,été,mâle,autres,kids,nostalgie" | split: "," %}
             {% for pocket_product in collections.all-designs.products limit: 250 %}
               {% assign pocket_shown = false %}
               {% for category in design_categories %}

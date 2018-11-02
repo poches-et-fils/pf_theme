@@ -105,11 +105,15 @@
     },
     "collections": {
         "general": {
-            "no_matches": "Sorry, there are no products in this collection",
             "men": "Men",
             "women": "Women",
             "youth": "Youth",
             "accessories": "Accessories"
+        },
+        "empty": {
+            "title": "Whooooooops!",
+            "subtitle": "Looks like you’re out of pockets.",
+            "button_text": "SEE MORE"
         }
     },
     "contact_details": {

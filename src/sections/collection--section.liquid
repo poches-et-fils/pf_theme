@@ -1,5 +1,13 @@
 {% paginate collection.products by 12 %}
 
+<div class="empty-collection {% if collection.products.size == 0 %}empty-collection--visible{% endif %}">
+  <h3>{{ 'collections.empty.title' | t }}</h3>
+  <p>{{ 'collections.empty.subtitle' | t }}</p>
+  <a href="#" class="clear-filters">
+    {{ 'collections.empty.button_text' | t }}
+  </a>
+</div>
+
 <div class="product-listing product-listing--grid product-listing--grid-three product-listing--collection">
   {% for product in collection.products %}
     {%- capture variantJson -%}{%- include "variant-json" -%}{%- endcapture -%}

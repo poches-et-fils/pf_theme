@@ -110,6 +110,11 @@
             "women": "Women",
             "youth": "Youth",
             "accessories": "Accessories"
+        },
+        "empty": {
+            "title": "Oooooooups",
+            "subtitle": "On dirait que tu n’as plus de poches.",
+            "button_text": "VOIR PLUS"
         }
     },
     "contact_details": {

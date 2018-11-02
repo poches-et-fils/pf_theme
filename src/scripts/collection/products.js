@@ -23,14 +23,20 @@ const generateFilterString = (filters, filterString) => {
 const getProducts = async ({index, page, collectionTitle, filters, filterString}) => {
 	const collection = collectionTitle === 'all' || !collectionTitle ? 'position > -1' : `named_tags.collection:"${collectionTitle}"`;
 	filterString = generateFilterString(filters, filterString);
+	$('.empty-collection').removeClass('empty-collection--visible');
 
-	const {hits: products, nbPages: maxPages} = await index.search({
+	const {hits: products, nbPages: maxPages, nbHits: count} = await index.search({
 		query: '',
 		hitsPerPage: 12,
 		page: page ? page : 0,
 		filters: `${collection}${filterString}`,
 		distinct: 1
 	});
+
+	if (count === 0 && maxPages === 0) {
+		$('.empty-collection').addClass('empty-collection--visible');
+		return [];
+	}
 
 	const {hits: variants} = await index.search({
 		query: '',

@@ -230,14 +230,14 @@ const collection = async () => {
 		.on('click', '.sidebar-designs__design', handleDesignClick)
 		.on('change', '[data-color-filters] input', e => filter('colors', e.target.value))
 		.on('change', '[data-size-filters] input', e => filter('sizes', e.target.value))
-		.on('click', '.collection--sidebar--close, .close-filters', toggleMobileFilters)
-		.on('click', '.clear-filters', handleFiterClear);
+		.on('click', '.collection--sidebar--close, .close-filters', toggleMobileFilters);
 
 	$('.collection--sidebar--mobile')
 		.on('change', '[data-type-select-filters]', handleTypeClick)
 		.on('click', '.show-mobile-filters', toggleMobileFilters);
 
 	$(document).off('scroll').scroll(() => pager());
+	$(document).on('click', '.clear-filters', handleFiterClear);
 };
 
 export default () => $(collection);

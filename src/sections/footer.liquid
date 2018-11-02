@@ -22,11 +22,11 @@ Section completed. Styling completed.
         <div class="foooter--branding"><a href="#" class="footer--branding--link w-inline-block">
           <img src="{{section.settings.logo | img_url: '1000x1000'}}" width="122" ></a></div>
         <div class="footer--address">
-          <div class="footer--heading">POCHES ET FILS</div>
+          <div class="footer--heading">POCHES & FILS</div>
           <p class="footer--paragraph">{{section.settings.paragraph}}</p>
         </div>
         <div class="footer--address">
-          <div class="footer--heading">COMPANY</div>
+          <div class="footer--heading">COMPAGNIE</div>
           {%- assign company_linklist = section.settings.company_linklist -%}
 
           {% if linklists[company_linklist].links.size > 0 %}
@@ -38,7 +38,7 @@ Section completed. Styling completed.
         </div>
 
         <div class="footer--address">
-          <div class="footer--heading">SHOP</div>
+          <div class="footer--heading">MAGASINER</div>
           {%- assign footer_linklist = section.settings.footer_linklist -%}
 
           {% if linklists[footer_linklist].links.size > 0 %}

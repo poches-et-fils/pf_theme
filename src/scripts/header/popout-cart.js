@@ -292,7 +292,7 @@ const hideCart = _ => {
 	const darkOverlay = $('.dark-overlay');
 	const cartSelector = $('.ajax--cart--popout--section');
 	cartSelector.removeClass('open--cart').addClass('closed--cart');
-	darkOverlay.css({display: 'none', opacity: 0});
+	darkOverlay.css({ display: 'none', opacity: 0 });
 };
 
 const refreshCounter = QTY => {
@@ -354,7 +354,7 @@ const refreshCart = _ => {
 					<div class="ajax--cart--item--curQuantity">${item.quantity}</div>
 					<button class="ajax--cart--item--quantity more" title="Add 1">+</button>
 		</div>
-				<div class="ajax--cart--price--block">${window.currencySymbol + (item.line_price/100).toFixed(2)}</div>
+				<div class="ajax--cart--price--block">${window.currencySymbol + (item.line_price / 100).toFixed(2)}</div>
 				</div>
 				</div>
 				</div>`);
@@ -410,10 +410,10 @@ const freeShipping = currentAmount => {
 	const cartMessage = $('.ajax--cart--message');
 
 	if (100 - currentAmount > 0) {
-		cartMessage.text(`Add another ${window.currencySymbol}${100 - currentAmount} to cart to get free shipping.`);
+		cartMessage.text(`Continue de même, il te manque ${window.currencySymbol}${100 - currentAmount} pour avoir la livraison gratuite.`);
 	} else {
-		cartMessage.text('Congratulations! You may apply for Free Shipping.');
+		cartMessage.text('Good job! Tu as la livraison gratuite.');
 	}
 };
 
-export {toggleCart, updateQty, refreshCart, hideCart};
+export { toggleCart, updateQty, refreshCart, hideCart };

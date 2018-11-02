@@ -9,7 +9,7 @@ const cartHTML = `
 		<div class="ajax--cart--lower">
 			<div class="ajax--cart--items"></div>
 			<div class="ajax--cart--bottom">
-				<h5 class="ajax--cart--free-shipping">Free Shipping</h3>
+				<h5 class="ajax--cart--free-shipping">Livraison gratuite</h3>
 				<p class="ajax--cart--message">
 			Add another
 			$<span class="ajax--cart--shippingLeft">100</span>
@@ -346,7 +346,7 @@ const refreshCart = _ => {
 		<div class="ajax--cart--item--text">${subtitle}</div>
 				</div>
 				<div class="ajax--cart--item--block padding">
-				<div class="ajax--cart--item--text">Size: ${size}</div>
+				<div class="ajax--cart--item--text">${size}</div>
 				</div>
 				<div class="ajax--cart--item--block flexed">
 				<div class="ajax--cart--qty">

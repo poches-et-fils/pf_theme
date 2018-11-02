@@ -1,31 +1,36 @@
+{% assign women = 'collections.general.women' | t %}
+{% assign men = 'collections.general.men' | t %}
+{% assign youth = 'collections.general.youth' | t %}
+{% assign accessories = 'collections.general.accessories' | t %}
+
 <div class="dropdown">
   {% for link in linklists.header-menu.links %}
     <div class="dropdown-content main {{ link.title }}">
       <div class="navigation--dropdown--block">
         <div class="navigation--content--block">
           <div class="navigation--image--item">
-            {% if link.title == "Men" %}
+            {% if link.title == men %}
               <img src="{{section.settings.menimg | img_url: '1000x1000'}}"
                   width="200"
                   height="200"
                   sizes="(max-width: 991px) 100vw, 114px"
                   class="image" />
             {% endif %}
-            {% if link.title == "Women" %}
+            {% if link.title == women %}
               <img src="{{section.settings.womenimg | img_url: '1000x1000'}}"
                   width="200"
                   height="200"
                   sizes="(max-width: 991px) 100vw, 114px"
                   class="image" />
             {% endif %}
-            {% if link.title == "Youth" %}
+            {% if link.title == youth %}
               <img src="{{section.settings.youthimg | img_url: '1000x1000'}}"
                   width="200"
                   height="200"
                   sizes="(max-width: 991px) 100vw, 114px"
                   class="image" />
             {% endif %}
-            {% if link.title == "Accessories" %}
+            {% if link.title == accessories %}
               <img src="{{section.settings.accessoriesimg | img_url: '1000x1000'}}"
                   width="200"
                   height="200"

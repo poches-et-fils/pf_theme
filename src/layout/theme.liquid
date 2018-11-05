@@ -54,7 +54,9 @@
   {% section 'header' %}
 
   <div class="dark-overlay"></div>
-  <div id="CartHolder" style="position: relative; z-index: 1000"></div>
+  <div id="CartHolder" style="position: relative; z-index: 1000">
+    {% include 'popout-cart' %}
+  </div>
   {% include 'newsletter--popup' %}
 
   <main role="main" id="MainContent">

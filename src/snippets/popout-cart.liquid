@@ -1,0 +1,30 @@
+{% capture shipping_amount %}
+  C$<span class="ajax--cart--shippingLeft">{{ 'cart.popout_cart.free_shipping_amount' | t }}</span>
+{% endcapture %}
+
+<div class="ajax--cart--popout--section closed--cart">
+	<div class="ajax--cart--popout" style="width: 100%">
+		<a href="#" data-keep-shopping class="button wide-text full-caps black w-button text-center">
+			← {{ 'cart.popout_cart.continue_shopping' | t }}
+		</a>
+		<div class="ajax--cart--lower">
+			<div class="ajax--cart--items"></div>
+			<div class="ajax--cart--bottom">
+				<h5 class="ajax--cart--free-shipping">{{ 'cart.popout_cart.free_delivery' | t }}</h3>
+				<p class="ajax--cart--message">
+					{{ 'cart.popout_cart.free_shipping' | t: amount: shipping_amount }}
+				</p>
+				<a href="#" data-keep-shopping>{{ 'cart.popout_cart.continue_shopping' | t }}</a>
+				<div class="ajax--cart--subtotal">
+					<h4 class="ajax--cart--title--text">{{ 'cart.popout_cart.subtotal' | t }}</h4>
+					<h4 class="ajax--cart--title--text right">
+						<strong class="ajax--cart--subtotal--amount"></strong>
+					</h4>
+				</div>
+				<a href="/checkout" class="button wide-text full-caps black full-width w-button text-center">
+					{{ 'cart.popout_cart.checkout' | t }}
+				</a>
+			</div>
+		</div>
+	</div>
+</div>

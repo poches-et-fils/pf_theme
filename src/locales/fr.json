@@ -1,7 +1,7 @@
 {
   "general": {
     "header": {
-      "see_all_link": "Voir tous les motifs" 
+      "see_all_link": "Voir tous les motifs"
     },
     "404": {
       "title": "404 - Page non trouvée",
@@ -104,6 +104,14 @@
       "total": "Total",
       "discounted_price": "Prix réduit",
       "original_price": "Prix original"
+    },
+    "popout_cart": {
+      "continue_shopping": "Continue shopping",
+      "free_delivery": "Livraison gratuite",
+      "checkout": "Checkout",
+      "subtotal": "Subtotal",
+      "free_shipping": "Add another {{ amount }} to cart to get free shipping.",
+      "free_shipping_amount": "100"
     }
   },
   "collections": {

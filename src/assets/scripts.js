@@ -6807,20 +6807,9 @@ $(function () {
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-var cartHTML = '\n<div class="ajax--cart--popout--section closed--cart">\n\t<div class="ajax--cart--popout" style="width: 100%">\n\t\t<a href="#" data-keep-shopping\n\t\t\tstyle="background-color: #161616; padding: 20px 23px; display: flex; font-weight: 500;"\n\t\t\t\tclass="button wide-text full-caps black w-button text-center">\n\t\t\t\u2190 Continue shopping\n\t\t</a>\n\t\t<div class="ajax--cart--lower">\n\t\t\t<div class="ajax--cart--items"></div>\n\t\t\t<div class="ajax--cart--bottom">\n\t\t\t\t<h5 class="ajax--cart--free-shipping">Livraison gratuite</h3>\n\t\t\t\t<p class="ajax--cart--message">\n\t\t\tAdd another\n\t\t\t$<span class="ajax--cart--shippingLeft">100</span>\n\t\t\tto cart to get free shipping.\n\t\t</p>\n\t\t\t\t<a href="#" data-keep-shopping>Continue Shopping</a>\n\t\t\t\t<div class="ajax--cart--subtotal">\n\t\t\t\t\t<h4 class="ajax--cart--title--text">Subtotal</h4>\n\t\t\t\t\t<h4 class="ajax--cart--title--text right">\n\t\t\t<strong class="ajax--cart--subtotal--amount"></strong>\n\t\t\t</h4>\n\t\t\t\t</div>\n\t\t\t\t<a href="/checkout"\n\t\t\t\tclass="button wide-text full-caps black full-width w-button text-center">\n\t\t\tCheckout\n\t\t</a>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>\n\n<style>\n.ajax--cart--popout--section {\n\tdisplay: -webkit-box;\n\tdisplay: -webkit-flex;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\theight: 100vh;\n\tz-index: 1001;\n\tjustify-content: flex-end;\n\talign-items: stretch;\n\tbackground-image: -webkit-linear-gradient(270deg, rgba(0, 0, 0, .57), rgba(0, 0, 0, .57));\n\tbackground-image: linear-gradient(180deg, rgba(0, 0, 0, .57), rgba(0, 0, 0, .57));\n\tbox-shadow: 8px 0px 20px 1px black;\n}\n\n.ajax--cart--popout {\n\tdisplay: -webkit-box;\n\tdisplay: -webkit-flex;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\twidth: 30%;\n\theight: 100%;\n\t-webkit-box-orient: vertical;\n\t-webkit-box-direction: normal;\n\t-webkit-flex-direction: column;\n\t-ms-flex-direction: column;\n\tflex-direction: column;\n\tbackground-color: #fff;\n}\n\n.ajax--cart--link--shop {\n\tdisplay: -webkit-box;\n\tdisplay: -webkit-flex;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\twidth: 100%;\n\theight: 8%;\n\tpadding: 15px;\n\talign-items: center;\n\tbackground-color: #161616;\n}\n\n.ajax--cart--link--title {\n\tmargin-top: 0px;\n\tmargin-bottom: 0px;\n\tcolor: #fff;\n\tfont-size: 13px;\n\tfont-weight: 400;\n\tletter-spacing: 1px;\n}\n\n.ajax--cart--lower {\n\twidth: 100%;\n\theight: 86%;\n}\n\n.ajax--cart--items {\n\theight: inherit;\n\tpadding: 8px 0 110px;\n\toverflow-y: scroll;\n}\n\n.ajax--cart--item {\n\tdisplay: flex;\n\theight: 125px;\n\tmargin-bottom: 40px;\n}\n\n.ajax--cart--item--image {\n\twidth: 40%;\n\ttext-align: center;\n}\n.ajax--cart--item--image img {\n\tmax-width: 100%;\n\tmax-height: 100%;\n}\n\n.ajax--cart--item--details {\n\tdisplay: -webkit-box;\n\tdisplay: -webkit-flex;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\twidth: 80%;\n\tpadding-left: 5%;\n\t-webkit-box-orient: vertical;\n\t-webkit-box-direction: normal;\n\t-webkit-flex-direction: column;\n\t-ms-flex-direction: column;\n\tflex-direction: column;\n\t-webkit-box-pack: justify;\n\t-webkit-justify-content: space-between;\n\t-ms-flex-pack: justify;\n\tjustify-content: space-between;\n}\n\n.ajax--cart--item--text.bold--text {\n\tfont-weight: 700;\n}\n\n.ajax--cart--item--block {\n\tmargin-bottom: 5px;\n}\n\n.ajax--cart--item--block.padding {\n\tmargin-bottom: 30px;\n}\n\n.ajax--cart--item--block.flexed {\n\tdisplay: flex;\n\talign-items: flex-end;\n}\n\n.ajax--cart--qty { width: 50%; }\n\n.ajax--cart--price--block {\n\tdisplay: -webkit-box;\n\tdisplay: -webkit-flex;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\twidth: 50%;\n\theight: 20px;\n\t-webkit-box-pack: end;\n\t-webkit-justify-content: flex-end;\n\t-ms-flex-pack: end;\n\tjustify-content: flex-end;\n}\n\n.ajax--cart--bottom {\n\tposition: absolute;\n\tbottom: 0;\n\twidth: 100%;\n\tpadding: 20px;\n\tbackground-color: #ddd;\n}\n\n.ajax--cart--free-shipping {\n\tmargin: 10px 0; \n\tfont-size: 18px;\n\tline-height: 1em;\n\tfont-weight: 500;\n}\n\n.ajax--cart--message {\n\tmargin-bottom: 0em;\n\tfont-size: 14px;\n}\n\n.ajax--cart--subtotal {\n\tdisplay: flex;\n\tpadding: 0 0 5px 0;\n}\n\n.ajax--cart--title--text {\n\twidth: 50%;\n\tmargin-top: 20px;\n\tmargin-bottom: 0px;\n\tfont-weight: 400;\n}\n\n.ajax--cart--title--text.right {\n\ttext-align: right;\n}\n\n@media screen and (max-width: 900px) {\n\t.ajax--cart--popout--section { width: 100%; }\n\n\t.ajax--cart--item--image { width: 20%; }\n}\n\n@media screen and (min-width: 901px) {\n\t.ajax--cart--popout--section { width: 33%; }\n}\n\n.ajax--cart--popout--section {\n\tposition: fixed;\n\ttop: 0;\n\tleft: 100%;\n\theight: 100%;\n}\n\n.ajax--cart--popout--section.open--cart {\n\ttransform: translateX(-100%); \n\ttransition: 0.6s;\n}\n.ajax--cart--popout--section.closed--cart {\n\ttransform: translateX(0); \n\ttransition: 0.6s;\n}\n\n.ajax--cart--item--quantity {\n\tdisplay: inline-flex;\n\tjustify-content: center;\n\talign-items: center;\n\tborder: 2px solid lightgray;\n\tborder-radius: 50%;\n\tbackground: transparent;\n\tcursor: pointer;\n\tcolor: gray;\n\theight: 18px;\n\twidth: 18px;\n\ttext-align: center;\n\tline-height: 1px;\n\tuser-select: none;\n}\n\n.ajax--cart--item--curQuantity { display: inline-block; }\n.ajax--cart--item--quantity.remove {\n\tfloat: right;\n\tfont-weight: 200;\n\tline-height: 1;\n}\n\n.ajax--cart--item--image {\n\tbackground-size: contain;\n\tposition: relative;\n\tbackground-repeat: no-repeat;\n\tbackground-position: center;\n\tbackground-color: #f9f9f9;\n}\n\n*[disabled] { cursor: not-allowed; }\n</style>';
-
 var toggleCart = function toggleCart(_) {
-	var cartSelector = $('.ajax--cart--popout--section');
-	var cartIsAppended = cartSelector.length > 0;
-
-	if (!cartIsAppended) {
-		$('#CartHolder').append(cartHTML);
-	}
-
-	setTimeout(function (_) {
-		refreshCart();
-		toggleWidth();
-	}, 200);
+	refreshCart();
+	toggleWidth();
 };
 
 var toggleWidth = function toggleWidth(_) {
@@ -6853,6 +6842,12 @@ var hideCart = function hideCart(_) {
 var refreshCounter = function refreshCounter(QTY) {
 	var itemNumberLabel = $('.cart--items--block');
 
+	if (typeof QTY === 'undefined') {
+		return $.getJSON('/cart.js', function (data) {
+			return itemNumberLabel.text(data.item_count);
+		});
+	}
+
 	if (QTY) {
 		return itemNumberLabel.text(QTY);
 	}
@@ -6875,6 +6870,7 @@ var refreshCart = function refreshCart(_) {
 	var itemsInCart = cartSelector.find('.ajax--cart--items').empty();
 
 	$.getJSON('/cart.js', function (data) {
+		cartSelector.find('.ajax--cart--items').empty();
 		data.items.map(function (item) {
 			var title = item.product_title;
 			var subtitle = '&nbsp;';
@@ -6884,7 +6880,7 @@ var refreshCart = function refreshCart(_) {
 				size = item.properties.size;
 			}
 
-			return itemsInCart.append('\n\t\t<div class="ajax--cart--item item-start" \n\t\t\t\tdata-variant-id="' + item.variant_id + '"\n\t\t\t\tdata-product-type=' + item.product_type + '>\n\t\t<div class="ajax--cart--item--image">\n\t\t\t<img src=\'' + item.image + '\' alt="' + item.title + '" title="' + item.title + '" />\n\t\t</a>\n\t\t\t\t</div>\n\t\t\t\t<div class="ajax--cart--item--details">\n\t\t\t\t<div class="ajax--cart--item--block padding">\n\t\t\t\t<div class="ajax--cart--item--text bold--text">\n\t\t\t\t' + title + '\n\t\t\t<span class="ajax--cart--item--quantity remove" title="Remove">x</span>\n\t\t</div>\n\t\t<div class="ajax--cart--item--text">' + subtitle + '</div>\n\t\t\t\t</div>\n\t\t\t\t<div class="ajax--cart--item--block padding">\n\t\t\t\t<div class="ajax--cart--item--text">' + size + '</div>\n\t\t\t\t</div>\n\t\t\t\t<div class="ajax--cart--item--block flexed">\n\t\t\t\t<div class="ajax--cart--qty">\n\t\t\t\t\t<button class="ajax--cart--item--quantity less" title="Substract 1">-</button>\n\t\t\t\t\t<div class="ajax--cart--item--curQuantity">' + item.quantity + '</div>\n\t\t\t\t\t<button class="ajax--cart--item--quantity more" title="Add 1">+</button>\n\t\t</div>\n\t\t\t\t<div class="ajax--cart--price--block">' + (window.currencySymbol + (item.line_price / 100).toFixed(2)) + '</div>\n\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t\t</div>');
+			return itemsInCart.append('\n\t\t\t\t<div class="ajax--cart--item item-start" data-variant-id="' + item.variant_id + '" data-product-type=' + item.product_type + '>\n\t\t\t\t\t<div class="ajax--cart--item--image">\n\t\t\t\t\t\t<img src=\'' + item.image + '\' alt="' + item.title + '" title="' + item.title + '" />\n\t\t\t\t\t</div>\n\t\t\t\t\t<div class="ajax--cart--item--details">\n\t\t\t\t\t\t<div class="ajax--cart--item--block padding">\n\t\t\t\t\t\t\t<div class="ajax--cart--item--text bold--text">\n\t\t\t\t\t\t\t\t' + title + '\n\t\t\t\t\t\t\t\t<span class="ajax--cart--item--quantity remove" title="Remove">x</span>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class="ajax--cart--item--text">' + subtitle + '</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div class="ajax--cart--item--block padding">\n\t\t\t\t\t\t\t<div class="ajax--cart--item--text">' + size + '</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t<div class="ajax--cart--item--block flexed">\n\t\t\t\t\t\t\t<div class="ajax--cart--qty">\n\t\t\t\t\t\t\t\t<button class="ajax--cart--item--quantity less" title="Substract 1">-</button>\n\t\t\t\t\t\t\t\t<div class="ajax--cart--item--curQuantity">' + item.quantity + '</div>\n\t\t\t\t\t\t\t\t<button class="ajax--cart--item--quantity more" title="Add 1">+</button>\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t<div class="ajax--cart--price--block">\n\t\t\t\t\t\t\t\t' + (window.currencySymbol + (item.line_price / 100).toFixed(2)) + '\n\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t</div>\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t');
 		});
 
 		freeShipping(data.total_price);
@@ -6905,17 +6901,15 @@ var updateQty = function updateQty(event) {
 	if (operation === 'add') {
 		newQty++;
 		button.removeProp('disabled');
-		refreshCounter(Number(refreshCounter()) + 1);
 	} else if (operation === 'substract') {
 		if (newQty > 1) {
 			newQty--;
-			refreshCounter(Number(refreshCounter()) - 1);
 		} else {
 			button.prop('disabled', true);
 		}
 	} else {
 		newQty = 0;
-		setTimeout(refreshCart, 1000);
+		item.remove();
 	}
 
 	$.post('/cart/update.js', 'updates[' + itemID + ']=' + newQty).always(function (response) {
@@ -6923,12 +6917,16 @@ var updateQty = function updateQty(event) {
 			response = JSON.parse(response);
 		}
 
-		var linePrice = response.items.find(function (it) {
+		var item = response.items.find(function (it) {
 			return it.id === Number(itemID);
-		}).line_price;
+		});
+
+		if (item) {
+			itemPrice.text(window.currencySymbol + (item.line_price / 100).toFixed(2));
+		}
 
 		curQty.text(newQty);
-		itemPrice.text(window.currencySymbol + (linePrice / 100).toFixed(2));
+		refreshCounter();
 		refreshPrice(response.total_price);
 		freeShipping(response.total_price);
 	});
@@ -6936,9 +6934,10 @@ var updateQty = function updateQty(event) {
 
 var freeShipping = function freeShipping(currentAmount) {
 	var cartMessage = $('.ajax--cart--message');
+	var remaining = 10000 - currentAmount;
 
-	if (100 - currentAmount > 0) {
-		cartMessage.text('Continue de m\xEAme, il te manque ' + window.currencySymbol + (100 - currentAmount) + ' pour avoir la livraison gratuite.');
+	if (remaining > 0) {
+		cartMessage.text('Continue de m\xEAme, il te manque ' + window.currencySymbol + (remaining / 100).toFixed(2) + ' pour avoir la livraison gratuite.');
 	} else {
 		cartMessage.text('Good job! Tu as la livraison gratuite.');
 	}
@@ -17372,7 +17371,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '64617' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '58042' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

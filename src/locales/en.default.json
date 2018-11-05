@@ -1,5 +1,8 @@
 {
     "general": {
+        "header": {
+            "see_all_link": "See all designs" 
+        },
         "404": {
             "title": "404 Page Not Found",
             "subtext_html": "The page you requested does not exist. Click <a href=\"/collections/all\">here</a> to continue shopping."
@@ -114,6 +117,18 @@
             "title": "Whooooooops!",
             "subtitle": "Looks like you’re out of pockets.",
             "button_text": "SEE MORE"
+        },
+        "sidebar": {
+            "heading": "Collections",
+            "shop_all": "Shop All",
+            "shop": "Shop",
+            "designs": "DESIGNS",
+            "see_all_designs": "Tout voir",
+            "filters": "Filtrer par",
+            "sizes": "Taille",
+            "colors": "Couleur",
+            "clear": "Clear",
+            "done": "Done"
         }
     },
     "contact_details": {

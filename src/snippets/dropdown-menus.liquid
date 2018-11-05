@@ -50,23 +50,8 @@
           {% endfor %}
 
           <div class="navigation--dropdown--block--item">
-            <a href="{{ link.url }}" class="navigation--link main">Designs</a>
-            <a href="{{ link.url }}?design_type=animaux" class="navigation--link sub">Animaux</a>
-            <a href="{{ link.url }}?design_type=nostalgie" class="navigation--link sub">Nostalgie</a>
-            <a href="{{ link.url }}?design_type=bouffe" class="navigation--link sub">Bouffe</a>
-            <a href="{{ link.url }}?design_type=patterns" class="navigation--link sub">Patterns</a>
-            <a href="{{ link.url }}?design_type=fi-fille" class="navigation--link sub">Fi-fille</a>
-            <a href="{{ link.url }}?design_type=collaboration" class="navigation--link sub">Collaborations</a>
-            <a href="{{ link.url }}?design_type=kids" class="navigation--link sub">Kids</a>
-            <a href="{{ link.url }}?design_type=drinks" class="navigation--link sub">Drinks</a>
-            <a href="{{ link.url }}?design_type=été" class="navigation--link sub">Été</a>
-            <a href="{{ link.url }}?design_type=mâle" class="navigation--link sub">Mâle</a>
-            <a href="{{ link.url }}?design_type=sports" class="navigation--link sub">Sports</a>
-            <a href="{{ link.url }}?design_type=autres" class="navigation--link sub">Autres</a>
+            <a href="{{ link.url }}" class="navigation--link sub">{{ 'general.header.see_all_link' | t }}</a>
           </div>
-
-          <div class="navigation--dropdown--block--item">
-            <a href="{{ link.url }}" class="navigation--link sub">Voir tous les motifs</a></div>
         </div>
       </div>
     </div>

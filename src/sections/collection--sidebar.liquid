@@ -4,9 +4,9 @@
   <a class="collection--sidebar--close">{% include 'icon-close' %}</a>
 
   <div class="sidebar--block sidebar--block--collections">
-    <h4 class="sidebar--heading">Collections</h4>
+    <h4 class="sidebar--heading">{{ 'collections.sidebar.heading' | t }}</h4>
     <ul class="sidebar--links--block">
-      <li><a href="/collections/all" class="{%- if collection.handle == 'all' -%}sidebar-link--active{%- endif -%}">Shop all</a></li>
+      <li><a href="/collections/all" class="{%- if collection.handle == 'all' -%}sidebar-link--active{%- endif -%}">{{ 'collections.sidebar.shop_all' | t }}</a></li>
       {% for link in linklists['header-menu'].links %}
         <li><a href="{{ link.url }}" class="{%- if link.handle == genderHandle -%}sidebar-link--active{%- endif -%}">{{ link.title }}</a></li>
       {% endfor %}
@@ -15,7 +15,7 @@
 
   {% if gender > '' %}
     <div class="sidebar--block sidebar--block--shop">
-      <h4 class="sidebar--heading">Shop</h4>
+      <h4 class="sidebar--heading">{{ 'collections.sidebar.shop' | t }}</h4>
 
       <ul class="sidebar--links--block" data-type-filters>
         {% for link in linklists['header-menu'].links %}
@@ -46,8 +46,8 @@
 
   <div class="sidebar--block sidebar--block--designs">
     <h4 class="sidebar--heading sidebar--heading--no-border sidebar--heading--designs">
-      <div>DESIGNS</div>
-      <a href="#" class="see-all-designs">Tout voir</a>
+      <div>{{ 'collections.sidebar.designs' | t }}</div>
+      <a href="#" class="see-all-designs">{{ 'collections.sidebar.heading' | t }}</a>
     </h4>
 
     <div class="sidebar--designs toggles--section" data-design-filters>
@@ -57,12 +57,12 @@
   </div>
 
   <div class="sidebar--block">
-    <h4 class="sidebar--heading sidebar--heading--no-border">Filtrer par</h4>
+    <h4 class="sidebar--heading sidebar--heading--no-border">{{ 'collections.sidebar.filters' | t }}</h4>
 
     <div class="toggles--section">
       <div class="toggle--item">
         <div class="toggle--activation" data-ix="toggle-interaction">
-          <h4 class="toggle--heading">Taille</h4>
+          <h4 class="toggle--heading">{{ 'collections.sidebar.sizes' | t }}</h4>
           {% include 'icon-minus' %}
           {% include 'icon-plus' %}
         </div>
@@ -73,7 +73,7 @@
 
       <div class="toggle--item">
         <div class="toggle--activation" data-ix="toggle-interaction">
-          <h4 class="toggle--heading">Couleur</h4>
+          <h4 class="toggle--heading">{{ 'collections.sidebar.colors' | t }}</h4>
           {% include 'icon-minus' %}
           {% include 'icon-plus' %}
         </div>
@@ -85,8 +85,8 @@
   </div>
 
   <div class="sidebar--actions">
-    <a href="#" class="clear-filters button">Clear</a>
-    <a href="#" class="close-filters button black">Done</a>
+    <a href="#" class="clear-filters button">{{ 'collections.sidebar.clear' | t }}</a>
+    <a href="#" class="close-filters button black">{{ 'collections.sidebar.done' | t }}</a>
   </div>
 </div>
 

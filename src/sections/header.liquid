@@ -1,10 +1,10 @@
 <div data-section-id="{{ section.id }}" data-section-type="header-section">
   <header role="banner">
     {% if template.name == 'index' %}
-    <div itemscope itemtype="http://schema.org/Organization">
-      {% else %}
+      <div itemscope itemtype="http://schema.org/Organization">
+    {% else %}
       <div class="h1" itemscope itemtype="http://schema.org/Organization">
-        {% endif %}
+    {% endif %}
 
         <div class="navigation--full--menu include--border">
           <div class="nav--header">
@@ -12,7 +12,6 @@
             <a style="text-decoration:none;" href="{{section.settings.link}}"> 
               <div class="nav--announcement" style="background-color: {{section.settings.bgcolor}};{% if section.settings.animg %}background-image: url('{{section.settings.animg | img_url: 'master' }}');{%endif%}">
                 <div>{{section.settings.antext}}</div>
-              </div>
               </div>
             </a>
 

@@ -1,6 +1,6 @@
-import {toggleCart} from '../header/popout-cart';
+import { toggleCart } from '../header/popout-cart';
 
-!(function() {
+!(function () {
 
 	const errorMessage = ($container, type) => {
 		const $errorContainer = $container.find('.quick-add__error');
@@ -37,7 +37,7 @@ import {toggleCart} from '../header/popout-cart';
 		const size = $sizeButton.data('size');
 		const color = getSelectedColor($container);
 		const variant = getSelectedVariant(variants, size, color);
-console.log(variants, variant);
+		console.log(variants, variant);
 		if (!variant) {
 			return errorMessage($container, 'unavailable');
 		}

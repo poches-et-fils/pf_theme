@@ -109,12 +109,12 @@
     </div>
 
     {%- for tag in product.tags -%}
-      {%- if tag contains 'gender' -%}
-        <input type="hidden" name="gender" value="{{ tag | remove: 'gender:' | escape }}"/>
+      {%- if tag contains 'type:' -%}
+        <input type="hidden" name="type" value="{{ tag }}"/>
       {%- endif -%}
     {%- endfor -%}
 
-    <input type="hidden" name="type" value="{{ product.type | escape }}"/>
+  
 
     <button
       type="submit"

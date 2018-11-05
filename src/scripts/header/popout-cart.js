@@ -15,9 +15,9 @@ const cartHTML = `
 			$<span class="ajax--cart--shippingLeft">100</span>
 			to cart to get free shipping.
 		</p>
-				<a href="#" data-keep-shopping>Continue Shopping</a>
+				<a href="#" data-keep-shopping>Continuez de magasiner</a>
 				<div class="ajax--cart--subtotal">
-					<h4 class="ajax--cart--title--text">Subtotal</h4>
+					<h4 class="ajax--cart--title--text">Sous-total</h4>
 					<h4 class="ajax--cart--title--text right">
 			<strong class="ajax--cart--subtotal--amount"></strong>
 			</h4>

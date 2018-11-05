@@ -19,9 +19,10 @@ const handleAddItemSubmit = e => {
 	const $form = $(e.target);
 	const id = $form.find('select[name="id"]').val();
 	const quantity = $form.find('input[name="quantity"]').val();
+
 	const type = $form.find('input[name="type"]').val();
 
-	addItem(id, quantity, type ).done(toggleCart);
+	addItem(id, quantity, { type }).done(toggleCart);
 };
 
 export { addItem, handleAddItemSubmit };

@@ -109,8 +109,8 @@
     </div>
 
     {%- for tag in product.tags -%}
-      {%- if tag contains 'type:' -%}
-        <input type="hidden" name="type" value="{{ tag }}"/>
+      {%- if tag contains 'type' -%}
+        <input type="hidden" name="type" value="{{ tag | remove: 'type:' | escape }}"/>
       {%- endif -%}
     {%- endfor -%}
 

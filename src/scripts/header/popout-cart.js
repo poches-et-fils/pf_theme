@@ -117,12 +117,13 @@ const updateQty = event => {
 	const itemID = item.attr('data-variant-id');
 	const itemPrice = item.find('.ajax--cart--price--block');
 	const curQty = $(button.siblings('.ajax--cart--item--curQuantity'));
+	const minusButton = button.hasClass('less') ? button : button.siblings('.less');
 	let newQty = curQty.text();
 	const operation = button.hasClass('more') ? 'add' : button.hasClass('less') ? 'substract' : 'delete';
 
 	if (operation === 'add') {
 		newQty++;
-		button.removeProp('disabled');
+		minusButton.prop('disabled', '');
 	} else if (operation === 'substract') {
 		if (newQty > 1) {
 			newQty--;

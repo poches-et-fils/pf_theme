@@ -33,7 +33,7 @@ const getProducts = async ({index, page, collectionTitle, filters, filterString}
 		distinct: 1
 	});
 
-	if (count === 0 && maxPages === 0) {
+	if (count === 0 && maxPages === 0 && page === 0) {
 		$('.empty-collection').addClass('empty-collection--visible');
 		return [];
 	}

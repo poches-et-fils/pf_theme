@@ -1,4 +1,5 @@
-import { toggleCart } from '../header/popout-cart';
+import {toggleCart} from '../header/popout-cart';
+import shortGender from '../modules/short-gender';
 
 !(function () {
 
@@ -37,7 +38,7 @@ import { toggleCart } from '../header/popout-cart';
 		const size = $sizeButton.data('size');
 		const color = getSelectedColor($container);
 		const variant = getSelectedVariant(variants, size, color);
-		console.log(variants, variant);
+
 		if (!variant) {
 			return errorMessage($container, 'unavailable');
 		}
@@ -50,8 +51,7 @@ import { toggleCart } from '../header/popout-cart';
 			id: variant.id,
 			quantity: 1,
 			properties: {
-				gender: variant.gender || '',
-				type: variant.type || ''
+				Info: `${variant.type} / ${shortGender(variant.gender)}`
 			}
 		}).fail(() => {
 			errorMessage($container, 'error');

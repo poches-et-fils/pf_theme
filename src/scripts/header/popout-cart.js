@@ -63,6 +63,7 @@ const refreshCart = _ => {
 	$.getJSON('/cart.js', data => {
 		cartSelector.find('.ajax--cart--items').empty();
 		data.items.map(item => {
+			console.log(item);
 			const title = item.product_title;
 			let subtitle = '&nbsp;';
 			let size = item.variant_title;
@@ -77,7 +78,7 @@ const refreshCart = _ => {
 						<img src='${item.image}' alt="${item.title}" title="${item.title}" />
 					</div>
 					<div class="ajax--cart--item--details">
-						<div class="ajax--cart--item--block padding">
+						<div class="ajax--cart--item--block">
 							<div class="ajax--cart--item--text bold--text">
 								${title}
 								<span class="ajax--cart--item--quantity remove" title="Remove">x</span>
@@ -86,6 +87,9 @@ const refreshCart = _ => {
 						</div>
 						<div class="ajax--cart--item--block padding">
 							<div class="ajax--cart--item--text">${size}</div>
+							${item.properties.Info ? `
+								<div class="ajax--cart--item--text">${item.properties.Info}</div>
+							` : ''}
 						</div>
 						<div class="ajax--cart--item--block flexed">
 							<div class="ajax--cart--qty">

@@ -1,40 +1,34 @@
-var locales = {
-	'en': {
-		'CA': 'poches-development-mica.myshopify.com'
+const locales = {
+	fr: {
+		CA: {
+			redirect: 'https://pochesetfils.com',
+			showFor: ['pochesetfilsfrance.myshopify.com', 'pochesetfils.com', 'poches-development-mica.myshopify.com']
+		}
 	},
-	'fr': {
-		'EU': 'pochesetfilsfrance.myshopify.com'
+	en: {
+		CA: {
+			redirect: 'https://www.pnfgoods.com',
+			showFor: ['www.pnfgoods.com', 'en.pochesetfils.com']
+		}
 	}
 };
 
-$(function () {
-	for (language in locales) {
-		for(country in locales[language]) {
-			var selected = '';
-			if(locales[language][country] == window.location.host) {
+$(() => {
+	for (const language in locales) {
+		for (const country in locales[language]) {
+			let selected = '';
+			if (locales[language][country].showFor.indexOf(window.location.host) > -1) {
 				selected = ' selected="selected"';
 			}
-			$('.country-switcher-dropdown').append('<option value="' + language + '-' + country + '"' + selected + '>' + language.toUpperCase() + '-' + country + '</option>');
+			$('.country-switcher-dropdown').append(`
+				<option value="${locales[language][country].redirect}" ${selected}>
+					${language.toUpperCase()}-${country.toUpperCase()}
+				</option>
+			`);
 		}
 	}
 
-	$('.country-switcher-dropdown').change(function () {
-		var countrySwitch = $(this).val().split('-');
-		window.location.host = locales[countrySwitch[0]][countrySwitch[1]];
+	$('.country-switcher-dropdown').change(e => {
+		window.location.href = e.target.value;
 	});
-
-	var euCountryCodes = ["AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "DE", "GR", "HU", "IE", "IT", "LV", "LT", "LU", "MT", "NL", "PL", "PT", "RO", "SK", "SI", "ES", "SE", "GB", "UK", "GR", "GF", "GP", "MQ", "ME", "YT", "RE", "MF", "GI", "AX", "PM", "GL", "BL", "SX", "AW", "CW", "WF", "PF", "NC", "TF", "AI", "BM", "IO", "VG", "KY", "FK", "MS", "PN", "SH", "GS", "TC", "AD", "LI", "MC", "SM", "VA", "JE", "GG", "GI"];
-	var language = (window.navigator.userLanguage || window.navigator.language).split('-')[0];
-	
-	if(locales[language]) {
-		$.getJSON('http://ip-api.com/json?callback=?', function (ipData) {
-			var countryCode = ipData['countryCode'];
-			if($.inArray(countryCode, euCountryCodes)) {
-				countryCode = 'EU';
-			}
-			if(window.location.host != locales[language][countryCode]) {
-				window.location.host = locales[language][countryCode];
-			}
-		});
-	}
 });

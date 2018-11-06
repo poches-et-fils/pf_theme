@@ -159,7 +159,7 @@ const freeShipping = currentAmount => {
 	const remaining = 10000 - currentAmount;
 
 	if (remaining > 0) {
-		cartMessage.text(`Continue de même, il te manque ${window.currencySymbol}${(remaining / 100).toFixed(2)} pour avoir la livraison gratuite.`);
+		cartMessage.text(`Continue comme çô, il te manque ${window.currencySymbol}${(remaining / 100).toFixed(2)} pour avoir la livraison gratuite.`);
 	} else {
 		cartMessage.text('Good job! Tu as la livraison gratuite.');
 	}

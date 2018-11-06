@@ -18,6 +18,9 @@ import shortGender from '../modules/short-gender';
 
 	const getSelectedVariant = (variants, size, color) => {
 		return variants.find(variant => {
+			if (!color) {
+				return variant.option1 === size;
+			}
 			return variant.option1 === size && variant.option2 === color;
 		});
 	};
@@ -69,7 +72,11 @@ import shortGender from '../modules/short-gender';
 		closeSizes();
 		const $button = $(e.currentTarget);
 		const $sizes = $button.siblings('.quick-add__sizes');
-		$sizes.addClass('quick-add__sizes--active');
+		if ($sizes.find('a').length === 1) {
+			$sizes.find('a').trigger('click');
+		} else {
+			$sizes.addClass('quick-add__sizes--active');
+		}
 	};
 
 	const bindEvents = () => {

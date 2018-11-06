@@ -63,7 +63,6 @@ const refreshCart = _ => {
 	$.getJSON('/cart.js', data => {
 		cartSelector.find('.ajax--cart--items').empty();
 		data.items.map(item => {
-			console.log(item);
 			const title = item.product_title;
 			let subtitle = '&nbsp;';
 			let size = item.variant_title;

@@ -17,16 +17,16 @@ development-live:
 
 fr-development:
   directory: src
-  password: 627474981ad99b0d490debab1fa926ff
-  theme_id: "40459960409"
-  store: pochesetfils-fr.myshopify.com
+  password: 59ff31737e705f832e4d92a05b61f349
+  theme_id: "43286331465"
+  store: poches-et-fils.myshopify.com
   ignore_files:
     - settings_data.json
 fr-live:
   directory: src
-  password: 627474981ad99b0d490debab1fa926ff
-  theme_id: "40459960409"
-  store: pochesetfils-fr.myshopify.com
+  password: 59ff31737e705f832e4d92a05b61f349
+  theme_id: "43283480649"
+  store: poches-et-fils.myshopify.com
   ignore_files:
     - settings_data.json
 

@@ -110,8 +110,9 @@
       "free_delivery": "Livraison gratuite",
       "checkout": "Checkout",
       "subtotal": "Subtotal",
-      "free_shipping": "Add another {{ amount }} to cart to get free shipping.",
-      "free_shipping_amount": "100"
+      "free_shipping": "Continue comme çô, il te manque {{ amount }} pour avoir la livraison gratuite.",
+      "free_shipping_amount": "100",
+      "has_free_shipping": "Good job! Tu as la livraison gratuite."
     }
   },
   "collections": {

@@ -111,7 +111,8 @@
             "checkout": "Passer à la caisse",
             "subtotal": "Sous-total",
             "free_shipping": "Add another {{ amount }} to cart to get free shipping.",
-            "free_shipping_amount": "100"
+            "free_shipping_amount": "100",
+            "has_free_shipping": "Good job! Tu as la livraison gratuite."
         }
     },
     "collections": {

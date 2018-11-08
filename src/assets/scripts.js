@@ -547,7 +547,7 @@ module.exports=t;var e=require("./buildSearchMethod.js");function t(t){return fu
 },{"global":"2s71","es6-promise":"V//m","inherits":"UAgo","../errors":"JwxB","./inline-headers":"lPLh","./jsonp-request":"vahi","../places.js":"By5H","../clone.js":"8izH","../version.js":"Tuqg","debug":"4/DP"}],"1/sR":[function(require,module,exports) {
 "use strict";var e=require("../../AlgoliaSearch.js"),r=require("../createAlgoliasearch.js");module.exports=r(e);
 },{"../../AlgoliaSearch.js":"163L","../createAlgoliasearch.js":"wNUc"}],"4itQ":[function(require,module,exports) {
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var e={development:{algolia:{appId:"7M9U4OP0D8",apiKey:"dc5c134cd92b8d6fdaff3232cb7c9e83",index:"poches_dev_products"}},production:{algolia:{appId:"7M9U4OP0D8",apiKey:"0fa9a8c172edb3c3f5ddedffbd0f8fbb",index:"poches_fr_productsproducts"}}};exports.default=e[window.theme.env||"production"];
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var e={development:{algolia:{appId:"7M9U4OP0D8",apiKey:"dc5c134cd92b8d6fdaff3232cb7c9e83",index:"poches_dev_products"}},production:{algolia:{appId:"H0IUYXLYYP",apiKey:"0fa9a8c172edb3c3f5ddedffbd0f8fbb",index:"poches_fr_productsproducts"}}};exports.default=e[window.theme.env||"production"];
 },{}],"CBdN":[function(require,module,exports) {
 
 var e=require("global"),n=e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||t,a=+new Date;function t(e){var n=+new Date,t=Math.max(0,16-(n-a)),i=setTimeout(e,t);return a=n,i}var i=e.cancelAnimationFrame||e.webkitCancelAnimationFrame||e.mozCancelAnimationFrame||clearTimeout;Function.prototype.bind&&(n=n.bind(e),i=i.bind(e)),exports=module.exports=n,exports.cancel=i;

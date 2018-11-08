@@ -9,7 +9,7 @@ const config = {
 
 	production: {
 		algolia: {
-			appId: '7M9U4OP0D8',
+			appId: 'H0IUYXLYYP',
 			apiKey: '0fa9a8c172edb3c3f5ddedffbd0f8fbb',
 			index: 'poches_fr_productsproducts'
 		}

@@ -5,7 +5,7 @@ export default (function () {
 
 	const showDrop = event => {
 		const selectedDrop = $(event.target)
-		const selectedMenu = selectedDrop.text()
+		const selectedMenu = selectedDrop.text().toLowerCase().replace(/ /g, '-').replace(/é/g, 'e');
 		const dropdowns	 = $('.dropdown-content') || false
 		const dropElement	 = $(`.dropdown-content.main.${selectedMenu}`) || false
 

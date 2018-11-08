@@ -21,22 +21,24 @@
         {% for link in linklists['header-menu'].links %}
           {% if link.handle == genderHandle %}
             {% for second_level_link in link.links %}
-              <li>
-                <a href="{{ second_level_link.url }}" data-collection="{{ second_level_link.object.handle }}:{{ second_level_link.object.title }}" class="{%- if second_level_link.active -%}sidebar-link--active{%- endif -%}">
-                  {{ second_level_link.title }}
-                </a>
-                {% if link.levels > 0 %}
-                  <ul>
-                    {% for third_level_link in second_level_link.links %}
-                      <li>
-                        <a href="{{ third_level_link.url }}" data-parent-collection="{{ second_level_link.object.handle }}:{{ second_level_link.object.title }}" data-collection="{{ third_level_link.object.handle }}:{{ third_level_link.object.title }}" class="{%- if third_level_link.active -%}sidebar-link--active{%- endif -%}">
-                          {{ third_level_link.title }}
-                        </a>
-                      </li>
-                    {% endfor %}
-                  </ul>
-                {% endif %}
-              </li>
+              {% if second_level_link.handle != 'designs' %}
+                <li>
+                  <a href="{{ second_level_link.url }}" data-collection="{{ second_level_link.object.handle }}:{{ second_level_link.object.title }}" class="{%- if second_level_link.active -%}sidebar-link--active{%- endif -%}">
+                    {{ second_level_link.title }}
+                  </a>
+                  {% if link.levels > 0 %}
+                    <ul>
+                      {% for third_level_link in second_level_link.links %}
+                        <li>
+                          <a href="{{ third_level_link.url }}" data-parent-collection="{{ second_level_link.object.handle }}:{{ second_level_link.object.title }}" data-collection="{{ third_level_link.object.handle }}:{{ third_level_link.object.title }}" class="{%- if third_level_link.active -%}sidebar-link--active{%- endif -%}">
+                            {{ third_level_link.title }}
+                          </a>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  {% endif %}
+                </li>
+              {% endif %}
             {% endfor %}
           {% endif %}
         {% endfor %}

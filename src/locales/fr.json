@@ -116,6 +116,9 @@
     }
   },
   "collections": {
+    "product": {
+      "see_details": "En savoir plus"
+    },
     "general": {
       "no_matches": "Aucun produit ne correspond à votre recherche.",
       "men": "Homme",

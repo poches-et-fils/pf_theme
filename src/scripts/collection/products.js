@@ -128,7 +128,7 @@ const productHtml = product => `
 			<h5>${product.title}</h5>
 			<h6>${window.currencySymbol}${product.price}</h6>
 			<a href="/products/${product.handle}">
-				<div class="product-listing__see-more">See more details</div>
+				<div class="product-listing__see-more">${window.theme.strings.collection.seeMoreDetails}</div>
 			</a>
 		</div>
 	</div>

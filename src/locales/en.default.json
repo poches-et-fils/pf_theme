@@ -116,6 +116,9 @@
         }
     },
     "collections": {
+        "product": {
+            "see_details": "See more details"
+        },
         "general": {
             "men": "Men",
             "women": "Women",

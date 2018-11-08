@@ -206,7 +206,7 @@ const collection = async () => {
 		page: 0,
 		collectionTitle: $('.collection--sidebar').data('collection'),
 		collectionHandle: $('.collection--sidebar').data('collection-handle'),
-		index: client.initIndex('poches_dev_products'),
+		index: client.initIndex(config.algolia.index),
 		designs: JSON.parse($('[data-design-json]').html()),
 		filterString: '',
 		filters: {

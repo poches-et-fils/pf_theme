@@ -27,6 +27,7 @@
 				hasFreeShipping: {{ 'cart.popout_cart.has_free_shipping' | t | json }}
 			}
 		},
-		moneyFormat: {{ shop.money_format | json }}
+		moneyFormat: {{ shop.money_format | json }},
+		env: {%- if shop.permanent_domain == 'poches-development-mica.myshopify.com' -%}'development'{%- else -%}'production'{%- endif -%}
 	};
 </script>

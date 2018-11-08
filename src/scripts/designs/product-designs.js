@@ -32,7 +32,7 @@ const getProductGender = product => product.tags.find(tag => {
 
 const getDesignProducts = product => {
 	const client = algoliasearch(config.algolia.appId, config.algolia.apiKey);
-	const index = client.initIndex('poches_dev_products');
+	const index = client.initIndex(config.algolia.index);
 	const gender = getProductGender(product);
 
 	return index.search({

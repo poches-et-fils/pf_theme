@@ -7,7 +7,7 @@
   {% assign gender = women %}
 {% elsif collection.title contains men %}
   {% assign gender = men %}
-{% elsif collection.title contains youth %}
+{% elsif collection.title contains youth or collection.handle contains 'bebe' or collection.handle contains 'enfant' %}
   {% assign gender = youth %}
 {% else %}
   {% assign gender = accessories %}

@@ -19,7 +19,7 @@
 
       <ul class="sidebar--links--block" data-type-filters>
         {% for link in linklists['header-menu'].links %}
-          {% if link.handle == genderHandle %}
+          {% if link.handle == genderHandle or link.handle contains 'enfant' and genderHandle contains 'enfant' %}
             {% for second_level_link in link.links %}
               {% if second_level_link.handle != 'designs' %}
                 <li>

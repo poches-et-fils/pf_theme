@@ -57,6 +57,13 @@ const designsHtml = designs => designs.map(design => `
 	</div>
 `).join('');
 
+const hashToggle = () => {
+	if (window.location.hash === '#voir-tous') {
+		togglePopup();
+		window.location.hash = '';
+	}
+};
+
 const allDesigns = (designs, callback) => {
 	if (!designs) {
 		designs = [];
@@ -73,6 +80,9 @@ const allDesigns = (designs, callback) => {
 	$('.all-designs__designs').off('click', '.all-designs__design').on('click', '.all-designs__design', e => {
 		onDesignSelected(e, designs, callback);
 	});
+
+	hashToggle();
+	window.addEventListener('hashchange', hashToggle, false);
 };
 
 export default allDesigns;

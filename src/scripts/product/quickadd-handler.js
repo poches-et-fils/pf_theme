@@ -54,7 +54,7 @@ import shortGender from '../modules/short-gender';
 			id: variant.id,
 			quantity: 1,
 			properties: {
-				Info: `${variant.type} / ${shortGender(variant.gender)}`
+				Info: `${variant.type || ''}${variant.gender ? `${variant.type ? ' / ' : ''}${shortGender(variant.gender)}` : ''}`
 			}
 		}).fail(() => {
 			errorMessage($container, 'error');

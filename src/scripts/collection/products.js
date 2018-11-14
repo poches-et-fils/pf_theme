@@ -61,7 +61,7 @@ const getProducts = async ({index, page, collectionTitle, filters, filterString}
 				available: Boolean(variant.inventory_quantity),
 				featured_image: {src: variant.image},
 				gender: product.named_tags.gender,
-				type: product.named_tags.type
+				type: product.product_type
 			}));
 
 		return product;

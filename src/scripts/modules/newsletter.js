@@ -5,10 +5,10 @@
 		if (shouldDisplay === 'open') {
 			toggleBanner('close');
 			setTimeout(() => {
-				overlay.css({display: 'flex', opacity: 1});
+				overlay.css({ display: 'flex', opacity: 1 });
 			}, 5000);
 		} else {
-			overlay.css({display: 'none', opacity: 0});
+			overlay.css({ display: 'none', opacity: 0 });
 		}
 	};
 
@@ -63,7 +63,7 @@
 	};
 
 	const checkLastTimeSeen = _ => {
-		const sevenDaysAgo = new Date(Date.now()-(1000 * 60 * 60 * 24 * 7)).getTime();;
+		const sevenDaysAgo = new Date(Date.now() - (1000 * 60 * 60 * 24 * 7)).getTime();;
 		const lastTimeSeen = localStorage.getItem('lastTimeSeen');
 
 		if (sevenDaysAgo > lastTimeSeen || !lastTimeSeen) {
@@ -75,7 +75,7 @@
 
 	$(document).on('click', '.close--popup, input#Subscribe, .dark-overlay', hideBanner);
 	$(document).on('submit', '.newsletter form', handleSubmit);
-	$(document).ready(checkLastTimeSeen);
+	//$(document).ready(checkLastTimeSeen);
 
 	$(document).on('click', '.page--popup--section', function (e) {
 		if (e.target !== this) {

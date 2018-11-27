@@ -159,7 +159,7 @@ const freeShipping = currentAmount => {
 	const remaining = 10000 - currentAmount;
 
 	if (remaining > 0) {
-		cartMessage.text(window.theme.strings.cart.freeShipping.replace('{{ amount }}', window.currencySymbol + (remaining / 100).toFixed(2)));
+		cartMessage.text(window.theme.strings.cart.freeShipping.replace('{{ amount }}', window.currencySymbol + (remaining / 100 -1).toFixed(2)));
 	} else {
 		cartMessage.text(window.theme.strings.cart.hasFreeShipping);
 	}

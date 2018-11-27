@@ -75,7 +75,7 @@
 
 	$(document).on('click', '.close--popup, input#Subscribe, .dark-overlay', hideBanner);
 	$(document).on('submit', '.newsletter form', handleSubmit);
-	//$(document).ready(checkLastTimeSeen);
+	$(document).ready(checkLastTimeSeen);
 
 	$(document).on('click', '.page--popup--section', function (e) {
 		if (e.target !== this) {

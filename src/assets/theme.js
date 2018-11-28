@@ -1423,7 +1423,7 @@ const refreshPrice = amount => {
 	const priceLabel = $('.ajax--cart--subtotal--amount')
 	
 	if(amount) {
-		return priceLabel.empty().text(window.currencySymbol + (amount/99).toFixed(2))
+		return priceLabel.empty().text(window.currencySymbol + (amount/100).toFixed(2))
 	} else {
 		return priceLabel.text()
 	}

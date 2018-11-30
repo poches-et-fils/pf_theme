@@ -18,8 +18,9 @@
 				<form action="/cart/add" method="post" enctype="multipart/form-data" class="gift-card__form" data-add-to-cart-form>
 					{% for option in product.options_with_values %}
 						{% assign option_name = option.name | downcase %}
-
+						<script>console.log({{ option_name | json }})</script>
 						{% if option_name == 'theme' %}
+
 							<div class="product--form--selector sizing js gift-card__themes-container">
 								<div class="variant--selector--bar w-clearfix">
 									<div class="selector--heading--left">
@@ -29,6 +30,7 @@
 										</span>
 									</div>
 								</div>
+
 								<div class="gift-card__themes">
 									{% for value in option.values %}
 										<input
@@ -73,9 +75,12 @@
 							</div>
 						{% endif %}
 					{% endfor %}
-				
-					<select name="id" class="no-js" data-product-select>
+
+					{% comment %} TEMPORAIRE: {% endcomment %}
+					
+					<select name="id" class="temporary-giftcard-class" data-product-select>
 						{% for variant in product.variants %}
+						<script>console.log({{variant}})</script>
 							<option
 								{% if variant == current_variant %}selected="selected"{% endif %}
 								{% unless variant.available %}disabled="disabled"{% endunless %}

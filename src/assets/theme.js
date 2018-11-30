@@ -965,7 +965,7 @@ slate.Variants = (function() {
 })()
 var locales = {
 	'en': {
-		'CA': 'poches-development-mica.myshopify.com'
+		'CA': 'poches-et-fils.myshopify.com'
 	},
 	'fr': {
 		'EU': 'pochesetfilsfrance.myshopify.com'

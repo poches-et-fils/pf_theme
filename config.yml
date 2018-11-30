@@ -1,32 +1,42 @@
 development:
   directory: src
-  password: f70b440e90ecee3a754b2af0293b772d
-  theme_id: "32821510207"
-  store: poches-development-mica.myshopify.com
-  timeout: 200s
+  password: 59ff31737e705f832e4d92a05b61f349
+  theme_id: "43286331465"
+  store: poches-et-fils.myshopify.com
   ignore_files:
     - settings_data.json
+
+fr-live:
+  directory: src
+  password: 59ff31737e705f832e4d92a05b61f349
+  theme_id: "43283480649"
+  store: poches-et-fils.myshopify.com
+  ignore_files:
+    - settings_data.json
+
+# development:
+#   directory: src
+#   password: f70b440e90ecee3a754b2af0293b772d
+#   theme_id: "32821510207"
+#   store: poches-development-mica.myshopify.com
+#   timeout: 200s
+#   ignore_files:
+#     - settings_data.json
+
+# fr-development:
+#   directory: src
+#   password: 59ff31737e705f832e4d92a05b61f349
+#   theme_id: "43286331465"
+#   store: poches-et-fils.myshopify.com
+#   ignore_files:
+#     - settings_data.json
+
 development-live:
   directory: src
   password: f70b440e90ecee3a754b2af0293b772d
   theme_id: "32877084735"
   store: poches-development-mica.myshopify.com
   timeout: 200s
-  ignore_files:
-    - settings_data.json
-
-fr-development:
-  directory: src
-  password: 59ff31737e705f832e4d92a05b61f349
-  theme_id: "43286331465"
-  store: poches-et-fils.myshopify.com
-  ignore_files:
-    - settings_data.json
-fr-live:
-  directory: src
-  password: 59ff31737e705f832e4d92a05b61f349
-  theme_id: "43283480649"
-  store: poches-et-fils.myshopify.com
   ignore_files:
     - settings_data.json
 

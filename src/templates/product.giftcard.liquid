@@ -19,68 +19,33 @@
 					{% for option in product.options_with_values %}
 						{% assign option_name = option.name | downcase %}
 						<script>console.log({{ option_name | json }})</script>
-						{% if option_name == 'theme' %}
+						{% if option_name == 'title' %}
 
 							<div class="product--form--selector sizing js gift-card__themes-container">
-								<div class="variant--selector--bar w-clearfix">
-									<div class="selector--heading--left">
-										<strong>{{ option.name }}: </strong> 
-										<span data-theme-name data-index="option{{ option.position }}">
-											{{ option.selected_value }}
-										</span>
-									</div>
-								</div>
 
-								<div class="gift-card__themes">
+								<div class="size-option-list">
 									{% for value in option.values %}
+									<script>console.log({{ value | json }})</script>
 										<input
 											type="radio"
 											id="SingleOptionSelector-{{ forloop.index0 }}-{{ value }}"
 											data-index="option{{ option.position }}"
 											data-single-option-selector
 											value="{{ value }}"
-											name="theme"
+											name="id"
 											{%- if option.selected_value == value -%}checked="checked"{%- endif -%}
 										/>
 										<label for="SingleOptionSelector-{{ forloop.index0 }}-{{ value }}">
-											{%- for variant in product.variants -%}
-												{%- if variant.option1 == value -%}
-													<img src="{{ variant | img_url: '300x' }}"/>
-													{%- break -%}
-												{%- endif -%}
-											{%- endfor -%}
+											{{ value }}
 										</label>
 									{% endfor %}
 								</div>
 							</div>
 						{% endif %}
-
-						{% if option_name == 'amount' %}
-							<div class="product--form--qty">
-								<div><strong>{{ option.name }}: </strong></div>
-								<select
-									id="SingleOptionSelector-{{ forloop.index0 }}"
-									data-single-option-selector
-									data-index="option{{ option.position }}"
-								>
-									{% for value in option.values %}
-										<option
-											value="{{ value | escape }}"
-											{% if option.selected_value == value %}selected="selected"{% endif %}
-										>
-											{{ value }}
-										</option>
-									{% endfor %}
-								</select>
-							</div>
-						{% endif %}
 					{% endfor %}
-
-					{% comment %} TEMPORAIRE: {% endcomment %}
 					
-					<select name="id" class="temporary-giftcard-class" data-product-select>
+					<select name="id" class="no-js" data-product-select>
 						{% for variant in product.variants %}
-						<script>console.log({{variant}})</script>
 							<option
 								{% if variant == current_variant %}selected="selected"{% endif %}
 								{% unless variant.available %}disabled="disabled"{% endunless %}
@@ -92,6 +57,7 @@
 					</select>
 
 					<input type="hidden" id="Quantity" name="quantity" value="1" min="1">
+
 
 					<button
 						type="submit"

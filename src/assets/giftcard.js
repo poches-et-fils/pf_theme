@@ -12,8 +12,8 @@
   };
 
   var $qrCode = $(config.qrCode);
-
   new QRCode($qrCode[0], {
+    
     text: $qrCode.attr('data-identifier'),
     width: 120,
     height: 120

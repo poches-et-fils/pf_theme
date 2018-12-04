@@ -6,13 +6,18 @@
 
 {% layout 'gift_card' %}
 
-{%- assign giftCardProduct = all_products['gift-card'] -%}
+<script>console.log({{ all_products['gift-card'].image | img_url: '800x' }})</script>
 
+{%- assign giftCardProduct = all_products['gift-card'] -%}
 <div class="product--container">
   <div class="product--block gift-card">
     <div class="product--block--left product-image">
       <div class="product-image__featured">
-        <img src="{{ giftCardProduct | img_url: '800x' }}" alt="Gift card illustration">
+
+      {% comment %} // TODO: FETCH the actual giftcard image instead of hardcoding it in. {% endcomment %}
+      {% comment %} <img src="{{ giftCardProduct.image | img_url: '800x' }}" alt="Gift card illustration"> {% endcomment %}
+      <img src="https://cdn.shopify.com/s/files/1/1346/1035/products/icone_carte_cadeau_800x.png?v=1541706568" alt="Gift card illustration">
+ 
       </div>
     </div>
 

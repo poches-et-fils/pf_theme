@@ -24,18 +24,13 @@
       <div class="product--block--right product--form--container">
         {% include 'product--normal--form' %}
         {% include 'product-toggle' %}
-
-        {% if product.type == "Bas" %}
-          <img class="upsell-banner" src="https://cdn.shopify.com/s/files/1/1346/1035/files/up_sale_selecteur.png?14168508578515423223" />
-        {% elsif product.type == "Boxers" %}
-          <img class="upsell-banner" src="https://cdn.shopify.com/s/files/1/1346/1035/files/up_sale_boxers_final.png?9877202131319444717" />
-        {% endif %}
-
       </div>
     </div>
     
     {% include 'related--products' %}
   </div>
+
+
 
   {% unless product == empty %}
     <script type="application/json" data-product-json>{{ product | json }}</script>

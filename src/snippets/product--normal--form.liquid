@@ -148,6 +148,12 @@
 
     <input type="hidden" name="type" value="{{ product.type | escape }}"/>
 
+        {% if product.type == "Bas" %}
+          <img class="upsell-banner" src="https://cdn.shopify.com/s/files/1/1346/1035/files/up_sale_selecteur.png?14168508578515423223" />
+        {% elsif product.type == "Boxers" %}
+          <img class="upsell-banner" src="https://cdn.shopify.com/s/files/1/1346/1035/files/up_sale_boxers_final.png?9877202131319444717" />
+        {% endif %}
+
     <button
       type="submit"
       name="add"

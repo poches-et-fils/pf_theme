@@ -6,7 +6,15 @@
       class="collection--section" 
       style="background-repeat: no-repeat; background-size: cover;background-image: url('{{ collection.image | img_url: '2048x2048' }}'); height: 608px"
     >
+    
+
+    {% comment %} TEMPORAIRE {% endcomment %}
+      {% if collection.title == "Boxing Day" %}
+      {% else %}
       <h2 class="collection--title">{{collection.title}}</h2>
+      {% endif %}
+
+
     </div>
   {% endif %}
 
